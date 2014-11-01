@@ -31,9 +31,26 @@ const QString &Request::source()
 
 void Request::get(const QVariant &data)
 {
-    mUrl.setPath("/"+mSource);
+
+
+    mUrl.setPath(mSource);
+
+    QUrlQuery query;
+
+    foreach (QString key, data.toMap().keys())
+    {
+       query.addQueryItem(key,data.toMap().value(key).toString());
+    }
+
+
+
+
+
+    mUrl.setQuery(query);
+
     QNetworkRequest request = makeRequest(mUrl);
 
+    qDebug()<<mUrl;
     QNetworkReply * reply = mManager->get(request);
 
     connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
@@ -74,6 +91,7 @@ void Request::parseFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+    qDebug()<<"cpp: "<<doc.object();
     emit success(doc.object());
 
 }

@@ -14,36 +14,48 @@ ApplicationWindow {
 
     color: Style.Background.WINDOW
 
-    Button {
-        text: "test"
+    Text{
+        id:textId
         anchors.centerIn: parent
-        onClicked: request.get()
+
+    }
+
+    Button {
+        id:bt
+        text: "test"
+
+        onClicked: request.get({
+                               "at":"43.601337,1.438675",
+                               "radius": 1000000})
     }
 
 
 
     Request {
         id:request
-        source:"config"
+        source:"/notes"
         onSuccess: {
-            console.log(data.results.max_note_length)
+            console.log(data.total)
+            textId.text = data.total
         }
     }
 
 
 
-//    StackView {
-//        id: stack
-//        anchors.fill: parent
-//        // Implements back key navigation
-//        focus: true
-//        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
-//                             stackView.pop();
-//                             event.accepted = true;
-//                         }
 
-//        initialItem: Qt.resolvedUrl("pages/Splash.qml")
-//    }
+
+    //    StackView {
+    //        id: stack
+    //        anchors.fill: parent
+    //        // Implements back key navigation
+    //        focus: true
+    //        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
+    //                             stackView.pop();
+    //                             event.accepted = true;
+    //                         }
+
+    //        initialItem: Qt.resolvedUrl("pages/Splash.qml")
+    //    }
 
 
 
