@@ -1,9 +1,10 @@
 TEMPLATE = app
 
-QT += qml quick
+QT += qml quick network
 
 SOURCES += main.cpp \
-    app.cpp
+    app.cpp \
+    request.cpp
 
 RESOURCES += qml.qrc
 
@@ -14,4 +15,5 @@ QML_IMPORT_PATH =
 include(deployment.pri)
 
 HEADERS += \
-    app.h
+    app.h \
+    request.h
