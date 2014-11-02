@@ -67,7 +67,6 @@ Rectangle {
         IconRow{
             id: iconRow
             Layout.fillHeight: true
-            Layout.fillWidth: true
             //We will need this in the future
 //            color: Style.Typography.Actionbar[style]
             onIconClicked: actionBar.toolbarButtonClicked(index, name)

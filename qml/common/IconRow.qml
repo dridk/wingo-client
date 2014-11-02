@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 RowLayout {
     id: iconRow
     //Needed for QtCreator design mode
-    width: childrenRect.width
+//    width: childrenRect.width
     height: 96
     //-----------
     spacing: 0
@@ -16,7 +16,6 @@ RowLayout {
 
     Repeater{
         id: iconRowRepeater
-        anchors.fill: parent
         Button
         {
             id: iconRowButton

@@ -1,15 +1,11 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
 import "../common"
 
 Page {
     id: page
-    //Needed for QtCreator design mode
-    width: 540
-    height: 960
-    //-----------
-    anchors.fill: parent
 
     icon: "wingo48"
     title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
@@ -29,12 +25,25 @@ Page {
     onMenuButtonClicked: console.log("Menu from Home")
     onActionButtonClicked: {
         console.log("Action button " + name + " clicked at index " + index)
+        switch (index){
+         case 0:
+             app.goToPage(app.pages["AddNote"])
+             break;
+        }
     }
 
-    Rectangle{
-        color: "#aa5151"
-        width: 100
-        height: 100
+    ColumnLayout{
+        anchors.fill: parent
+
+        FilterBar{
+            id: filterbar
+        }
+
+        Rectangle{
+            color: "#7c1c1c"
+            width: 100
+            height: 100
+        }
     }
 
 

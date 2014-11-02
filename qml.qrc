@@ -24,5 +24,6 @@
         <file>qml/Res/icons/refresh48.png</file>
         <file>qml/Res/icons/search48.png</file>
         <file>qml/Res/icons/expand48.png</file>
+        <file>qml/common/FilterBar.qml</file>
     </qresource>
 </RCC>

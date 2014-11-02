@@ -7,10 +7,9 @@ Item
     id: page
     default property alias _contentChildren: content.data
     //Needed for QtCreator design mode
-    width: 540
-    height: 960
+    width: app.width
+    height: app.height
     //-----------
-    anchors.fill: parent
 
     property alias icon: actionBar.icon
     property alias title: actionBar.title
