@@ -223,11 +223,15 @@ Rectangle {
                     MouseArea{
                         id:area
                         anchors.fill: parent
+                        onClicked: filterBar.search=name
+
+
                     }
 
                 }
             }
         }
+//=================END TAGS LIST ==========================================
 
     }
 
