@@ -5,26 +5,34 @@ Rectangle {
     id: root
     width: 210
     height: 210
+    property string source
+    //    color: source=="" ? "transparent" : "white"
+//    opacity: area.pressed ? 0.2 : 1
+    color: "black"
 
-    property string source: ""
 
-    Image
-    {
-        id: imgPlaceHolder
-        fillMode: Image.PreserveAspectCrop
-        source: "qrc:/qml/Res/images/addPicturePlaceholder.png"
+    Rectangle {
         anchors.fill: parent
-    }
-
-    Image
-    {
-        id: imgPreview
-        fillMode: Image.PreserveAspectCrop
-        source: root.source
-        anchors.fill: parent
+        color: "red"
         anchors.margins: 5
-    }
+        Image
+        {
+            anchors.fill: parent
+            id: imgPreview
 
+            source: root.source =="" ?  "qrc:/qml/Res/images/addPicturePlaceholder.png" : root.source
+
+
+
+            MouseArea {
+                id:area
+                anchors.fill: parent
+
+            }
+        }
+
+
+    }
     /*
     DropShadow
     {

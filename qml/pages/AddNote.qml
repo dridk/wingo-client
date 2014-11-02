@@ -26,6 +26,8 @@ Page {
             width: page.width /2.0
             height: page.width /2.0
             anchors.centerIn: parent
+            anchors.verticalCenterOffset: 400
+
             //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
         }
     }
