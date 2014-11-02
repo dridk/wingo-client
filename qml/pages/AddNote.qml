@@ -1,5 +1,4 @@
 import QtQuick 2.3
-
 import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
@@ -13,6 +12,10 @@ Page {
     defaultAction: Style.ACTION_BAR_BACK_ACTION
 
     onBackButtonClicked: app.goBack()
+
+    Component.onCompleted: {
+        app.updateLocation()
+    }
 
     actionsListModel: ListModel{
         ListElement {
@@ -30,7 +33,7 @@ Page {
                                   "at":[parseFloat(app.latitude),parseFloat(app.longitude)],
                                   "author":"darwin", //TIPS... darwin, to make it works without auth
                                   "anonymous":true,
-                                  "message":"This is a qml message sended from qml"
+                                  "message":noteEdit.text
                                    })
         }
     }
@@ -104,6 +107,11 @@ Page {
         //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
     }
 
+    Text {
+        anchors.centerIn: parent
+        text: app.latitude+" " + app.longitude
+    }
+
     Request{
         id:postNoteRequester
         source:"/notes"
@@ -114,5 +122,7 @@ Page {
             app.showMessage("ERROR " + message)
         }
     }
+
+
 
 }

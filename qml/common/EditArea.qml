@@ -6,6 +6,7 @@ Item {
     height: maxNoteLength
 
     property int maxNoteLength : 255
+    property alias text : txtId.text
     property string _temp
 
     Rectangle {
@@ -19,7 +20,7 @@ Item {
             anchors.margins: 10
             wrapMode:TextEdit.Wrap
             font.pointSize: 16
-            textFormat: Text.RichText
+            textFormat: Text.PlainText
             font.family: "Droid Sans"
             color: Style.Typography.TEXT
             verticalAlignment: Text.AlignTop

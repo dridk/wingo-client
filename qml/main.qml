@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.2
+import QtPositioning 5.3
 import Wingo 1.0
 import "scripts/AppStyle.js" as Style
 
@@ -20,12 +21,15 @@ ApplicationWindow {
     //Global configuration variable
     property variant config
     //Current GPS location
+
+    //USE THIS VALUE FOR DESKTOP TESTING
     property double latitude  : 43.601337
     property double longitude :1.438675
 
+
     property variant pages: {
         "Home": Qt.resolvedUrl("pages/Home.qml"),
-        "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
+                "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
     }
     function goBack(){
         stack.pop()
@@ -39,6 +43,11 @@ ApplicationWindow {
         msgTextBox.text = message
         msgBox.visible  = true
     }
+
+    function updateLocation(){
+        gpsSource.start()
+    }
+
 
     FontLoader { id: font; name: "Droid Sans" }
 
@@ -54,17 +63,17 @@ ApplicationWindow {
         initialItem: Qt.resolvedUrl("pages/Home.qml")
 
 
-//        initialItem: Rectangle {
-//            anchors.fill: parent
-//            color: Style.Palette.CYAN
-//            Timer{interval: 3000; running:true; onTriggered: stack.push(app.pages["Home"])}
-//        }
+        //        initialItem: Rectangle {
+        //            anchors.fill: parent
+        //            color: Style.Palette.CYAN
+        //            Timer{interval: 3000; running:true; onTriggered: stack.push(app.pages["Home"])}
+        //        }
 
         delegate: StackViewDelegate {
-//            function transitionFinished(properties)
-//            {
-//                properties.exitItem.state = ""
-//            }
+            //            function transitionFinished(properties)
+            //            {
+            //                properties.exitItem.state = ""
+            //            }
 
             pushTransition: StackViewTransition {
                 SequentialAnimation {
@@ -94,7 +103,7 @@ ApplicationWindow {
             }
         }
     }
-//======Added by Sacha
+    //======Added by Sacha
     Request{
         id:configRequester
         source:"/config"
@@ -103,29 +112,43 @@ ApplicationWindow {
     }
 
 
-//======== MESSAGE ERROR SHOW
-Rectangle {
-    id:msgBox
-    width: parent.width
-    height: 200
-    anchors.centerIn: parent
-    color:"#00b8cc"
-    visible: false
-    Label {
-        id: msgTextBox
+    //======== MESSAGE ERROR SHOW
+    Rectangle {
+        id:msgBox
+        width: parent.width
+        height: 200
         anchors.centerIn: parent
-        text: "ERROR happens"
-        color: "white"
-        font.pixelSize:25
+        color:"#00b8cc"
+        visible: false
+        Label {
+            id: msgTextBox
+            anchors.centerIn: parent
+            text: "ERROR happens"
+            color: "white"
+            font.pixelSize:25
+        }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: msgBox.visible=false
+        }
+
+
     }
-    MouseArea {
-        anchors.fill: parent
-        onClicked: msgBox.visible=false
+
+    //=========== POSITIONNING GPS
+    PositionSource
+    {
+        id: gpsSource
+        updateInterval: 1000
+        active: enable
+        onPositionChanged: {
+            var coord = gpsSource.position.coordinate;
+            app.longitude = coord.longitude;
+            app.latitude = coord.latitude;
+
+            console.debug(coord.longitude +" " +coord.latitude )
+        }
     }
-
-
-}
-
 
 
 
