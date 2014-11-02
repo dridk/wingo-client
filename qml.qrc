@@ -27,10 +27,7 @@
         <file>qml/common/FilterBar.qml</file>
         <file>qml/common/ImagePreview.qml</file>
         <file>qml/Res/images/addPicturePlaceholder.png</file>
-<<<<<<< HEAD
         <file>qml/common/EditArea.qml</file>
-=======
         <file>qml/common/NoteListItem.qml</file>
->>>>>>> 139b87a918babb4adac6137c1f56b860b972d84d
     </qresource>
 </RCC>

@@ -37,7 +37,7 @@ ApplicationWindow {
                              stackView.pop();
                              event.accepted = true;
                          }
-        initialItem: Qt.resolvedUrl("pages/AddNote.qml")
+        initialItem: Qt.resolvedUrl("pages/Home.qml")
 
 
 //        initialItem: Rectangle {
