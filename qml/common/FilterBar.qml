@@ -11,7 +11,9 @@ Rectangle {
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    z: 0
+
+    property bool expanded: filterBarTray.height > 0
+    z: expanded ? 99 : 0
 
     property variant filter: {
         "byDate": true,
@@ -32,6 +34,11 @@ Rectangle {
 
     function updateFilterBarSensorLabelText(){
         filterBarSensorLabel.text = filterBar.filterBarSensorLabelText()
+    }
+
+    function toggle(){
+        if (state == "EXPANDED")  contract()
+        else expand()
     }
 
     function expand(){
@@ -61,7 +68,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             Behavior on rotation {NumberAnimation{}}
         }
-        onClicked: filterBar.state = filterBar.state==="EXPANDED"? "" : "EXPANDED"
+        onClicked: toggle()
     }
 
     Rectangle{
@@ -70,6 +77,19 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         color: Style.Border.DEFAULT
+    }    
+
+    //Page shadowing effect
+    Rectangle
+    {
+        id: overlay
+        color: Style.Background.OVERLAY
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.bottom
+        height: 0
+        opacity: 0
+        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
     }
 
     Rectangle{
@@ -129,6 +149,7 @@ Rectangle {
 
     }
 
+
     states: [
         State {
             name: "EXPANDED"
@@ -144,13 +165,14 @@ Rectangle {
             }
 
             PropertyChanges {
-                target: filterBarSensorLabel
-                color: Style.Typography.FADE
+                target: overlay
+                height: app.height - ( filterBar.y + filterBar.height )
+                opacity: 1
             }
 
             PropertyChanges {
-                target: filterBar
-                z: 1
+                target: filterBarSensorLabel
+                color: Style.Typography.FADE
             }
         }
     ]

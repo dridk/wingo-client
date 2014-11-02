@@ -2,7 +2,7 @@ import QtQuick 2.0
 
 import "../scripts/AppStyle.js" as Style
 
-Item
+Rectangle
 {
     id: page
     default property alias _contentChildren: content.data
@@ -12,9 +12,11 @@ Item
     height: 960
     //-----------
 
+    color: Style.Background.WINDOW
+
     property alias icon: actionBar.icon
     property alias title: actionBar.title
-    property alias color: actionBar.color
+    property alias style: actionBar.style
 
     property alias defaultAction: actionBar.actionType
     property alias actionsListModel: actionBar.actionsListModel

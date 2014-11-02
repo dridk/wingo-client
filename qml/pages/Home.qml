@@ -31,7 +31,7 @@ Page {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
          case 0:
-             app.goToPage(app.pages["AddNote"])
+
              break;
         }
     }
@@ -56,7 +56,7 @@ Page {
                     noteAuthor: "Someone"
                     noteAvatar: "url://"
                     noteAnonymous: false
-                    noteMessage: ""
+                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -66,7 +66,7 @@ Page {
                 }
                 ListElement{
                     noteAnonymous: true
-                    noteMessage: ""
+                    noteMessage: "Hey guys! Mad party going on here >>"
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -78,7 +78,7 @@ Page {
                     noteAuthor: "Someone2"
                     noteAvatar: "url://"
                     noteAnonymous: false
-                    noteMessage: ""
+                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -88,33 +88,29 @@ Page {
                 }
             }
 
-            delegate: Rectangle{
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: childrenRect.height
-                color: Style.Background.VIEW
-
-                RowLayout{
-                    ColumnLayout{
-                        Label{text: noteAuthor}
-                        Label{text: noteMessage}
-                    }
-                    ColumnLayout{
-
-                    }
-                }
-
-                Rectangle{
-                    height: 2
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    color: Style.Border.DEFAULT
-                }
-            }
+            delegate: NoteListItem{}
         }
 
     }
 
+    Rectangle{
+        id: rectangle1
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height: 64
+        color: Qt.rgba(255, 255, 255, 0.95)
+        anchors.bottom: parent.bottom
+        Label{
+            text: "Post new note..."
+            anchors.left: parent.left
+            anchors.leftMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            color: Style.Typography.FADE
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: app.goToPage(app.pages["AddNote"])
+        }
+    }
 
 }
