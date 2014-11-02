@@ -10,7 +10,7 @@ var Palette = {
     //---Special
     NONE:       "transparent",
     DARKEN:     Qt.rgba(0, 0, 0, 0.4),
-    LIGHTEN:    Qt.rgba(255, 255, 255, 0.4),
+    LIGHTEN:    Qt.rgba(255, 255, 255, 0.9),
     //---Grays
     BLACK:      "#29332e",
     GRAY:       "#a1b3aa",

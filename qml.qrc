@@ -27,5 +27,6 @@
         <file>qml/common/FilterBar.qml</file>
         <file>qml/common/ImagePreview.qml</file>
         <file>qml/Res/images/addPicturePlaceholder.png</file>
+        <file>qml/common/NoteListItem.qml</file>
     </qresource>
 </RCC>

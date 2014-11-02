@@ -31,7 +31,7 @@ Page {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
          case 0:
-             app.goToPage(app.pages["AddNote"])
+
              break;
         }
     }
@@ -47,45 +47,6 @@ Page {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         clip: true
-
-//        Rectangle{
-//            id: rectangle1
-//                        anchors.left: parent.left
-//                        anchors.right: parent.right
-//                        height: 96
-//                        color: Style.Background.VIEW
-
-//                        RowLayout{
-//                            id: rowLayout1
-//                            anchors.bottom: parent.bottom
-//                            anchors.bottomMargin: 16
-//                            anchors.top: parent.top
-//                            anchors.topMargin: 16
-//                            anchors.left: parent.left
-//                            anchors.leftMargin: 32
-//                            anchors.right: parent.right
-//                            anchors.rightMargin: 8
-//                            ColumnLayout{
-//                                Layout.fillWidth: true
-
-//                                Label{text: noteAnonymous? "Anonimous" : noteAuthor; font.pointSize: 12; Layout.fillWidth: true}
-//                                Label{text: noteMessage; Layout.fillWidth: true}
-//                            }
-//                            ColumnLayout{
-//                                width: 64
-//                                Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12;Layout.fillWidth: true}
-//                                Label{text: "12 takes"; horizontalAlignment: Text.AlignRight; font.pointSize: 12;Layout.fillWidth: true}
-//                            }
-//                        }
-
-//                        Rectangle{
-//                            height: 2
-//                            anchors.bottom: parent.bottom
-//                            anchors.left: parent.left
-//                            anchors.right: parent.right
-//                            color: Style.Border.DEFAULT
-//                        }
-//                    }
 
         ListView {
             anchors.fill: parent
@@ -127,49 +88,29 @@ Page {
                 }
             }
 
-            delegate: Rectangle{
-                id: rectangle1
-                            anchors.left: parent.left
-                            anchors.right: parent.right
-                            height: Math.max(96, noteMessage.length / 18 * 16 + 48)
-                            color: Style.Background.VIEW
-
-                            RowLayout{
-                                id: rowLayout1
-                                anchors.bottom: parent.bottom
-                                anchors.bottomMargin: 8
-                                anchors.top: parent.top
-                                anchors.topMargin: 8
-                                anchors.left: parent.left
-                                anchors.leftMargin: 32
-                                anchors.right: parent.right
-                                anchors.rightMargin: 8
-                                spacing: 8
-
-                                ColumnLayout{
-                                    Layout.fillWidth: true
-
-                                    Label{text: (noteAnonymous? "Anonimous" : noteAuthor) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
-                                    Label{text: noteMessage; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
-                                }
-                                ColumnLayout{
-                                    width: 64
-                                    Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-                                    Label{text: "12 takes"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
-                                }
-                            }
-
-                            Rectangle{
-                                height: 2
-                                anchors.bottom: parent.bottom
-                                anchors.left: parent.left
-                                anchors.right: parent.right
-                                color: Style.Border.DEFAULT
-                            }
-                        }
+            delegate: NoteListItem{}
         }
 
     }
 
+    Rectangle{
+        id: rectangle1
+        anchors.right: parent.right
+        anchors.left: parent.left
+        height: 64
+        color: Qt.rgba(255, 255, 255, 0.95)
+        anchors.bottom: parent.bottom
+        Label{
+            text: "Post new note..."
+            anchors.left: parent.left
+            anchors.leftMargin: 16
+            anchors.verticalCenter: parent.verticalCenter
+            color: Style.Typography.FADE
+        }
+        MouseArea{
+            anchors.fill: parent
+            onClicked: app.goToPage(app.pages["AddNote"])
+        }
+    }
 
 }

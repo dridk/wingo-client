@@ -11,7 +11,9 @@ Rectangle {
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    z: filterBarTray.height > 0 ? 1 : 0
+
+    property bool expanded: filterBarTray.height > 0
+    z: expanded ? 99 : 0
 
     property variant filter: {
         "byDate": true,
@@ -35,13 +37,8 @@ Rectangle {
     }
 
     function toggle(){
-        if (state == "EXPANDED") {
-            contract()
-            if (parent.state) parent.state = ""
-        }else{
-            expand()
-            if (parent.state) parent.state = "DISABLED"
-        }
+        if (state == "EXPANDED")  contract()
+        else expand()
     }
 
     function expand(){
@@ -80,6 +77,19 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         color: Style.Border.DEFAULT
+    }    
+
+    //Page shadowing effect
+    Rectangle
+    {
+        id: overlay
+        color: Style.Background.OVERLAY
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.top: parent.bottom
+        height: 0
+        opacity: 0
+        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
     }
 
     Rectangle{
@@ -139,6 +149,7 @@ Rectangle {
 
     }
 
+
     states: [
         State {
             name: "EXPANDED"
@@ -151,6 +162,12 @@ Rectangle {
             PropertyChanges {
                 target: filterBarTray
                 height: app.height - ( filterBar.y + filterBar.height )
+            }
+
+            PropertyChanges {
+                target: overlay
+                height: app.height - ( filterBar.y + filterBar.height )
+                opacity: 1
             }
 
             PropertyChanges {
