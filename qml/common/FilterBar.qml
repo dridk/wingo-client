@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-
+import Wingo 1.0
 import "../scripts/AppStyle.js" as Style
 
 Rectangle {
@@ -126,11 +126,13 @@ Rectangle {
                 }
             }
             RowLayout{
+                id:radiusLayoutId
                 height: 96
                 Layout.fillWidth: true
 
                 Repeater {
-                    model : app.config.allowed_radius.length
+                    //ugly... But I want to avoid error message for now
+                    model : app.config === undefined ? 0 : app.config.allowed_radius.length
                     Button {
 
                         width: filterBar.width / 4
@@ -143,55 +145,41 @@ Rectangle {
                         Layout.fillWidth: true
                         onClicked: {
                             filterBar.distance = app.config.allowed_radius[index]
-                            filterBar.contract()
+//                            filterBar.contract()
+                            tagRequester.get()
                         }
                     }
 
-
                 }
 
+            }
+        }
 
-                //                Button {
-                //                    id: button1
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 5
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 15
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 50
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 100
-                //                        filterBar.contract()
-                //                    }
-                //                }
+//=================THE TAGS LIST ==========================================
+        Rectangle {
+            anchors.top: filterBarTrayColumn.bottom
+            width: parent.width
+            height: 500
+            color:"red"
+
+            Request {
+                id:tagRequester
+                source:"/tags"
+                onSuccess: {
+                    tagModel.clear()
+                    console.debug("TAGSSSSSSSSSS")
+                }
+            }
+
+            ListView {
+                anchors.fill: parent
+                model: ListModel{id:tagModel}
+
+                delegate:   ListItem {
+                    height: 96
+                    text: "Popular notes"
+                    onClicked: { }
+                }
             }
         }
 

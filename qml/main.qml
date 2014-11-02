@@ -16,8 +16,11 @@ ApplicationWindow {
     Component.onCompleted: {
         configRequester.get()
     }
-
+    //Global configuration variable
     property variant config
+    //Current GPS location
+    property double latitude  : 43.601337
+    property double longitude :1.438675
 
     property variant pages: {
         "Home": Qt.resolvedUrl("pages/Home.qml"),

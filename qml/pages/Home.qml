@@ -38,7 +38,7 @@ Page {
     }
 
     function refresh(){
-        notesServerRequest.get({"at":"43.601337,1.438675", "radius": filterbar.distance + ""})
+        notesServerRequest.get({"at": app.latitude+","+app.longitude, "radius": filterbar.distance + ""})
     }
 
     Request {
