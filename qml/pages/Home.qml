@@ -46,9 +46,8 @@ Page {
         source: "/notes"
         onSuccess: {
             notesListModel.clear()
-            for (var index in data.results){
-                notesListModel.append(data.results[index])
-            }
+            notesListModel.append(data.results)
+
         }
         onError: {
             console.debug(message)
