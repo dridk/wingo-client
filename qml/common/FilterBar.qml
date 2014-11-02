@@ -11,7 +11,7 @@ Rectangle {
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    z: 0
+    z: filterBarTray.height > 0 ? 1 : 0
 
     property variant filter: {
         "byDate": true,
@@ -32,6 +32,16 @@ Rectangle {
 
     function updateFilterBarSensorLabelText(){
         filterBarSensorLabel.text = filterBar.filterBarSensorLabelText()
+    }
+
+    function toggle(){
+        if (state == "EXPANDED") {
+            contract()
+            if (parent.state) parent.state = ""
+        }else{
+            expand()
+            if (parent.state) parent.state = "DISABLED"
+        }
     }
 
     function expand(){
@@ -61,7 +71,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             Behavior on rotation {NumberAnimation{}}
         }
-        onClicked: filterBar.state = filterBar.state==="EXPANDED"? "" : "EXPANDED"
+        onClicked: toggle()
     }
 
     Rectangle{
@@ -146,11 +156,6 @@ Rectangle {
             PropertyChanges {
                 target: filterBarSensorLabel
                 color: Style.Typography.FADE
-            }
-
-            PropertyChanges {
-                target: filterBar
-                z: 1
             }
         }
     ]

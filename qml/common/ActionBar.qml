@@ -13,7 +13,7 @@ Rectangle {
     anchors.right: parent.right
     anchors.top: parent.top
 
-    property string style: Style.ACTION_BAR_DEFAULT
+    property string style: Style.PAGE_DEFAULT
 
     color: Style.Background.Actionbar[actionBar.style]
 

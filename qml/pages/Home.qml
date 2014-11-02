@@ -48,6 +48,45 @@ Page {
         anchors.left: parent.left
         clip: true
 
+//        Rectangle{
+//            id: rectangle1
+//                        anchors.left: parent.left
+//                        anchors.right: parent.right
+//                        height: 96
+//                        color: Style.Background.VIEW
+
+//                        RowLayout{
+//                            id: rowLayout1
+//                            anchors.bottom: parent.bottom
+//                            anchors.bottomMargin: 16
+//                            anchors.top: parent.top
+//                            anchors.topMargin: 16
+//                            anchors.left: parent.left
+//                            anchors.leftMargin: 32
+//                            anchors.right: parent.right
+//                            anchors.rightMargin: 8
+//                            ColumnLayout{
+//                                Layout.fillWidth: true
+
+//                                Label{text: noteAnonymous? "Anonimous" : noteAuthor; font.pointSize: 12; Layout.fillWidth: true}
+//                                Label{text: noteMessage; Layout.fillWidth: true}
+//                            }
+//                            ColumnLayout{
+//                                width: 64
+//                                Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12;Layout.fillWidth: true}
+//                                Label{text: "12 takes"; horizontalAlignment: Text.AlignRight; font.pointSize: 12;Layout.fillWidth: true}
+//                            }
+//                        }
+
+//                        Rectangle{
+//                            height: 2
+//                            anchors.bottom: parent.bottom
+//                            anchors.left: parent.left
+//                            anchors.right: parent.right
+//                            color: Style.Border.DEFAULT
+//                        }
+//                    }
+
         ListView {
             anchors.fill: parent
 
@@ -56,7 +95,7 @@ Page {
                     noteAuthor: "Someone"
                     noteAvatar: "url://"
                     noteAnonymous: false
-                    noteMessage: ""
+                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -66,7 +105,7 @@ Page {
                 }
                 ListElement{
                     noteAnonymous: true
-                    noteMessage: ""
+                    noteMessage: "Hey guys! Mad party going on here >>"
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -78,7 +117,7 @@ Page {
                     noteAuthor: "Someone2"
                     noteAvatar: "url://"
                     noteAnonymous: false
-                    noteMessage: ""
+                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
                     noteLocation: []
                     noteExpiration: ""
                     noteTimestamp: ""
@@ -89,29 +128,45 @@ Page {
             }
 
             delegate: Rectangle{
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: childrenRect.height
-                color: Style.Background.VIEW
+                id: rectangle1
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            height: Math.max(96, noteMessage.length / 18 * 16 + 48)
+                            color: Style.Background.VIEW
 
-                RowLayout{
-                    ColumnLayout{
-                        Label{text: noteAuthor}
-                        Label{text: noteMessage}
-                    }
-                    ColumnLayout{
+                            RowLayout{
+                                id: rowLayout1
+                                anchors.bottom: parent.bottom
+                                anchors.bottomMargin: 8
+                                anchors.top: parent.top
+                                anchors.topMargin: 8
+                                anchors.left: parent.left
+                                anchors.leftMargin: 32
+                                anchors.right: parent.right
+                                anchors.rightMargin: 8
+                                spacing: 8
 
-                    }
-                }
+                                ColumnLayout{
+                                    Layout.fillWidth: true
 
-                Rectangle{
-                    height: 2
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    color: Style.Border.DEFAULT
-                }
-            }
+                                    Label{text: (noteAnonymous? "Anonimous" : noteAuthor) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
+                                    Label{text: noteMessage; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
+                                }
+                                ColumnLayout{
+                                    width: 64
+                                    Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
+                                    Label{text: "12 takes"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
+                                }
+                            }
+
+                            Rectangle{
+                                height: 2
+                                anchors.bottom: parent.bottom
+                                anchors.left: parent.left
+                                anchors.right: parent.right
+                                color: Style.Border.DEFAULT
+                            }
+                        }
         }
 
     }
