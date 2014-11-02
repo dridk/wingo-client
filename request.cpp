@@ -15,7 +15,7 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-    mUrl.setHost("192.168.1.28");
+    mUrl.setHost("localhost");
     mUrl.setPort(5000);
 
 
