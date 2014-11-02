@@ -34,6 +34,11 @@ ApplicationWindow {
         stack.push(page);
     }
 
+    function showMessage(message) {
+        msgTextBox.text = message
+        msgBox.visible  = true
+    }
+
     FontLoader { id: font; name: "Droid Sans" }
 
     StackView {
@@ -95,6 +100,33 @@ ApplicationWindow {
         onSuccess:  app.config = data.results
 
     }
+
+
+//======== MESSAGE ERROR SHOW
+Rectangle {
+    id:msgBox
+    width: parent.width
+    height: 200
+    anchors.centerIn: parent
+    color:"#00b8cc"
+    visible: false
+    Label {
+        id: msgTextBox
+        anchors.centerIn: parent
+        text: "ERROR happens"
+        color: "white"
+        font.pixelSize:25
+    }
+    MouseArea {
+        anchors.fill: parent
+        onClicked: msgBox.visible=false
+    }
+
+
+}
+
+
+
 
 
 }
