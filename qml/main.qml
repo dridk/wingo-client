@@ -1,7 +1,7 @@
 import QtQuick 2.3
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.2
-
+import Wingo 1.0
 import "scripts/AppStyle.js" as Style
 
 ApplicationWindow {
@@ -12,6 +12,7 @@ ApplicationWindow {
     height: 960
     //-----------
     color: Style.Background.WINDOW
+
 
     property variant pages: {
         "Home": Qt.resolvedUrl("pages/Home.qml"),
