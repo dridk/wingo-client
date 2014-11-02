@@ -13,6 +13,11 @@ ApplicationWindow {
     //-----------
     color: Style.Background.WINDOW
 
+    Component.onCompleted: {
+        configRequester.get()
+    }
+
+    property variant config
 
     property variant pages: {
         "Home": Qt.resolvedUrl("pages/Home.qml"),
@@ -80,7 +85,13 @@ ApplicationWindow {
             }
         }
     }
+//======Added by Sacha
+    Request{
+        id:configRequester
+        source:"/config"
+        onSuccess:  app.config = data.results
 
+    }
 
 
 }
