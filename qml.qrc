@@ -12,10 +12,17 @@
         <file>qml/common/SideBar.qml</file>
         <file>qml/common/ListView.qml</file>
         <file>qml/common/ListItem.qml</file>
-        <file>qml/common/Text.qml</file>
+        <file>qml/common/Label.qml</file>
         <file>qml/pages/Splash.qml</file>
         <file>qml/pages/Home.qml</file>
         <file>qml/pages/AddNote.qml</file>
         <file>qml/common/IconRow.qml</file>
+        <file>qml/Res/icons/menu48.png</file>
+        <file>qml/Res/icons/pocket48.png</file>
+        <file>qml/Res/icons/wingo48.png</file>
+        <file>qml/Res/icons/back48.png</file>
+        <file>qml/Res/icons/refresh48.png</file>
+        <file>qml/Res/icons/search48.png</file>
+        <file>qml/Res/icons/expand48.png</file>
     </qresource>
 </RCC>

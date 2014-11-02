@@ -78,3 +78,11 @@ var Background = {
     Element = {
 
     };
+
+//ActionBar styles
+var ACTION_BAR_DEFAULT = "DEFAULT",
+    ACTION_BAR_ALTERNATIVE = "ALTERNATIVE",
+    ACTION_BAR_UTILITY = "UTILITY",
+    ACTION_BAR_SPECIAL = "SPECIAL",
+    ACTION_BAR_MENU_ACTION = "menu",
+    ACTION_BAR_BACK_ACTION = "back"

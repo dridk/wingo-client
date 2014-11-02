@@ -1,6 +1,12 @@
 import QtQuick 2.0
 
-Rectangle {
-    width: 100
-    height: 62
+MouseArea {
+    width: 32
+    height: 32
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(0,0,0,0.5)
+        opacity: parent.pressed? 1: 0
+        Behavior on opacity {NumberAnimation{}}
+    }
 }

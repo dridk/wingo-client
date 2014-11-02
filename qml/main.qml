@@ -11,8 +11,14 @@ ApplicationWindow {
     width: 540
     height: 960
     //-----------
-
     color: Style.Background.WINDOW
+
+    property variant pages: {
+        "Home": Qt.resolvedUrl("pages/Home.qml"),
+        "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
+    }
+
+    FontLoader { id: font; name: "Droid Sans" }
 
     StackView {
         id: stack
@@ -23,7 +29,11 @@ ApplicationWindow {
                              stackView.pop();
                              event.accepted = true;
                          }
-
-        initialItem: Qt.resolvedUrl("pages/Splash.qml")
+        initialItem: Qt.resolvedUrl("pages/Home.qml")
+//        initialItem: Rectangle {
+//            anchors.fill: parent
+//            color: Style.Palette.CYAN
+//            Timer{interval: 3000; running:true; onTriggered: stack.push(app.pages["Home"])}
+//        }
     }
 }
