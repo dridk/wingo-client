@@ -21,10 +21,12 @@ Page {
             id: filterbar
         }
 
-        Rectangle{
-            color: "#7c1c1c"
-            width: 100
-            height: 100
+        ImagePreview
+        {
+            width: page.width /2.0
+            height: page.width /2.0
+            anchors.centerIn: parent
+            //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
         }
     }
 

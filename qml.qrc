@@ -25,5 +25,7 @@
         <file>qml/Res/icons/search48.png</file>
         <file>qml/Res/icons/expand48.png</file>
         <file>qml/common/FilterBar.qml</file>
+        <file>qml/common/ImagePreview.qml</file>
+        <file>qml/Res/images/addPicturePlaceholder.png</file>
     </qresource>
 </RCC>
