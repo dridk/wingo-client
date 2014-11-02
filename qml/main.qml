@@ -1,10 +1,15 @@
 import QtQuick 2.3
+import QtQuick.Layouts 1.1
+import QtPositioning 5.3
+
 import QtQuick.Window 2.0
 import QtQuick.Controls 1.2
-import Wingo 1.0
 import "scripts/AppStyle.js" as Style
+import Wingo 1.0
 
-ApplicationWindow {
+
+ApplicationWindow
+{
     id: app
     visible: true
     //Needed for QtCreator design mode
@@ -14,26 +19,32 @@ ApplicationWindow {
     color: Style.Background.WINDOW
 
 
-    property variant pages: {
+
+    property variant pages:
+    {
         "Home": Qt.resolvedUrl("pages/Home.qml"),
         "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
     }
-    function goBack(){
+    function goBack()
+    {
         stack.pop()
     }
 
-    function goToPage(page){
+    function goToPage(page)
+    {
         stack.push(page);
     }
 
     FontLoader { id: font; name: "Droid Sans" }
 
-    StackView {
+    StackView
+    {
         id: stack
         anchors.fill: parent
         // Implements back key navigation
         focus: true
-        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
+        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1)
+                         {
                              stackView.pop();
                              event.accepted = true;
                          }
@@ -46,18 +57,23 @@ ApplicationWindow {
 //            Timer{interval: 3000; running:true; onTriggered: stack.push(app.pages["Home"])}
 //        }
 
-        delegate: StackViewDelegate {
+        delegate: StackViewDelegate
+        {
 //            function transitionFinished(properties)
 //            {
 //                properties.exitItem.state = ""
 //            }
 
-            pushTransition: StackViewTransition {
-                SequentialAnimation {
-                    ScriptAction {
+            pushTransition: StackViewTransition
+            {
+                SequentialAnimation
+                {
+                    ScriptAction
+                    {
                         script: exitItem.state = "DISABLED"
                     }
-                    PropertyAnimation {
+                    PropertyAnimation
+                    {
                         target: enterItem
                         property: "x"
                         from: enterItem.width
@@ -65,12 +81,16 @@ ApplicationWindow {
                     }
                 }
             }
-            popTransition: StackViewTransition {
-                SequentialAnimation {
-                    ScriptAction {
+            popTransition: StackViewTransition
+            {
+                SequentialAnimation
+                {
+                    ScriptAction
+                    {
                         script: enterItem.state = ""
                     }
-                    PropertyAnimation {
+                    PropertyAnimation
+                    {
                         target: exitItem
                         property: "x"
                         to: enterItem.width
@@ -79,36 +99,6 @@ ApplicationWindow {
                 }
             }
         }
-
-    Text{
-        id:textId
-        anchors.centerIn: parent
-
-    }
-
-    Button {
-        id:bt
-        text: "test"
-
-        onClicked: request.get({
-                               "at":"43.601337,1.438675",
-                               "radius": 1000000})
-
-    }
-
-
-
-    Request {
-        id:request
-        source:"/notes"
-        onSuccess: {
-            console.log(data.total)
-            textId.text = data.total
-        }
-    }
-
-
-
 
 
     //    StackView {
@@ -124,6 +114,49 @@ ApplicationWindow {
     //        initialItem: Qt.resolvedUrl("pages/Splash.qml")
     //    }
 
+    }
+
+
+
+    WingoRequest
+    {
+        id: req
+        source:"/notes"
+        onSuccess:
+        {
+          console.debug("Req Succes : " + data.success)
+        }
+
+        onError:
+        {
+            console.log("Req Error : " + message)
+        }
+    }
+
+    // OGD - GPS Test
+    Text
+    {
+        id: gpsText
+        anchors.centerIn: parent
+        text: "salut"
+    }
+
+    PositionSource
+    {
+        id: gpsSource
+        updateInterval: 1000
+        active: true
+
+        onPositionChanged:
+        {
+            var coord = gpsSource.position.coordinate;
+            console.log("Coordinate:", coord.latitude, coord.longitude);
+
+            req.get({"at": coord.latitude+","+coord.longitude,"radius": 100})
+
+            gpsText.text = coord.latitude + " " + coord.longitude
+        }
+    }
 
 
 

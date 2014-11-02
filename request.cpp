@@ -1,15 +1,19 @@
 #include "request.h"
 #include <QDebug>
-QNetworkAccessManager * Request::mManager = new QNetworkAccessManager();
+
+QNetworkAccessManager * Request::mManager = 0;
 
 Request::Request(QQuickItem *parent) :
     QObject(parent)
 {
     qDebug()<<"SET URL";
 
-
+    if (mManager == 0)
+    {
+        mManager = new QNetworkAccessManager();
+    }
     mUrl.setScheme("http");
-    mUrl.setHost("localhost");
+    mUrl.setHost("192.168.1.1");
     mUrl.setPort(5000);
 
 
