@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
 import "../common"
-
+import Wingo 1.0
 Page {
     id: page
 
@@ -21,6 +21,20 @@ Page {
             buttonStyle: "ACCENT"
         }
     }
+
+    onActionButtonClicked: {
+        if (index == 0)
+        {
+            console.debug("POST NOTE")
+            postNoteRequester.post({
+                                  "at":[parseFloat(app.latitude),parseFloat(app.longitude)],
+                                  "author":"darwin", //TIPS... darwin, to make it works without auth
+                                  "anonymous":true,
+                                  "message":"This is a qml message sended from qml"
+                                   })
+        }
+    }
+
 
     OmniBar{
         id: noteProperties
@@ -88,6 +102,17 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
 
         //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
+    }
+
+    Request{
+        id:postNoteRequester
+        source:"/notes"
+        onSuccess: {
+            app.showMessage("SUCCESS")
+        }
+        onError: {
+            app.showMessage("ERROR " + message)
+        }
     }
 
 }
