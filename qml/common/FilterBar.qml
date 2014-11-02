@@ -77,7 +77,7 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         color: Style.Border.DEFAULT
-    }    
+    }
 
     //Page shadowing effect
     Rectangle
@@ -128,47 +128,70 @@ Rectangle {
             RowLayout{
                 height: 96
                 Layout.fillWidth: true
-                Button {
-                    id: button1
-                    width: filterBar.width / 4
-                    height: 96
-                    Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                    Layout.fillWidth: true
-                    onClicked: {
-                        filterBar.distance = 5
-                        filterBar.contract()
+
+                Repeater {
+                    model : app.config.allowed_radius.length
+                    Button {
+
+                        width: filterBar.width / 4
+                        height: 96
+                        Label{
+                            text: "in "+app.config.allowed_radius[index]+"m" ;
+                            anchors.horizontalCenter: parent.horizontalCenter;
+                            anchors.verticalCenter: parent.verticalCenter
+                        }
+                        Layout.fillWidth: true
+                        onClicked: {
+                            filterBar.distance = app.config.allowed_radius[index]
+                            filterBar.contract()
+                        }
                     }
+
+
                 }
-                Button {
-                    width: filterBar.width / 4
-                    height: 96
-                    Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                    Layout.fillWidth: true
-                    onClicked: {
-                        filterBar.distance = 15
-                        filterBar.contract()
-                    }
-                }
-                Button {
-                    width: filterBar.width / 4
-                    height: 96
-                    Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                    Layout.fillWidth: true
-                    onClicked: {
-                        filterBar.distance = 50
-                        filterBar.contract()
-                    }
-                }
-                Button {
-                    width: filterBar.width / 4
-                    height: 96
-                    Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                    Layout.fillWidth: true
-                    onClicked: {
-                        filterBar.distance = 100
-                        filterBar.contract()
-                    }
-                }
+
+
+                //                Button {
+                //                    id: button1
+                //                    width: filterBar.width / 4
+                //                    height: 96
+                //                    Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
+                //                    Layout.fillWidth: true
+                //                    onClicked: {
+                //                        filterBar.distance = 5
+                //                        filterBar.contract()
+                //                    }
+                //                }
+                //                Button {
+                //                    width: filterBar.width / 4
+                //                    height: 96
+                //                    Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
+                //                    Layout.fillWidth: true
+                //                    onClicked: {
+                //                        filterBar.distance = 15
+                //                        filterBar.contract()
+                //                    }
+                //                }
+                //                Button {
+                //                    width: filterBar.width / 4
+                //                    height: 96
+                //                    Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
+                //                    Layout.fillWidth: true
+                //                    onClicked: {
+                //                        filterBar.distance = 50
+                //                        filterBar.contract()
+                //                    }
+                //                }
+                //                Button {
+                //                    width: filterBar.width / 4
+                //                    height: 96
+                //                    Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
+                //                    Layout.fillWidth: true
+                //                    onClicked: {
+                //                        filterBar.distance = 100
+                //                        filterBar.contract()
+                //                    }
+                //                }
             }
         }
 
