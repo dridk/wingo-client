@@ -22,7 +22,7 @@ Rectangle{
 
         ColumnLayout{
             Layout.fillWidth: true
-            Label{text: (noteAnonymous? "Anonimous" : noteAuthor) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
+            Label{text: (anonymous? "Anonimous" : author.nickname) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
             Label{text: message; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
         }
         ColumnLayout{
