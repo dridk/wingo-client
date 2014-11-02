@@ -14,20 +14,18 @@ Page {
 
     onBackButtonClicked: app.goBack()
 
-    ColumnLayout{
-        anchors.fill: parent
 
-        FilterBar{
-            id: filterbar
-        }
+    FilterBar{
+        id: filterbar
+        anchors.top: parent.top
+    }
 
-        ImagePreview
-        {
-            width: page.width /2.0
-            height: page.width /2.0
-            anchors.centerIn: parent
-            //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
-        }
+    ImagePreview
+    {
+        width: page.width /2.0
+        height: page.width /2.0
+        anchors.centerIn: parent
+        //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
     }
 
 }
