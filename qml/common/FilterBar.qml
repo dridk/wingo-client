@@ -15,20 +15,20 @@ Rectangle {
     property bool expanded: filterBarTray.height > 0
     z: expanded ? 99 : 0
 
-    property variant filter: {
-        "byDate": true,
-        "byPopularity": false,
-        "distance": 50,
-        "search": ""
-    }
+    property bool sortByDate: true
+    property bool sortByPopularity: false
+    property int distance: 50
+    property string search: ""
+
+    signal filterChanged
 
     color: Style.Background.VIEW
 
     function filterBarSensorLabelText(){
         var t = "";
-        if (filter.byDate) {t = "Recent"}
-        else if (filter.byPopularity) {t = "Popular"}
-        t += " in " + filter.distance + "m radius"
+        if (sortByDate) {t = "Recent"}
+        else if (sortByPopularity) {t = "Popular"}
+        t += " in " + distance + "m radius"
         return t
     }
 
@@ -111,20 +111,18 @@ Rectangle {
                 height: 96
                 text: "Recent notes"
                 onClicked: {
-                    filterBar.filter.byDate = true
-                    filterBar.filter.byPopularity = false
+                    filterBar.sortByDate = true
+                    filterBar.sortByPopularity = false
                     filterBar.contract()
-                    console.debug(filterBar.filter)
                 }
             }
             ListItem {
                 height: 96
                 text: "Popular notes"
                 onClicked: {
-                    filterBar.filter.byDate = false
-                    filterBar.filter.byPopularity = true
+                    filterBar.sortByDate = false
+                    filterBar.sortByPopularity = true
                     filterBar.contract()
-                    console.debug(filterBar.filter)
                 }
             }
             RowLayout{
@@ -136,24 +134,40 @@ Rectangle {
                     height: 96
                     Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
+                    onClicked: {
+                        filterBar.distance = 5
+                        filterBar.contract()
+                    }
                 }
                 Button {
                     width: filterBar.width / 4
                     height: 96
                     Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
+                    onClicked: {
+                        filterBar.distance = 15
+                        filterBar.contract()
+                    }
                 }
                 Button {
                     width: filterBar.width / 4
                     height: 96
                     Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
+                    onClicked: {
+                        filterBar.distance = 50
+                        filterBar.contract()
+                    }
                 }
                 Button {
                     width: filterBar.width / 4
                     height: 96
                     Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
+                    onClicked: {
+                        filterBar.distance = 100
+                        filterBar.contract()
+                    }
                 }
             }
         }

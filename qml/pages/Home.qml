@@ -32,10 +32,13 @@ Page {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
          case 0:
-             //43.8218617,-79.4245574
-           notesServerRequest.get({"at":"43.601337,1.438675", "radius":"100"})
+           refresh()
            break;
         }
+    }
+
+    function refresh(){
+        notesServerRequest.get({"at":"43.601337,1.438675", "radius": filterbar.distance + ""})
     }
 
     Request {
@@ -55,6 +58,7 @@ Page {
     FilterBar {
         id: filterbar
         anchors.top: parent.top
+        onDistanceChanged: refresh()
     }
 
     Item{
