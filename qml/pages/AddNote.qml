@@ -43,6 +43,32 @@ Page {
             text = composeText()
         }
         Component.onCompleted: text = composeText()
+
+        ColumnLayout {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            RowLayout {
+                height: 96
+                anchors.left: parent.left
+                anchors.right: parent.right
+                Button {
+                    Label {text: "Post as yourself"}
+                    width: parent.width / 2
+                }
+                Button {
+                    Label {text: "Post as Anonimous"}
+                    width: parent.width / 2
+                }
+            }
+            ListItem{
+                height: 96
+                Label {text: "Never expire"}
+            }
+            ListItem{
+                height: 96
+                Label {text: "Allow unlimited takes"}
+            }
+        }
     }
 
     EditArea {
