@@ -25,8 +25,14 @@ Page {
         anchors.top: parent.top
         width: parent.width
 
-        FilterBar{
-            id: filterbar
+        OmniBar{
+            id: settingBar
+            property bool postAnonimous: false
+            property string expiery: "null"
+            property int maxTakes: -1
+            onContracted: {
+
+            }
         }
 
       EditArea {
