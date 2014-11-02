@@ -15,8 +15,8 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-    mUrl.setHost("labsquare.org");
-    mUrl.setPort(9000);
+    mUrl.setHost("localhost");
+    mUrl.setPort(5000);
 
 
 

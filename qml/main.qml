@@ -142,11 +142,11 @@ ApplicationWindow {
         updateInterval: 1000
         active: enable
         onPositionChanged: {
-            var coord = gpsSource.position.coordinate;
-            app.longitude = coord.longitude;
-            app.latitude = coord.latitude;
+//            var coord = gpsSource.position.coordinate;
+//            app.longitude = coord.longitude;
+//            app.latitude = coord.latitude;
 
-            console.debug(coord.longitude +" " +coord.latitude )
+//            console.debug(coord.longitude +" " +coord.latitude )
         }
     }
 
