@@ -124,8 +124,8 @@ void Request::parseError(QNetworkReply::NetworkError err)
 QNetworkRequest Request::makeRequest(const QUrl &url)
 {
 
-    QNetworkRequest request;
+    QNetworkRequest request(url);
     request.setRawHeader("Content-Type","application/json");
-    return QNetworkRequest(url);
+    return request;
 
 }

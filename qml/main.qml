@@ -61,7 +61,7 @@ ApplicationWindow {
 
 //        onClicked: request.get({"at": lat.text+","+longi.text,"radius": radiusId.text})
           onClicked: request.post({
-                                      "at": lat.text+","+longi.text,
+                                      "at":[parseFloat(lat.text),parseFloat(longi.text)],
                                       "author":"54553bca12f8034017ad2e3c",
                                       "anonymous":true,
                                       "message":"This is a qml message sended from qml"
@@ -78,11 +78,12 @@ ApplicationWindow {
         id:request
         source:"/notes"
         onSuccess: {
-            totalId.text = data.total
-            listModel.clear()
-            for (var index in data.results){
-                listModel.append(data.results[index])
-            }
+
+          console.debug(data.success)
+        }
+
+        onError: {
+            console.log(message)
         }
     }
 
