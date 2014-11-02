@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
 import "../common"
@@ -31,8 +32,20 @@ Page {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
          case 0:
+             //43.8218617,-79.4245574
+           notesServerRequest.get({"at": "43.8218617,-79.4245574","radius": 50})
+           break;
+        }
+    }
 
-             break;
+    Request {
+        id: notesServerRequest
+        source: "/notes"
+        onSuccess: {
+            console.debug(data)
+        }
+        onError: {
+            console.debug(message)
         }
     }
 
@@ -52,41 +65,44 @@ Page {
             anchors.fill: parent
 
             model: ListModel{
-                ListElement{
-                    noteAuthor: "Someone"
-                    noteAvatar: "url://"
-                    noteAnonymous: false
-                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
-                    noteLocation: []
-                    noteExpiration: ""
-                    noteTimestamp: ""
-                    noteTakes: 5
-                    noteLimit: 10
-                    noteTags: []
-                }
-                ListElement{
-                    noteAnonymous: true
-                    noteMessage: "Hey guys! Mad party going on here >>"
-                    noteLocation: []
-                    noteExpiration: ""
-                    noteTimestamp: ""
-                    noteTakes: 5
-                    noteLimit: 10
-                    noteTags: []
-                }
-                ListElement{
-                    noteAuthor: "Someone2"
-                    noteAvatar: "url://"
-                    noteAnonymous: false
-                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
-                    noteLocation: []
-                    noteExpiration: ""
-                    noteTimestamp: ""
-                    noteTakes: 5
-                    noteLimit: 10
-                    noteTags: []
-                }
+                id: notesListModel
             }
+//                ListModel{
+//                ListElement{
+//                    noteAuthor: "Someone"
+//                    noteAvatar: "url://"
+//                    noteAnonymous: false
+//                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
+//                    noteLocation: []
+//                    noteExpiration: ""
+//                    noteTimestamp: ""
+//                    noteTakes: 5
+//                    noteLimit: 10
+//                    noteTags: []
+//                }
+//                ListElement{
+//                    noteAnonymous: true
+//                    noteMessage: "Hey guys! Mad party going on here >>"
+//                    noteLocation: []
+//                    noteExpiration: ""
+//                    noteTimestamp: ""
+//                    noteTakes: 5
+//                    noteLimit: 10
+//                    noteTags: []
+//                }
+//                ListElement{
+//                    noteAuthor: "Someone2"
+//                    noteAvatar: "url://"
+//                    noteAnonymous: false
+//                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
+//                    noteLocation: []
+//                    noteExpiration: ""
+//                    noteTimestamp: ""
+//                    noteTakes: 5
+//                    noteLimit: 10
+//                    noteTags: []
+//                }
+//            }
 
             delegate: NoteListItem{}
         }
@@ -94,7 +110,6 @@ Page {
     }
 
     Rectangle{
-        id: rectangle1
         anchors.right: parent.right
         anchors.left: parent.left
         height: 64

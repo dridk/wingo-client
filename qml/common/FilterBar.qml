@@ -129,18 +129,22 @@ Rectangle {
                 height: 96
                 Layout.fillWidth: true
                 ListItem {
+                    width: filterBar.width / 4
                     text: "in 5m"
                     Layout.fillWidth: true
                 }
                 ListItem {
+                    width: filterBar.width / 4
                     text: "in 15m"
                     Layout.fillWidth: true
                 }
                 ListItem {
+                    width: filterBar.width / 4
                     text: "in 50m"
                     Layout.fillWidth: true
                 }
                 ListItem {
+                    width: filterBar.width / 4
                     text: "in 100m"
                     Layout.fillWidth: true
                 }
