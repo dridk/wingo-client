@@ -6,7 +6,7 @@ import "../scripts/AppStyle.js" as Style
 Rectangle{
     anchors.left: parent.left
     anchors.right: parent.right
-    height: Math.max(96, noteMessage.length / 18 * 16 + 48)
+    height: Math.max(96, message.length / 18 * 16 + 48)
     color: Style.Background.VIEW
 
     RowLayout{
@@ -23,7 +23,7 @@ Rectangle{
         ColumnLayout{
             Layout.fillWidth: true
             Label{text: (noteAnonymous? "Anonimous" : noteAuthor) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
-            Label{text: noteMessage; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
+            Label{text: message; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
         }
         ColumnLayout{
             width: 64

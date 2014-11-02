@@ -33,7 +33,7 @@ Page {
         switch (index){
          case 0:
              //43.8218617,-79.4245574
-           notesServerRequest.get({"at": "43.8218617,-79.4245574","radius": 50})
+           notesServerRequest.get({"at":"43.601337,1.438675", "radius":"1000"})
            break;
         }
     }
@@ -42,7 +42,10 @@ Page {
         id: notesServerRequest
         source: "/notes"
         onSuccess: {
-            console.debug(data)
+            notesListModel.clear()
+            for (var index in data.results){
+                notesListModel.append(data.results[index])
+            }
         }
         onError: {
             console.debug(message)

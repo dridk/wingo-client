@@ -1,6 +1,6 @@
 #include "request.h"
 #include <QDebug>
-QNetworkAccessManager * Request::mManager = NULL;
+QNetworkAccessManager * Request::mManager = 0;
 
 Request::Request(QQuickItem *parent) :
     QObject(parent)
@@ -8,7 +8,7 @@ Request::Request(QQuickItem *parent) :
     qDebug()<<"SET URL";
 
 
-    if (mManager == NULL)
+    if (mManager == 0)
     {
         mManager = new QNetworkAccessManager;
     }
@@ -49,7 +49,7 @@ void Request::get(const QVariant &data)
     QNetworkRequest request = makeRequest(mUrl);
 
     qDebug()<<mUrl;
-    QNetworkReply * reply = mManager->get(request);
+    QNetworkReply * reply = mManager->get(QNetworkRequest(mUrl));
 
     connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
 
@@ -119,13 +119,14 @@ void Request::parseFinished()
             return;
         }
         else {
+
             emit error(1, doc.object().value("message").toString());
             return;
         }
     }
     emit error(1, reply->errorString());
     reply->deleteLater();
-
+      qDebug()<<reply->errorString();
 
 }
 
@@ -133,6 +134,8 @@ void Request::parseError(QNetworkReply::NetworkError err)
 {
 
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+
+
     emit error(1, reply->errorString());
     reply->deleteLater();
 
