@@ -14,34 +14,97 @@ ApplicationWindow {
 
     color: Style.Background.WINDOW
 
+
     Text{
         id:textId
         anchors.centerIn: parent
 
     }
 
+    Row {
+        anchors.right: parent.right
+
+        Text {
+            id: totalId
+            width: 100
+            text:"1000000"
+        }
+
+        TextField {
+            id: radiusId
+            width: 100
+            placeholderText: "radius"
+            text:"1000000"
+        }
+        TextField {
+            id: lat
+            width: 100
+            placeholderText: "latitude"
+            text:"43.601337"
+        }
+        TextField {
+            id: longi
+            width: 100
+            placeholderText: "longitude"
+            text:"1.438675"
+        }
+
+
+    }
+
+
+
+
     Button {
         id:bt
         text: "test"
 
-        onClicked: request.get({
-                               "at":"43.601337,1.438675",
-                               "radius": 1000000})
+        onClicked: request.get({"at": lat.text+","+longi.text,"radius": radiusId.text})
     }
 
 
 
     Request {
         id:request
-        source:"/notes"
+        source:"/tags"
         onSuccess: {
-            console.log(data.total)
-            textId.text = data.total
+            totalId.text = data.total
+            listModel.clear()
+            for (var index in data.results){
+                listModel.append(data.results[index])
+            }
         }
     }
 
 
 
+    ListModel {
+        id:listModel
+    }
+
+    ListView {
+        width: app.width
+        height: 800
+        anchors.top: bt.bottom
+
+        model:listModel
+        clip:true
+        delegate: Rectangle {
+            width: app.width
+            height: 80
+            anchors.margins: 5
+            border.color: "red"
+            Text {
+                anchors.fill: parent
+                text:name + " " + count
+                wrapMode: Text.WordWrap
+
+            }
+        }
+
+
+
+    }
 
 
     //    StackView {

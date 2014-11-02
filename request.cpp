@@ -31,20 +31,11 @@ const QString &Request::source()
 
 void Request::get(const QVariant &data)
 {
-
-
     mUrl.setPath(mSource);
-
     QUrlQuery query;
 
     foreach (QString key, data.toMap().keys())
-    {
-       query.addQueryItem(key,data.toMap().value(key).toString());
-    }
-
-
-
-
+        query.addQueryItem(key,data.toMap().value(key).toString());
 
     mUrl.setQuery(query);
 
@@ -57,12 +48,6 @@ void Request::get(const QVariant &data)
 
     connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
             SLOT(parseError(QNetworkReply::NetworkError)));
-
-
-
-
-
-
 
 
 }
@@ -91,8 +76,20 @@ void Request::parseFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-    qDebug()<<"cpp: "<<doc.object();
-    emit success(doc.object());
+    reply->deleteLater();
+
+    if (doc.object().contains("success")){
+
+        if (doc.object().value("success").toBool()){
+            emit success(doc.object());
+            return;
+        }
+        else {
+            emit error(1, doc.object().value("message").toString());
+            return;
+        }
+    }
+     emit error(1, "JSON error");
 
 }
 
