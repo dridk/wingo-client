@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-
+import Wingo 1.0
 import "../scripts/AppStyle.js" as Style
 
 Rectangle {
@@ -126,11 +126,13 @@ Rectangle {
                 }
             }
             RowLayout{
+                id:radiusLayoutId
                 height: 96
                 Layout.fillWidth: true
 
                 Repeater {
-                    model : app.config.allowed_radius.length
+                    //ugly... But I want to avoid error message for now
+                    model : app.config === undefined ? 0 : app.config.allowed_radius.length
                     Button {
 
                         width: filterBar.width / 4
@@ -143,57 +145,93 @@ Rectangle {
                         Layout.fillWidth: true
                         onClicked: {
                             filterBar.distance = app.config.allowed_radius[index]
-                            filterBar.contract()
+//                            filterBar.contract()
+                            tagRequester.get({"at": app.latitude+","+app.longitude, "radius":filterBar.distance})
                         }
                     }
 
-
                 }
 
-
-                //                Button {
-                //                    id: button1
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 5
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 15
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 50
-                //                        filterBar.contract()
-                //                    }
-                //                }
-                //                Button {
-                //                    width: filterBar.width / 4
-                //                    height: 96
-                //                    Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
-                //                    Layout.fillWidth: true
-                //                    onClicked: {
-                //                        filterBar.distance = 100
-                //                        filterBar.contract()
-                //                    }
-                //                }
             }
         }
+
+//=================THE TAGS LIST ==========================================
+        Rectangle {
+            anchors.top: filterBarTrayColumn.bottom
+            width: parent.width
+            height: 500
+
+            Rectangle {
+                id:separator
+                width: parent.width
+                height: 50
+                color: "lightgray"
+
+                Label{
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 16
+                    text: "Tags"
+                    color: "#46504c"
+                }
+            }
+
+            Request {
+                id:tagRequester
+                source:"/tags"
+                onSuccess: {
+                    tagModel.clear()
+                    tagModel.append(data.results)
+                }
+            }
+
+            ListView {
+                anchors.fill: parent
+                anchors.topMargin: 50
+                model: ListModel{id:tagModel}
+                clip:true
+
+                delegate:   Rectangle {
+                    height: 54
+                    width: parent.width
+                    color: area.pressed ? "#00b8cc" : "white"
+
+                    Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 16
+                        text: name
+                        color: !area.pressed ? "#00b8cc" : "white"
+                    }
+
+                    Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: 16
+                        text: count
+                        color: !area.pressed ? "#00b8cc" : "lightgray"
+
+                    }
+
+                    Rectangle{
+                        id:lineSeparator
+                        width: parent.width
+                        height: 1
+                        color: "lightgray"
+                    }
+
+                    MouseArea{
+                        id:area
+                        anchors.fill: parent
+                        onClicked: filterBar.search=name
+
+
+                    }
+
+                }
+            }
+        }
+//=================END TAGS LIST ==========================================
 
     }
 

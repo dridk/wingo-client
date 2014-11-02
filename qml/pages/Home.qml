@@ -31,14 +31,14 @@ Page {
     onActionButtonClicked: {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
-         case 0:
-           refresh()
-           break;
+        case 0:
+            refresh()
+            break;
         }
     }
 
     function refresh(){
-        notesServerRequest.get({"at":"43.601337,1.438675", "radius": filterbar.distance + ""})
+        notesServerRequest.get({"at": app.latitude+","+app.longitude, "radius": filterbar.distance, "query": filterbar.search})
     }
 
     Request {
@@ -58,7 +58,10 @@ Page {
     FilterBar {
         id: filterbar
         anchors.top: parent.top
-        onDistanceChanged: refresh()
+        onSearchChanged: {
+            refresh()
+            contract()
+        }
     }
 
     Item{
@@ -74,42 +77,42 @@ Page {
             model: ListModel{
                 id: notesListModel
             }
-//                ListModel{
-//                ListElement{
-//                    noteAuthor: "Someone"
-//                    noteAvatar: "url://"
-//                    noteAnonymous: false
-//                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
-//                    noteLocation: []
-//                    noteExpiration: ""
-//                    noteTimestamp: ""
-//                    noteTakes: 5
-//                    noteLimit: 10
-//                    noteTags: []
-//                }
-//                ListElement{
-//                    noteAnonymous: true
-//                    noteMessage: "Hey guys! Mad party going on here >>"
-//                    noteLocation: []
-//                    noteExpiration: ""
-//                    noteTimestamp: ""
-//                    noteTakes: 5
-//                    noteLimit: 10
-//                    noteTags: []
-//                }
-//                ListElement{
-//                    noteAuthor: "Someone2"
-//                    noteAvatar: "url://"
-//                    noteAnonymous: false
-//                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
-//                    noteLocation: []
-//                    noteExpiration: ""
-//                    noteTimestamp: ""
-//                    noteTakes: 5
-//                    noteLimit: 10
-//                    noteTags: []
-//                }
-//            }
+            //                ListModel{
+            //                ListElement{
+            //                    noteAuthor: "Someone"
+            //                    noteAvatar: "url://"
+            //                    noteAnonymous: false
+            //                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
+            //                    noteLocation: []
+            //                    noteExpiration: ""
+            //                    noteTimestamp: ""
+            //                    noteTakes: 5
+            //                    noteLimit: 10
+            //                    noteTags: []
+            //                }
+            //                ListElement{
+            //                    noteAnonymous: true
+            //                    noteMessage: "Hey guys! Mad party going on here >>"
+            //                    noteLocation: []
+            //                    noteExpiration: ""
+            //                    noteTimestamp: ""
+            //                    noteTakes: 5
+            //                    noteLimit: 10
+            //                    noteTags: []
+            //                }
+            //                ListElement{
+            //                    noteAuthor: "Someone2"
+            //                    noteAvatar: "url://"
+            //                    noteAnonymous: false
+            //                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
+            //                    noteLocation: []
+            //                    noteExpiration: ""
+            //                    noteTimestamp: ""
+            //                    noteTakes: 5
+            //                    noteLimit: 10
+            //                    noteTags: []
+            //                }
+            //            }
 
             delegate: NoteListItem{}
         }
