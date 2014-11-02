@@ -10,7 +10,7 @@
         <file>qml/common/Avatar.qml</file>
         <file>qml/common/Badge.qml</file>
         <file>qml/common/SideBar.qml</file>
-        <file>qml/common/ListView.qml</file>
+        <file>qml/common/ListView~.qml</file>
         <file>qml/common/ListItem.qml</file>
         <file>qml/common/Label.qml</file>
         <file>qml/pages/Splash.qml</file>

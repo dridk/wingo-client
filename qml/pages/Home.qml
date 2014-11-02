@@ -35,7 +35,7 @@ Page {
     ColumnLayout{
         anchors.fill: parent
 
-        FilterBar{
+        FilterBar {
             id: filterbar
         }
 
