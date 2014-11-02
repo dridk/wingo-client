@@ -146,7 +146,7 @@ Rectangle {
                         onClicked: {
                             filterBar.distance = app.config.allowed_radius[index]
 //                            filterBar.contract()
-                            tagRequester.get()
+                            tagRequester.get({"at": app.latitude+","+app.longitude, "radius":filterBar.distance})
                         }
                     }
 
@@ -160,25 +160,71 @@ Rectangle {
             anchors.top: filterBarTrayColumn.bottom
             width: parent.width
             height: 500
-            color:"red"
+
+            Rectangle {
+                id:separator
+                width: parent.width
+                height: 50
+                color: "lightgray"
+
+                Label{
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
+                    anchors.leftMargin: 16
+                    text: "Tags"
+                    color: "#46504c"
+                }
+            }
 
             Request {
                 id:tagRequester
                 source:"/tags"
                 onSuccess: {
                     tagModel.clear()
-                    console.debug("TAGSSSSSSSSSS")
+                    tagModel.append(data.results)
                 }
             }
 
             ListView {
                 anchors.fill: parent
+                anchors.topMargin: 50
                 model: ListModel{id:tagModel}
+                clip:true
 
-                delegate:   ListItem {
-                    height: 96
-                    text: "Popular notes"
-                    onClicked: { }
+                delegate:   Rectangle {
+                    height: 54
+                    width: parent.width
+                    color: area.pressed ? "#00b8cc" : "white"
+
+                    Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.left: parent.left
+                        anchors.leftMargin: 16
+                        text: name
+                        color: !area.pressed ? "#00b8cc" : "white"
+                    }
+
+                    Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        anchors.right: parent.right
+                        anchors.rightMargin: 16
+                        text: count
+                        color: !area.pressed ? "#00b8cc" : "lightgray"
+
+                    }
+
+                    Rectangle{
+                        id:lineSeparator
+                        width: parent.width
+                        height: 1
+                        color: "lightgray"
+                    }
+
+                    MouseArea{
+                        id:area
+                        anchors.fill: parent
+                    }
+
                 }
             }
         }
