@@ -16,6 +16,12 @@ Page {
     title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
     defaultAction: Style.ACTION_BAR_MENU_ACTION
 
+    Component.onCompleted: {
+        //Init on load
+        refresh()
+
+    }
+
     actionsListModel: ListModel{
         ListElement {
             icon: "refresh48"

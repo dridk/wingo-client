@@ -17,7 +17,7 @@ Rectangle {
 
     property bool sortByDate: true
     property bool sortByPopularity: false
-    property int distance: 50
+    property int distance: 1000
     property string search: ""
 
     signal filterChanged

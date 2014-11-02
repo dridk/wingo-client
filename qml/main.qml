@@ -15,6 +15,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         configRequester.get()
+
     }
     //Global configuration variable
     property variant config
