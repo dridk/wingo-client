@@ -20,6 +20,7 @@ Request::Request(QQuickItem *parent) :
 void Request::setSource(const QString &source)
 {
     mSource = source;
+    mUrl.setPath(mSource);
     emit sourceChanged();
 
 }
@@ -31,7 +32,7 @@ const QString &Request::source()
 
 void Request::get(const QVariant &data)
 {
-    mUrl.setPath(mSource);
+
     QUrlQuery query;
 
     foreach (QString key, data.toMap().keys())
@@ -54,6 +55,22 @@ void Request::get(const QVariant &data)
 
 void Request::post(const QVariant &data)
 {
+
+    QJsonDocument doc = QJsonDocument::fromVariant(data);
+
+    QNetworkRequest request = makeRequest(mUrl);
+
+
+    qDebug()<<request.url();
+    qDebug()<<doc.toJson();
+    QNetworkReply * reply = mManager->post(request, doc.toJson());
+
+    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
+            SLOT(parseError(QNetworkReply::NetworkError)));
+
+
 
 }
 
@@ -107,6 +124,8 @@ void Request::parseError(QNetworkReply::NetworkError err)
 QNetworkRequest Request::makeRequest(const QUrl &url)
 {
 
+    QNetworkRequest request;
+    request.setRawHeader("Content-Type","application/json");
     return QNetworkRequest(url);
 
 }
