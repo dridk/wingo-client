@@ -8,20 +8,17 @@ import "../common"
 Page {
     id: page
 
-    icon: "Add Note"
-    title: "Pocket"
+    icon: ""
+    title: "Add Note"
     defaultAction: Style.ACTION_BAR_BACK_ACTION
 
     onBackButtonClicked: app.goBack()
 
     actionsListModel: ListModel{
         ListElement {
-            icon: "refresh48"
-            name: "refresh"
-        }
-        ListElement {
-            icon: "pocket48"
-            name: "pocket"
+            icon: "post48"
+            name: "post"
+            buttonStyle: "ACCENT"
         }
     }
     Column {

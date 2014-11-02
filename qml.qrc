@@ -29,5 +29,6 @@
         <file>qml/Res/images/addPicturePlaceholder.png</file>
         <file>qml/common/EditArea.qml</file>
         <file>qml/common/NoteListItem.qml</file>
+        <file>qml/Res/icons/post48.png</file>
     </qresource>
 </RCC>

@@ -114,6 +114,7 @@ Rectangle {
                     filterBar.filter.byDate = true
                     filterBar.filter.byPopularity = false
                     filterBar.contract()
+                    console.debug(filterBar.filter)
                 }
             }
             ListItem {
@@ -123,29 +124,35 @@ Rectangle {
                     filterBar.filter.byDate = false
                     filterBar.filter.byPopularity = true
                     filterBar.contract()
+                    console.debug(filterBar.filter)
                 }
             }
             RowLayout{
                 height: 96
                 Layout.fillWidth: true
-                ListItem {
+                Button {
+                    id: button1
                     width: filterBar.width / 4
-                    text: "in 5m"
+                    height: 96
+                    Label{text: "in 5m" ; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
                 }
-                ListItem {
+                Button {
                     width: filterBar.width / 4
-                    text: "in 15m"
+                    height: 96
+                    Label{text: "in 15m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
                 }
-                ListItem {
+                Button {
                     width: filterBar.width / 4
-                    text: "in 50m"
+                    height: 96
+                    Label{text: "in 50m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
                 }
-                ListItem {
+                Button {
                     width: filterBar.width / 4
-                    text: "in 100m"
+                    height: 96
+                    Label{text: "in 100m"; anchors.horizontalCenter: parent.horizontalCenter;anchors.verticalCenter: parent.verticalCenter}
                     Layout.fillWidth: true
                 }
             }

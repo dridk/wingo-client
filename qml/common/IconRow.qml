@@ -19,9 +19,10 @@ RowLayout {
         Button
         {
             id: iconRowButton
-            width: iconRowIcon.width + 16
+            width: iconRowIcon.width + 24
             Layout.fillHeight: true
             onClicked: iconRow.iconClicked(index, name)
+            style: buttonStyle || "DEFAULT"
             Icon
             {
                 id: iconRowIcon;

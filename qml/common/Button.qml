@@ -1,14 +1,18 @@
 import QtQuick 2.0
 
+import "../scripts/AppStyle.js" as Style
+
+
 MouseArea {
     width: 32
     height: 32
 
-    property alias color: buttonBackground.color
+    property string style: "DEFAULT"
+//    property alias color: buttonBackground.color
 
     Rectangle {
         id: buttonBackground
-        color: "transparent"
+        color: Style.Background.Button[style]
         anchors.fill: parent
     }
 
