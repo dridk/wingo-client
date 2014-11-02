@@ -57,12 +57,7 @@ void Request::post(const QVariant &data)
 {
 
     QJsonDocument doc = QJsonDocument::fromVariant(data);
-
     QNetworkRequest request = makeRequest(mUrl);
-
-
-    qDebug()<<request.url();
-    qDebug()<<doc.toJson();
     QNetworkReply * reply = mManager->post(request, doc.toJson());
 
     connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
@@ -76,11 +71,28 @@ void Request::post(const QVariant &data)
 
 void Request::put(const QVariant &data)
 {
+    QJsonDocument doc = QJsonDocument::fromVariant(data);
+    QNetworkRequest request = makeRequest(mUrl);
+    QNetworkReply * reply = mManager->put(request, doc.toJson());
+
+    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
+            SLOT(parseError(QNetworkReply::NetworkError)));
 
 }
 
 void Request::deleteResource(const QVariant &data)
 {
+
+    QNetworkRequest request = makeRequest(mUrl);
+    QNetworkReply * reply = mManager->deleteResource(request);
+
+    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
+            SLOT(parseError(QNetworkReply::NetworkError)));
+
 
 }
 
@@ -93,7 +105,6 @@ void Request::parseFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
-    reply->deleteLater();
 
     if (doc.object().contains("success")){
 
@@ -106,7 +117,9 @@ void Request::parseFinished()
             return;
         }
     }
-     emit error(1, "JSON error");
+    emit error(1, reply->errorString());
+    reply->deleteLater();
+
 
 }
 
@@ -114,9 +127,9 @@ void Request::parseError(QNetworkReply::NetworkError err)
 {
 
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    qDebug()<<reply->readAll();
-    QVariant results = reply->readAll();
-    emit error(1, "results");
+    emit error(1, reply->errorString());
+    reply->deleteLater();
+
 
 
 }
