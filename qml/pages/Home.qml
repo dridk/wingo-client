@@ -1,6 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-
+import QtPositioning 5.2
 import "../scripts/AppStyle.js" as Style
 import "../common"
 
@@ -46,5 +46,29 @@ Page {
         }
     }
 
+
+
+
+
+    // OGD - GPS Test
+    Text
+    {
+        id: gpsText
+        anchors.centerIn: parent
+    }
+
+    PositionSource
+    {
+        id: gpsSource
+        updateInterval: 1000
+        active: true
+
+        onPositionChanged:
+        {
+            var coord = gpsSource.position.coordinate;
+            console.log("Coordinate:", coord.latitude, coord.longitude);
+            gpsText.text = coord.latitude + " " + coord.longitude
+        }
+    }
 
 }
