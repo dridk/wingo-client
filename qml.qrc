@@ -30,5 +30,6 @@
         <file>qml/common/EditArea.qml</file>
         <file>qml/common/NoteListItem.qml</file>
         <file>qml/Res/icons/post48.png</file>
+        <file>qml/common/OmniBar.qml</file>
     </qresource>
 </RCC>
