@@ -21,34 +21,45 @@ Page {
             buttonStyle: "ACCENT"
         }
     }
-    Column {
+
+    OmniBar{
+        id: noteProperties
+        property bool postAnonimous: false
+        property string expiery: ""
+        property int maxTakes: -1
         anchors.top: parent.top
-        width: parent.width
 
-        OmniBar{
-            id: settingBar
-            property bool postAnonimous: false
-            property string expiery: "null"
-            property int maxTakes: -1
-            onContracted: {
-
-            }
+        function composeText(){
+            var t = ""
+            t = postAnonimous? "Anonimous" : "Signed"
+            t += ", "
+            t += expiery === ""? "no expiery" : "expire"
+            t += ", "
+            t += maxTakes === -1? "unlimited" : "limited to " + maxTakes + "takse"
+            return t
         }
 
-      EditArea {
-          focus: true
+        onContract: {
+            text = composeText()
+        }
+        Component.onCompleted: text = composeText()
+    }
 
-      }
-
+    EditArea {
+        id: noteEdit
+        anchors.top: noteProperties.bottom
+        focus: true
 
     }
 
     ImagePreview
     {
-        width: page.width /2.0
-        height: page.width /2.0
-        anchors.verticalCenterOffset: 10
-        anchors.centerIn: parent
+        id: noteAttachment
+//        width: page.width /2.0
+//        height: page.width /2.0
+        anchors.topMargin: 48
+        anchors.top: noteEdit.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
 
         //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
     }

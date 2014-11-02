@@ -17,24 +17,24 @@ Rectangle {
     property bool expanded: omniBarTray.height > 0
     z: expanded ? 99 : 0
 
-    signal expanded
-    signal contracted
+    signal expand
+    signal contract
 
     color: Style.Background.VIEW
 
-    function toggle(){
-        if (state == "EXPANDED")  contract()
-        else expand()
+    function toggleTray(){
+        if (state == "EXPANDED")  contractTray()
+        else expandTray()
     }
 
-    function expand(){
+    function expandTray(){
         state = "EXPANDED"
-        expanded()
+        expand()
     }
 
-    function contract(){
+    function contractTray(){
         state = ""
-        contracted()
+        contract()
     }
 
     MouseArea{
@@ -44,7 +44,6 @@ Rectangle {
         anchors.fill: parent
         Label{
             id: omniBarSensorLabel
-            text: omniBar.omniBarSensorLabelText()
             anchors.verticalCenter: parent.verticalCenter
             Behavior on color {ColorAnimation {}}
         }
@@ -55,7 +54,7 @@ Rectangle {
             anchors.verticalCenter: parent.verticalCenter
             Behavior on rotation {NumberAnimation{}}
         }
-        onClicked: toggle()
+        onClicked: toggleTray()
     }
 
     Rectangle{
