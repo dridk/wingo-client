@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.3
 
 import QtQuick.Layouts 1.1
 
@@ -14,22 +14,29 @@ Page {
 
     onBackButtonClicked: app.goBack()
 
-    ColumnLayout{
-        anchors.fill: parent
+
+    Column {
+        anchors.top: parent.top
+        width: parent.width
 
         FilterBar{
             id: filterbar
         }
 
-        ImagePreview
-        {
-            width: page.width /2.0
-            height: page.width /2.0
-            anchors.centerIn: parent
-            anchors.verticalCenterOffset: 400
+      EditArea {
+          focus: true
 
-            //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
-        }
+      }
+
+//        ImagePreview
+//        {
+//            width: page.width /2.0
+//            height: page.width /2.0
+//            anchors.centerIn: parent
+//            anchors.verticalCenterOffset: 10
+
+//            //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
+//        }
     }
 
 }

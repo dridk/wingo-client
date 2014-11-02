@@ -1,38 +1,34 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
-Rectangle {
+Item {
     id: root
     width: 210
     height: 210
     property string source
     //    color: source=="" ? "transparent" : "white"
 //    opacity: area.pressed ? 0.2 : 1
-    color: "black"
 
 
-    Rectangle {
-        anchors.fill: parent
-        color: "red"
-        anchors.margins: 5
         Image
         {
             anchors.fill: parent
             id: imgPreview
 
             source: root.source =="" ?  "qrc:/qml/Res/images/addPicturePlaceholder.png" : root.source
-
+            opacity: area.pressed ? 0.7 : 1
 
 
             MouseArea {
                 id:area
                 anchors.fill: parent
 
+
             }
         }
 
 
-    }
+
     /*
     DropShadow
     {
