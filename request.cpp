@@ -1,11 +1,17 @@
 #include "request.h"
 #include <QDebug>
-QNetworkAccessManager * Request::mManager = new QNetworkAccessManager();
+QNetworkAccessManager * Request::mManager = NULL;
 
 Request::Request(QQuickItem *parent) :
     QObject(parent)
 {
     qDebug()<<"SET URL";
+
+
+    if (mManager == NULL)
+    {
+        mManager = new QNetworkRequest;
+    }
 
 
     mUrl.setScheme("http");
