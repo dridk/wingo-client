@@ -45,7 +45,7 @@ ApplicationWindow {
     }
 
     function updateLocation(){
-//        gpsSource.start()
+        gpsSource.start()
     }
 
 
