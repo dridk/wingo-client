@@ -51,6 +51,7 @@ var Background = {
     },
     Border = {
         DEFAULT: Palette.SILVER,
+        DARK:   Palette.GRAY,
         SHADOW: Palette.BLACK
     },
     Typography = {

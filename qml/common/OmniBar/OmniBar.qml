@@ -1,11 +1,12 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
-import "../scripts/AppStyle.js" as Style
+import "../../scripts/AppStyle.js" as Style
+import "../"
 
 Rectangle {
     id: omniBar
-    default property alias _contentChildren: omniBarTray.data
+    default property alias _contentChildren: filterBarTrayColumn.data
     //Needed for QtCreator design mode
     width: 540
     height: 64
@@ -73,9 +74,10 @@ Rectangle {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.bottom
-        height: 0
+        height: app.height - ( omniBar.y + omniBar.height )
         opacity: 0
-        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
+        Behavior on opacity {NumberAnimation{}}
+        MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: contractTray()} // Block click throughts
     }
 
     Rectangle{
@@ -88,8 +90,13 @@ Rectangle {
         color: Style.Background.VIEW
         Behavior on height {NumberAnimation{}}
 
+        ColumnLayout{
+            id: filterBarTrayColumn
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
         //OmniBar contents go here >>>
-
+        }
 
 
     }
@@ -105,12 +112,11 @@ Rectangle {
 
             PropertyChanges {
                 target: omniBarTray
-                height: app.height - ( omniBar.y + omniBar.height )
+                height: Math.min( app.height - ( omniBar.y + omniBar.height ), filterBarTrayColumn.height )
             }
 
             PropertyChanges {
                 target: overlay
-                height: app.height - ( omniBar.y + omniBar.height )
                 opacity: 1
             }
 

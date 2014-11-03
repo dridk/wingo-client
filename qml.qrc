@@ -10,7 +10,6 @@
         <file>qml/common/Avatar.qml</file>
         <file>qml/common/Badge.qml</file>
         <file>qml/common/SideBar.qml</file>
-        <file>qml/common/ListView~.qml</file>
         <file>qml/common/ListItem.qml</file>
         <file>qml/common/Label.qml</file>
         <file>qml/pages/Splash.qml</file>
@@ -24,12 +23,16 @@
         <file>qml/Res/icons/refresh48.png</file>
         <file>qml/Res/icons/search48.png</file>
         <file>qml/Res/icons/expand48.png</file>
-        <file>qml/common/FilterBar.qml</file>
         <file>qml/common/ImagePreview.qml</file>
         <file>qml/Res/images/addPicturePlaceholder.png</file>
         <file>qml/common/EditArea.qml</file>
         <file>qml/common/NoteListItem.qml</file>
         <file>qml/Res/icons/post48.png</file>
-        <file>qml/common/OmniBar.qml</file>
+        <file>qml/common/OmniBar/OmniBar.qml</file>
+        <file>qml/common/OmniBar/SimpleListItem.qml</file>
+        <file>qml/common/OmniBar/MultiSelectListItem.qml</file>
+        <file>qml/common/OmniBar/TagListView.qml</file>
+        <file>qml/common/OmniBar/SectionHeader.qml</file>
+        <file>qml/common/OmniBar/SearchListItem.qml</file>
     </qresource>
 </RCC>

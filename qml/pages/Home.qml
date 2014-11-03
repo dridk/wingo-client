@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
+import "../common/OmniBar" as OmniBarWidget
 import "../common"
 
 Page {
@@ -60,14 +61,71 @@ Page {
         }
     }
 
-    FilterBar {
+    OmniBarWidget.OmniBar{
         id: filterbar
         anchors.top: parent.top
-        onSearchChanged: {
-            refresh()
-            contract()
+
+        property bool sortByDate: true
+        property bool sortByPopularity: false
+        property int distance: 1000
+        property string search: ""
+
+        function filterBarSensorLabelText(){
+            var t = "";
+            if (sortByDate) {t = "Recent"}
+            else if (sortByPopularity) {t = "Popular"}
+            t += " in " + distance + "m radius"
+            return t
         }
+
+        function updateFilterBarSensorLabelText(){
+            text = filterBarSensorLabelText()
+        }
+
+        onContract: {
+            //Request list refresh here!!!!
+        }
+
+        text: filterBarSensorLabelText()
+
+        OmniBarWidget.SimpleListItem{
+            text: "Recent notes"
+            onClicked: {
+                filterbar.sortByDate = true
+                filterbar.sortByPopularity = false
+                updateFilterBarSensorLabelText()
+            }
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "Popular notes"
+            onClicked: {
+                filterbar.sortByDate = false
+                filterbar.sortByPopularity = true
+                updateFilterBarSensorLabelText()
+            }
+        }
+
+        OmniBarWidget.MultiSelectListItem{
+            model : app.config === undefined ? 0 : app.config.allowed_radius.length
+            onClick: {
+                distance = value
+                updateFilterBarSensorLabelText()
+            }
+        }
+
+        OmniBarWidget.SectionHeader{text:"Trending tags:"}
+
+        OmniBarWidget.TagListView {
+            height: 400 //This has to be automated somehow
+            model: ListModel{id:tagModel}
+            onClick: {
+                search = tag
+                updateFilterBarSensorLabelText()
+            }
+        }
+
     }
+
 
     Item{
         anchors.top: filterbar.bottom
@@ -82,42 +140,6 @@ Page {
             model: ListModel{
                 id: notesListModel
             }
-            //                ListModel{
-            //                ListElement{
-            //                    noteAuthor: "Someone"
-            //                    noteAvatar: "url://"
-            //                    noteAnonymous: false
-            //                    noteMessage: "There is a cute dog here :) Come check it out - it's soooo cuuuute!! I really like dogs, especially cute ones!"
-            //                    noteLocation: []
-            //                    noteExpiration: ""
-            //                    noteTimestamp: ""
-            //                    noteTakes: 5
-            //                    noteLimit: 10
-            //                    noteTags: []
-            //                }
-            //                ListElement{
-            //                    noteAnonymous: true
-            //                    noteMessage: "Hey guys! Mad party going on here >>"
-            //                    noteLocation: []
-            //                    noteExpiration: ""
-            //                    noteTimestamp: ""
-            //                    noteTakes: 5
-            //                    noteLimit: 10
-            //                    noteTags: []
-            //                }
-            //                ListElement{
-            //                    noteAuthor: "Someone2"
-            //                    noteAvatar: "url://"
-            //                    noteAnonymous: false
-            //                    noteMessage: "This is a free online calculator which counts the number of characters or letters in a text, useful for your tweets on Twitter, as well as a multitude of other applications."
-            //                    noteLocation: []
-            //                    noteExpiration: ""
-            //                    noteTimestamp: ""
-            //                    noteTakes: 5
-            //                    noteLimit: 10
-            //                    noteTags: []
-            //                }
-            //            }
 
             delegate: NoteListItem{}
         }

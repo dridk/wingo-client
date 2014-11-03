@@ -2,6 +2,8 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
+import "../common/OmniBar" as OmniBarWidget
+
 import "../common"
 import Wingo 1.0
 Page {
@@ -38,8 +40,7 @@ Page {
         }
     }
 
-
-    OmniBar{
+    OmniBarWidget.OmniBar{
         id: noteProperties
         property bool postAnonimous: false
         property string expiery: ""
@@ -61,31 +62,28 @@ Page {
         }
         Component.onCompleted: text = composeText()
 
-        ColumnLayout {
-            anchors.left: parent.left
-            anchors.right: parent.right
-            RowLayout {
-                height: 96
-                anchors.left: parent.left
-                anchors.right: parent.right
-                Button {
-                    Label {text: "Post as yourself"}
-                    width: parent.width / 2
+        OmniBarWidget.MultiSelectListItem{
+            model: ["Post as yourself", "Post as Anonimous"]
+            selected: 0
+            onClick: {
+                switch (index) {
+                case 0:
+                    noteProperties.postAnonimous = true
+                    break;
+                case 1:
+                    noteProperties.postAnonimous = false
+                    break;
                 }
-                Button {
-                    Label {text: "Post as Anonimous"}
-                    width: parent.width / 2
-                }
-            }
-            ListItem{
-                height: 96
-                Label {text: "Never expire"}
-            }
-            ListItem{
-                height: 96
-                Label {text: "Allow unlimited takes"}
             }
         }
+
+        OmniBarWidget.SimpleListItem{
+            text: "Never expire"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "Allow unlimited takes"
+        }
+
     }
 
     EditArea {
