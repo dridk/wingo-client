@@ -1,5 +1,5 @@
 import QtQuick 2.3
-import QtQuick.Window 2.0
+import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
 import Wingo 1.0
@@ -24,7 +24,7 @@ ApplicationWindow {
 
     //USE THIS VALUE FOR DESKTOP TESTING
     property double latitude  : 43.601337
-    property double longitude :1.438675
+    property double longitude : 1.438675
 
 
     property variant pages: {
@@ -140,7 +140,7 @@ ApplicationWindow {
     {
         id: gpsSource
         updateInterval: 1000
-        active: enable
+        active: true
         onPositionChanged: {
 //            var coord = gpsSource.position.coordinate;
 //            app.longitude = coord.longitude;

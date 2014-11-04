@@ -40,7 +40,7 @@ ListView {
 
         }
 
-        onClicked: tagListView.click (index, tag)
+        onClicked: tagListView.click (index, name)
 
         Rectangle{
             height: 2

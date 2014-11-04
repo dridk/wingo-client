@@ -34,5 +34,6 @@
         <file>qml/common/OmniBar/TagListView.qml</file>
         <file>qml/common/OmniBar/SectionHeader.qml</file>
         <file>qml/common/OmniBar/SearchListItem.qml</file>
+        <file>qml/common/TextBox.qml</file>
     </qresource>
 </RCC>

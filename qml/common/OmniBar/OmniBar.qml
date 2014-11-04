@@ -38,6 +38,8 @@ Rectangle {
         contract()
     }
 
+    MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: contractTray()} // Block click throughts
+
     MouseArea{
         id: omniBarSensor
         anchors.rightMargin: 8
@@ -77,7 +79,6 @@ Rectangle {
         height: app.height - ( omniBar.y + omniBar.height )
         opacity: 0
         Behavior on opacity {NumberAnimation{}}
-        MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: contractTray()} // Block click throughts
     }
 
     Rectangle{

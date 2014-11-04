@@ -45,7 +45,7 @@ Page {
     }
 
     function refresh(){
-        notesServerRequest.get({"at": app.latitude+","+app.longitude, "radius": filterbar.distance, "query": filterbar.search})
+        notesServerRequest.get({"lat": app.latitude, "lon": app.longitude, "radius": filterbar.distance, "query": filterbar.search})
     }
 
     Request {
@@ -82,11 +82,20 @@ Page {
             text = filterBarSensorLabelText()
         }
 
+        onExpand: tagRequester.refresh()
+
         onContract: {
             //Request list refresh here!!!!
+            refresh()
         }
 
         text: filterBarSensorLabelText()
+
+        OmniBarWidget.SearchListItem{
+            onTextChanged: {
+                filterbar.search = text
+            }
+        }
 
         OmniBarWidget.SimpleListItem{
             text: "Recent notes"
@@ -106,10 +115,12 @@ Page {
         }
 
         OmniBarWidget.MultiSelectListItem{
-            model : app.config === undefined ? 0 : app.config.allowed_radius.length
+            selected: filterbar.distance
+            model : app.config === undefined ? 0 : app.config.allowed_radius
             onClick: {
-                distance = value
-                updateFilterBarSensorLabelText()
+                console.log(value)
+                filterbar.distance = value
+                tagRequester.refresh()
             }
         }
 
@@ -118,9 +129,18 @@ Page {
         OmniBarWidget.TagListView {
             height: 400 //This has to be automated somehow
             model: ListModel{id:tagModel}
-            onClick: {
-                search = tag
-                updateFilterBarSensorLabelText()
+            onClick: filterbar.search = tag
+        }
+
+        Request {
+            id: tagRequester
+            source: "/tags"
+            onSuccess: {
+                tagModel.clear()
+                tagModel.append(data.results)
+            }
+            function refresh(){
+                tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterbar.distance})
             }
         }
 

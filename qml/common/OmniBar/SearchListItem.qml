@@ -7,12 +7,20 @@ Rectangle{
     id: listItem
     //Needed for QtCreator design mode
     width: 540
-    height: 96
+    height: 48
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
 
-    TextEdit{
+    property alias text: textBox.text
+
+    TextBox{
+        id: textBox
+        placeholder: "Search..."
+        anchors.rightMargin: 8
+        anchors.leftMargin: 8
+        anchors.bottomMargin: 8
+        anchors.fill: parent
 
     }
 
