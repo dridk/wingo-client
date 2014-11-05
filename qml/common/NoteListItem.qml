@@ -9,6 +9,12 @@ Rectangle{
     height: Math.max(96, message.length / 18 * 16 + 48)
     color: Style.Background.VIEW
 
+
+    function parseTags(text){
+
+         return text.replace(/#\w+/g, "<b>$& </b>")
+    }
+
     RowLayout{
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 8
@@ -23,7 +29,17 @@ Rectangle{
         ColumnLayout{
             Layout.fillWidth: true
             Label{text: (anonymous? "Anonimous" : author.nickname) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
-            Label{text: message; Layout.fillWidth: true; Layout.fillHeight: true; wrapMode: Text.WordWrap}
+            Label{
+                text: parseTags(message)
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                wrapMode: Text.WordWrap
+
+
+
+
+
+            }
         }
         ColumnLayout{
             width: 64
