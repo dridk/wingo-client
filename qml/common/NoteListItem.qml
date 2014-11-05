@@ -12,7 +12,10 @@ Rectangle{
 
     function parseTags(text){
 
-         return text.replace(/#\w+/g, "<b>$& </b>")
+        var temp = text.replace(/#/g, "##")
+        temp= temp.replace(/##\w+/g, "<b><font color='#6b47b2',font-weight: bold;>$& </font></b>")
+        temp= temp.replace(/##/g, "")
+        return temp
     }
 
     RowLayout{

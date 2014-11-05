@@ -23,8 +23,8 @@ ApplicationWindow {
     //Current GPS location
 
     //USE THIS VALUE FOR DESKTOP TESTING
-    property double latitude  : 43.601337
-    property double longitude : 1.438675
+    property double latitude  : 49.17970
+    property double longitude : -0.36960
 
 
     property variant pages: {
