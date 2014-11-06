@@ -56,6 +56,11 @@ Rectangle {
                     name: actionBar.actionType + "48"
                     //We will need this in the future
                     //color: Style.Typography.Actionbar[style]
+                    Behavior on x {
+                        NumberAnimation {
+                            duration : 100
+                        }
+                    }
                 }
                 Icon{
                     id: actionBarIcon
@@ -93,8 +98,8 @@ Rectangle {
             }
 
             PropertyChanges {
-                target: actionBarRowLayout
-                anchors.leftMargin: -8
+                target: actionBarAction
+                x:-10
             }
         }
     ]
