@@ -36,8 +36,13 @@ Page {
     }
 
     onMenuButtonClicked: sideBar.toggleTray()
+
     onActionButtonClicked: {
         console.log("Action button " + name + " clicked at index " + index)
+
+        if (sideBar.expanded) sideBar.contractTray();
+        if (filterBar.expanded) filterBar.contractTray();
+
         switch (index){
         case 0:
             refresh()
@@ -46,7 +51,7 @@ Page {
     }
 
     function refresh(){
-        notesServerRequest.get({"lat": app.latitude, "lon": app.longitude, "radius": filterbar.distance, "query": filterbar.search})
+        notesServerRequest.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance, "query": filterBar.search})
     }
 
     Request {
@@ -66,10 +71,37 @@ Page {
 
     SideBarWidget.SideBar{
         id: sideBar
+
+        //This is very-very UGLY@!!!!
+        onContract: page.actionBarMenu = false
+
+        OmniBarWidget.SimpleListItem{
+            text: "User Name<br><small>user.email@server.com</small>"
+        }
+        OmniBarWidget.SectionHeader{text:"Places"}
+        OmniBarWidget.SimpleListItem{
+            text: "New Note"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "My Notes"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "My Pocket"
+        }
+        OmniBarWidget.SectionHeader{text:"Options"}
+        OmniBarWidget.SimpleListItem{
+            text: "App Settings"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "About"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "Legal"
+        }
     }
 
     OmniBarWidget.OmniBar{
-        id: filterbar
+        id: filterBar
         anchors.top: parent.top
 
         property bool sortByDate: true
@@ -100,43 +132,43 @@ Page {
 
         OmniBarWidget.SearchListItem{
             onTextChanged: {
-                filterbar.search = text
+                filterBar.search = text
             }
         }
 
         OmniBarWidget.SimpleListItem{
             text: "Recent notes"
             onClicked: {
-                filterbar.sortByDate = true
-                filterbar.sortByPopularity = false
+                filterBar.sortByDate = true
+                filterBar.sortByPopularity = false
                 updateFilterBarSensorLabelText()
             }
         }
         OmniBarWidget.SimpleListItem{
             text: "Popular notes"
             onClicked: {
-                filterbar.sortByDate = false
-                filterbar.sortByPopularity = true
+                filterBar.sortByDate = false
+                filterBar.sortByPopularity = true
                 updateFilterBarSensorLabelText()
             }
         }
 
         OmniBarWidget.MultiSelectListItem{
-            selected: filterbar.distance
+            selected: filterBar.distance
             model : app.config === undefined ? 0 : app.config.allowed_radius
             onClick: {
                 console.log(value)
-                filterbar.distance = value
+                filterBar.distance = value
                 tagRequester.refresh()
             }
         }
 
-        OmniBarWidget.SectionHeader{text:"Trending tags:"}
+        OmniBarWidget.SectionHeader{text:"Trending tags"}
 
         OmniBarWidget.TagListView {
             height: 400 //This has to be automated somehow
             model: ListModel{id:tagModel}
-            onClick: filterbar.search = tag
+            onClick: filterBar.search = tag
         }
 
         Request {
@@ -147,7 +179,7 @@ Page {
                 tagModel.append(data.results)
             }
             function refresh(){
-                tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterbar.distance})
+                tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance})
             }
         }
 
@@ -155,7 +187,7 @@ Page {
 
 
     Item{
-        anchors.top: filterbar.bottom
+        anchors.top: filterBar.bottom
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.left: parent.left

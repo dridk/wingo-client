@@ -23,6 +23,9 @@ Rectangle
 
     property int backgroundAnimationDuration: 500
 
+    //This is very-very UGLY@!!!!
+    property alias actionBarMenu: actionBar.menuOpen
+
     property alias footer: _footer.source
 
     signal menuButtonClicked

@@ -27,7 +27,10 @@ Rectangle {
     signal backButtonClicked
     signal toolbarButtonClicked (int index, string name)
 
+    property bool menuOpen: false
+
     RowLayout{
+        id: actionBarRowLayout
 //        anchors.rightMargin: 16
         anchors.fill: parent
         spacing: 8
@@ -36,7 +39,12 @@ Rectangle {
             width: childrenRect.width
             Layout.fillHeight: true
             onClicked: {
-                if (actionBar.actionType === Style.ACTION_BAR_MENU_ACTION) menuButtonClicked();
+                if (actionBar.actionType === Style.ACTION_BAR_MENU_ACTION){
+                    //Toggle menu state
+                    //This is very-very UGLY@!!!!
+                    menuOpen = !menuOpen;
+                    menuButtonClicked();
+                }
                 else backButtonClicked();
             }
 
@@ -72,4 +80,22 @@ Rectangle {
             onIconClicked: actionBar.toolbarButtonClicked(index, name)
         }
     }
+    states: [
+        State {
+            name: "MENU"
+
+            when: menuOpen
+
+            PropertyChanges {
+                target: iconRow
+                enabled: false
+                opacity: 0.8
+            }
+
+            PropertyChanges {
+                target: actionBarRowLayout
+                anchors.leftMargin: -8
+            }
+        }
+    ]
 }
