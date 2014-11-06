@@ -31,23 +31,18 @@ Rectangle{
 
         ColumnLayout{
             Layout.fillWidth: true
-            Label{text: (anonymous? "Anonimous" : author.nickname) + " 1h"; font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
+            Label{text: qsTr("%1 %2h ago").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(1); font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
             Label{
                 text: parseTags(message)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 wrapMode: Text.WordWrap
-
-
-
-
-
             }
         }
         ColumnLayout{
             width: 64
             Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-            Label{text: "12 takes"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
+            Label{text: qsTr("%1 takes").arg(takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
         }
     }
 

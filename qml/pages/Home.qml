@@ -4,6 +4,7 @@ import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
 import "../common/OmniBar" as OmniBarWidget
+import "../common/SideBar" as SideBarWidget
 import "../common"
 
 Page {
@@ -34,7 +35,7 @@ Page {
         }
     }
 
-    onMenuButtonClicked: console.log("Menu from Home")
+    onMenuButtonClicked: sideBar.toggleTray()
     onActionButtonClicked: {
         console.log("Action button " + name + " clicked at index " + index)
         switch (index){
@@ -52,6 +53,8 @@ Page {
         id: notesServerRequest
         source: "/notes"
         onSuccess: {
+//            console.log( JSON.stringify(data.results) )
+
             notesListModel.clear()
             notesListModel.append(data.results)
 
@@ -59,6 +62,10 @@ Page {
         onError: {
             console.debug(message)
         }
+    }
+
+    SideBarWidget.SideBar{
+        id: sideBar
     }
 
     OmniBarWidget.OmniBar{
@@ -184,5 +191,7 @@ Page {
             onClicked: app.goToPage(app.pages["AddNote"])
         }
     }
+
+
 
 }

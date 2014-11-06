@@ -49,6 +49,10 @@ Rectangle {
             id: omniBarSensorLabel
             anchors.verticalCenter: parent.verticalCenter
             Behavior on color {ColorAnimation {}}
+            anchors.rightMargin: 8
+            anchors.right: omniBarSensorIcon.left
+            anchors.left: parent.left
+            elide: Text.ElideRight
         }
         Icon{
             id: omniBarSensorIcon
