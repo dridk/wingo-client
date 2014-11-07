@@ -4,7 +4,8 @@ QT += qml quick network positioning
 
 SOURCES += main.cpp \
     app.cpp \
-    request.cpp
+    request.cpp \
+    polygonitem.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +17,5 @@ include(deployment.pri)
 
 HEADERS += \
     app.h \
-    request.h
+    request.h \
+    polygonitem.h
