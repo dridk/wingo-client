@@ -37,5 +37,6 @@
         <file>qml/scripts/StringFormat.js</file>
         <file>qml/scripts/NumberFormat.js</file>
         <file>qml/common/SideBar/SideBar.qml</file>
+        <file>qml/common/WingoApplication.qml</file>
     </qresource>
 </RCC>
