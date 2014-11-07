@@ -4,10 +4,15 @@ import QtQuick.Layouts 1.1
 import "../scripts/AppStyle.js" as Style
 
 Rectangle{
+    id:root
     anchors.left: parent.left
     anchors.right: parent.right
     height: Math.max(96, message.length / 18 * 16 + 48)
     color: Style.Background.VIEW
+    property bool anonymous
+    property string nickname
+    property string message
+    property int takes
 
 
     function parseTags(text){
@@ -31,9 +36,9 @@ Rectangle{
 
         ColumnLayout{
             Layout.fillWidth: true
-            Label{text: qsTr("%1 %2h ago").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(1); font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
+            Label{text: qsTr("%1 %2h ago").arg(root.anonymous? qsTr("Anonimous") : root.nickname).arg(1); font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
             Label{
-                text: parseTags(message)
+                text: parseTags(root.message)
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 wrapMode: Text.WordWrap
@@ -42,7 +47,7 @@ Rectangle{
         ColumnLayout{
             width: 64
             Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-            Label{text: qsTr("%1 takes").arg(takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
+            Label{text: qsTr("%1 takes").arg(root.takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
         }
     }
 

@@ -10,7 +10,7 @@ ApplicationWindow {
     visible: true
     //Needed for QtCreator design mode
     width: 540
-    height: 960
+    height: 600
     property alias pageStack : stack
     property alias initialPage : stack.initialItem
     //-----------

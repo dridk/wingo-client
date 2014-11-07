@@ -11,7 +11,6 @@ Rectangle {
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    anchors.top: parent.top
 
     property string style: Style.PAGE_DEFAULT
 

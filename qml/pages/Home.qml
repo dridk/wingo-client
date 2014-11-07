@@ -3,7 +3,6 @@ import QtQuick.Layouts 1.1
 import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
-import "../common/OmniBar" as OmniBarWidget
 import "../common/SideBar" as SideBarWidget
 import "../common"
 
@@ -13,201 +12,37 @@ Page {
     width: 540
     height: 960
     //-----------
-
-    icon: "wingo48"
-    title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
-    defaultAction: Style.ACTION_BAR_MENU_ACTION
-
-    Component.onCompleted: {
-        //Init on load
-        refresh()
-
-    }
-
-    actionsListModel: ListModel{
-        ListElement {
-            icon: "refresh48"
-            name: "refresh"
-        }
-        ListElement {
-            icon: "pocket48"
-            name: "pocket"
-        }
-    }
-
-    onMenuButtonClicked: sideBar.toggleTray()
-
-    onActionButtonClicked: {
-        console.log("Action button " + name + " clicked at index " + index)
-
-        if (sideBar.expanded) sideBar.contractTray();
-        if (filterBar.expanded) filterBar.contractTray();
-
-        switch (index){
-        case 0:
-            refresh()
-            break;
-        }
-    }
-
-    function refresh(){
-        notesServerRequest.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance, "query": filterBar.search})
-    }
-
-    Request {
-        id: notesServerRequest
-        source: "/notes"
-        onSuccess: {
-//            console.log( JSON.stringify(data.results) )
-
-            notesListModel.clear()
-            notesListModel.append(data.results)
-
-        }
-        onError: {
-            console.debug(message)
-        }
-    }
-
-    SideBarWidget.SideBar{
-        id: sideBar
-
-        //This is very-very UGLY@!!!!
-        onContract: page.actionBarMenu = false
-
-        OmniBarWidget.SimpleListItem{
-            text: "User Name<br><small>user.email@server.com</small>"
-        }
-        OmniBarWidget.SectionHeader{text:"Places"}
-        OmniBarWidget.SimpleListItem{
-            text: "New Note"
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "My Notes"
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "My Pocket"
-        }
-        OmniBarWidget.SectionHeader{text:"Options"}
-        OmniBarWidget.SimpleListItem{
-            text: "App Settings"
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "About"
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "Legal"
-        }
-    }
-
-    OmniBarWidget.OmniBar{
-        id: filterBar
-        anchors.top: parent.top
-
-        property bool sortByDate: true
-        property bool sortByPopularity: false
-        property int distance: 1000
-        property string search: ""
-
-        function filterBarSensorLabelText(){
-            var t = "";
-            if (sortByDate) {t = "Recent"}
-            else if (sortByPopularity) {t = "Popular"}
-            t += " in " + distance + "m radius"
-            return t
+    Column {
+        anchors.fill: parent
+        ActionBar {
+            id:actionBar
+            icon: "wingo48"
+            title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
         }
 
-        function updateFilterBarSensorLabelText(){
-            text = filterBarSensorLabelText()
+
+        HomeOmniBar {
+
         }
 
-        onExpand: tagRequester.refresh()
-
-        onContract: {
-            //Request list refresh here!!!!
-            refresh()
-        }
-
-        text: filterBarSensorLabelText()
-
-        OmniBarWidget.SearchListItem{
-            onTextChanged: {
-                filterBar.search = text
-            }
-        }
-
-        OmniBarWidget.SimpleListItem{
-            text: "Recent notes"
-            onClicked: {
-                filterBar.sortByDate = true
-                filterBar.sortByPopularity = false
-                updateFilterBarSensorLabelText()
-            }
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "Popular notes"
-            onClicked: {
-                filterBar.sortByDate = false
-                filterBar.sortByPopularity = true
-                updateFilterBarSensorLabelText()
-            }
-        }
-
-        OmniBarWidget.MultiSelectListItem{
-            selected: filterBar.distance
-            model : app.config === undefined ? 0 : app.config.allowed_radius
-            onClick: {
-                console.log(value)
-                filterBar.distance = value
-                tagRequester.refresh()
-            }
-        }
-
-        OmniBarWidget.SectionHeader{text:"Trending tags"}
-
-        OmniBarWidget.TagListView {
-            height: 400 //This has to be automated somehow
-            model: ListModel{id:tagModel}
-            onClick: filterBar.search = tag
-        }
-
-        Request {
-            id: tagRequester
-            source: "/tags"
-            onSuccess: {
-                tagModel.clear()
-                tagModel.append(data.results)
-            }
-            function refresh(){
-                tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance})
-            }
-        }
-
-    }
-
-
-    Item{
-        anchors.top: filterBar.bottom
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        clip: true
 
         ListView {
-            anchors.fill: parent
+            model: 10
+            width: page.width
+            height: page.height - actionBar.height
+            clip:true
 
-            model: ListModel{
-                id: notesListModel
+            delegate: NoteListItem{
+                message: "salut"
+                takes: 5
+                nickname: "sacha"
             }
-
-            delegate: NoteListItem{}
         }
-
     }
 
     Rectangle{
-        anchors.right: parent.right
-        anchors.left: parent.left
+        id:footer
+        width: parent.width
         height: 64
         color: Qt.rgba(255, 255, 255, 0.95)
         anchors.bottom: parent.bottom
@@ -223,7 +58,5 @@ Page {
             onClicked: app.goToPage(app.pages["AddNote"])
         }
     }
-
-
 
 }
