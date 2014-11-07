@@ -4,6 +4,8 @@ import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
 import "../common/SideBar" as SideBarWidget
+import "../common/OmniBar" as OmniBarWidget
+
 import "../common"
 
 Page {
@@ -14,18 +16,35 @@ Page {
     //-----------
     Column {
         anchors.fill: parent
+
         ActionBar {
             id:actionBar
             icon: "wingo48"
             title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
         }
 
+        OmniBarWidget.OmniBar
+        {
+            OmniBarWidget.SimpleListItem{
+                text: "Recent notes"
+            }
 
-        HomeOmniBar {
+            OmniBarWidget.SimpleListItem{
+                text: "Popular notes"
+            }
+            OmniBarWidget.MultiSelectListItem{
+                model : 4
+            }
+
+            OmniBarWidget.SectionHeader{text:"Trending tags"}
+
+            OmniBarWidget.TagListView {
+                height: 400 //This has to be automated somehow
+                model: ListModel{id:tagModel}
+                onClick: filterBar.search = tag
+            }
 
         }
-
-
         ListView {
             model: 10
             width: page.width
