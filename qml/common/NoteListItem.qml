@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
 import "../scripts/DateFormat.js" as DateFormat
+import "../scripts/DistanceFormat.js" as DistanceFormat
 
 Rectangle{
     anchors.left: parent.left
@@ -33,7 +34,7 @@ Rectangle{
         ColumnLayout{
             Layout.fillWidth: true
             Label{
-                text: qsTr("%1 %2").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(
+                text: qsTr("%1 %2, %3").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(
                           DateFormat.toNow(timestamp , [
                                                qsTr("just now"),
                                                qsTr("min ago"),
@@ -42,6 +43,17 @@ Rectangle{
                                                qsTr("days ago"),
                                                qsTr("yr ago")
                                            ])
+                          ).arg (
+                            DistanceFormat.toHere(
+                              DistanceFormat.pointObject(app.latitude, app.longitude),
+                              DistanceFormat.pointObject(lat, lon),
+                              [
+                                  qsTr("right here"),
+                                  qsTr("m away"),
+                                  qsTr("km away"),
+                                  qsTr("very far...")
+                              ]
+                              )
                           )
                 font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
             Label{
@@ -54,7 +66,7 @@ Rectangle{
         ColumnLayout{
             width: 64
             Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-            Label{text: qsTr("%1 takes").arg(5); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
+            Label{text: qsTr("%1 takes").arg(takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
         }
     }
 

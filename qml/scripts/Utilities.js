@@ -30,3 +30,36 @@ function isDateObject(v) {
 function isArray(v) {
     return Object.prototype.toString.call( v ) === '[object Array]';
 }
+
+function isFunction(v){
+    return Object.prototype.toString.call( v ) === "[object Function]"
+}
+
+//Mathmatical
+function toRadians(deg) {
+    return deg * ( Math.PI/180 );
+}
+
+//Objects
+
+function copyArray(a) {
+    return a.slice(0);
+}
+
+function copyObject(o) {//Shallow copy
+    if (!isObject(o)) return o;
+    var newO = {};
+    for (var key in o){
+        newO[key] = o[key]
+    }
+    return newO;
+}
+
+function sortArrayOfObjects(a, fn){
+    if(!isArray(a)) return a;
+    fn = fn || function(a, b){
+        return a < b;
+       };
+    var newA = copyArray(a);
+    return newA.sort(fn);
+}

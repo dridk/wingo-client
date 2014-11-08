@@ -40,5 +40,6 @@
         <file>qml/common/Controls/Checkmark.qml</file>
         <file>qml/scripts/DateFormat.js</file>
         <file>qml/scripts/Utilities.js</file>
+        <file>qml/scripts/DistanceFormat.js</file>
     </qresource>
 </RCC>

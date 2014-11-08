@@ -52,7 +52,8 @@ Page {
 
     function refresh(){
         var request = {
-            "lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance
+            "lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance,
+            "sort": filterBar.sortByDate ? "recent" : "popular"
         }
         if (filterBar.search !== "") request["query"] = filterBar.search;
 
@@ -64,9 +65,8 @@ Page {
         source: "/notes"
         onSuccess: {
 //            console.log( JSON.stringify(data.results) )
-
             notesListModel.clear()
-            notesListModel.append(data.results)
+            notesListModel.append(data.results.reverse())
 
         }
         onError: {

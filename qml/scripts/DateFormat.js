@@ -12,6 +12,10 @@ function stringToDate(s) {
     return new Date(s);
 }
 
+function timePassedBetweeen(date1, date2){
+
+}
+
 function toNow(date, dict) {
     dict = dict || ["now", "min", "h", "days", "month", "years"];
     date = Utilities.isString(date)? stringToDate(date) : date;
