@@ -23,6 +23,8 @@ Page {
             icon: "wingo48"
             title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
 
+            onClicked : sideBar.expandTray()
+
             actions: ListModel{
                 ListElement {
                     icon: "refresh48"
@@ -87,6 +89,35 @@ Page {
         MouseArea{
             anchors.fill: parent
             onClicked: app.setPage("AddNote")
+        }
+    }
+
+
+    SideBarWidget.SideBar {
+        id: sideBar
+
+        OmniBarWidget.SimpleListItem{
+            text: "User Name<br><small>user.email@server.com</small>"
+        }
+        OmniBarWidget.SectionHeader{text:"Places"}
+        OmniBarWidget.SimpleListItem{
+            text: "New Note"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "My Notes"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "My Pocket"
+        }
+        OmniBarWidget.SectionHeader{text:"Options"}
+        OmniBarWidget.SimpleListItem{
+            text: "App Settings"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "About"
+        }
+        OmniBarWidget.SimpleListItem{
+            text: "Legal"
         }
     }
 

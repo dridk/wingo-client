@@ -28,7 +28,7 @@ Rectangle{
         Repeater {
             id: listItemRepeater
 //            model: ["5m", "10m", "50m", "100m"]
-            Button {
+            SelectArea {
                 width: listItem.width / listItemRepeater.count
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom

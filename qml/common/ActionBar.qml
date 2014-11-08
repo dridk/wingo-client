@@ -16,14 +16,14 @@ Rectangle {
 
     color: Style.Background.Actionbar[actionBar.style]
 
-    property alias icon: actionBarIcon.name
+    property alias icon : actionBarIcon.name
     property alias title: actionBarTite.text
     property alias actions: iconRow.iconsListModel
 
     property string actionType: Style.ACTION_BAR_MENU_ACTION
 
     signal clicked()
-    signal toolbarButtonClicked (int index, string name)
+    signal actionClicked(int index, string name)
 
 
     RowLayout{
@@ -34,25 +34,50 @@ Rectangle {
 
         RowLayout {
 
-            ActionItem{
-                id: actionBarAction
-                name: actionBar.actionType + "48"
-                Layout.fillHeight: true
-                //We will need this in the future
-                //color: Style.Typography.Actionbar[style]
-                Behavior on x {
-                    NumberAnimation {
-                        duration : 100
-                    }
+            RowLayout {
+                id: mainIcon
+                anchors.left: parent.left
+                spacing: 0
+                Icon{
+
+                    name: actionBar.actionType + "48"
                 }
+                Icon{
+                    id: actionBarIcon
+                    name: "wingo48"
+                    //We will need this in the future
+                    //color: Style.Typography.Actionbar[style]
+                }
+
+               SelectArea {
+                   anchors.fill: parent
+               }
+
+
             }
 
-            Icon{
-                id: actionBarIcon
-                name: "wingo48"
-                //We will need this in the future
-                //color: Style.Typography.Actionbar[style]
-            }
+
+
+            //            ActionItem{
+            //                id: actionBarAction
+            //                name: actionBar.actionType + "48"
+            //                Layout.fillHeight: true
+            //                onClicked: actionBar.clicked()
+            //                //We will need this in the future
+            //                //color: Style.Typography.Actionbar[style]
+            //                Behavior on x {
+            //                    NumberAnimation {
+            //                        duration : 100
+            //                    }
+            //                }
+            //            }
+
+            //            Icon{
+            //                id: actionBarIcon
+            //                name: "wingo48"
+            //                //We will need this in the future
+            //                //color: Style.Typography.Actionbar[style]
+            //            }
 
             Label{
                 id: actionBarTite
@@ -65,7 +90,7 @@ Rectangle {
             ActionsRow{
                 id: iconRow
                 Layout.fillHeight: true
-                onIconClicked: actionBar.toolbarButtonClicked(index, name)
+                onIconClicked: actionBar.actionClicked(index, name)
             }
 
 

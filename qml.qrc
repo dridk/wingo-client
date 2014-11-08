@@ -6,7 +6,7 @@
         <file>qml/common/ActionBar.qml</file>
         <file>qml/common/Page.qml</file>
         <file>qml/common/Icon.qml</file>
-        <file>qml/common/Button.qml</file>
+        <file>qml/common/SelectArea.qml</file>
         <file>qml/common/Avatar.qml</file>
         <file>qml/common/Badge.qml</file>
         <file>qml/common/ListItem.qml</file>

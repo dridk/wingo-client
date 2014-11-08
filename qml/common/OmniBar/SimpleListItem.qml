@@ -3,7 +3,7 @@ import QtQuick 2.0
 import "../../scripts/AppStyle.js" as Style
 import "../"
 
-Button{
+SelectArea{
     id: listItem
     //Needed for QtCreator design mode
     width: 540

@@ -15,7 +15,7 @@ ListView {
 
     signal click (int index, string tag)
 
-    delegate: Button {
+    delegate: SelectArea {
         height: 48
         anchors.left: parent.left
         anchors.right: parent.right
