@@ -146,7 +146,6 @@ Page {
             onClicked: {
                 filterBar.sortByDate = true
                 filterBar.sortByPopularity = false
-                updateFilterBarSensorLabelText()
             }
         }
         OmniBarWidget.SimpleListItem{
@@ -154,7 +153,6 @@ Page {
             onClicked: {
                 filterBar.sortByDate = false
                 filterBar.sortByPopularity = true
-                updateFilterBarSensorLabelText()
             }
         }
 

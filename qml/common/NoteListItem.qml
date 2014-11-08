@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
+import "../scripts/DateFormat.js" as DateFormat
 
 Rectangle{
     anchors.left: parent.left
@@ -31,7 +32,18 @@ Rectangle{
 
         ColumnLayout{
             Layout.fillWidth: true
-            Label{text: qsTr("%1 %2h ago").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(1); font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
+            Label{
+                text: qsTr("%1 %2").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(
+                          DateFormat.toNow(timestamp , [
+                                               qsTr("just now"),
+                                               qsTr("min ago"),
+                                               qsTr("h ago"),
+                                               qsTr("mon ago"),
+                                               qsTr("days ago"),
+                                               qsTr("yr ago")
+                                           ])
+                          )
+                font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: true}
             Label{
                 text: parseTags(message)
                 Layout.fillWidth: true
@@ -42,7 +54,7 @@ Rectangle{
         ColumnLayout{
             width: 64
             Label{text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-            Label{text: qsTr("%1 takes").arg(takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
+            Label{text: qsTr("%1 takes").arg(5); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
         }
     }
 

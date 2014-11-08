@@ -38,5 +38,7 @@
         <file>qml/scripts/NumberFormat.js</file>
         <file>qml/common/SideBar/SideBar.qml</file>
         <file>qml/common/Controls/Checkmark.qml</file>
+        <file>qml/scripts/DateFormat.js</file>
+        <file>qml/scripts/Utilities.js</file>
     </qresource>
 </RCC>
