@@ -41,8 +41,11 @@ void Request::get(const QVariant &data)
 
     QUrlQuery query;
 
-    foreach (QString key, data.toMap().keys())
-        query.addQueryItem(key,data.toMap().value(key).toString());
+    foreach (QString key, data.toMap().keys()){
+        if (!data.toMap().value(key).isNull()){
+            query.addQueryItem(key,data.toMap().value(key).toString());
+        }
+    }
 
     mUrl.setQuery(query);
 
@@ -126,7 +129,7 @@ void Request::parseFinished()
     }
     emit error(1, reply->errorString());
     reply->deleteLater();
-      qDebug()<<reply->errorString();
+    qDebug()<<reply->errorString();
 
 }
 

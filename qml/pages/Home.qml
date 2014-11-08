@@ -51,11 +51,14 @@ Page {
     }
 
     function refresh(){
+
         var request = {
-            "lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance,
+            "lat": app.latitude,
+            "lon": app.longitude,
+            "radius": filterBar.distance,
+            "query": filterBar.search,
             "sort": filterBar.sortByDate ? "recent" : "popular"
         }
-        if (filterBar.search !== "") request["query"] = filterBar.search;
 
         notesServerRequest.get(request);
     }
@@ -182,6 +185,7 @@ Page {
                 tagModel.append(data.results)
             }
             function refresh(){
+
                 tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance})
             }
         }
