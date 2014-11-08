@@ -18,7 +18,7 @@ Rectangle {
 
     property alias icon: actionBarIcon.name
     property alias title: actionBarTite.text
-    property alias actionsListModel: iconRow.iconsListModel
+    property alias actions: iconRow.iconsListModel
 
     property string actionType: Style.ACTION_BAR_MENU_ACTION
 
@@ -28,68 +28,66 @@ Rectangle {
 
     RowLayout{
         id: actionBarRowLayout
-//        anchors.rightMargin: 16
+        //        anchors.rightMargin: 16
         anchors.fill: parent
         spacing: 8
-        Button {
-            id: actionButton
-            width: childrenRect.width
-            Layout.fillHeight: true
-            onClicked: actionBar.clicked()
 
-            RowLayout{
-                anchors.verticalCenter: parent.verticalCenter
-                spacing: 8
-                Icon{
-                    id: actionBarAction
-                    name: actionBar.actionType + "48"
-                    //We will need this in the future
-                    //color: Style.Typography.Actionbar[style]
-                    Behavior on x {
-                        NumberAnimation {
-                            duration : 100
-                        }
+        RowLayout {
+
+            ActionItem{
+                id: actionBarAction
+                name: actionBar.actionType + "48"
+                Layout.fillHeight: true
+                //We will need this in the future
+                //color: Style.Typography.Actionbar[style]
+                Behavior on x {
+                    NumberAnimation {
+                        duration : 100
                     }
                 }
-                Icon{
-                    id: actionBarIcon
-                    name: "wingo48"
-                    //We will need this in the future
-                    //color: Style.Typography.Actionbar[style]
+            }
+
+            Icon{
+                id: actionBarIcon
+                name: "wingo48"
+                //We will need this in the future
+                //color: Style.Typography.Actionbar[style]
+            }
+
+            Label{
+                id: actionBarTite
+                text: "Action Bar"
+                anchors.verticalCenter: parent.verticalCenter
+                color: Style.Typography.Actionbar[actionBar.style]
+                Layout.fillWidth: true
+            }
+
+            ActionsRow{
+                id: iconRow
+                Layout.fillHeight: true
+                onIconClicked: actionBar.toolbarButtonClicked(index, name)
+            }
+
+
+        }
+
+        states: [
+            State {
+                name: "MENU"
+
+                when: menuOpen
+
+                PropertyChanges {
+                    target: iconRow
+                    enabled: false
+                    opacity: 0.8
+                }
+
+                PropertyChanges {
+                    target: actionBarAction
+                    x:-10
                 }
             }
-        }
-        Label{
-            id: actionBarTite
-            text: "Action Bar"
-            anchors.verticalCenter: parent.verticalCenter
-            color: Style.Typography.Actionbar[actionBar.style]
-            Layout.fillWidth: true
-        }
-        IconRow{
-            id: iconRow
-            Layout.fillHeight: true
-            //We will need this in the future
-//            color: Style.Typography.Actionbar[style]
-            onIconClicked: actionBar.toolbarButtonClicked(index, name)
-        }
+        ]
     }
-    states: [
-        State {
-            name: "MENU"
-
-            when: menuOpen
-
-            PropertyChanges {
-                target: iconRow
-                enabled: false
-                opacity: 0.8
-            }
-
-            PropertyChanges {
-                target: actionBarAction
-                x:-10
-            }
-        }
-    ]
 }

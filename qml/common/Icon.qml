@@ -5,6 +5,9 @@ Image {
     height: 48
 
     property string name: ""
+    fillMode: Image.PreserveAspectFit
+    verticalAlignment: Image.AlignVCenter
+    horizontalAlignment: Image.AlignHCenter
 
     function getIconByName(name)
     {

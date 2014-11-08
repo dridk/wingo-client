@@ -22,6 +22,17 @@ Page {
             id:actionBar
             icon: "wingo48"
             title: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
+
+            actions: ListModel{
+                ListElement {
+                    icon: "refresh48"
+                    name: "refresh"
+                }
+                ListElement {
+                    icon: "pocket48"
+                    name: "pocket"
+                }
+            }
         }
 
         OmniBarWidget.OmniBar
