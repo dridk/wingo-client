@@ -33,6 +33,7 @@ Rectangle{
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
 
+
                 Rectangle{
                     width: 2
                     anchors.top: parent.top
@@ -46,7 +47,7 @@ Rectangle{
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.verticalCenter: parent.verticalCenter
                     text: modelData
-                    color: listItem.selected === index ? Style.Typography.TEXT : Style.Typography.FADE
+                    color: enabled && listItem.selected === index ? Style.Typography.TEXT : Style.Typography.FADE
                 }
 
                 onClicked: {

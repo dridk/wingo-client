@@ -12,7 +12,7 @@ MouseArea {
 
     Rectangle {
         id: buttonBackground
-        color: Style.Background.Button[style]
+        color: enabled? Style.Background.Button[style] : Style.Background.Button.DISABLED
         anchors.fill: parent
     }
 

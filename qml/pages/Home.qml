@@ -51,7 +51,12 @@ Page {
     }
 
     function refresh(){
-        notesServerRequest.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance, "query": filterBar.search})
+        var request = {
+            "lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance
+        }
+        if (filterBar.search !== "") request["query"] = filterBar.search;
+
+        notesServerRequest.get(request);
     }
 
     Request {

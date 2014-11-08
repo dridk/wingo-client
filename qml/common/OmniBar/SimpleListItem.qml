@@ -5,6 +5,7 @@ import "../"
 
 Button{
     id: listItem
+    default property alias _contentChildren: listItemRow.data
     //Needed for QtCreator design mode
     width: 540
     height: 96
@@ -16,6 +17,7 @@ Button{
     property alias icon: listItemIcon.name
 
     Row{
+        id: listItemRow
         spacing: 8
         anchors.rightMargin: 16
         anchors.leftMargin: 16

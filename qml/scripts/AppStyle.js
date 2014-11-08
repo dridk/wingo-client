@@ -40,6 +40,7 @@ var Background = {
         },
         Button: {
             DEFAULT: Palette.NONE,
+            DISABLED: Palette.SILVER,
             ACTION: Palette.DEEPSEA,
             ACCENT: Palette.YELLOW,
             SUNKEN: Palette.SILVER
