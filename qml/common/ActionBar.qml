@@ -26,74 +26,43 @@ Rectangle {
     signal actionClicked(int index, string name)
 
 
-    RowLayout{
-        id: actionBarRowLayout
-        //        anchors.rightMargin: 16
+    RowLayout {
+        id:mainLayout
         anchors.fill: parent
-        spacing: 8
-
         RowLayout {
-
-            RowLayout {
-                id: mainIcon
-                anchors.left: parent.left
-                spacing: 0
-                Icon{
-
-                    name: actionBar.actionType + "48"
-                }
-                Icon{
-                    id: actionBarIcon
-                    name: "wingo48"
-                    //We will need this in the future
-                    //color: Style.Typography.Actionbar[style]
-                }
-
-               SelectArea {
-                   anchors.fill: parent
-               }
-
-
-            }
-
-
-
-            //            ActionItem{
-            //                id: actionBarAction
-            //                name: actionBar.actionType + "48"
-            //                Layout.fillHeight: true
-            //                onClicked: actionBar.clicked()
-            //                //We will need this in the future
-            //                //color: Style.Typography.Actionbar[style]
-            //                Behavior on x {
-            //                    NumberAnimation {
-            //                        duration : 100
-            //                    }
-            //                }
-            //            }
-
-            //            Icon{
-            //                id: actionBarIcon
-            //                name: "wingo48"
-            //                //We will need this in the future
-            //                //color: Style.Typography.Actionbar[style]
-            //            }
-
-            Label{
-                id: actionBarTite
-                text: "Action Bar"
-                anchors.verticalCenter: parent.verticalCenter
-                color: Style.Typography.Actionbar[actionBar.style]
-                Layout.fillWidth: true
-            }
-
-            ActionsRow{
-                id: iconRow
+            id: mainIconLayout
+            anchors.left: parent.left
+            spacing: 0
+            Icon{
+                name: actionBar.actionType + "48"
                 Layout.fillHeight: true
-                onIconClicked: actionBar.actionClicked(index, name)
+            }
+            Icon{
+                id: actionBarIcon
+                name: "wingo48"
+
+                //We will need this in the future
+                //color: Style.Typography.Actionbar[style]
             }
 
+            SelectArea {
+                anchors.fill: parent
+                onClicked: actionBar.clicked()
+            }
+        }
 
+        Label{
+            id: actionBarTite
+            text: "Action Bar"
+            anchors.verticalCenter: parent.verticalCenter
+            color: Style.Typography.Actionbar[actionBar.style]
+            Layout.fillWidth: true
+        }
+
+        ActionsRow{
+            id: iconRow
+            Layout.fillHeight: true
+            onIconClicked: actionBar.actionClicked(index, name)
         }
 
         states: [
