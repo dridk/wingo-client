@@ -3,7 +3,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
 import Wingo 1.0
-import "../scripts/AppStyle.js" as Style
+import "scripts/AppStyle.js" as Style
 
 ApplicationWindow {
     id: app
@@ -13,6 +13,13 @@ ApplicationWindow {
     height: 600
     property alias pageStack : stack
     property alias initialPage : stack.initialItem
+    property var pages
+
+    function setPage(pageName){
+        console.debug("set page:"+pageName )
+        pageStack.push(Qt.resolvedUrl(pages[pageName]))
+    }
+
     //-----------
     FontLoader { id: font; name: "Droid Sans" }
 

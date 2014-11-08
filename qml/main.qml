@@ -9,6 +9,12 @@ import "scripts/AppStyle.js" as Style
 WingoApplication {
     id : app
 
+    //Qt.resolve : only load when it's necessary
+   pages: {
+        "Home": "pages/Home.qml",
+     "AddNote": "pages/AddNote.qml"
+    }
+
     initialPage  : Home {
 
     }

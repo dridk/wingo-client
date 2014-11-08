@@ -18,7 +18,7 @@ Rectangle
         color: Style.Background.OVERLAY
         anchors.fill: parent
         opacity: 0
-        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
+        Behavior on opacity {NumberAnimation{duration: 500}}
     }
 
     states: [

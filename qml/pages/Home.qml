@@ -14,8 +14,9 @@ Page {
     width: 540
     height: 960
     //-----------
-    Column {
-        anchors.fill: parent
+    ColumnLayout {
+        width: parent.width
+        spacing: 0
 
         ActionBar {
             id:actionBar
@@ -74,7 +75,7 @@ Page {
         }
         MouseArea{
             anchors.fill: parent
-            onClicked: app.goToPage(app.pages["AddNote"])
+            onClicked: app.setPage("AddNote")
         }
     }
 

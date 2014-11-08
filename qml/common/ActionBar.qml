@@ -22,11 +22,9 @@ Rectangle {
 
     property string actionType: Style.ACTION_BAR_MENU_ACTION
 
-    signal menuButtonClicked
-    signal backButtonClicked
+    signal clicked()
     signal toolbarButtonClicked (int index, string name)
 
-    property bool menuOpen: false
 
     RowLayout{
         id: actionBarRowLayout
@@ -37,15 +35,7 @@ Rectangle {
             id: actionButton
             width: childrenRect.width
             Layout.fillHeight: true
-            onClicked: {
-                if (actionBar.actionType === Style.ACTION_BAR_MENU_ACTION){
-                    //Toggle menu state
-                    //This is very-very UGLY@!!!!
-                    menuOpen = !menuOpen;
-                    menuButtonClicked();
-                }
-                else backButtonClicked();
-            }
+            onClicked: actionBar.clicked()
 
             RowLayout{
                 anchors.verticalCenter: parent.verticalCenter
