@@ -69,7 +69,7 @@ Page {
         onSuccess: {
              console.log( data.results.length )
             notesListModel.clear()
-            notesListModel.append(data.results)
+            notesListModel.append(data.results.reverse())
 
         }
         onError: {
