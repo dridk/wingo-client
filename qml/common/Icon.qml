@@ -1,8 +1,8 @@
 import QtQuick 2.0
 
 Image {
-    width: 48
-    height: 48
+    width: _RES.s_ICON_SIZE
+    height: width
 
     property string name: ""
 

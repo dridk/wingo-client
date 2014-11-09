@@ -5,7 +5,7 @@ RowLayout {
     id: iconRow
     //Needed for QtCreator design mode
 //    width: childrenRect.width
-    height: 96
+    height: _RES.s_LIST_ITEM_DOUBLE_HEIGHT
     //-----------
     spacing: 0
     layoutDirection: Qt.RightToLeft
@@ -19,7 +19,7 @@ RowLayout {
         Button
         {
             id: iconRowButton
-            width: iconRowIcon.width + 24
+            width: iconRowIcon.width + _RES.s_HALF_DOUBLE_MARGIN
             Layout.fillHeight: true
             onClicked: iconRow.iconClicked(index, name)
             style: buttonStyle || "DEFAULT"

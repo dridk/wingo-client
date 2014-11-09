@@ -8,7 +8,7 @@ Button{
     default property alias _contentChildren: listItemRow.data
     //Needed for QtCreator design mode
     width: 540
-    height: 96
+    height: _RES.s_LIST_ITEM_DOUBLE_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -18,9 +18,9 @@ Button{
 
     Row{
         id: listItemRow
-        spacing: 8
-        anchors.rightMargin: 16
-        anchors.leftMargin: 16
+        spacing: _RES.s_BASE_UNIT
+        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+        anchors.leftMargin: _RES.s_DOUBLE_MARGIN
         anchors.fill: parent
 
         Icon {
@@ -39,7 +39,7 @@ Button{
     }
 
     Rectangle{
-        height: 2
+        height: _RES.s_BORDER
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right

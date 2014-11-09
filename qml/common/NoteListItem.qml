@@ -12,7 +12,7 @@ Rectangle{
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    height: Math.max(96, childrenRect.height) //message.length / 18 * 16 + 48)
+    height: Math.max(_RES.s_NOTE_LIST_MIN_HEIGHT, childrenRect.height) //message.length / 18 * 16 + 48)
     color: Style.Background.VIEW
 
     Column {

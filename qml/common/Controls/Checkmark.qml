@@ -4,8 +4,8 @@ import "../../scripts/AppStyle.js" as Style
 
 Item {
     id: checkmark
-    width: 48
-    height: 48
+    width: _RES.s_LIST_ITEM_HEIGHT
+    height: width
 
     property bool checked: false
 
@@ -16,11 +16,11 @@ Item {
 
     Rectangle {
         id: checkmarkBorder
-        width: 32
-        height: 32
+        width: parent.width * 1.5
+        height: width
         color: Style.Background.WINDOW
         border.color: Style.Border.DARK
-        border.width: 2
+        border.width: _RES.s_BORDER
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 
@@ -28,10 +28,10 @@ Item {
             id: checkmarkFill
             color: Style.Background.Button.ACTION
             visible: false
-            anchors.rightMargin: 4
-            anchors.leftMargin: 4
-            anchors.bottomMargin: 4
-            anchors.topMargin: 4
+            anchors.rightMargin: _RES.s_BORDER * 2
+            anchors.leftMargin: _RES.s_BORDER * 2
+            anchors.bottomMargin: _RES.s_BORDER * 2
+            anchors.topMargin: _RES.s_BORDER * 2
             anchors.fill: parent
         }
 

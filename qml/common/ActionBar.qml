@@ -7,7 +7,7 @@ Rectangle {
     id: actionBar
     //Needed for QtCreator design mode
     width: 540
-    height: 96
+    height: _RES.s_ACTION_BAR_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -50,7 +50,7 @@ Rectangle {
 
             RowLayout{
                 anchors.verticalCenter: parent.verticalCenter
-                spacing: 8
+                spacing: _RES.s_MARGIN
                 Icon{
                     id: actionBarAction
                     name: actionBar.actionType + "48"

@@ -7,7 +7,7 @@ Rectangle {
     id: sectionHeader
     //Needed for QtCreator design mode
     width: 540
-    height: 48
+    height: _RES.s_LIST_ITEM_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -16,10 +16,10 @@ Rectangle {
 
     property alias text: sectionHeaderText.text
 
-    Label{id: sectionHeaderText ; anchors.left: parent.left; anchors.leftMargin: 16;anchors.verticalCenter: parent.verticalCenter}
+    Label{id: sectionHeaderText ; anchors.left: parent.left; anchors.leftMargin: _RES.s_DOUBLE_MARGIN;anchors.verticalCenter: parent.verticalCenter}
 
     Rectangle{
-        height: 2
+        height: _RES.s_BORDER
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right

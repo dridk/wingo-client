@@ -9,7 +9,7 @@ Rectangle {
     default property alias _contentChildren: filterBarTrayColumn.data
     //Needed for QtCreator design mode
     width: 540
-    height: 64
+    height: _RES.s_OMNI_BAR_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -42,14 +42,14 @@ Rectangle {
 
     MouseArea{
         id: omniBarSensor
-        anchors.rightMargin: 8
-        anchors.leftMargin: 16
+        anchors.rightMargin: _RES.s_MARGIN
+        anchors.leftMargin: _RES.s_DOUBLE_MARGIN
         anchors.fill: parent
         Label{
             id: omniBarSensorLabel
             anchors.verticalCenter: parent.verticalCenter
             Behavior on color {ColorAnimation {}}
-            anchors.rightMargin: 8
+            anchors.rightMargin: _RES.s_MARGIN
             anchors.right: omniBarSensorIcon.left
             anchors.left: parent.left
             elide: Text.ElideRight

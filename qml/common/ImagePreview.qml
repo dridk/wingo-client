@@ -3,8 +3,8 @@ import QtGraphicalEffects 1.0
 
 Item {
     id: root
-    width: 210
-    height: 210
+    width: _RES.s_IMAGE_PREVIEWS_SIZE
+    height: _RES
     property string source
     //    color: source=="" ? "transparent" : "white"
 //    opacity: area.pressed ? 0.2 : 1

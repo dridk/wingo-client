@@ -7,7 +7,7 @@ ListView {
     id: tagListView
     //Needed for QtCreator design mode
     width: 540
-    height: 100
+    height: _RES.s_LIST_ITEM_DOUBLE_HEIGHT * 2
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -16,15 +16,15 @@ ListView {
     signal click (int index, string tag)
 
     delegate: Button {
-        height: 48
+        height: _RES.s_LIST_ITEM_HEIGHT
         anchors.left: parent.left
         anchors.right: parent.right
 
         Row{
             anchors.fill: parent
-            anchors.leftMargin: 16
-            anchors.rightMargin: 16
-            spacing: 8
+            anchors.leftMargin: _RES.s_DOUBLE_MARGIN
+            anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+            spacing: _RES.s_BASE_UNIT
 
             Label{
                 anchors.verticalCenter: parent.verticalCenter
@@ -43,7 +43,7 @@ ListView {
         onClicked: tagListView.click (index, name)
 
         Rectangle{
-            height: 2
+            height: _RES.s_BORDER
             anchors.bottom: parent.bottom
             anchors.left: parent.left
             anchors.right: parent.right

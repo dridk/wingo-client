@@ -7,7 +7,7 @@ Rectangle{
     id: listItem
     //Needed for QtCreator design mode
     width: 540
-    height: 96
+    height: _RES.s_LIST_ITEM_DOUBLE_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -18,8 +18,8 @@ Rectangle{
     signal click (int index, string value)
 
     Row{
-        anchors.bottomMargin: 8
-        anchors.topMargin: 8
+        anchors.bottomMargin: _RES.s_MARGIN
+        anchors.topMargin: _RES.s_MARGIN
         spacing: 0
 //        anchors.rightMargin: 16
 //        anchors.leftMargin: 16
@@ -35,7 +35,7 @@ Rectangle{
 
 
                 Rectangle{
-                    width: 2
+                    width: _RES.s_BORDER
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
@@ -59,7 +59,7 @@ Rectangle{
     }
 
     Rectangle{
-        height: 2
+        height: _RES.s_BORDER
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right

@@ -10,14 +10,14 @@ ApplicationWindow {
     id: app
     visible: true
     //Needed for QtCreator design mode
-    width: 540
-    height: 960
+    width: 540 * 0.5
+    height: 960 * 0.5
     //-----------
     color: Style.Background.WINDOW
 
     Component.onCompleted: {
         configRequester.get()
-
+        _RES.refreshScreenScaleRatio()
     }
     //Global configuration variable
     property variant config
@@ -58,22 +58,34 @@ ApplicationWindow {
         intendedScreenWidth: 540
         intendedScreenHeight: 960
 
+        refreshOnResize: true
+
         /*Preset app-wide sizes
           These are only recalculated one
           */
         //Base point size
-        property real s_BASE_UNIT: 8
+        property int s_BASE_UNIT: 8
         //Fonts::
-        property real s_TEXT_SIZE_MEDIUM: 24
-        property real s_TEXT_SIZE_SMALL: 18
+        property int s_TEXT_SIZE_MEDIUM: 24
+        property int s_TEXT_SIZE_SMALL: 18
         //Layouts::
-        property real s_MARGIN: 8
-        property real s_DOUBLE_MARGIN: 16
-        property real s_TRIPPLE_MARGIN: 32
+        property int s_MARGIN: 8
+        property int s_DOUBLE_MARGIN: 16
+        property int s_HALF_DOUBLE_MARGIN: 24
+        property int s_TRIPPLE_MARGIN: 32
 
-        property real s_BORDER: 2
+        property int s_BORDER: 2
+
+        property int s_LIST_ITEM_HEIGHT: 48
+        property int s_LIST_ITEM_DOUBLE_HEIGHT: 96
+
+        property int s_ICON_SIZE: 48
+
         //Special cases::
-        property real s_ACTION_BAR_HEIGHT: 96
+        property int s_NOTE_LIST_MIN_HEIGHT: 96
+        property int s_ACTION_BAR_HEIGHT: 96
+        property int s_OMNI_BAR_HEIGHT: 64
+        property int s_IMAGE_PREVIEWS_SIZE: 210
     }
 
 

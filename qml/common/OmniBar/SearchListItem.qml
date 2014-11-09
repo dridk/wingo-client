@@ -7,7 +7,7 @@ Rectangle{
     id: listItem
     //Needed for QtCreator design mode
     width: 540
-    height: 48
+    height: _RES.s_LIST_ITEM_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
@@ -17,16 +17,16 @@ Rectangle{
     TextBox{
         id: textBox
         placeholder: "Search..."
-        anchors.rightMargin: 8
-        anchors.leftMargin: 8
-        anchors.bottomMargin: 8
+        anchors.rightMargin: _RES.s_MARGIN
+        anchors.leftMargin: _RES.s_MARGIN
+        anchors.bottomMargin: _RES.s_MARGIN
         anchors.fill: parent
 
     }
 
 
     Rectangle{
-        height: 2
+        height: _RES.s_BORDER
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
