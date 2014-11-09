@@ -63,3 +63,18 @@ function sortArrayOfObjects(a, fn){
     var newA = copyArray(a);
     return newA.sort(fn);
 }
+
+function findRoot(el) {
+    var found = false,
+        root = el;
+    while (!found) {
+        if (root.hasOwnProperty("parent") && root.parent !== null) root = root.parent;
+        else found = true;
+    }
+    return root;
+}
+
+function getGlobalCoordinates(el) {
+    var root = findRoot(el);
+    return el.mapToItem(root, 0, 0);
+}

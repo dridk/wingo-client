@@ -116,6 +116,7 @@ Page {
     OmniBarWidget.OmniBar{
         id: filterBar
         anchors.top: parent.top
+        fillHeight: true
 
         property bool sortByDate: true
         property bool sortByPopularity: false
@@ -178,7 +179,6 @@ Page {
         OmniBarWidget.SectionHeader{text:"Trending tags"}
 
         OmniBarWidget.TagListView {
-            height: 400 //This has to be automated somehow
             model: ListModel{id:tagModel}
             onClick: filterBar.search = tag
         }
@@ -202,7 +202,7 @@ Page {
     Item{
         anchors.top: filterBar.bottom
         anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        anchors.bottom: footer.top
         anchors.left: parent.left
         clip: true
 
@@ -218,11 +218,12 @@ Page {
 
     }
 
-    footer: Rectangle{
+    Rectangle{
+        id: footer
             anchors.right: parent.right
             anchors.left: parent.left
             height: _RES.s_OMNI_BAR_HEIGHT
-            color: Qt.rgba(255, 255, 255, 0.95)
+            color: Style.Background.VIEW
             anchors.bottom: parent.bottom
             Label{
                 text: "Post new note..."

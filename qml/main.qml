@@ -10,8 +10,8 @@ ApplicationWindow {
     id: app
     visible: true
     //Needed for QtCreator design mode
-    width: 540
-    height: 960
+    width: 540 * 1.2
+    height: 960 * 1.3
     //-----------
     color: Style.Background.WINDOW
 

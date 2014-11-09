@@ -2,6 +2,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import "../../scripts/AppStyle.js" as Style
+import "../../scripts/Utilities.js" as Utilities
 import "../"
 
 Rectangle {
@@ -16,6 +17,7 @@ Rectangle {
 
     property alias text: omniBarSensorLabel.text
     property bool expanded: omniBarTray.height > 0
+    property bool fillHeight: false
     z: expanded ? 99 : 0
 
     signal expand
@@ -35,6 +37,7 @@ Rectangle {
 
     function contractTray(){
         state = ""
+        omniBarTrayFlickable.contentY = 0
         contract()
     }
 
@@ -83,6 +86,10 @@ Rectangle {
         height: app.height - ( omniBar.y + omniBar.height )
         opacity: 0
         Behavior on opacity {NumberAnimation{}}
+        MouseArea{
+            anchors.fill: parent
+            enabled: parent.opacity === 1
+        }
     }
 
     Rectangle{
@@ -95,15 +102,32 @@ Rectangle {
         color: Style.Background.VIEW
         Behavior on height {NumberAnimation{}}
 
-        ColumnLayout{
-            id: filterBarTrayColumn
-            anchors.left: parent.left
-            anchors.right: parent.right
-            spacing: 0
-        //OmniBar contents go here >>>
+        Flickable{
+            id: omniBarTrayFlickable
+            flickableDirection: Flickable.VerticalFlick
+            anchors.fill: parent
+            contentHeight: filterBarTrayColumn.height
+            interactive: false
+            Column{
+                id: filterBarTrayColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+    //            anchors.bottom: omniBar.fillHeight? parent.bottom : undefined
+                spacing: 0
+            //OmniBar contents go here >>>
+            }
         }
 
 
+    }
+
+    function computeHeight() {
+        var barCoord = Utilities.getGlobalCoordinates(omniBar),
+            fullHeight = app.height - ( barCoord.y + omniBar.height ),
+            trayHeight = fillHeight? fullHeight : Math.min( fullHeight, filterBarTrayColumn.height );
+        if (trayHeight === fullHeight) omniBarTrayFlickable.interactive = true;
+        else  omniBarTrayFlickable.interactive = false;
+        return trayHeight;
     }
 
     states: [
@@ -117,7 +141,7 @@ Rectangle {
 
             PropertyChanges {
                 target: omniBarTray
-                height: Math.min( app.height - ( omniBar.y + omniBar.height ), filterBarTrayColumn.height )
+                height: computeHeight()
             }
 
             PropertyChanges {
