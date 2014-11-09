@@ -199,3 +199,7 @@ function sprintf( format ) {
         return newString;
     };
 
+function setWordColor(string, color, pattern){
+    pattern = pattern || /.*/g;
+    return string.replace(pattern , "<font color='"+color+"'>$&</font>");
+}

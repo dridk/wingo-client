@@ -3,7 +3,7 @@ import QtQuick 2.0
 import "../scripts/AppStyle.js" as Style
 
 Text {
-    font.pointSize: 16
+    font.pointSize: 15
     textFormat: Text.RichText
     font.family: "Droid Sans"
     color: Style.Typography.TEXT

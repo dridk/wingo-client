@@ -26,7 +26,7 @@ Rectangle
     //This is very-very UGLY@!!!!
     property alias actionBarMenu: actionBar.menuOpen
 
-    property alias footer: _footer.source
+    property Component footer: Item{}
 
     signal menuButtonClicked
     signal backButtonClicked
@@ -57,6 +57,7 @@ Rectangle
         //Placeholder for the footer element
         //Not every page has it
         id: _footer
+        sourceComponent: footer
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom

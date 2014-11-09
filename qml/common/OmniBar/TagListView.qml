@@ -29,13 +29,13 @@ ListView {
             Label{
                 anchors.verticalCenter: parent.verticalCenter
                 text: name
-                color: Style.Typography.ACCENT
+                color: Style.Typography.LINK
             }
 
             Label{
                 anchors.verticalCenter: parent.verticalCenter
                 text: " - " + count
-                color: Style.Typography.FADE
+                color: Style.Typography.ACCENT
             }
 
         }

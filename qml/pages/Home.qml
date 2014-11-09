@@ -89,6 +89,11 @@ Page {
         OmniBarWidget.SectionHeader{text:"Places"}
         OmniBarWidget.SimpleListItem{
             text: "New Note"
+            onClicked: {
+                sideBar.contractTray();
+                page.actionBarMenu = false;
+                app.goToPage(app.pages["AddNote"]);
+            }
         }
         OmniBarWidget.SimpleListItem{
             text: "My Notes"
@@ -139,6 +144,7 @@ Page {
         text: filterBarSensorLabelText()
 
         OmniBarWidget.SearchListItem{
+            text: filterBar.search
             onTextChanged: {
                 filterBar.search = text
             }
@@ -212,25 +218,23 @@ Page {
 
     }
 
-    Rectangle{
-        anchors.right: parent.right
-        anchors.left: parent.left
-        height: 64
-        color: Qt.rgba(255, 255, 255, 0.95)
-        anchors.bottom: parent.bottom
-        Label{
-            text: "Post new note..."
+    footer: Rectangle{
+            anchors.right: parent.right
             anchors.left: parent.left
-            anchors.leftMargin: 16
-            anchors.verticalCenter: parent.verticalCenter
-            color: Style.Typography.FADE
+            height: 64
+            color: Qt.rgba(255, 255, 255, 0.95)
+            anchors.bottom: parent.bottom
+            Label{
+                text: "Post new note..."
+                anchors.left: parent.left
+                anchors.leftMargin: 16
+                anchors.verticalCenter: parent.verticalCenter
+                color: Style.Typography.FADE
+            }
+            MouseArea{
+                anchors.fill: parent
+                onClicked: app.goToPage(app.pages["AddNote"])
+            }
         }
-        MouseArea{
-            anchors.fill: parent
-            onClicked: app.goToPage(app.pages["AddNote"])
-        }
-    }
-
-
 
 }

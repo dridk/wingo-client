@@ -57,6 +57,7 @@ var Background = {
     },
     Typography = {
         TEXT: Palette.BLACK,
+        QUOTE: Qt.darker(Palette.GRAY),
         LINK: Palette.DEEPSEA,
         ACCENT: Palette.AZURES,
         FADE: Palette.GRAY,
