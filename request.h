@@ -10,6 +10,9 @@ class Request : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY (QString host READ host )
+    Q_PROPERTY (int port READ port )
+
 public:
     explicit Request(QQuickItem *parent = 0);
 
@@ -17,6 +20,9 @@ public:
 
     void setSource(const QString& source);
     const QString& source();
+     QString host();
+    int port() ;
+
 
 public slots:
     void get(const QVariant& data = QVariant());
@@ -24,6 +30,7 @@ public slots:
     void put(const QVariant& data= QVariant());
     void deleteResource(const QVariant& data= QVariant());
     void patch(const QVariant& data= QVariant());
+
 
 
 private slots:

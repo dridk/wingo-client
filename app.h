@@ -9,9 +9,8 @@ class App : public QObject
 public:
     explicit App(QObject *parent = 0);
 
-signals:
 
-public slots:
+    Q_INVOKABLE static QString getDeviceId();
 
 };
 

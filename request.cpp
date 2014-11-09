@@ -1,5 +1,7 @@
 #include "request.h"
 #include <QDebug>
+#include <QNetworkInterface>
+#include "app.h"
 QNetworkAccessManager * Request::mManager = 0;
 
 Request::Request(QQuickItem *parent) :
@@ -15,7 +17,14 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
+#ifdef Q_OS_ANDROID
+    mUrl.setHost("labsquare.org");
+#else
     mUrl.setHost("localhost");
+#endif
+
+
+
     mUrl.setPort(5000);
 
 
@@ -31,9 +40,19 @@ void Request::setSource(const QString &source)
 
 }
 
+int Request::port()
+{
+    return mUrl.port();
+}
+
 const QString &Request::source()
 {
     return mSource;
+}
+
+QString Request::host()
+{
+    return mUrl.host();
 }
 
 void Request::get(const QVariant &data)
@@ -50,9 +69,8 @@ void Request::get(const QVariant &data)
     mUrl.setQuery(query);
 
     QNetworkRequest request = makeRequest(mUrl);
-
-    qDebug()<<mUrl;
-    QNetworkReply * reply = mManager->get(QNetworkRequest(mUrl));
+    request.setRawHeader("Content-Type","Content-type: text/plain");
+    QNetworkReply * reply = mManager->get(request);
 
     connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
 
@@ -148,9 +166,9 @@ void Request::parseError(QNetworkReply::NetworkError err)
 
 QNetworkRequest Request::makeRequest(const QUrl &url)
 {
-
     QNetworkRequest request(url);
     request.setRawHeader("Content-Type","application/json");
+    request.setRawHeader("FROM",App::getDeviceId().toUtf8());
     return request;
 
 }

@@ -57,7 +57,7 @@ ApplicationWindow {
         intendedScreenWidth: 540
         intendedScreenHeight: 960
 
-//        refreshOnResize: true
+        //        refreshOnResize: true
 
         /*Preset app-wide sizes
           These are only recalculated one
@@ -180,17 +180,22 @@ ApplicationWindow {
     {
         id: gpsSource
         updateInterval: 1000
-        active: true
+        active: Qt.platform.os == "android" ? true : false
         onPositionChanged: {
-//            var coord = gpsSource.position.coordinate;
-//            app.longitude = coord.longitude;
-//            app.latitude = coord.latitude;
+            if ( Qt.platform.os == "android") {
+            var coord = gpsSource.position.coordinate;
+            app.longitude = coord.longitude;
+            app.latitude = coord.latitude;
+            }
 
-//            console.debug(coord.longitude +" " +coord.latitude )
+            //            console.debug(coord.longitude +" " +coord.latitude )
         }
     }
 
 
+    Text {
+        text: wingo.getDeviceId() + "\n" + configRequester.host+":"+configRequester.port+"\n pos:" + app.latitude +" , "+app.longitude
+    }
 
 
 }
