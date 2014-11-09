@@ -57,7 +57,7 @@ Page {
             "lon": app.longitude,
             "radius": filterBar.distance,
             "query": filterBar.search,
-            "sort": filterBar.sortByDate ? "recent" : "popular"
+            "order": filterBar.sortByDate ? "recent" : "popular"
         }
 
         notesServerRequest.get(request);
@@ -67,9 +67,9 @@ Page {
         id: notesServerRequest
         source: "/notes"
         onSuccess: {
-//            console.log( JSON.stringify(data.results) )
+             console.log( data.results.length )
             notesListModel.clear()
-            notesListModel.append(data.results.reverse())
+            notesListModel.append(data.results)
 
         }
         onError: {
