@@ -16,7 +16,7 @@ Item {
 
     Rectangle {
         id: checkmarkBorder
-        width: parent.width * 1.5
+        width: _RES.s_LIST_ITEM_HEIGHT * 0.8
         height: width
         color: Style.Background.WINDOW
         border.color: Style.Border.DARK

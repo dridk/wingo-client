@@ -18,9 +18,9 @@ Item {
         TextEdit {
             id:txtId
             anchors.fill: parent
-            anchors.margins: 10
+            anchors.margins: _RES.s_MARGIN
             wrapMode:TextEdit.Wrap
-            font.pointSize: 16
+            font.pixelSize: _RES.s_TEXT_SIZE_MEDIUM
             textFormat: Text.PlainText
             font.family: "Droid Sans"
             color: Style.Typography.TEXT
@@ -53,26 +53,23 @@ Item {
         id:footer
         width: parent.width
         anchors.top: container.bottom
-        height:40
+        height: _RES.s_LIST_ITEM_HEIGHT
         color: "white"
 
         Rectangle {
             anchors.top: parent.top
             width: parent.width
-            height: 1
+            height: _RES.s_BORDER
             color: "#00b8cc"
-
         }
 
-        Text {
+        Label {
             id:limitId
             anchors.right: parent.right
             anchors.top: parent.top
-            anchors.margins: 5
+            anchors.margins: _RES.s_MARGIN
             text: "( "+txtId.length+" )"
-            font.pointSize: 16
-            textFormat: Text.RichText
-            font.family: "Droid Sans"
+            font.pixelSize: _RES.s_TEXT_SIZE_SMALL
             color: txtId.length >=255 ? "red" : Style.Typography.FADE
 
         }

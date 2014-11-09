@@ -4,7 +4,7 @@ import QtGraphicalEffects 1.0
 Item {
     id: root
     width: _RES.s_IMAGE_PREVIEWS_SIZE
-    height: _RES
+    height: width
     property string source
     //    color: source=="" ? "transparent" : "white"
 //    opacity: area.pressed ? 0.2 : 1

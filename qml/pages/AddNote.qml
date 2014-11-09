@@ -157,16 +157,14 @@ Page {
     ImagePreview
     {
         id: noteAttachment
-//        width: page.width /2.0
-//        height: page.width /2.0
-        anchors.topMargin: 48
+        anchors.topMargin: _RES.s_QUADRO_MARGIN
         anchors.top: noteEdit.bottom
         anchors.horizontalCenter: parent.horizontalCenter
 
         //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
     }
 
-    Text {
+    Label {
         anchors.centerIn: parent
         text: app.latitude+" " + app.longitude
     }

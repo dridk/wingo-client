@@ -221,13 +221,13 @@ Page {
     footer: Rectangle{
             anchors.right: parent.right
             anchors.left: parent.left
-            height: 64
+            height: _RES.s_OMNI_BAR_HEIGHT
             color: Qt.rgba(255, 255, 255, 0.95)
             anchors.bottom: parent.bottom
             Label{
                 text: "Post new note..."
                 anchors.left: parent.left
-                anchors.leftMargin: 16
+                anchors.leftMargin: _RES.s_DOUBLE_MARGIN
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.Typography.FADE
             }

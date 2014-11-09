@@ -40,6 +40,7 @@ Item {
     function connectToAppWindow(){
         appWindow.widthChanged.connect(refreshScreenScaleRatio);
         appWindow.heightChanged.connect(refreshScreenScaleRatio);
+        refreshScreenScaleRatio();
     }
 
     function disconnectFromAppWindow(){

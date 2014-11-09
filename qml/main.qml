@@ -10,14 +10,13 @@ ApplicationWindow {
     id: app
     visible: true
     //Needed for QtCreator design mode
-    width: 540 * 0.5
-    height: 960 * 0.5
+    width: 540
+    height: 960
     //-----------
     color: Style.Background.WINDOW
 
     Component.onCompleted: {
         configRequester.get()
-        _RES.refreshScreenScaleRatio()
     }
     //Global configuration variable
     property variant config
@@ -73,6 +72,7 @@ ApplicationWindow {
         property int s_DOUBLE_MARGIN: 16
         property int s_HALF_DOUBLE_MARGIN: 24
         property int s_TRIPPLE_MARGIN: 32
+        property int s_QUADRO_MARGIN: 48
 
         property int s_BORDER: 2
 
