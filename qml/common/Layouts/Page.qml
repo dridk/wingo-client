@@ -17,8 +17,8 @@ Rectangle
 
     property int backgroundAnimationDuration: 500
 
-    property alias header: pageHeader.source
-    property alias footer: pageFooter.source
+    property Component header: Item{}
+    property Component footer: Item{}
 
     property alias pageInteractionTracking: pageClickSensor.enabled
     property alias containsMouse: pageClickSensor.containsMouse
@@ -32,6 +32,7 @@ Rectangle
         //Placeholder for the footer element
         //Not every page has it
         id: pageHeader
+        sourceComponent: header
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.top: parent.top
@@ -52,6 +53,7 @@ Rectangle
         //Placeholder for the footer element
         //Not every page has it
         id: pageFooter
+        sourceComponent: footer
         anchors.right: parent.right
         anchors.left: parent.left
         anchors.bottom: parent.bottom

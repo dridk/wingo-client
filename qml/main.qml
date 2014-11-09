@@ -3,6 +3,7 @@ import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
 import Wingo 1.0
+import "lib"
 import "scripts/AppStyle.js" as Style
 
 ApplicationWindow {
@@ -50,6 +51,31 @@ ApplicationWindow {
 
 
     FontLoader { id: font; name: "Droid Sans" }
+
+    ResolutionManagerCahce{
+        id: _RES
+        appWindow: app
+        intendedScreenWidth: 540
+        intendedScreenHeight: 960
+
+        /*Preset app-wide sizes
+          These are only recalculated one
+          */
+        //Base point size
+        property real s_BASE_UNIT: 8
+        //Fonts::
+        property real s_TEXT_SIZE_MEDIUM: 24
+        property real s_TEXT_SIZE_SMALL: 18
+        //Layouts::
+        property real s_MARGIN: 8
+        property real s_DOUBLE_MARGIN: 16
+        property real s_TRIPPLE_MARGIN: 32
+
+        property real s_BORDER: 2
+        //Special cases::
+        property real s_ACTION_BAR_HEIGHT: 96
+    }
+
 
     StackView {
         id: stack

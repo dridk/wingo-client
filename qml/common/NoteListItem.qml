@@ -12,27 +12,29 @@ Rectangle{
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right
-    height: Math.max(96, message.length / 18 * 16 + 48)
+    height: Math.max(96, childrenRect.height) //message.length / 18 * 16 + 48)
     color: Style.Background.VIEW
 
-    ColumnLayout {
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 8
+    Column {
+        id: column1
+//        anchors.bottom: parent.bottom
+//        anchors.bottomMargin: _RES.s_MARGIN
         anchors.top: parent.top
-        anchors.topMargin: 8
+        anchors.topMargin: _RES.s_MARGIN
         anchors.left: parent.left
-        anchors.leftMargin: 32
+        anchors.leftMargin: _RES.s_TRIPPLE_MARGIN
         anchors.right: parent.right
-        anchors.rightMargin: 8
-        spacing: 0
+        anchors.rightMargin: _RES.s_MARGIN
+        spacing: _RES.s_BASE_UNIT
 
         RowLayout{
-            Layout.fillWidth: true
-            Layout.fillHeight: false
-            spacing: 8
+            anchors.right: parent.right
+            anchors.left: parent.left
+            spacing: _RES.s_BASE_UNIT
+
             Label{
                 text: anonymous? qsTr("Anonimous") : author.nickname
-                font.pointSize: 12; color: Style.Typography.LINK; Layout.fillWidth: false
+                font.pixelSize: _RES.s_TEXT_SIZE_SMALL ; color: Style.Typography.LINK; Layout.fillWidth: false
             }
             Label{
                 text: DateFormat.toNow(timestamp , [
@@ -43,7 +45,7 @@ Rectangle{
                                                qsTr("days ago"),
                                                qsTr("yr ago")
                                            ])
-                font.pointSize: 12; color: Style.Typography.QUOTE; Layout.fillWidth: false
+                font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.QUOTE; Layout.fillWidth: false
             }
             Label{
                 text: DistanceFormat.toHere(
@@ -56,95 +58,49 @@ Rectangle{
                                   qsTr("very far...")
                               ]
                               )
-                font.pointSize: 12; color: Style.Typography.QUOTE; Layout.fillWidth: true
+                font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.QUOTE; Layout.fillWidth: true
             }
             Label{
                 visible:expiration!=="None"
                 text: "30d left"
                 horizontalAlignment: Text.AlignRight
-                font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: false
+                font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.LINK ;Layout.fillWidth: false
             }
         }
 
         RowLayout{
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            spacing: 8
+            anchors.right: parent.right
+            anchors.left: parent.left
+            spacing: _RES.s_BASE_UNIT
+
             Label{
                 text: StringFormat.setWordColor(message, Style.Typography.LINK ,/\#\w+/g)
                 Layout.fillWidth: true
-                Layout.fillHeight: true
                 wrapMode: Text.WordWrap
             }
             Item{
                 id: item1
                 width: 64
                 Layout.fillWidth: false
-                Layout.fillHeight: true
                 Label {
                     text: qsTr("%1<br>takes").arg(takes)
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.right: parent.right
-                    horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT
+                    horizontalAlignment: Text.AlignRight; font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.ACCENT
                 }
             }
         }
 
+        Item {
+            anchors.right: parent.right
+            anchors.left: parent.left
+            height: _RES.s_DOUBLE_MARGIN
+        }
+
     }
 
-//    RowLayout{
-//        anchors.bottom: parent.bottom
-//        anchors.bottomMargin: 8
-//        anchors.top: parent.top
-//        anchors.topMargin: 8
-//        anchors.left: parent.left
-//        anchors.leftMargin: 32
-//        anchors.right: parent.right
-//        anchors.rightMargin: 8
-//        spacing: 8
-
-//        ColumnLayout{
-//            Layout.fillWidth: true
-
-//            Label{
-//                text: qsTr("%1 %2, %3").arg(anonymous? qsTr("Anonimous") : author.nickname).arg(
-//                          DateFormat.toNow(timestamp , [
-//                                               qsTr("just now"),
-//                                               qsTr("min ago"),
-//                                               qsTr("h ago"),
-//                                               qsTr("mon ago"),
-//                                               qsTr("days ago"),
-//                                               qsTr("yr ago")
-//                                           ])
-//                          ).arg (
-//                            DistanceFormat.toHere(
-//                              DistanceFormat.pointObject(app.latitude, app.longitude),
-//                              DistanceFormat.pointObject(lat, lon),
-//                              [
-//                                  qsTr("right here"),
-//                                  qsTr("m away"),
-//                                  qsTr("km away"),
-//                                  qsTr("very far...")
-//                              ]
-//                              )
-//                          )
-//                font.pointSize: 12; color: Style.Typography.QUOTE; Layout.fillWidth: true}
-//            Label{
-//                text: StringFormat.setWordColor(message, Style.Typography.LINK ,/\#\w+/g)
-//                Layout.fillWidth: true
-//                Layout.fillHeight: true
-//                wrapMode: Text.WordWrap
-//            }
-//        }
-//        ColumnLayout{
-//            width: 64
-//            Label{visible:expiration!=="None";text: "30d left"; horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.LINK ;Layout.fillWidth: true}
-//            Label{text: qsTr("%1<br>takes").arg(takes); horizontalAlignment: Text.AlignRight; font.pointSize: 12; color: Style.Typography.ACCENT ;Layout.fillWidth: true}
-//        }
-//    }
-
     Rectangle{
-        height: 2
+        height: _RES.s_BORDER
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right

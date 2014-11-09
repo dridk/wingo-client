@@ -33,7 +33,7 @@ Rectangle {
         id: actionBarRowLayout
 //        anchors.rightMargin: 16
         anchors.fill: parent
-        spacing: 8
+        spacing: _RES.s_MARGIN
         Button {
             id: actionButton
             width: childrenRect.width
@@ -99,7 +99,7 @@ Rectangle {
 
             PropertyChanges {
                 target: actionBarAction
-                x:-10
+                x:-_RES.s_BASE_UNIT
             }
         }
     ]

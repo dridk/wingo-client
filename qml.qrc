@@ -41,5 +41,9 @@
         <file>qml/scripts/DateFormat.js</file>
         <file>qml/scripts/Utilities.js</file>
         <file>qml/scripts/DistanceFormat.js</file>
+        <file>qml/common/Layouts/Page.qml</file>
+        <file>qml/lib/ResolutionManagerCahce.qml</file>
+        <file>qml/lib/Scripts/Cache.js</file>
+        <file>qml/lib/Scripts/Helpers.js</file>
     </qresource>
 </RCC>
