@@ -9,9 +9,9 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     qmlRegisterType<Request>("Wingo",1,0,"Request");
     qmlRegisterType<PolygonItem>("Wingo",1,0,"PolygonItem");
-    app.setApplicationName("Wingo - Xu Fu");
+    app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");
-    app.setApplicationVersion("0.1.0-alpha");
+    app.setApplicationVersion("0.1.0 alpha XuFu");
 
 
     QQmlApplicationEngine engine;
