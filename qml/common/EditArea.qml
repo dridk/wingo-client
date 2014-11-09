@@ -12,7 +12,8 @@ Item {
     Rectangle {
         id:container
         width: parent.width
-        height:(txtId.lineCount * 32) + 10
+        height: txtId.contentHeight + txtId.font.pixelSize
+
         color: "white"
         TextEdit {
             id:txtId
@@ -26,7 +27,14 @@ Item {
             verticalAlignment: Text.AlignTop
             horizontalAlignment: Text.AlignLeft
             cursorVisible: true
-            text:"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris commodo dolor sed risus tristique, ac congue velit faucibus. Integer ultrices in sapien scelerisque accumsan. Integer faucibus non velit nec vulputate. Lorem ipsum dolor sit amet turpis duis."
+            text:"Write your note here"
+            selectByMouse: true
+
+            Component.onCompleted: {
+                console.debug("?"+txtId.height)
+                txtId.selectAll()
+            }
+
 
             onTextChanged: {
                // Limit text length
