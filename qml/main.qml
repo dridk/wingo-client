@@ -10,8 +10,8 @@ ApplicationWindow {
     id: app
     visible: true
     //Needed for QtCreator design mode
-    width: 540
-    height: 960
+    width: 720
+    height: 1280
     //-----------
     color: Style.Background.WINDOW
 
@@ -57,16 +57,18 @@ ApplicationWindow {
         intendedScreenWidth: 540
         intendedScreenHeight: 960
 
-        refreshOnResize: true
+//        refreshOnResize: true
 
         /*Preset app-wide sizes
           These are only recalculated one
           */
         //Base point size
         property int s_BASE_UNIT: 8
+
         //Fonts::
         property int s_TEXT_SIZE_MEDIUM: 24
         property int s_TEXT_SIZE_SMALL: 18
+
         //Layouts::
         property int s_MARGIN: 8
         property int s_DOUBLE_MARGIN: 16
@@ -98,7 +100,7 @@ ApplicationWindow {
                              stackView.pop();
                              event.accepted = true;
                          }
-        initialItem: Qt.resolvedUrl("pages/Home.qml")
+        initialItem: Qt.resolvedUrl("pages/Splash.qml")
 
 
         //        initialItem: Rectangle {

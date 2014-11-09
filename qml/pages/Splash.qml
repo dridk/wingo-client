@@ -9,4 +9,9 @@ Rectangle {
     //-----------
     anchors.fill: parent
     color: Style.Palette.CYAN
+    Timer{
+        running: true
+        interval: 1000
+        onTriggered: app.goToPage(app.pages.Home)
+    }
 }

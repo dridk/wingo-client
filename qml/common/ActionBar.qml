@@ -53,6 +53,8 @@ Rectangle {
                 spacing: _RES.s_MARGIN
                 Icon{
                     id: actionBarAction
+                    width: _RES.scale(48)
+                    height: width
                     name: actionBar.actionType + "48"
                     //We will need this in the future
                     //color: Style.Typography.Actionbar[style]
@@ -64,6 +66,8 @@ Rectangle {
                 }
                 Icon{
                     id: actionBarIcon
+                    width: _RES.scale(48)
+                    height: width
                     name: "wingo48"
                     //We will need this in the future
                     //color: Style.Typography.Actionbar[style]

@@ -4,8 +4,8 @@ import "../scripts/AppStyle.js" as Style
 
 
 MouseArea {
-    width: 32
-    height: 32
+//    width: 32
+//    height: 32
 
     property string style: "DEFAULT"
 //    property alias color: buttonBackground.color
