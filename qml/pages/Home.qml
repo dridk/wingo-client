@@ -56,9 +56,10 @@ Page {
             "lat": app.latitude,
             "lon": app.longitude,
             "radius": filterBar.distance,
-            "query": filterBar.search,
             "order": filterBar.sortByDate ? "recent" : "popular"
         }
+        if (filterBar.search !== "")
+                request["query"] = filterBar.search;
 
         notesServerRequest.get(request);
     }
@@ -151,18 +152,28 @@ Page {
             }
         }
 
-        OmniBarWidget.SimpleListItem{
-            text: "Recent notes"
-            onClicked: {
-                filterBar.sortByDate = true
-                filterBar.sortByPopularity = false
-            }
-        }
-        OmniBarWidget.SimpleListItem{
-            text: "Popular notes"
-            onClicked: {
-                filterBar.sortByDate = false
-                filterBar.sortByPopularity = true
+//        OmniBarWidget.SimpleListItem{
+//            text: "Recent notes"
+//            onClicked: {
+//                filterBar.sortByDate = true
+//                filterBar.sortByPopularity = false
+//            }
+//        }
+//        OmniBarWidget.SimpleListItem{
+//            text: "Popular notes"
+//            onClicked: {
+//                filterBar.sortByDate = false
+//                filterBar.sortByPopularity = true
+//            }
+//        }
+        OmniBarWidget.MultiSelectListItem{
+            selected: filterBar.sortByDate? 0 : 1
+            model : ["Recent notes", "Popular notes"]
+            onClick: {
+                console.log(value)
+                filterBar.sortByDate = index === 0;
+                filterBar.sortByPopularity = index === 1;
+                tagRequester.refresh()
             }
         }
 

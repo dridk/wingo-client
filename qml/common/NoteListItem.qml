@@ -80,7 +80,7 @@ Rectangle{
             }
             Item{
                 id: item1
-                width: 64
+                width: _RES.scale(64)
                 Layout.fillWidth: false
                 Label {
                     text: qsTr("%1<br>takes").arg(takes)
