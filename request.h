@@ -5,6 +5,7 @@
 #include <QQuickItem>
 #include <QtNetwork>
 #include <QJsonDocument>
+#include <QHttpMultiPart>
 
 class Request : public QObject
 {
@@ -31,6 +32,7 @@ public slots:
     void deleteResource(const QVariant& data= QVariant());
     void patch(const QVariant& data= QVariant());
 
+    void postImage(const QString&);
 
 
 private slots:

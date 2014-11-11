@@ -1,6 +1,7 @@
 #include "request.h"
 #include <QDebug>
 #include <QNetworkInterface>
+#include <QFileInfo>
 #include "app.h"
 QNetworkAccessManager * Request::mManager = 0;
 
@@ -130,10 +131,58 @@ void Request::patch(const QVariant &data)
 
 }
 
+void Request::postImage(const QString &filename)
+{
+
+    // Open File....
+    QFile *file = new QFile("/home/schutz/test.png");
+    QFileInfo info(file->fileName());
+
+    if (!file->exists()){
+        qDebug()<<"file doesn't exists...";
+        emit error(-1,"ocal file doesn't exists");
+        return;
+    }
+    file->open(QIODevice::ReadOnly);
+
+
+    //Create multipart request
+    QHttpMultiPart *multiPart = new QHttpMultiPart(QHttpMultiPart::FormDataType);
+
+    //Create image part
+    QHttpPart imagePart;
+    imagePart.setHeader(QNetworkRequest::ContentTypeHeader, QString("image/%1").arg(info.suffix()));
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader, QVariant("form-data; name=\"picture\""));
+    imagePart.setBodyDevice(file);
+
+
+    imagePart.setHeader(QNetworkRequest::ContentDispositionHeader,QString( "form-data; name=\"picture\"; filename=\"%1\"").arg(info.fileName()));
+
+    QString boundary = "--"+ QString::number( qrand() * (90000000000) / (RAND_MAX + 1) + 10000000000, 16);
+    multiPart->setBoundary(boundary.toUtf8());
+    multiPart->append(imagePart);
+    file->setParent(multiPart); // we cannot delete the file now, so delete it with the multiPart
+
+
+    QNetworkRequest request(mUrl);
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "multipart/form-data; boundary=" + boundary);
+
+
+    QNetworkReply *reply = mManager->post(request, multiPart);
+    multiPart->setParent(reply);
+
+
+    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
+            SLOT(parseError(QNetworkReply::NetworkError)));
+
+}
+
 void Request::parseFinished()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+    qDebug()<<doc.toJson();
 
     if (doc.object().contains("success")){
 
@@ -169,7 +218,7 @@ void Request::parseError(QNetworkReply::NetworkError err)
 QNetworkRequest Request::makeRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
-    request.setRawHeader("Content-Type","application/json");
+    request.setRawHeader("Content-Type","application/json;charset=UTF-8");
     request.setRawHeader("FROM",App::getDeviceId().toUtf8());
     return request;
 

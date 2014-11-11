@@ -160,6 +160,11 @@ Page {
         anchors.topMargin: _RES.s_QUADRO_MARGIN
         anchors.top: noteEdit.bottom
         anchors.horizontalCenter: parent.horizontalCenter
+        onClicked: {
+            console.debug("POST PICTURE")
+            postPictureRequester.postImage("")
+        }
+
 
         //source: "http://animalia-life.com/data_images/dog/dog4.jpg"
     }
@@ -178,6 +183,11 @@ Page {
         onError: {
             app.showMessage("ERROR " + message)
         }
+    }
+
+    Request {
+        id:postPictureRequester
+        source:"/notes/picture"
     }
 
 

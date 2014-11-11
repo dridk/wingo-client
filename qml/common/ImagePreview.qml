@@ -8,6 +8,7 @@ Item {
     property string source
     //    color: source=="" ? "transparent" : "white"
 //    opacity: area.pressed ? 0.2 : 1
+    signal clicked()
 
 
         Image
@@ -22,6 +23,7 @@ Item {
             MouseArea {
                 id:area
                 anchors.fill: parent
+                onClicked: root.clicked()
 
 
             }
