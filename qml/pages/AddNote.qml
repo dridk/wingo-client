@@ -162,7 +162,7 @@ Page {
         anchors.horizontalCenter: parent.horizontalCenter
         onClicked: {
             console.debug("POST PICTURE")
-            postPictureRequester.postImage("")
+            postPictureRequester.postImage("/home/schutz/test.png")
         }
 
 

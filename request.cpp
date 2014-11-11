@@ -135,7 +135,7 @@ void Request::postImage(const QString &filename)
 {
 
     // Open File....
-    QFile *file = new QFile("/home/schutz/test.png");
+    QFile *file = new QFile(filename);
     QFileInfo info(file->fileName());
 
     if (!file->exists()){
