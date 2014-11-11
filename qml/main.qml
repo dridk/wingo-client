@@ -50,6 +50,8 @@ ApplicationWindow {
 
 
     FontLoader { id: font; name: "Droid Sans" }
+    FontLoader { id: iconFont; name: "Icon Font"; source: "Res/icons/icons.ttf"}
+
 
     ResolutionManagerCahce{
         id: _RES

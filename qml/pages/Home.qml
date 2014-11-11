@@ -118,6 +118,7 @@ Page {
         id: filterBar
         anchors.top: parent.top
         fillHeight: true
+        z: 2
 
         property bool sortByDate: true
         property bool sortByPopularity: false
@@ -152,20 +153,6 @@ Page {
             }
         }
 
-//        OmniBarWidget.SimpleListItem{
-//            text: "Recent notes"
-//            onClicked: {
-//                filterBar.sortByDate = true
-//                filterBar.sortByPopularity = false
-//            }
-//        }
-//        OmniBarWidget.SimpleListItem{
-//            text: "Popular notes"
-//            onClicked: {
-//                filterBar.sortByDate = false
-//                filterBar.sortByPopularity = true
-//            }
-//        }
         OmniBarWidget.MultiSelectListItem{
             selected: filterBar.sortByDate? 0 : 1
             model : ["Recent notes", "Popular notes"]

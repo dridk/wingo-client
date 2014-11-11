@@ -45,5 +45,16 @@
         <file>qml/lib/ResolutionManagerCahce.qml</file>
         <file>qml/lib/Scripts/Cache.js</file>
         <file>qml/lib/Scripts/Helpers.js</file>
+        <file>qml/common/Components/ListItemBase.qml</file>
+        <file>qml/common/Components/TouchSensorArea.qml</file>
+        <file>qml/common/Components/OverlayBackground.qml</file>
+        <file>qml/common/Controls/Button.qml</file>
+        <file>qml/common/Controls/Label.qml</file>
+        <file>qml/common/Controls/Icon.qml</file>
+        <file>qml/Res/icons/icons.ttf</file>
+        <file>qml/pages/Home/OmniBar.qml</file>
+        <file>qml/Res/images/shadow.png</file>
+        <file>qml/common/Components/WidgetItemBase.qml</file>
+        <file>qml/scripts/Icons.js</file>
     </qresource>
 </RCC>

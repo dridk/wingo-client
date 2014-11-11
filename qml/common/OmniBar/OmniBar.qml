@@ -2,10 +2,12 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
 import "../../scripts/AppStyle.js" as Style
+import "../../scripts/Icons.js" as Icon
 import "../../scripts/Utilities.js" as Utilities
-import "../"
+import "../Components" as Components
+import "../Controls" as Widgets
 
-Rectangle {
+Components.WidgetItemBase {
     id: omniBar
     default property alias _contentChildren: filterBarTrayColumn.data
     //Needed for QtCreator design mode
@@ -23,8 +25,6 @@ Rectangle {
     signal expand
     signal contract
 
-    color: Style.Background.VIEW
-
     function toggleTray(){
         if (state == "EXPANDED")  contractTray()
         else expandTray()
@@ -41,14 +41,14 @@ Rectangle {
         contract()
     }
 
-    MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: contractTray()} // Block click throughts
+//    MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: contractTray()} // Block click throughts
 
     MouseArea{
         id: omniBarSensor
         anchors.rightMargin: _RES.s_MARGIN
         anchors.leftMargin: _RES.s_DOUBLE_MARGIN
         anchors.fill: parent
-        Label{
+        Widgets.Label{
             id: omniBarSensorLabel
             anchors.verticalCenter: parent.verticalCenter
             Behavior on color {ColorAnimation {}}
@@ -57,9 +57,9 @@ Rectangle {
             anchors.left: parent.left
             elide: Text.ElideRight
         }
-        Icon{
+        Widgets.Icon{
             id: omniBarSensorIcon
-            name: "expand48"
+            name: Icon.CARRET_DOWN
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             Behavior on rotation {NumberAnimation{}}
@@ -67,32 +67,16 @@ Rectangle {
         onClicked: toggleTray()
     }
 
-    Rectangle{
-        height: 2
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        color: Style.Border.DEFAULT
-    }
-
     //Page shadowing effect
-    Rectangle
-    {
+    Components.OverlayBackground{
         id: overlay
-        color: Style.Background.OVERLAY
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.bottom
         height: app.height - ( omniBar.y + omniBar.height )
-        opacity: 0
-        Behavior on opacity {NumberAnimation{}}
-        MouseArea{
-            anchors.fill: parent
-            enabled: parent.opacity === 1
-        }
     }
 
-    Rectangle{
+    Components.WidgetItemBase{
         id: omniBarTray
         anchors.left: parent.left
         anchors.right: parent.right
@@ -146,7 +130,7 @@ Rectangle {
 
             PropertyChanges {
                 target: overlay
-                opacity: 1
+                enabled: true
             }
 
             PropertyChanges {

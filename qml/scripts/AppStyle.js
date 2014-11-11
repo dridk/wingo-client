@@ -41,6 +41,7 @@ var Background = {
         Button: {
             DEFAULT: Palette.NONE,
             DISABLED: Palette.SILVER,
+            PRESSED: Qt.rgba(0, 0, 0, 0.5),
             ACTION: Palette.DEEPSEA,
             ACCENT: Palette.YELLOW,
             SUNKEN: Palette.SILVER
@@ -89,3 +90,4 @@ var PAGE_DEFAULT = "DEFAULT",
     PAGE_SPECIAL = "SPECIAL",
     ACTION_BAR_MENU_ACTION = "menu",
     ACTION_BAR_BACK_ACTION = "back"
+
