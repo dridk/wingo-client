@@ -1,9 +1,10 @@
 import QtQuick 2.0
 
 import "../../scripts/AppStyle.js" as Style
-import "../"
+import "../Components" as Components
+import "../Controls" as Widgets
 
-Button{
+Components.TouchSensorArea{
     id: listItem
     default property alias _contentChildren: listItemRow.data
     //Needed for QtCreator design mode
@@ -16,33 +17,29 @@ Button{
     property alias text: listItemLabel.text
     property alias icon: listItemIcon.name
 
-    Row{
-        id: listItemRow
-        spacing: _RES.s_BASE_UNIT
-        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
-        anchors.leftMargin: _RES.s_DOUBLE_MARGIN
+    Components.ListItemBase {
         anchors.fill: parent
 
-        Icon {
-            id: listItemIcon
-            name: ""
-            anchors.verticalCenter: parent.verticalCenter
-            visible: name !== ""
+        Row{
+            id: listItemRow
+            spacing: _RES.s_BASE_UNIT
+            anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+            anchors.leftMargin: _RES.s_DOUBLE_MARGIN
+            anchors.fill: parent
+
+            Widgets.Icon {
+                id: listItemIcon
+                name: ""
+                anchors.verticalCenter: parent.verticalCenter
+                visible: name !== ""
+            }
+
+            Widgets.Label{
+                id: listItemLabel
+                text: "test"
+                anchors.verticalCenter: parent.verticalCenter
+            }
+
         }
-
-        Label{
-            id: listItemLabel
-            text: "test"
-            anchors.verticalCenter: parent.verticalCenter
-        }
-
-    }
-
-    Rectangle{
-        height: _RES.s_BORDER
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        color: Style.Border.DEFAULT
     }
 }

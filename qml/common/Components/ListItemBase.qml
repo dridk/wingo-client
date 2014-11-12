@@ -3,7 +3,6 @@ import "../../scripts/AppStyle.js" as Style
 
 
 Item {
-    anchors.fill: parent
     Rectangle{
         height: _RES.s_BORDER
         anchors.bottom: parent.bottom

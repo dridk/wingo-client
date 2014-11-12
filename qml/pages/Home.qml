@@ -3,6 +3,8 @@ import QtQuick.Layouts 1.1
 import Wingo 1.0
 
 import "../scripts/AppStyle.js" as Style
+import "../scripts/Utilities.js" as Utilities
+import "../scripts/DistanceFormat.js" as DistanceFormat
 import "../common/OmniBar" as OmniBarWidget
 import "../common/SideBar" as SideBarWidget
 import "../common"
@@ -122,14 +124,14 @@ Page {
 
         property bool sortByDate: true
         property bool sortByPopularity: false
-        property int distance: 1000
+        property double distance: 1000
         property string search: ""
 
         function filterBarSensorLabelText(){
             var t = "";
             if (sortByDate) {t = "Recent"}
             else if (sortByPopularity) {t = "Popular"}
-            t += " in " + distance + "m radius"
+            t += " " + DistanceFormat.format(distance, DistanceFormat.METER, ["right here", "m around", "km around", "far-far away"])
             return t
         }
 
@@ -165,12 +167,13 @@ Page {
         }
 
         OmniBarWidget.MultiSelectListItem{
-            selected: filterBar.distance
-            model : app.config === undefined ? 0 : app.config.allowed_radius
+            selected: app.config.allowed_radius.indexOf(filterBar.distance)
+            model : app.config === undefined ? 0 : Utilities.applyFunction(app.config.allowed_radius, function(v,i){
+                return DistanceFormat.format(v, DistanceFormat.METER);
+            })
             onClick: {
-                console.log(value)
-                filterBar.distance = value
-                tagRequester.refresh()
+                filterBar.distance = app.config.allowed_radius[index];
+                tagRequester.refresh();
             }
         }
 

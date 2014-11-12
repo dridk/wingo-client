@@ -78,3 +78,19 @@ function getGlobalCoordinates(el) {
     var root = findRoot(el);
     return el.mapToItem(root, 0, 0);
 }
+
+function forEach(array, fn){
+    if (!isArray(array) || !isFunction(fn)) return array;
+    for (var i = 0; i < array.length; i++){
+        fn (array[i], i);
+    }
+}
+
+function applyFunction(array, fn) {
+    if (!isArray(array) || !isFunction(fn)) return array;
+    var _arr = copyArray(array);
+    forEach(_arr, function(v,i){
+        _arr[i] = fn(array[i], i);
+    });
+    return _arr;
+}

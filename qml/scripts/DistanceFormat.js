@@ -7,6 +7,7 @@ var KM = 1;
 var METER = KM / 1000;
 var CM = METER / 100;
 var FAR = 100;
+var DEFAULT_DICTIONARY = ["here", "m", "km", "very far"];
 
 function pointObject(lat, lon) {
     return {
@@ -29,11 +30,25 @@ function getDistanceBetween(p1, p2) {
     return d;
 }
 
-function toHere(here, there, dict) {
-    var distance = getDistanceBetween(here, there);
-    if (distance === null) return null;
+function convert (value, from, to) {
+    if (from === KM)
+        return value / to;
+    else if (from === METER && to === KM )
+        return value * METER;
+    else if (from === METER && to === CM )
+        return value * 100;
+    else if (from === CM && to === KM )
+        return value * CM;
+    else if (from === CM && to === METER )
+        return value / 100;
 
-    dict = dict || ["here", "m", "km", "very far"];
+    return value;
+}
+
+function format( distance, units, dict) {
+    dict = dict || DEFAULT_DICTIONARY;
+    units = units || KM;
+    distance = units === KM ? distance : convert(distance, units, KM);
 
     if (distance < METER * 5) { // less then 5meters is here
         return dict[0];
@@ -45,3 +60,10 @@ function toHere(here, there, dict) {
         return dict[3]
     }
 }
+
+function toHere(here, there, dict) {
+    var distance = getDistanceBetween(here, there);
+    if (distance === null) return null;
+    return format(distance, KM, dict);
+}
+
