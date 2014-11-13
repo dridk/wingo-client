@@ -14,7 +14,7 @@ Item {
         id: glyph
         color: Style.Icon.DEFAULT
         lineHeight: 1
-        font.family: "Icon Font"
+        font.family: "wingo"
         font.pixelSize: parent.width
         textFormat: Text.PlainText
         verticalAlignment: Text.AlignVCenter

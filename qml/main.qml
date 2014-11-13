@@ -28,9 +28,9 @@ ApplicationWindow {
 
 
     property variant pages: {
-//        "Home": Qt.resolvedUrl("pages/HomeOld.qml"),
+        //        "Home": Qt.resolvedUrl("pages/HomeOld.qml"),
         "Home": Qt.resolvedUrl("pages/Home.qml"),
-        "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
+                "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
     }
     function goBack(){
         stack.pop()
@@ -51,7 +51,8 @@ ApplicationWindow {
 
 
     FontLoader { id: font; name: "Droid Sans" }
-    FontLoader { id: iconFont; name: "Icon Font"; source: "Res/icons/icons.ttf"}
+    //cpp loaded
+    //FontLoader { id: iconFont; name: "Icon Font"; source: "Res/icons/icons.ttf"}
 
 
     ResolutionManagerCahce{
@@ -188,9 +189,9 @@ ApplicationWindow {
         active: Qt.platform.os == "android" ? true : false
         onPositionChanged: {
             if ( Qt.platform.os == "android") {
-            var coord = gpsSource.position.coordinate;
-            app.longitude = coord.longitude;
-            app.latitude = coord.latitude;
+                var coord = gpsSource.position.coordinate;
+                app.longitude = coord.longitude;
+                app.latitude = coord.latitude;
             }
 
             //            console.debug(coord.longitude +" " +coord.latitude )
