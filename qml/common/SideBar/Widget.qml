@@ -64,8 +64,6 @@ Item {
 
     }
     
-    
-    
     states: [
         State {
             name: "EXPANDED"

@@ -16,15 +16,16 @@ Rectangle {
     anchors.top: parent.top
 
     property string style: Style.PAGE_DEFAULT
+    signal click
 
     color: Style.Background.Actionbar[actionBar.style]
 
     RowLayout{
         id: actionBarRowLayout
         anchors.fill: parent
-        spacing: 8
-
+        spacing: _RES.s_MARGIN
     }
+
     states: [
         State {
             name: "DISABLED"

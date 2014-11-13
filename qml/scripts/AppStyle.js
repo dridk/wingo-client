@@ -36,12 +36,18 @@ var Background = {
             DEFAULT: Palette.CYAN,
             ALTERNATIVE: Palette.MAGENTA,
             UTILITY: Palette.GRAY,
-            SPECIAL: Palette.NIGHTSKY
+            SPECIAL: Palette.NIGHTSKY,
+            Action: {
+                DEFAULT: Palette.YELLOW,
+                ALTERNATIVE: Palette.SUNRISE,
+                UTILITY: Palette.SILVER,
+                SPECIAL: Palette.AZURES,
+            }
         },
         Button: {
             DEFAULT: Palette.NONE,
             DISABLED: Palette.SILVER,
-            PRESSED: Qt.rgba(0, 0, 0, 0.5),
+            PRESSED: Qt.rgba(0, 0, 0, 0.3),
             ACTION: Palette.DEEPSEA,
             ACCENT: Palette.YELLOW,
             SUNKEN: Palette.SILVER
@@ -79,7 +85,20 @@ var Background = {
             ACCENT: Palette.WHITE
         }
     },
-    Element = {
+    Icon = {
+        DEFAULT: Palette.BLACK,
+        ACTION: Palette.WHITE,
+        ACCENT: Palette.CYAN,
+        FADE: Palette.GRAY,
+        SUNKEN: Palette.SILVER,
+        Actionbar: {
+            DEFAULT: Palette.WHITE,
+            ALTERNATIVE: Palette.WHITE,
+            UTILITY: Palette.WHITE,
+            SPECIAL: Palette.WHITE
+        }
+    },
+    Elements = {
 
     };
 

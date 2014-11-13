@@ -17,75 +17,81 @@ Rectangle
 
     property int backgroundAnimationDuration: 500
 
-    property Component header: Item{}
-    property Component footer: Item{}
+//    property Component header: Item{}
+//    property Component footer: Item{}
 
-    property alias pageInteractionTracking: pageClickSensor.enabled
-    property alias containsMouse: pageClickSensor.containsMouse
-    property alias pressed: pageClickSensor.pressed
+//    property alias pageInteractionTracking: pageClickSensor.enabled
+//    property alias containsMouse: pageClickSensor.containsMouse
+//    property alias pressed: pageClickSensor.pressed
 
     signal pageInteraction (variant mouse)
 
     //Main Page structure
-    Loader
-    {
-        //Placeholder for the footer element
-        //Not every page has it
-        id: pageHeader
-        sourceComponent: header
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.top: parent.top
-    }
+//    Loader
+//    {
+//        //Placeholder for the footer element
+//        //Not every page has it
+//        id: pageHeader
+//        z: 2
+//        sourceComponent: header
+//        anchors.right: parent.right
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//    }
 
     Item
     {
         //Page content
         id: pageContent
-        anchors.top: _header.bottom
-        anchors.bottom: _footer.top
-        anchors.right: parent.right
-        anchors.left: parent.left
+//        z: 0
+        anchors.fill: parent
+//        anchors.top: parent.bottom
+//        anchors.bottom: parent.top
+//        anchors.right: parent.right
+//        anchors.left: parent.left
     }
 
-    Loader
-    {
-        //Placeholder for the footer element
-        //Not every page has it
-        id: pageFooter
-        sourceComponent: footer
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-    }
+//    Loader
+//    {
+//        //Placeholder for the footer element
+//        //Not every page has it
+//        id: pageFooter
+//        z: 1
+//        sourceComponent: footer
+//        anchors.right: parent.right
+//        anchors.left: parent.left
+//        anchors.bottom: parent.bottom
+//    }
 
     //Page shadowing effect
-    Rectangle
-    {
-        id: pageOverlay
-        color: Style.Background.OVERLAY
-        anchors.fill: parent
-        opacity: 0
-        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
-    }
+//    Rectangle
+//    {
+//        id: pageOverlay
+//        color: Style.Background.OVERLAY
+//        anchors.fill: parent
+//        opacity: 0
+//        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
+//    }
 
     //Page click sensor
     //Used to detect onClickOutside events
-    MouseArea{
-        id: pageClickSensor
-        anchors.fill: parent
-        propagateComposedEvents: true
-        onClicked: pageInteraction (mouse)
-    }
+//    MouseArea{
+//        id: pageClickSensor
+//        z: 1
+//        anchors.fill: parent
+//        propagateComposedEvents: true
+//        onClicked: pageInteraction (mouse)
+//    }
 
-    states: [
-        State {
-            name: "DISABLED"
-            when: !page.enabled
-            PropertyChanges {
-                target: overlay
-                opacity: 1
-            }
-        }
-    ]
+//    states: [
+//        State {
+//            name: "DISABLED"
+//            when: !page.enabled
+
+//            PropertyChanges {
+//                target: pageOverlay
+//                opacity: 1
+//            }
+//        }
+//    ]
 }

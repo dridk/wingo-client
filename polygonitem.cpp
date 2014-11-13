@@ -5,7 +5,7 @@
 
 QQuickPen::QQuickPen(QObject *parent)
 {
-    mWidth = 1;
+    mWidth = 0;
     mColor = Qt::black;
 
 }
@@ -63,7 +63,7 @@ void PolygonItem::paint(QPainter *painter)
 
     QPen pen;
     pen.setWidth(mBorder->width());
-    pen.setColor(mBorder->color());
+    pen.setColor(mBorder->width()? mBorder->color() : color());
     painter->setPen(pen);
     painter->setBrush(QBrush(color()));
     painter->drawPolygon(mPoly);

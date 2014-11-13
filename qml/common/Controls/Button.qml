@@ -4,7 +4,7 @@ import "../Components"
 
 TouchSensorArea {
     id: button
-    width: rectangle1.width
+    width: buttonContents.width
     height: 48
 
     property string style: "DEFAULT"
@@ -12,7 +12,7 @@ TouchSensorArea {
     property alias text: buttonText.text
 
     Rectangle {
-        id: rectangle1
+        id: buttonContents
         width: childrenRect.width + 16
         height: parent.height
         color: Style.Background.Button[button.style]

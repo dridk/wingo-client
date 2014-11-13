@@ -2,7 +2,7 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
-import "../common/OmniBar" as OmniBarWidget
+import "../common/OmniBar" as OmniBar
 import "../common/Controls" as Widgets
 
 import "../common"
@@ -61,7 +61,7 @@ Page {
         }
     }
 
-    OmniBarWidget.OmniBar{
+    OmniBar.Widget{
         id: noteProperties
         property bool postAnonimous: false
         property int expiery: -1
@@ -90,18 +90,18 @@ Page {
 
         Component.onCompleted: text = composeText()
 
-        OmniBarWidget.MultiSelectListItem{
+        OmniBar.MultiSelectListItem{
             id: notePropertiesIdentityWidget
             model: ["Post as yourself", "Post as Anonimous"]
             selected: 0
             onClick: noteProperties.updateValues()
         }
 
-        OmniBarWidget.SectionHeader{
+        OmniBar.SectionHeader{
             text: "Note expiery"
         }
 
-        OmniBarWidget.SimpleListItem{
+        OmniBar.SimpleListItem{
             text: "Never expire"
             Widgets.Checkmark{
                 id: widgetNeverExpire
@@ -113,7 +113,7 @@ Page {
             onClicked: widgetNeverExpire.toggle()
         }
 
-        OmniBarWidget.MultiSelectListItem{
+        OmniBar.MultiSelectListItem{
             id: notePropertiesExpieryWidget
             model: ["1day", "5day", "15day", "1Mo", "6Mo", "1Yr", "3Yr"]
             selected: -1
@@ -121,11 +121,11 @@ Page {
             onSelectedChanged: noteProperties.updateValues()
         }
 
-        OmniBarWidget.SectionHeader{
+        OmniBar.SectionHeader{
             text: "Allowed Takes"
         }
 
-        OmniBarWidget.SimpleListItem{
+        OmniBar.SimpleListItem{
             text: "Unlimited"
             Widgets.Checkmark{
                 id: widgetUnlimitedTakes
@@ -137,7 +137,7 @@ Page {
             onClicked: widgetUnlimitedTakes.toggle()
         }
 
-        OmniBarWidget.MultiSelectListItem{
+        OmniBar.MultiSelectListItem{
             id: notePropertiesLimitWidget
             model: ["5", "10", "15", "30", "80", "100", "300"]
             selected: -1

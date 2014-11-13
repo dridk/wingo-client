@@ -12,7 +12,7 @@
         <file>qml/common/ListItem.qml</file>
         <file>qml/common/Label.qml</file>
         <file>qml/pages/Splash.qml</file>
-        <file>qml/pages/Home.qml</file>
+        <file>qml/pages/HomeOld.qml</file>
         <file>qml/pages/AddNote.qml</file>
         <file>qml/common/IconRow.qml</file>
         <file>qml/Res/icons/menu48.png</file>
@@ -27,7 +27,7 @@
         <file>qml/common/EditArea.qml</file>
         <file>qml/common/NoteListItem.qml</file>
         <file>qml/Res/icons/post48.png</file>
-        <file>qml/common/OmniBar/OmniBar.qml</file>
+        <file>qml/common/OmniBar/Widget.qml</file>
         <file>qml/common/OmniBar/SimpleListItem.qml</file>
         <file>qml/common/OmniBar/MultiSelectListItem.qml</file>
         <file>qml/common/OmniBar/TagListView.qml</file>
@@ -36,7 +36,7 @@
         <file>qml/common/TextBox.qml</file>
         <file>qml/scripts/StringFormat.js</file>
         <file>qml/scripts/NumberFormat.js</file>
-        <file>qml/common/SideBar/SideBar.qml</file>
+        <file>qml/common/SideBar/Widget.qml</file>
         <file>qml/common/Controls/Checkmark.qml</file>
         <file>qml/scripts/DateFormat.js</file>
         <file>qml/scripts/Utilities.js</file>
@@ -56,5 +56,16 @@
         <file>qml/Res/images/shadow.png</file>
         <file>qml/common/Components/WidgetItemBase.qml</file>
         <file>qml/scripts/Icons.js</file>
+        <file>qml/common/Components/Trapezoid.qml</file>
+        <file>qml/common/SideBar/SectionHeader.qml</file>
+        <file>qml/common/SideBar/SimpleListItem.qml</file>
+        <file>qml/common/ActionBar/Widget.qml</file>
+        <file>qml/common/ActionBar/Title.qml</file>
+        <file>qml/common/ActionBar/Button.qml</file>
+        <file>qml/common/ActionBar/Action.qml</file>
+        <file>qml/pages/Home.qml</file>
+        <file>qml/pages/Home/AppMenu.qml</file>
+        <file>qml/common/Controls/EntryBox.qml</file>
+        <file>qml/common/Layouts/NoteListItem.qml</file>
     </qresource>
 </RCC>

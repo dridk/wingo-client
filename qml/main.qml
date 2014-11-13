@@ -28,8 +28,9 @@ ApplicationWindow {
 
 
     property variant pages: {
+//        "Home": Qt.resolvedUrl("pages/HomeOld.qml"),
         "Home": Qt.resolvedUrl("pages/Home.qml"),
-                "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
+        "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
     }
     function goBack(){
         stack.pop()
@@ -84,6 +85,8 @@ ApplicationWindow {
         property int s_LIST_ITEM_DOUBLE_HEIGHT: 96
 
         property int s_ICON_SIZE: 48
+        property int s_ICON_SIZE_SMALL: 32
+        property int s_ICON_SIZE_MINI: 24
 
         //Special cases::
         property int s_NOTE_LIST_MIN_HEIGHT: 96

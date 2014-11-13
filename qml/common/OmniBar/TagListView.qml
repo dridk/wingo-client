@@ -1,7 +1,8 @@
 import QtQuick 2.0
 
 import "../../scripts/AppStyle.js" as Style
-import "../"
+import "../Components" as Components
+import "../Controls" as Widgets
 
 Column {
     id: tagListView
@@ -20,40 +21,35 @@ Column {
         id: tagListViewRepeater
         anchors.left: parent.left
         anchors.right: parent.right
-        delegate: Button {
+        delegate: Components.TouchSensorArea {
             height: _RES.s_LIST_ITEM_HEIGHT
             anchors.left: tagListView.left
             anchors.right: tagListView.right
 
-            Row{
+            Components.ListItemBase {
                 anchors.fill: parent
-                anchors.leftMargin: _RES.s_DOUBLE_MARGIN
-                anchors.rightMargin: _RES.s_DOUBLE_MARGIN
-                spacing: _RES.s_BASE_UNIT
+                Row{
+                    anchors.fill: parent
+                    anchors.leftMargin: _RES.s_DOUBLE_MARGIN
+                    anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+                    spacing: _RES.s_BASE_UNIT
 
-                Label{
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: name
-                    color: Style.Typography.LINK
+                    Widgets.Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: name
+                        color: Style.Typography.LINK
+                    }
+
+                    Widgets.Label{
+                        anchors.verticalCenter: parent.verticalCenter
+                        text: " - " + count
+                        color: Style.Typography.ACCENT
+                    }
+
                 }
-
-                Label{
-                    anchors.verticalCenter: parent.verticalCenter
-                    text: " - " + count
-                    color: Style.Typography.ACCENT
-                }
-
             }
 
             onClicked: tagListView.click (index, name)
-
-            Rectangle{
-                height: _RES.s_BORDER
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-                color: Style.Border.DEFAULT
-            }
         }
     }
 }
