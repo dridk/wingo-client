@@ -11,6 +11,13 @@ class PainterItem : public QQuickPaintedItem
 public:
     explicit PainterItem(QQuickItem *parent = 0);
 
+    void setPenSize(int w);
+    void setPenColor(const QColor& color);
+
+
+signals:
+    void penChanged();
+
 protected:
     virtual void paint(QPainter * painter);
     void mousePressEvent(QMouseEvent * event);

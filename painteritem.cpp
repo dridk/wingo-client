@@ -4,8 +4,25 @@ PainterItem::PainterItem(QQuickItem *parent) :
     QQuickPaintedItem(parent)
 {
 
-setAcceptedMouseButtons(Qt::LeftButton);
+    setAcceptedMouseButtons(Qt::LeftButton);
 }
+
+void PainterItem::setPenSize(int w)
+{
+    mPen.setWidth(w);
+    emit penChanged();
+
+
+}
+
+void PainterItem::setPenColor(const QColor &color)
+{
+
+    mPen.setColor(color);
+    emit penChanged();
+
+}
+
 
 void PainterItem::paint(QPainter *painter)
 {
