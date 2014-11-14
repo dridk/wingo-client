@@ -68,5 +68,6 @@
         <file>qml/common/Controls/EntryBox.qml</file>
         <file>qml/common/Layouts/NoteListItem.qml</file>
         <file>qml/common/Controls/Badge.qml</file>
+        <file>qml/Res/images/anonymous.png</file>
     </qresource>
 </RCC>

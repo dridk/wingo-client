@@ -87,10 +87,11 @@ Componenets.WidgetItemBase{
                 Layout.fillWidth: false
                 Layout.fillHeight: true
                 ColumnLayout{
-                    Rectangle {
+                    Image {
                         width: _RES.scale(64)
                         height: width
-                        color: "silver"
+//                        color: "silver"
+                        source: status == Image.Ready ? author.avatar :"qrc:/qml/Res/images/anonymous.png"
                     }
 
                     Widgets.Label {
