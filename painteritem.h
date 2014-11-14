@@ -8,6 +8,8 @@
 class PainterItem : public QQuickPaintedItem
 {
     Q_OBJECT
+    Q_PROPERTY(QColor penColor WRITE setPenColor NOTIFY penChanged)
+
 public:
     explicit PainterItem(QQuickItem *parent = 0);
 
@@ -29,6 +31,10 @@ private:
     QColor mColor;
     QPen mPen;
     QPainterPath mPath;
+    QPixmap mCachePixmap;
+    QPainter mCachePainter;
+    QPoint mPenPos;
+
 
 
 };

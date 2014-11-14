@@ -38,7 +38,9 @@ Page {
 
             }
 
+
             ListView {
+                id:colorView
                 orientation: Qt.Horizontal
                 anchors.fill: parent
                 model:colorModel
@@ -46,12 +48,19 @@ Page {
                     width : parent.height
                     height: parent.height
                     color :colorName
+                    border.color:  ListView.isCurrentItem ? "black" : "transparent"
+                    border.width: 2
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: colorView.currentIndex = index
+                    }
                 }
             }
         }
         PainterItem {
             width : parent.width
             height : parent.width
+            penColor:colorModel.get(colorView.currentIndex).colorName
         }
     }
 
