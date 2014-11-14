@@ -15,7 +15,6 @@ SideBar.Widget {
         icon: Icons.LOGO
         onClicked: {
             appMenu.contractTray();
-            page.actionBarMenu = false;
             app.goToPage(app.pages["AddNote"]);
         }
     }

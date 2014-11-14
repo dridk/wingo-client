@@ -67,5 +67,6 @@
         <file>qml/pages/Home/AppMenu.qml</file>
         <file>qml/common/Controls/EntryBox.qml</file>
         <file>qml/common/Layouts/NoteListItem.qml</file>
+        <file>qml/common/Controls/Badge.qml</file>
     </qresource>
 </RCC>

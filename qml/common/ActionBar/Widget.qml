@@ -9,7 +9,7 @@ Rectangle {
 
     //Needed for QtCreator design mode
     width: 540
-    height: 96
+    height: _RES.s_ACTION_BAR_HEIGHT
     //-----------
     anchors.left: parent.left
     anchors.right: parent.right

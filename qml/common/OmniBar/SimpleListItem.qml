@@ -30,8 +30,8 @@ Components.TouchSensorArea{
             Widgets.Icon {
                 id: listItemIcon
                 name: ""
-                anchors.verticalCenter: parent.verticalCenter
                 visible: name !== ""
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             Widgets.Label{
@@ -39,7 +39,6 @@ Components.TouchSensorArea{
                 text: "test"
                 anchors.verticalCenter: parent.verticalCenter
             }
-
         }
     }
 }

@@ -65,7 +65,7 @@ Componenets.WidgetItemBase{
                 font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.QUOTE; Layout.fillWidth: true
             }
             Widgets.Label{
-                visible:expiration!=="None"
+//                visible:expiration!=="None"
                 text: "30d left"
                 horizontalAlignment: Text.AlignRight
                 font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.LINK ;Layout.fillWidth: false
@@ -85,11 +85,19 @@ Componenets.WidgetItemBase{
             Item{
                 width: _RES.scale(64)
                 Layout.fillWidth: false
-                Widgets.Label {
-                    text: qsTr("%1<br>takes").arg(takes)
-                    anchors.verticalCenter: parent.verticalCenter
-                    anchors.right: parent.right
-                    horizontalAlignment: Text.AlignRight; font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.ACCENT
+                Layout.fillHeight: true
+                ColumnLayout{
+                    Rectangle {
+                        width: _RES.scale(64)
+                        height: width
+                        color: "silver"
+                    }
+
+                    Widgets.Label {
+                        text: qsTr("%1<br>takes").arg(takes)
+                        anchors.right: parent.right
+                        horizontalAlignment: Text.AlignRight; font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.ACCENT
+                    }
                 }
             }
         }

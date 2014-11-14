@@ -10,8 +10,8 @@ ApplicationWindow {
     id: app
     visible: true
     //Needed for QtCreator design mode
-    width: 540
-    height: 960
+    width: 238
+    height: 428
     //-----------
     color: Style.Background.WINDOW
 
@@ -50,7 +50,7 @@ ApplicationWindow {
     }
 
 
-    FontLoader { id: font; name: "Droid Sans" }
+//    FontLoader { id: font; name: "Droid Sans" }
     //cpp loaded
     //FontLoader { id: iconFont; name: "Icon Font"; source: "Res/icons/icons.ttf"}
 
@@ -70,8 +70,8 @@ ApplicationWindow {
         property int s_BASE_UNIT: 8
 
         //Fonts::
-        property int s_TEXT_SIZE_MEDIUM: 24
-        property int s_TEXT_SIZE_SMALL: 18
+        property int s_TEXT_SIZE_MEDIUM: 20
+        property int s_TEXT_SIZE_SMALL: 14
 
         //Layouts::
         property int s_MARGIN: 8
@@ -91,8 +91,8 @@ ApplicationWindow {
 
         //Special cases::
         property int s_NOTE_LIST_MIN_HEIGHT: 96
-        property int s_ACTION_BAR_HEIGHT: 96
-        property int s_OMNI_BAR_HEIGHT: 64
+        property int s_ACTION_BAR_HEIGHT: 82
+        property int s_OMNI_BAR_HEIGHT: 56
         property int s_IMAGE_PREVIEWS_SIZE: 210
     }
 
@@ -200,7 +200,9 @@ ApplicationWindow {
 
 
     Text {
+        anchors.bottom: parent.bottom
         text: wingo.getDeviceId() + "\n" + configRequester.host+":"+configRequester.port+"\n pos:" + app.latitude +" , "+app.longitude
+        opacity: 0.4
     }
 
 

@@ -34,7 +34,6 @@ Layouts.Page {
             console.log( data.results.length )
             notesListModel.clear()
             notesListModel.append(data.results)
-
         }
         onError: {
             console.debug(message)

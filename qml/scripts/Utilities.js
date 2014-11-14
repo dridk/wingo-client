@@ -11,6 +11,11 @@ function containsNumber(v) {
     return v.replace(/\D/g,'') !== "";
 }
 
+function number(v) {
+    if (!containsNumber(v)) return false;
+    return v.replace(/\D/g,'') * 1;
+}
+
 function isString(v) {
     return typeof v === "string"
 }
