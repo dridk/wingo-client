@@ -20,4 +20,5 @@ REFRESH = "\uF10E",
 REMOVE = "\uF114",
 SANDWICH = "\uF109",
 SEARCH = "\uF10A",
-TRASH = "\uF115";
+TRASH = "\uF115",
+PEN =  "\uF112";

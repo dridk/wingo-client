@@ -2,6 +2,7 @@ import QtQuick 2.3
 import QtQuick.Layouts 1.1
 
 import "../scripts/AppStyle.js" as Style
+import "../scripts/Icons.js" as Icons
 import "../common/OmniBar" as OmniBar
 import "../common/Controls" as Widgets
 
@@ -22,6 +23,15 @@ Page {
             width: parent.width
             height: 60
             color: "lightgray"
+
+
+                Widgets.Icon {
+                    name: Icons.PEN
+
+                    Button {
+                        anchors.fill: parent
+                    }
+            }
         }
 
         Rectangle {
