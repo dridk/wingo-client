@@ -5,7 +5,8 @@ QT += qml quick network positioning
 SOURCES += main.cpp \
     app.cpp \
     request.cpp \
-    polygonitem.cpp
+    polygonitem.cpp \
+    painteritem.cpp
 
 RESOURCES += qml.qrc
 
@@ -18,7 +19,8 @@ include(deployment.pri)
 HEADERS += \
     app.h \
     request.h \
-    polygonitem.h
+    polygonitem.h \
+    painteritem.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
