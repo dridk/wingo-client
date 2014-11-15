@@ -52,7 +52,7 @@ var Background = {
             ACCENT: Palette.YELLOW,
             SUNKEN: Palette.SILVER
         },
-        Bage: {
+        Badge: {
             DEFAULT: Palette.WHITE,
             ACCENT: Palette.MAGENTA
         }
@@ -80,7 +80,7 @@ var Background = {
             ACCENT: Palette.BLACK,
             SUNKEN: Palette.BLACK
         },
-        Bage: {
+        Badge: {
             DEFAULT: Palette.DEEPSEA,
             ACCENT: Palette.WHITE
         }
@@ -110,3 +110,14 @@ var PAGE_DEFAULT = "DEFAULT",
     ACTION_BAR_MENU_ACTION = "menu",
     ACTION_BAR_BACK_ACTION = "back"
 
+//Avatar styles
+
+//Callout styles
+var CALLOUT_TOP = 1,
+    CALLOUT_TOP_DOMINANAT = 10,
+    CALLOUT_BOTTOM = 2,
+    CALLOUT_BOTTOM_DOMINANAT = 20,
+    CALLOUT_LEFT = 3,
+    CALLOUT_LEFT_DOMINANAT = 30,
+    CALLOUT_RIGHT = 4,
+    CALLOUT_RIGHT_DOMINANAT = 40;

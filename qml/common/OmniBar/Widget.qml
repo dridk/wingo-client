@@ -114,6 +114,7 @@ Item {
         color: Style.Background.VIEW
         Behavior on height {
             NumberAnimation {
+                easing.type: Easing.InOutQuad
             }
         }
 

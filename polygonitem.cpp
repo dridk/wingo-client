@@ -67,7 +67,7 @@ void PolygonItem::paint(QPainter *painter)
     painter->setPen(pen);
     painter->setBrush(QBrush(color()));
     painter->drawPolygon(mPoly);
-    qDebug()<<"paint";
+//    qDebug()<<"paint";
 
 
 }

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "../../scripts/Icons.js" as Icons
 import "../../scripts/AppStyle.js" as Style
 import "../../scripts/DateFormat.js" as DateFormat
 import "../../scripts/StringFormat.js" as StringFormat
@@ -34,6 +35,7 @@ Componenets.WidgetItemBase{
         RowLayout{
             anchors.right: parent.right
             anchors.left: parent.left
+            anchors.rightMargin: _RES.s_MARGIN
             spacing: _RES.s_BASE_UNIT
 
             Widgets.Label{
@@ -66,7 +68,14 @@ Componenets.WidgetItemBase{
             }
             Widgets.Label{
 //                visible:expiration!=="None"
-                text: "30d left"
+                text: qsTr("%1 left").arg(DateFormat.toNow(new Date("12/12/2014"), [
+                                                               qsTr(""),
+                                                               qsTr("min"),
+                                                               qsTr("h"),
+                                                               qsTr("d"),
+                                                               qsTr("mo"),
+                                                               qsTr("yr")
+                                                           ]))
                 horizontalAlignment: Text.AlignRight
                 font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.LINK ;Layout.fillWidth: false
             }
@@ -83,21 +92,33 @@ Componenets.WidgetItemBase{
                 wrapMode: Text.WordWrap
             }
             Item{
-                width: _RES.scale(64)
-                Layout.fillWidth: false
+                width: _RES.s_ICON_SIZE_BIG
                 Layout.fillHeight: true
-                ColumnLayout{
-                    Image {
-                        width: _RES.scale(64)
-                        height: width
-//                        color: "silver"
-                        source: status == Image.Ready ? author.avatar :"qrc:/qml/Res/images/anonymous.png"
+                Column{
+                    spacing: -_RES.s_MARGIN
+                    Widgets.Avatar {
+                        id: noteAvatar
+                        source: author && author.hasOwnProperty('avatar')? author.avatar :"qrc:/qml/Res/images/anonymous.png"
                     }
 
-                    Widgets.Label {
-                        text: qsTr("%1<br>takes").arg(takes)
-                        anchors.right: parent.right
-                        horizontalAlignment: Text.AlignRight; font.pixelSize: _RES.s_TEXT_SIZE_SMALL; color: Style.Typography.ACCENT
+                    Row{
+                        id: noteTakesRow
+                        spacing: -_RES.s_MARGIN
+                        anchors.right: noteAvatar.right
+                        visible: noteTakesBadge.visible
+                        Widgets.Badge {
+                            id: noteTakesBadge
+                            value: takes
+                            anchors.bottom: noteTakesIcon.bottom
+                            z: 1
+                        }
+                        Widgets.Icon{
+                            id: noteTakesIcon
+                            name: Icons.POCKET
+                            color: Style.Icon.FADE
+                            size: _RES.s_ICON_SIZE_SMALL
+                            z: 0
+                        }
                     }
                 }
             }

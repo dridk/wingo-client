@@ -6,6 +6,7 @@ import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
 import "../common/Layouts" as Layouts
 import "../common/ActionBar" as ActionBar
+import "../common/Controls" as Widgets
 
 import "Home"
 
@@ -50,27 +51,38 @@ Layouts.Page {
                 text: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
                 onClicked: appMenu.toggleTray()
             }
-            ActionBar.Button{
-                icon: Icons.POCKET
-                onClicked: console.log("Pocket")
-            }
-            ActionBar.Button{
-                icon: Icons.REFRESH
-                onClicked: page.refresh()
+            ActionBar.Right{
+                ActionBar.Button{
+                    icon: Icons.POCKET
+                    onClicked: console.log("Pocket")
+                }
+                ActionBar.Button{
+                    icon: Icons.REFRESH
+                    onClicked: page.refresh()
+                }
             }
             onClick: omniBar.contractTray();
         }
+
         OmniBar {
             id: omniBar
             onContract: refresh()
         }
 
-        ListView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            clip: true
+        Layouts.NoteListView {
+            id: noteList
             model: ListModel{id: notesListModel}
-            delegate: Layouts.NoteListItem{}
+            onVerticalMovementUpChanged: if (verticalMovementUp&&!atYEnd) addNoteActionButton.show()
+            onDistancePassed: if(verticalMovementDown) addNoteActionButton.hide()
+            onRefresh: page.refresh()
+        }
+    }
+
+    Widgets.ActionButton{
+        id: addNoteActionButton
+        onClicked: {
+            appMenu.contractTray();
+            app.goToPage(app.pages["AddNote"]);
         }
     }
 

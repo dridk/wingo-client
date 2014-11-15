@@ -5,7 +5,7 @@ import "../Components"
 TouchSensorArea {
     id: button
     width: buttonContents.width
-    height: 48
+    height: _RES.s_ICON_SIZE
 
     property string style: "DEFAULT"
     property alias icon: buttonIcon.name

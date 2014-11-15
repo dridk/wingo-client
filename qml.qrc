@@ -69,5 +69,12 @@
         <file>qml/common/Layouts/NoteListItem.qml</file>
         <file>qml/common/Controls/Badge.qml</file>
         <file>qml/Res/images/anonymous.png</file>
+        <file>qml/common/Controls/ActionButton.qml</file>
+        <file>qml/Res/images/actionButtonShadow.png</file>
+        <file>qml/common/Controls/Avatar.qml</file>
+        <file>qml/common/Components/CalloutRectangle.qml</file>
+        <file>qml/common/ActionBar/Left.qml</file>
+        <file>qml/common/ActionBar/Right.qml</file>
+        <file>qml/common/Layouts/NoteListView.qml</file>
     </qresource>
 </RCC>
