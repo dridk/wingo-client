@@ -24,6 +24,8 @@ Layouts.Page {
         if (omniBar.search !== "")
                 request["query"] = omniBar.search;
 
+        noteList.positionViewAtBeginning()
+        notesListModel.clear()
         notesServerRequest.get(request);
     }
     Component.onCompleted: refresh()
@@ -33,7 +35,6 @@ Layouts.Page {
         source: "/notes"
         onSuccess: {
             console.log( data.results.length )
-            notesListModel.clear()
             notesListModel.append(data.results)
         }
         onError: {
@@ -41,11 +42,11 @@ Layouts.Page {
         }
     }
 
-    ColumnLayout{
+    Item{
         anchors.fill: parent
-        spacing: 0
         ActionBar.Widget {
             id: actionBar
+            anchors.top: parent.top
             ActionBar.Title {
                 icon: Icons.SANDWICH
                 text: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
@@ -62,18 +63,34 @@ Layouts.Page {
                 }
             }
             onClick: omniBar.contractTray();
+
         }
 
         OmniBar {
             id: omniBar
-            onContract: refresh()
+            anchors.top: actionBar.bottom
+            onContract: {addNoteActionButton.show(); refresh()}
+            onExpand: addNoteActionButton.hide()
         }
 
         Layouts.NoteListView {
             id: noteList
+            anchors.top: omniBar.bottom
+            anchors.bottom: parent.bottom
             model: ListModel{id: notesListModel}
-            onVerticalMovementUpChanged: if (verticalMovementUp&&!atYEnd) addNoteActionButton.show()
-            onDistancePassed: if(verticalMovementDown) addNoteActionButton.hide()
+
+            onVerticalMovementUpChanged: {
+                if (verticalMovementUp&&!atYEnd){
+                    omniBar.show();
+                    addNoteActionButton.show()
+                }
+            }
+            onDistancePassed: {
+                if(verticalMovementDown&&!atYBeginning) {
+                    addNoteActionButton.hide();
+                    omniBar.hide();
+                }
+            }
             onRefresh: page.refresh()
         }
     }

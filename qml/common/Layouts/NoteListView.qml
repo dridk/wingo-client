@@ -5,10 +5,12 @@ ListView {
     id: noteList
     Layout.fillWidth: true
     Layout.fillHeight: true
+    anchors.left: parent.left
+    anchors.right: parent.right
     clip: true
     delegate: NoteListItem{}
 
-    property real triggerAnDistance: 50
+    property real triggerAnDistance: height * 0.2
     property int refreshTimeout: 2000
 
     property bool verticalMovementUp: verticalVelocity < 0

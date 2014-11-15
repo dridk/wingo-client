@@ -15,6 +15,8 @@ Rectangle {
     anchors.right: parent.right
     anchors.top: parent.top
 
+    z: 99 //Always on top of page layout
+
     property string style: Style.PAGE_DEFAULT
     signal click
 

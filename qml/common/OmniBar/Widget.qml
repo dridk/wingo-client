@@ -27,6 +27,14 @@ Item {
     signal expand
     signal contract
 
+    function show() {
+        state = ""
+    }
+
+    function hide() {
+        state = "HIDDEN"
+    }
+
     function toggleTray() {
         if (state == "EXPANDED")
             contractTray()
@@ -191,6 +199,24 @@ Item {
                 target: omniBarSensorLabel
                 color: Style.Typography.FADE
             }
+        },
+        State {
+            name: "HIDDEN"
+
+            PropertyChanges {
+                target: omniBar
+                clip: true
+                height: 0
+//                opacity: 0
+            }
+            PropertyChanges {
+                target: omniBarSensor
+                enabled: false
+            }
         }
     ]
+
+    transitions: Transition {
+        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
+    }
 }
