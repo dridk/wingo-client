@@ -18,7 +18,6 @@ Rectangle {
     z: 99 //Always on top of page layout
 
     property string style: Style.PAGE_DEFAULT
-    signal click
 
     color: Style.Background.Actionbar[actionBar.style]
 

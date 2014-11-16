@@ -62,15 +62,12 @@ Layouts.Page {
                     onClicked: page.refresh()
                 }
             }
-            onClick: omniBar.contractTray();
-
         }
 
         OmniBar {
             id: omniBar
             anchors.top: actionBar.bottom
             onContract: {addNoteActionButton.show(); refresh()}
-            onExpand: addNoteActionButton.hide()
         }
 
         Layouts.NoteListView {
@@ -93,13 +90,13 @@ Layouts.Page {
             }
             onRefresh: page.refresh()
         }
-    }
 
-    Widgets.ActionButton{
-        id: addNoteActionButton
-        onClicked: {
-            appMenu.contractTray();
-            app.goToPage(app.pages["AddNote"]);
+        Widgets.ActionButton{
+            id: addNoteActionButton
+            onClicked: {
+                appMenu.contractTray();
+                app.goToPage(app.pages["AddNote"]);
+            }
         }
     }
 

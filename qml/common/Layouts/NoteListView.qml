@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "../Controls" as Widgets
+
 ListView {
     id: noteList
     Layout.fillWidth: true
@@ -16,16 +18,13 @@ ListView {
     property bool verticalMovementUp: verticalVelocity < 0
     property bool verticalMovementDown: verticalVelocity > 0
     property bool contentOverTopBound: contentY < 0
+    property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
 
     boundsBehavior: Flickable.DragOverBounds
 
     property int _contentY0: 0
     onFlickStarted: {_contentY0 = contentY; contentDistanceTraveled = 0}
-    onFlickEnded: {
-        _contentY0 = contentY;
-        if(timeoutTimer.running)timeoutTimer.stop();
-    }
 
     signal distancePassed
     signal refresh
@@ -35,17 +34,21 @@ ListView {
         if(contentDistanceTraveled > triggerAnDistance) distancePassed();
     }
 
-    Timer{
-        id: timeoutTimer
-        interval: parent.refreshTimeout
-        running: false
-        repeat: false
-        triggeredOnStart: false
-        onTriggered: parent.refresh()
-        function toggle(){
-            if (noteList.contentOverTopBound) timeoutTimer.restart();
-        }
+//    add: Transition {
+//            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }
+//        }
 
-        Component.onCompleted: noteList.contentOverTopBoundChanged.connect(toggle)
+    Widgets.TimeoutIndicator {
+        id: timeoutTimer
+        y: noteList.contentOverTopBound? _RES.s_MARGIN : - height
+        anchors.horizontalCenter: parent.horizontalCenter
+        running: noteList.contentOverTopBound
+        timeout: parent.refreshTimeout
+        onTimeoutTriggered: parent.refresh()
+
+        Behavior on y {NumberAnimation{}}
     }
+
+
+
 }

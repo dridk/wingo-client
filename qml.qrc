@@ -76,5 +76,6 @@
         <file>qml/common/ActionBar/Left.qml</file>
         <file>qml/common/ActionBar/Right.qml</file>
         <file>qml/common/Layouts/NoteListView.qml</file>
+        <file>qml/common/Controls/TimeoutIndicator.qml</file>
     </qresource>
 </RCC>
