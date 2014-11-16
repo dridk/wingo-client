@@ -13,6 +13,11 @@ class Request : public QObject
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY (QString host READ host )
     Q_PROPERTY (int port READ port )
+    Q_PROPERTY (bool isLoading READ isLoading NOTIFY isLoadingChanged)
+    Q_PROPERTY (double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged)
+
+
+
 
 public:
     explicit Request(QQuickItem *parent = 0);
@@ -23,6 +28,8 @@ public:
     const QString& source();
      QString host();
     int port() ;
+    bool isLoading();
+    double downloadProgress();
 
 
 public slots:
@@ -31,13 +38,16 @@ public slots:
     void put(const QVariant& data= QVariant());
     void deleteResource(const QVariant& data= QVariant());
     void patch(const QVariant& data= QVariant());
-
     void postImage(const QString&);
 
 
+protected:
+    void connectReply(QNetworkReply * reply);
+    void setLoading(bool enabled);
 private slots:
     void parseFinished();
     void parseError(QNetworkReply::NetworkError err);
+    void setDownloadProgress(qint64 value, qint64 total);
 
 private:
     QNetworkRequest makeRequest(const QUrl& url);
@@ -46,11 +56,15 @@ signals:
     void success(QVariant data);
     void error(int code, QString message);
     void sourceChanged();
+    void isLoadingChanged();
+    void downloadProgressChanged();
 
 private:
     QUrl mUrl;
     QString mSource;
     static QNetworkAccessManager * mManager;
+    bool mIsLoading;
+    double mDownloadProgress;
 
 
 };
