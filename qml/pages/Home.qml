@@ -48,7 +48,19 @@ Layouts.Page {
         onError: {
             console.debug(message)
         }
+
+
     }
+
+// EXAMPLE OF HOW TO USE isLoading and progress property
+    Text {
+        anchors.centerIn: parent
+        z:10
+        font.pixelSize: 40
+        text:"loading : " + notesServerRequest.downloadProgress*100 +"%"
+        visible: notesServerRequest.isLoading
+    }
+// END OF EXAMPLE.. CAN BE REMOVED
 
     Item{
         anchors.fill: parent
@@ -94,6 +106,12 @@ Layouts.Page {
     AppMenu{
         id: appMenu
     }
+
+
+
+
+
+
 
 
 }
