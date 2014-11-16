@@ -13,10 +13,7 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: "New Note"
         icon: Icons.LOGO
-        onClicked: {
-            appMenu.contractTray();
-            app.goToPage(app.pages["AddNote"]);
-        }
+        onClicked: page.goPost()
     }
     SideBar.SimpleListItem{
         text: "My Notes"
@@ -25,6 +22,7 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: "My Pocket"
         icon: Icons.POCKET
+        onClicked: page.goPocket()
     }
     SideBar.SectionHeader{text:"Options"}
     SideBar.SimpleListItem{

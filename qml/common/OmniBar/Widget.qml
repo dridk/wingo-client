@@ -20,6 +20,7 @@ Item {
     property alias text: omniBarSensorLabel.text
     property alias icon: omniBarSensorIcon.name
     property bool animateIconOnexpand: true
+    property color iconBackgroundColor: Style.Background.WINDOW
     property bool expanded: omniBarTray.height > 0
     property bool fillHeight: false
     z: 99
@@ -80,7 +81,7 @@ Item {
                 width: _RES.scale(80)
                 height: parent.height
                 anchors.right: parent.right
-                color: Style.Background.WINDOW
+                color: omniBar.iconBackgroundColor
                 Widgets.Icon {
                     id: omniBarSensorIcon
                     name: Icon.CARRET_DOWN
@@ -216,7 +217,14 @@ Item {
         }
     ]
 
-    transitions: Transition {
+    transitions: [
+        Transition {
+        from: ""; to: "HIDDEN"
+        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
+    },
+        Transition {
+        from: "HIDDEN"; to: ""
         NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
     }
+    ]
 }

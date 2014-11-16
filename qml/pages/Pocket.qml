@@ -6,19 +6,13 @@ import "../scripts/AppStyle.js" as Style
 import "../common/Layouts" as Layouts
 import "../common/Controls" as Widgets
 
-import "Home"
+import "Pocket"
 
 Layouts.Page {
     id: page
 
-    function goPost(){
-        appMenu.contractTray();
-        app.goToPage(app.pages["Post"]);
-    }
-
-    function goPocket(){
-        appMenu.contractTray();
-        app.goToPage(app.pages["Pocket"]);
+    function back(){
+        app.goBack();
     }
 
     function refresh(){
@@ -68,32 +62,22 @@ Layouts.Page {
             id: noteList
             anchors.top: omniBar.bottom
             anchors.bottom: parent.bottom
+            refreshOnPull: false
+
             model: ListModel{id: notesListModel}
 
             onVerticalMovementUpChanged: {
                 if (verticalMovementUp&&!atYEnd){
                     omniBar.show();
-                    addNoteActionButton.show()
                 }
             }
             onDistancePassed: {
                 if(verticalMovementDown&&!atYBeginning) {
-                    addNoteActionButton.hide();
                     omniBar.hide();
                 }
             }
             onRefresh: page.refresh()
         }
-
-        Widgets.ActionButton {
-            id: addNoteActionButton
-            onClicked: page.goPost()
-        }
     }
-
-    AppMenu{
-        id: appMenu
-    }
-
 
 }

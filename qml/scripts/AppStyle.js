@@ -54,6 +54,7 @@ var Background = {
         },
         Badge: {
             DEFAULT: Palette.WHITE,
+            ACTIONBAR: Palette.WHITE,
             ACCENT: Palette.MAGENTA
         }
     },
@@ -82,6 +83,7 @@ var Background = {
         },
         Badge: {
             DEFAULT: Palette.DEEPSEA,
+            ACTIONBAR: Palette.MAGENTA,
             ACCENT: Palette.WHITE
         }
     },
@@ -95,7 +97,13 @@ var Background = {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
             UTILITY: Palette.WHITE,
-            SPECIAL: Palette.WHITE
+            SPECIAL: Palette.WHITE,
+            Action: {
+                DEFAULT: Palette.BLACK,
+                ALTERNATIVE: Palette.WHITE,
+                UTILITY: Palette.BLACK,
+                SPECIAL: Palette.WHITE,
+            }
         }
     },
     Elements = {

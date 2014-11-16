@@ -10,9 +10,11 @@ ListView {
     anchors.left: parent.left
     anchors.right: parent.right
     clip: true
-    delegate: NoteListItem{}
+    delegate: NoteListItem {
+    }
 
     property real triggerAnDistance: height * 0.2
+    property bool refreshOnPull: true
     property int refreshTimeout: 2000
 
     property bool verticalMovementUp: verticalVelocity < 0
@@ -24,31 +26,36 @@ ListView {
     boundsBehavior: Flickable.DragOverBounds
 
     property int _contentY0: 0
-    onFlickStarted: {_contentY0 = contentY; contentDistanceTraveled = 0}
+    onFlickStarted: {
+        _contentY0 = contentY
+        contentDistanceTraveled = 0
+    }
 
     signal distancePassed
     signal refresh
 
     onContentYChanged: {
-        contentDistanceTraveled = Math.abs(_contentY0 - contentY);
-        if(contentDistanceTraveled > triggerAnDistance) distancePassed();
+        contentDistanceTraveled = Math.abs(_contentY0 - contentY)
+        if (contentDistanceTraveled > triggerAnDistance)
+            distancePassed()
     }
 
-//    add: Transition {
-//            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }
-//        }
 
+    //    add: Transition {
+    //            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }
+    //        }
     Widgets.TimeoutIndicator {
         id: timeoutTimer
-        y: noteList.contentOverTopBound? _RES.s_MARGIN : - height
+        y: refreshOnPull
+           && noteList.contentOverTopBound ? _RES.s_MARGIN : -height
         anchors.horizontalCenter: parent.horizontalCenter
-        running: noteList.contentOverTopBound
+        running: refreshOnPull && noteList.contentOverTopBound
         timeout: parent.refreshTimeout
         onTimeoutTriggered: parent.refresh()
 
-        Behavior on y {NumberAnimation{}}
+        Behavior on y {
+            NumberAnimation {
+            }
+        }
     }
-
-
-
 }

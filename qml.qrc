@@ -77,5 +77,13 @@
         <file>qml/common/ActionBar/Right.qml</file>
         <file>qml/common/Layouts/NoteListView.qml</file>
         <file>qml/common/Controls/TimeoutIndicator.qml</file>
+        <file>qml/pages/Home/ActionBar.qml</file>
+        <file>qml/pages/Post.qml</file>
+        <file>qml/pages/Post/ActionBar.qml</file>
+        <file>qml/pages/Post/OmniBar.qml</file>
+        <file>qml/common/Controls/EntryArea.qml</file>
+        <file>qml/pages/Pocket.qml</file>
+        <file>qml/pages/Pocket/ActionBar.qml</file>
+        <file>qml/pages/Pocket/OmniBar.qml</file>
     </qresource>
 </RCC>

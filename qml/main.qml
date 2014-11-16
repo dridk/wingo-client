@@ -27,10 +27,10 @@ ApplicationWindow {
     property double longitude : 1.438675
 
 
-    property variant pages: {
-        //        "Home": Qt.resolvedUrl("pages/HomeOld.qml"),
-        "Home": Qt.resolvedUrl("pages/Home.qml"),
-                "AddNote": Qt.resolvedUrl("pages/AddNote.qml")
+    property variant pages: {        
+        "Home":     Qt.resolvedUrl("pages/Home.qml"),
+        "Post":     Qt.resolvedUrl("pages/Post.qml"),
+        "Pocket":   Qt.resolvedUrl("pages/Pocket.qml")
     }
     function goBack(){
         stack.pop()
