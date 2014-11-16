@@ -217,7 +217,7 @@ void Request::parseError(QNetworkReply::NetworkError err)
 
 void Request::setDownloadProgress(qint64 value, qint64 total)
 {
-    mDownloadProgress = total == -1 ? 0: value / total;
+    mDownloadProgress = total == -1 ? 0: double(value) / double(total);
     emit downloadProgressChanged();
 
 }
