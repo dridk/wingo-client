@@ -55,7 +55,6 @@ Layouts.Page {
         OmniBar {
             id: omniBar
             anchors.top: actionBar.bottom
-            onContract: {addNoteActionButton.show(); refresh()}
         }
 
         Layouts.NoteListView {

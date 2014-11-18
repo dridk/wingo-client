@@ -18,7 +18,7 @@ ActionBar.Widget {
     }
     ActionBar.Right{
         ActionBar.Button{
-            icon: Icons.CLOCK
+            icon: Icons.CHECKMAK_FULL
         }
         ActionBar.Button{
             icon: Icons.ARCHIVE

@@ -12,12 +12,12 @@ SideBar.Widget {
     SideBar.SectionHeader{text:"Places"}
     SideBar.SimpleListItem{
         text: "New Note"
-        icon: Icons.LOGO
+        icon: Icons.POST
         onClicked: page.goPost()
     }
     SideBar.SimpleListItem{
         text: "My Notes"
-        icon: Icons.LOCATION
+        icon: Icons.NOTEBOOK
     }
     SideBar.SimpleListItem{
         text: "My Pocket"
@@ -27,11 +27,14 @@ SideBar.Widget {
     SideBar.SectionHeader{text:"Options"}
     SideBar.SimpleListItem{
         text: "App Settings"
+        icon: Icons.GEAR
     }
     SideBar.SimpleListItem{
         text: "About"
+        icon: Icons.INFO
     }
     SideBar.SimpleListItem{
         text: "Legal"
+        icon: Icons.INFO
     }
 }

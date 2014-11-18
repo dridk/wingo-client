@@ -129,7 +129,7 @@ ApplicationWindow {
             pushTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
-                        script: exitItem.state = "DISABLED"
+                        script: exitItem.enabled = false
                     }
                     PropertyAnimation {
                         target: enterItem
@@ -142,7 +142,7 @@ ApplicationWindow {
             popTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
-                        script: enterItem.state = ""
+                        script: enterItem.enabled = true
                     }
                     PropertyAnimation {
                         target: exitItem

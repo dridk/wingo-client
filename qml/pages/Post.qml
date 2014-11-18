@@ -44,7 +44,7 @@ Layouts.Page {
             anchors.top: actionBar.bottom
         }
 
-        EditArea {
+        Widgets.EntryArea {
             id: noteEdit
             anchors.top: omniBar.bottom
             focus: true
