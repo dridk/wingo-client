@@ -8,6 +8,7 @@ SideBar.Widget {
 
     SideBar.SimpleListItem{
         text: "User Name<br><small>user.email@server.com</small>"
+        onClicked: page.goLogin()
     }
     SideBar.SectionHeader{text:"Places"}
     SideBar.SimpleListItem{

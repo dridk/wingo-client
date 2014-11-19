@@ -30,7 +30,9 @@ ApplicationWindow {
     property variant pages: {        
         "Home":     Qt.resolvedUrl("pages/Home.qml"),
         "Post":     Qt.resolvedUrl("pages/Post.qml"),
-        "Pocket":   Qt.resolvedUrl("pages/Pocket.qml")
+        "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
+        "Login":    Qt.resolvedUrl("pages/Login.qml")
+
     }
     function goBack(){
         stack.pop()

@@ -21,6 +21,11 @@ Layouts.Page {
         app.goToPage(app.pages["Pocket"]);
     }
 
+    function goLogin(){
+        appMenu.contractTray();
+        app.goToPage(app.pages["Login"]);
+    }
+
     function refresh(){
 
         var request = {
