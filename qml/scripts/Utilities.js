@@ -45,12 +45,26 @@ function toRadians(deg) {
     return deg * ( Math.PI/180 );
 }
 
-//Objects
-
+//Arrays
 function copyArray(a) {
     return a.slice(0);
 }
 
+function diffArray(a, b) {
+    if (!isArray(a) || !isArray(b)) return null;
+    return a.filter(function(i) {return b.indexOf(i) < 0;});
+}
+
+// function indexDiffArray(a, b) {
+//     if (!isArray(a) || !isArray(b)) return null;
+//     var ind = [];
+//     forEach(b, bunction(val, i){
+//         if (a.indexOf(val) < 0) ind[] = i;
+//     });
+//     return ind;
+// }
+
+//Objects
 function copyObject(o) {//Shallow copy
     if (!isObject(o)) return o;
     var newO = {};
