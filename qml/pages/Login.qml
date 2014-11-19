@@ -26,8 +26,8 @@ Layouts.Page {
                 ActionBar.Action {
                     icon: Icons.LOGO
                     onClicked: {
-                        var email = "sacha@labsquare.org"
-                        var pass = "sacha"
+                        var email = emailBox.text
+                        var pass = passBox.text
                         console.debug("login")
                         loginRequester.post({"email":email, "password":pass})
 
@@ -42,11 +42,18 @@ Layouts.Page {
             width: parent.width
             anchors.top: actionBar.bottom
             Widgets.EntryBox {
-                placeholder: "Username"
+                id:emailBox
+                placeholder: "Email"
+                text:"sacha@labsquare.org"
+                inputMethodHints: Qt.ImhEmailCharactersOnly
+
             }
 
             Widgets.EntryBox {
+                id:passBox
                 placeholder: "Password"
+                text:"sacha"
+                inputMethodHints: Qt.ImhHiddenText
             }
 
 
@@ -60,6 +67,11 @@ Layouts.Page {
 
         onSuccess: {
             app.requestCurrentUser()
+            app.goBack()
+        }
+
+        onError: {
+            app.showMessage("Bad login or password")
         }
 
 

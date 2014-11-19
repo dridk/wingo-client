@@ -2,6 +2,7 @@ import QtQuick 2.0
 
 import "../../scripts/Icons.js" as Icons
 import "../../common/SideBar" as SideBar
+import "../../common/Controls" as Widgets
 
 SideBar.Widget {
     id: appMenu
@@ -15,8 +16,13 @@ SideBar.Widget {
        text : app.logged ? currentUserToStr() : "Login"
         onClicked: page.goLogin()
 
-        Rectangle {
-
+        Widgets.Avatar {
+            id: noteAvatar
+            source: "avatar" in app.currentUser ? app.currentUser["avatar"] : "qrc:/qml/Res/images/anonymous.png"
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.leftMargin: 5
+            anchors.rightMargin: _RES.s_BORDER
         }
 
     }
@@ -29,11 +35,13 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: "My Notes"
         icon: Icons.NOTEBOOK
+        enabled: app.logged
     }
     SideBar.SimpleListItem{
         text: "My Pocket"
         icon: Icons.POCKET
         onClicked: page.goPocket()
+        enabled: app.logged
     }
     SideBar.SectionHeader{text:"Options"}
     SideBar.SimpleListItem{
