@@ -34,7 +34,8 @@ ApplicationWindow {
         "Home":     Qt.resolvedUrl("pages/Home.qml"),
         "Post":     Qt.resolvedUrl("pages/Post.qml"),
         "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
-        "Login":    Qt.resolvedUrl("pages/Login.qml")
+        "Login":    Qt.resolvedUrl("pages/Login.qml"),
+        "Account":  Qt.resolvedUrl("pages/Account.qml"),
 
     }
     function goBack(){

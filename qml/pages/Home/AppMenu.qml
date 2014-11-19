@@ -7,18 +7,14 @@ import "../../common/Controls" as Widgets
 SideBar.Widget {
     id: appMenu
 
-    function currentUserToStr(){
-
-       return app.currentUser["nickname"]+"<br><small>"+app.currentUser["email"]+"</small>";
-    }
 
     SideBar.SimpleListItem{
-       text : app.logged ? currentUserToStr() : "Login"
-        onClicked: page.goLogin()
+       text : app.logged ? app.currentUser["nickname"]+"<br><small>"+app.currentUser["email"]+"</small>" : "Login"
+        onClicked: app.logged ? page.goAccount() :  page.goLogin()
 
         Widgets.Avatar {
             id: noteAvatar
-            source: "avatar" in app.currentUser ? app.currentUser["avatar"] : "qrc:/qml/Res/images/anonymous.png"
+            source: app.logged ? app.currentUser["avatar"] : ""
             anchors.left: parent.left
             anchors.verticalCenter: parent.verticalCenter
             anchors.leftMargin: 5

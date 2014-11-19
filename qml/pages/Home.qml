@@ -26,6 +26,11 @@ Layouts.Page {
         app.goToPage(app.pages["Login"]);
     }
 
+    function goAccount() {
+        appMenu.contractTray();
+        app.goToPage(app.pages["Account"]);
+    }
+
     function refresh(){
 
         var request = {
