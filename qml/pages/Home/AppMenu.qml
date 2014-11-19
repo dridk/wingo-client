@@ -6,9 +6,19 @@ import "../../common/SideBar" as SideBar
 SideBar.Widget {
     id: appMenu
 
+    function currentUserToStr(){
+
+       return app.currentUser["nickname"]+"<br><small>"+app.currentUser["email"]+"</small>";
+    }
+
     SideBar.SimpleListItem{
-        text: "User Name<br><small>user.email@server.com</small>"
+       text : app.logged ? currentUserToStr() : "Login"
         onClicked: page.goLogin()
+
+        Rectangle {
+
+        }
+
     }
     SideBar.SectionHeader{text:"Places"}
     SideBar.SimpleListItem{
@@ -38,4 +48,15 @@ SideBar.Widget {
         text: "Legal"
         icon: Icons.INFO
     }
+
+
+
+
+
+
+
+
+
 }
+
+

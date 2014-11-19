@@ -20,12 +20,19 @@ Layouts.Page {
             ActionBar.Title {
                 icon: Icons.CARRET_LEFT
                 text: "Login"
-                onClicked: page.back()
+                onClicked: app.goBack()
             }
             ActionBar.Right{
                 ActionBar.Action {
                     icon: Icons.LOGO
-                    onClicked: page.post()
+                    onClicked: {
+                        var email = "sacha@labsquare.org"
+                        var pass = "sacha"
+                        console.debug("login")
+                        loginRequester.post({"email":email, "password":pass})
+
+
+                    }
                 }
             }
         }
@@ -45,8 +52,15 @@ Layouts.Page {
 
         }
 
+    }
 
+    Request {
+        id: loginRequester
+        source: "/users/login"
 
+        onSuccess: {
+            app.requestCurrentUser()
+        }
 
 
     }
