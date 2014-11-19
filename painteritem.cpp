@@ -1,5 +1,8 @@
 #include "painteritem.h"
 #include <QDebug>
+#include <QStandardPaths>
+#include <QDir>
+#include <QTime>
 PainterItem::PainterItem(QQuickItem *parent) :
     QQuickPaintedItem(parent)
 {
@@ -11,6 +14,12 @@ PainterItem::PainterItem(QQuickItem *parent) :
     mPen.setStyle(Qt::SolidLine);
     mPen.setJoinStyle(Qt::RoundJoin);
     mPen.setCapStyle(Qt::RoundCap);
+
+
+    mCachePixmap = QPixmap();
+
+
+
 }
 
 void PainterItem::setPenSize(int w)
@@ -28,10 +37,37 @@ void PainterItem::setPenColor(const QColor &color)
 
 }
 
+bool PainterItem::save()
+{
+
+return mCachePixmap.save(path());
+
+}
+
+bool PainterItem::load()
+{
+    mCachePixmap.load(path());
+    mCachePainter.begin(&mCachePixmap);
+
+}
+
+QString PainterItem::path() const
+{
+    QString filename = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QDir::separator() + "wingo.png";
+    return filename;
+
+}
+
 
 void PainterItem::paint(QPainter *painter)
 {
 
+    if (mCachePixmap.isNull()){
+        mCachePixmap = QPixmap(width(),height());
+        mCachePixmap.fill(Qt::white);
+        mCachePainter.begin(&mCachePixmap);
+
+    }
     painter->setBrush(QBrush(Qt::white));
     painter->drawRect(contentsBoundingRect());
    painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
@@ -44,12 +80,7 @@ void PainterItem::mousePressEvent(QMouseEvent *event)
 {
 
 
-    if (mCachePixmap.isNull()){
-        mCachePixmap = QPixmap(width(),height());
-        mCachePixmap.fill(Qt::white);
-        mCachePainter.setRenderHint(QPainter::HighQualityAntialiasing,true);
-        mCachePainter.begin(&mCachePixmap);
-    }
+
 
     mCachePainter.setPen(mPen);
     mPenPos = event->pos();

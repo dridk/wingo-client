@@ -28,6 +28,7 @@ ApplicationWindow {
 
     property bool logged : false
     property variant currentUser
+    property alias currentPage : stack.currentItem
 
 
     property variant pages: {        
@@ -58,6 +59,8 @@ ApplicationWindow {
     function requestCurrentUser(){
         currentUserRequester.get()
     }
+
+
 
 //    FontLoader { id: font; name: "Droid Sans" }
     //cpp loaded

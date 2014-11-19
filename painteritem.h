@@ -10,11 +10,15 @@ class PainterItem : public QQuickPaintedItem
     Q_OBJECT
     Q_PROPERTY(QColor penColor WRITE setPenColor NOTIFY penChanged)
 
+
 public:
     explicit PainterItem(QQuickItem *parent = 0);
 
     void setPenSize(int w);
     void setPenColor(const QColor& color);
+    Q_INVOKABLE bool save();
+    Q_INVOKABLE bool load();
+    Q_INVOKABLE QString path() const;
 
 
 signals:
@@ -25,6 +29,8 @@ protected:
     void mousePressEvent(QMouseEvent * event);
     void mouseReleaseEvent(QMouseEvent * event);
     void mouseMoveEvent(QMouseEvent * event);
+
+
 
 
 private:

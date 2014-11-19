@@ -46,6 +46,10 @@ Layouts.Page {
         app.goBack();
     }
 
+    function updateImage(path){
+        addImage.source = " " // needs.. to avoid caching features
+        addImage.source = path;
+    }
 
     Request{
         id:postNoteRequester
@@ -90,10 +94,18 @@ Layouts.Page {
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
         anchors.horizontalCenter: parent.horizontalCenter
         onAdd: {
-            app.goToPage( Qt.resolvedUrl("Painter.qml"))
+            var painter = Qt.resolvedUrl("Painter.qml")
+            app.goToPage(painter)
+            app.currentPage.drawChange.connect(updateImage)
         }
 
-        onEdit: console.log("Edit")
+        onEdit: {
+            var painter = Qt.resolvedUrl("Painter.qml")
+            app.goToPage(painter)
+            app.currentPage.drawChange.connect(updateImage)
+            app.currentPage.loadImage()
+        }
+
         onRemove: console.log("Image removed")
     }
 
