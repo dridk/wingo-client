@@ -11,7 +11,21 @@ import "Post"
 Layouts.Page {
     id: page
 
-    function post () {
+    function post() {
+        if (addImage.isEmpty)
+            postData()
+        else
+            postImage()
+    }
+
+
+    function postImage(){
+        var path = Qt.resolvedUrl(addImage.source)
+        console.debug(path)
+        postImageRequester.postImage(path)
+    }
+
+    function postData () {
         if(noteEdit.textLength === 0) return app.showMessage("Can't post an empty note");
 
         var post = {
@@ -20,6 +34,7 @@ Layouts.Page {
             "author":"darwin", //TIPS... darwin, to make it works without auth
             "anonymous": omniBar.postAnonimous,
             "message":noteEdit.text
+//            "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
         }
 
         if (omniBar.expiery > -1){
@@ -62,6 +77,20 @@ Layouts.Page {
         }
     }
 
+
+    Request {
+        id:postImageRequester
+        source:"/notes/picture"
+        onSuccess: {
+           addImage.pathGenerated =  data["results"]["path"]
+           page.postData()
+        }
+        onError: {
+            app.showMessage("Cannot upload image " + message)
+        }
+    }
+
+
     ActionBar {
         id: actionBar
         anchors.top: parent.top
@@ -93,6 +122,7 @@ Layouts.Page {
         anchors.top: noteEdit.bottom
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
         anchors.horizontalCenter: parent.horizontalCenter
+        property url pathGenerated
         onAdd: {
             var painter = Qt.resolvedUrl("Painter.qml")
             app.goToPage(painter)
@@ -106,7 +136,7 @@ Layouts.Page {
             app.currentPage.loadImage()
         }
 
-        onRemove: console.log("Image removed")
+        onRemove: addImage.pathGenerated = ""
     }
 
 }

@@ -14,6 +14,7 @@ Componenets.WidgetItemBase {
     border.color: Style.Border.DARK
 
     property alias source: addImageImage.source
+    property bool isEmpty: addImageImage.status == Image.Null ? true : false
 
     signal remove
     signal add
