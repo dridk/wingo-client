@@ -85,5 +85,6 @@
         <file>qml/pages/Pocket.qml</file>
         <file>qml/pages/Pocket/ActionBar.qml</file>
         <file>qml/pages/Pocket/OmniBar.qml</file>
+        <file>qml/pages/Post/AddImage.qml</file>
     </qresource>
 </RCC>

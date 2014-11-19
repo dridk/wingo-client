@@ -10,7 +10,7 @@ var Palette = {
     //---Special
     NONE:       "transparent",
     DARKEN:     Qt.rgba(0, 0, 0, 0.4),
-    LIGHTEN:    Qt.rgba(255, 255, 255, 0.9),
+    LIGHTEN:    Qt.rgba(255, 255, 255, 0.6),
     //---Grays
     BLACK:      "#29332e",
     GRAY:       "#a1b3aa",
@@ -33,6 +33,7 @@ var Background = {
         WINDOW: Palette.SILVER,
         VIEW: Palette.WHITE,
         OVERLAY: Palette.DARKEN,
+        SELECTION: Palette.DEEPSEA,
         Actionbar: {
             DEFAULT: Palette.CYAN,
             ALTERNATIVE: Palette.MAGENTA,
@@ -69,7 +70,9 @@ var Background = {
         QUOTE: Palette.DARKGRAY,
         LINK: Palette.DEEPSEA,
         ACCENT: Palette.AZURES,
+        ALERT: Palette.MAGENTA,
         FADE: Palette.GRAY,
+        SELECTION: Palette.WHITE,
         Actionbar: {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,

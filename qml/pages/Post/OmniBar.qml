@@ -16,6 +16,8 @@ OmniBar.Widget{
     property int expiery: -1
     property int maxTakes: -1
 
+    property alias noteExpieryModel: notePropertiesExpieryWidget.model
+    property alias noteTakeLimitModel: notePropertiesLimitWidget.model
 
     function composeText(){
         var t = ""
@@ -66,7 +68,7 @@ OmniBar.Widget{
 
     OmniBar.MultiSelectListItem{
         id: notePropertiesExpieryWidget
-        model: ["1day", "5day", "15day", "1Mo", "6Mo", "1Yr", "3Yr"]
+//        model: ["1day", "5day", "15day", "1Mo", "6Mo", "1Yr", "3Yr"]
         selected: -1
         enabled: !widgetNeverExpire.checked
         onSelectedChanged: noteProperties.updateValues()
@@ -90,7 +92,7 @@ OmniBar.Widget{
 
     OmniBar.MultiSelectListItem{
         id: notePropertiesLimitWidget
-        model: ["5", "10", "15", "30", "80", "100", "300"]
+//        model: ["5", "10", "15", "30", "80", "100", "300"]
         selected: -1
         enabled: !widgetUnlimitedTakes.checked
         onSelectedChanged: noteProperties.updateValues()

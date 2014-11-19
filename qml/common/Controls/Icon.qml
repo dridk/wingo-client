@@ -22,5 +22,6 @@ Item {
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         anchors.fill: parent
+        z: 1
     }
 }
