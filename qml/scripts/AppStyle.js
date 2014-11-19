@@ -14,6 +14,7 @@ var Palette = {
     //---Grays
     BLACK:      "#29332e",
     GRAY:       "#a1b3aa",
+    DARKGRAY:   Qt.darker("#a1b3aa"),
     SILVER:     "#e3e9e7",
     WHITE:      "#ffffff",
     //---Colors
@@ -65,7 +66,7 @@ var Background = {
     },
     Typography = {
         TEXT: Palette.BLACK,
-        QUOTE: Qt.darker(Palette.GRAY),
+        QUOTE: Palette.DARKGRAY,
         LINK: Palette.DEEPSEA,
         ACCENT: Palette.AZURES,
         FADE: Palette.GRAY,
@@ -89,6 +90,8 @@ var Background = {
     },
     Icon = {
         DEFAULT: Palette.BLACK,
+        ALTERNATIVE: Palette.MAGENTA,
+        SIDELINE: Palette.DARKGRAY,
         ACTION: Palette.WHITE,
         ACCENT: Palette.CYAN,
         FADE: Palette.GRAY,

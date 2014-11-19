@@ -6,13 +6,14 @@ import "../../scripts/Icons.js" as Icons
 import "../../scripts/AppStyle.js" as Style
 import "../Components"
 
-CalloutRectangle {
+//CalloutRectangle {
+Item{
     id: avatar
     width: _RES.s_ICON_SIZE_BIG
     height: width
 
-    color: Style.Background.WINDOW
-    tipSize: 10
+//    color: Style.Background.VIEW
+//    tipSize: 10
 
     property alias source: avatarImage.source
 

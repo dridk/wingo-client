@@ -71,7 +71,8 @@ ApplicationWindow {
 
         //Fonts::
         property int s_TEXT_SIZE_MEDIUM: 20
-        property int s_TEXT_SIZE_SMALL: 14
+        property int s_TEXT_SIZE_SMALL: 18
+        property int s_TEXT_SIZE_MINI: 14
 
         //Layouts::
         property int s_MARGIN: 8

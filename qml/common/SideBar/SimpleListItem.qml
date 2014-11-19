@@ -20,7 +20,7 @@ Components.TouchSensorArea{
         id: listItemIcon
         name: ""
         size: _RES.s_ICON_SIZE_SMALL
-        color: Style.Icon.FADE
+        color: Style.Icon.SIDELINE
         anchors.left: parent.left
         anchors.leftMargin: _RES.s_HALF_DOUBLE_MARGIN
         anchors.verticalCenter: parent.verticalCenter

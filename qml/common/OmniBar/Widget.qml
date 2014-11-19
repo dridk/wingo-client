@@ -134,6 +134,7 @@ Item {
             anchors.bottomMargin: _RES.s_DOUBLE_MARGIN
             anchors.fill: parent
             contentHeight: filterBarTrayColumn.height
+            boundsBehavior: Flickable.StopAtBounds
             interactive: false
             Column {
                 id: filterBarTrayColumn

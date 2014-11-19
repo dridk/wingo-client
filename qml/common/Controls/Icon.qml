@@ -9,6 +9,8 @@ Item {
     property int size: _RES.s_ICON_SIZE
     property alias name: glyph.text
     property alias color: glyph.color
+    property alias iconStyle: glyph.style
+    property alias iconStyleColor: glyph.styleColor
 
     Text {
         id: glyph

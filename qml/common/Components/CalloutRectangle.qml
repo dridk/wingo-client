@@ -12,7 +12,7 @@ Rectangle {
     property int tipVerticalAlignment: Style.CALLOUT_BOTTOM
     property int tipHorizontalAlignment: Style.CALLOUT_LEFT_DOMINANAT
     property int tipMargin: 0
-    property int tipSize: 12
+    property int tipSize: _RES.s_MARGIN
 
 
     PolygonItem {

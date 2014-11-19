@@ -23,7 +23,7 @@ Rectangle {
         y: x / 2
         id: badgeLabel
         text: NumberFormat.toReadableString(badge.value)
-        font.pixelSize: _RES.s_TEXT_SIZE_SMALL
+        font.pixelSize: _RES.s_TEXT_SIZE_MINI
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         color: Style.Typography.Badge[badge.style]
