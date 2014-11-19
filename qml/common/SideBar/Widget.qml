@@ -53,7 +53,7 @@ Item {
         height: parent.height
         color: Style.Background.VIEW
         x: -width
-        Behavior on x {NumberAnimation{}}
+        Behavior on x {NumberAnimation{easing.type: Easing.InOutQuad }}
 
         ColumnLayout{
             id: sideBarTrayColumn

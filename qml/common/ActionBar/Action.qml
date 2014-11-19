@@ -12,7 +12,7 @@ Componenets.TouchSensorArea {
     //-----------
     Layout.alignment: Qt.AlignRight
     height: _RES.s_ACTION_BAR_HEIGHT
-    width: height + _RES.scale(28)
+    width: height + _RES.scale(16)
     Layout.fillHeight: true
     preventStealing: true
 
@@ -24,11 +24,18 @@ Componenets.TouchSensorArea {
     Componenets.Trapezoid {
         anchors.fill: parent
 
-        Widgets.Icon {
-            id: buttonIcon
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            color: Style.Icon.Actionbar.Action[button.style]
+        color: Style.Background.Actionbar.Action[button.style]
+
+        Item{
+            width: button.height
+            height: width
+            anchors.right: parent.right
+            Widgets.Icon {
+                id: buttonIcon
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                color: Style.Icon.Actionbar.Action[button.style]
+            }
         }
     }
 }

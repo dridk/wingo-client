@@ -3,37 +3,13 @@
         <file>qml/main.qml</file>
         <file>qml/scripts/AppLayout.js</file>
         <file>qml/scripts/AppStyle.js</file>
-        <file>qml/common/ActionBar.qml</file>
-        <file>qml/common/Page.qml</file>
-        <file>qml/common/Icon.qml</file>
-        <file>qml/common/Button.qml</file>
-        <file>qml/common/Avatar.qml</file>
-        <file>qml/common/Badge.qml</file>
-        <file>qml/common/ListItem.qml</file>
-        <file>qml/common/Label.qml</file>
         <file>qml/pages/Splash.qml</file>
-        <file>qml/pages/HomeOld.qml</file>
-        <file>qml/pages/AddNote.qml</file>
-        <file>qml/common/IconRow.qml</file>
-        <file>qml/Res/icons/menu48.png</file>
-        <file>qml/Res/icons/pocket48.png</file>
-        <file>qml/Res/icons/wingo48.png</file>
-        <file>qml/Res/icons/back48.png</file>
-        <file>qml/Res/icons/refresh48.png</file>
-        <file>qml/Res/icons/search48.png</file>
-        <file>qml/Res/icons/expand48.png</file>
-        <file>qml/common/ImagePreview.qml</file>
-        <file>qml/Res/images/addPicturePlaceholder.png</file>
-        <file>qml/common/EditArea.qml</file>
-        <file>qml/common/NoteListItem.qml</file>
-        <file>qml/Res/icons/post48.png</file>
         <file>qml/common/OmniBar/Widget.qml</file>
         <file>qml/common/OmniBar/SimpleListItem.qml</file>
         <file>qml/common/OmniBar/MultiSelectListItem.qml</file>
         <file>qml/common/OmniBar/TagListView.qml</file>
         <file>qml/common/OmniBar/SectionHeader.qml</file>
         <file>qml/common/OmniBar/SearchListItem.qml</file>
-        <file>qml/common/TextBox.qml</file>
         <file>qml/scripts/StringFormat.js</file>
         <file>qml/scripts/NumberFormat.js</file>
         <file>qml/common/SideBar/Widget.qml</file>
@@ -69,6 +45,25 @@
         <file>qml/common/Layouts/NoteListItem.qml</file>
         <file>qml/common/Controls/Badge.qml</file>
         <file>qml/Res/images/anonymous.png</file>
-        <file>qml/pages/PainterPage.qml</file>
+        <file>qml/pages/Painter.qml</file>
+        <file>qml/common/Controls/ActionButton.qml</file>
+        <file>qml/Res/images/actionButtonShadow.png</file>
+        <file>qml/common/Controls/Avatar.qml</file>
+        <file>qml/common/Components/CalloutRectangle.qml</file>
+        <file>qml/common/ActionBar/Left.qml</file>
+        <file>qml/common/ActionBar/Right.qml</file>
+        <file>qml/common/Layouts/NoteListView.qml</file>
+        <file>qml/common/Controls/TimeoutIndicator.qml</file>
+        <file>qml/pages/Home/ActionBar.qml</file>
+        <file>qml/pages/Post.qml</file>
+        <file>qml/pages/Post/ActionBar.qml</file>
+        <file>qml/pages/Post/OmniBar.qml</file>
+        <file>qml/common/Controls/EntryArea.qml</file>
+        <file>qml/pages/Pocket.qml</file>
+        <file>qml/pages/Pocket/ActionBar.qml</file>
+        <file>qml/pages/Pocket/OmniBar.qml</file>
+        <file>qml/pages/Post/AddImage.qml</file>
+        <file>qml/pages/Login.qml</file>
+        <file>qml/pages/Account.qml</file>
     </qresource>
 </RCC>

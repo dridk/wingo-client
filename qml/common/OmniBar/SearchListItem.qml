@@ -4,7 +4,7 @@ import "../../scripts/AppStyle.js" as Style
 import "../Components" as Componenets
 import "../Controls" as Widgets
 
-Componenets.ListItemBase{
+Item{
     id: listItem
     //Needed for QtCreator design mode
     width: 540

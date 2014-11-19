@@ -25,5 +25,6 @@ Componenets.TouchSensorArea {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
         color: Style.Icon.Actionbar[button.style]
+        size: _RES.s_ACTION_BAR_BUTTON_SIZE
     }
 }

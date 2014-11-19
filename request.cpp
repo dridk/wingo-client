@@ -29,7 +29,8 @@ Request::Request(QQuickItem *parent) :
 
 
 
-
+    mIsLoading = false;
+    mDownloadProgress = 0;
 
 
 
@@ -46,6 +47,16 @@ void Request::setSource(const QString &source)
 int Request::port()
 {
     return mUrl.port();
+}
+
+bool Request::isLoading()
+{
+    return mIsLoading;
+}
+
+double Request::downloadProgress()
+{
+    return mDownloadProgress;
 }
 
 const QString &Request::source()
@@ -75,10 +86,8 @@ void Request::get(const QVariant &data)
     request.setRawHeader("Content-Type","Content-type: text/plain");
     QNetworkReply * reply = mManager->get(request);
 
-    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connectReply(reply);
 
-    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
-            SLOT(parseError(QNetworkReply::NetworkError)));
 
 
 }
@@ -90,10 +99,8 @@ void Request::post(const QVariant &data)
     QNetworkRequest request = makeRequest(mUrl);
     QNetworkReply * reply = mManager->post(request, doc.toJson());
 
-    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connectReply(reply);
 
-    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
-            SLOT(parseError(QNetworkReply::NetworkError)));
 
 
 
@@ -105,10 +112,8 @@ void Request::put(const QVariant &data)
     QNetworkRequest request = makeRequest(mUrl);
     QNetworkReply * reply = mManager->put(request, doc.toJson());
 
-    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connectReply(reply);
 
-    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
-            SLOT(parseError(QNetworkReply::NetworkError)));
 
 }
 
@@ -118,10 +123,8 @@ void Request::deleteResource(const QVariant &data)
     QNetworkRequest request = makeRequest(mUrl);
     QNetworkReply * reply = mManager->deleteResource(request);
 
-    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connectReply(reply);
 
-    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
-            SLOT(parseError(QNetworkReply::NetworkError)));
 
 
 }
@@ -170,18 +173,20 @@ void Request::postImage(const QString &filename)
 
     QNetworkReply *reply = mManager->post(request, multiPart);
     multiPart->setParent(reply);
-
-
-    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
-    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,
-            SLOT(parseError(QNetworkReply::NetworkError)));
+    connectReply(reply);
 
 }
 
+
+
 void Request::parseFinished()
 {
+    setLoading(false);
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
+
+    qDebug()<<reply->request().url();
+    qDebug()<<reply->request().rawHeaderList();
     qDebug()<<doc.toJson();
 
     if (doc.object().contains("success")){
@@ -205,13 +210,19 @@ void Request::parseFinished()
 void Request::parseError(QNetworkReply::NetworkError err)
 {
 
+    setLoading(false);
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-
-
     emit error(1, reply->errorString());
     reply->deleteLater();
 
 
+
+}
+
+void Request::setDownloadProgress(qint64 value, qint64 total)
+{
+    mDownloadProgress = total == -1 ? 0: double(value) / double(total);
+    emit downloadProgressChanged();
 
 }
 
@@ -222,4 +233,19 @@ QNetworkRequest Request::makeRequest(const QUrl &url)
     request.setRawHeader("FROM",App::getDeviceId().toUtf8());
     return request;
 
+}
+void Request::connectReply(QNetworkReply *reply)
+{
+
+    setLoading(true);
+    connect(reply,SIGNAL(finished()),this,SLOT(parseFinished()));
+    connect(reply,SIGNAL(error(QNetworkReply::NetworkError)),this,SLOT(parseError(QNetworkReply::NetworkError)));
+    connect(reply,SIGNAL(downloadProgress(qint64,qint64)),this,SLOT(setDownloadProgress(qint64,qint64)));
+
+}
+
+void Request::setLoading(bool enabled)
+{
+    mIsLoading = enabled;
+    emit isLoadingChanged();
 }

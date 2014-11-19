@@ -20,12 +20,21 @@ Item {
     property alias text: omniBarSensorLabel.text
     property alias icon: omniBarSensorIcon.name
     property bool animateIconOnexpand: true
+    property color iconBackgroundColor: Style.Background.WINDOW
     property bool expanded: omniBarTray.height > 0
     property bool fillHeight: false
     z: 99
 
     signal expand
     signal contract
+
+    function show() {
+        state = ""
+    }
+
+    function hide() {
+        state = "HIDDEN"
+    }
 
     function toggleTray() {
         if (state == "EXPANDED")
@@ -72,7 +81,7 @@ Item {
                 width: _RES.scale(80)
                 height: parent.height
                 anchors.right: parent.right
-                color: Style.Background.WINDOW
+                color: omniBar.iconBackgroundColor
                 Widgets.Icon {
                     id: omniBarSensorIcon
                     name: Icon.CARRET_DOWN
@@ -114,6 +123,7 @@ Item {
         color: Style.Background.VIEW
         Behavior on height {
             NumberAnimation {
+                easing.type: Easing.InOutQuad
             }
         }
 
@@ -124,6 +134,7 @@ Item {
             anchors.bottomMargin: _RES.s_DOUBLE_MARGIN
             anchors.fill: parent
             contentHeight: filterBarTrayColumn.height
+            boundsBehavior: Flickable.StopAtBounds
             interactive: false
             Column {
                 id: filterBarTrayColumn
@@ -190,6 +201,31 @@ Item {
                 target: omniBarSensorLabel
                 color: Style.Typography.FADE
             }
+        },
+        State {
+            name: "HIDDEN"
+
+            PropertyChanges {
+                target: omniBar
+                clip: true
+                height: 0
+//                opacity: 0
+            }
+            PropertyChanges {
+                target: omniBarSensor
+                enabled: false
+            }
         }
+    ]
+
+    transitions: [
+        Transition {
+        from: ""; to: "HIDDEN"
+        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
+    },
+        Transition {
+        from: "HIDDEN"; to: ""
+        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
+    }
     ]
 }

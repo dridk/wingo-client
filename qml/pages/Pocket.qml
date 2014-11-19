@@ -6,29 +6,13 @@ import "../scripts/AppStyle.js" as Style
 import "../common/Layouts" as Layouts
 import "../common/Controls" as Widgets
 
-import "Home"
+import "Pocket"
 
 Layouts.Page {
     id: page
 
-    function goPost(){
-        appMenu.contractTray();
-        app.goToPage(app.pages["Post"]);
-    }
-
-    function goPocket(){
-        appMenu.contractTray();
-        app.goToPage(app.pages["Pocket"]);
-    }
-
-    function goLogin(){
-        appMenu.contractTray();
-        app.goToPage(app.pages["Login"]);
-    }
-
-    function goAccount() {
-        appMenu.contractTray();
-        app.goToPage(app.pages["Account"]);
+    function back(){
+        app.goBack();
     }
 
     function refresh(){
@@ -58,19 +42,7 @@ Layouts.Page {
         onError: {
             console.debug(message)
         }
-
-
     }
-
-// EXAMPLE OF HOW TO USE isLoading and progress property
-    Text {
-        anchors.centerIn: parent
-        z:10
-        font.pixelSize: 40
-        text:"loading : " + notesServerRequest.downloadProgress*100 +"%"
-        visible: notesServerRequest.isLoading
-    }
-// END OF EXAMPLE.. CAN BE REMOVED
 
     Item{
         anchors.fill: parent
@@ -83,45 +55,28 @@ Layouts.Page {
         OmniBar {
             id: omniBar
             anchors.top: actionBar.bottom
-            onContract: {addNoteActionButton.show(); refresh()}
         }
 
         Layouts.NoteListView {
             id: noteList
             anchors.top: omniBar.bottom
             anchors.bottom: parent.bottom
+            refreshOnPull: false
+
             model: ListModel{id: notesListModel}
 
             onVerticalMovementUpChanged: {
                 if (verticalMovementUp&&!atYEnd){
                     omniBar.show();
-                    addNoteActionButton.show()
                 }
             }
             onDistancePassed: {
                 if(verticalMovementDown&&!atYBeginning) {
-                    addNoteActionButton.hide();
                     omniBar.hide();
                 }
             }
             onRefresh: page.refresh()
         }
-
-        Widgets.ActionButton {
-            id: addNoteActionButton
-            onClicked: page.goPost()
-        }
     }
-
-    AppMenu{
-        id: appMenu
-    }
-
-
-
-
-
-
-
 
 }

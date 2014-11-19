@@ -3,7 +3,6 @@ import "../../scripts/AppStyle.js" as Style
 
 MouseArea
 {
-//    anchors.fill: parent
     enabled: false
     Rectangle{
         color: Style.Background.OVERLAY

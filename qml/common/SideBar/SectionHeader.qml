@@ -27,7 +27,8 @@ Item {
         anchors.left: parent.left
         anchors.leftMargin: _RES.s_TRIPPLE_MARGIN
         anchors.verticalCenter: parent.verticalCenter
-        color: Style.Typography.FADE
+        color: Style.Typography.QUOTE
         font.pixelSize: _RES.s_TEXT_SIZE_SMALL
+        font.capitalization: Font.AllUppercase
     }
 }

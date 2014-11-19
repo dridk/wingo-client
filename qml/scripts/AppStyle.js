@@ -10,10 +10,11 @@ var Palette = {
     //---Special
     NONE:       "transparent",
     DARKEN:     Qt.rgba(0, 0, 0, 0.4),
-    LIGHTEN:    Qt.rgba(255, 255, 255, 0.9),
+    LIGHTEN:    Qt.rgba(255, 255, 255, 0.6),
     //---Grays
     BLACK:      "#29332e",
     GRAY:       "#a1b3aa",
+    DARKGRAY:   Qt.darker("#a1b3aa"),
     SILVER:     "#e3e9e7",
     WHITE:      "#ffffff",
     //---Colors
@@ -32,6 +33,7 @@ var Background = {
         WINDOW: Palette.SILVER,
         VIEW: Palette.WHITE,
         OVERLAY: Palette.DARKEN,
+        SELECTION: Palette.DEEPSEA,
         Actionbar: {
             DEFAULT: Palette.CYAN,
             ALTERNATIVE: Palette.MAGENTA,
@@ -52,8 +54,9 @@ var Background = {
             ACCENT: Palette.YELLOW,
             SUNKEN: Palette.SILVER
         },
-        Bage: {
+        Badge: {
             DEFAULT: Palette.WHITE,
+            ACTIONBAR: Palette.WHITE,
             ACCENT: Palette.MAGENTA
         }
     },
@@ -64,10 +67,12 @@ var Background = {
     },
     Typography = {
         TEXT: Palette.BLACK,
-        QUOTE: Qt.darker(Palette.GRAY),
+        QUOTE: Palette.DARKGRAY,
         LINK: Palette.DEEPSEA,
         ACCENT: Palette.AZURES,
+        ALERT: Palette.MAGENTA,
         FADE: Palette.GRAY,
+        SELECTION: Palette.WHITE,
         Actionbar: {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
@@ -80,13 +85,16 @@ var Background = {
             ACCENT: Palette.BLACK,
             SUNKEN: Palette.BLACK
         },
-        Bage: {
+        Badge: {
             DEFAULT: Palette.DEEPSEA,
+            ACTIONBAR: Palette.MAGENTA,
             ACCENT: Palette.WHITE
         }
     },
     Icon = {
         DEFAULT: Palette.BLACK,
+        ALTERNATIVE: Palette.MAGENTA,
+        SIDELINE: Palette.DARKGRAY,
         ACTION: Palette.WHITE,
         ACCENT: Palette.CYAN,
         FADE: Palette.GRAY,
@@ -95,7 +103,13 @@ var Background = {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
             UTILITY: Palette.WHITE,
-            SPECIAL: Palette.WHITE
+            SPECIAL: Palette.WHITE,
+            Action: {
+                DEFAULT: Palette.BLACK,
+                ALTERNATIVE: Palette.WHITE,
+                UTILITY: Palette.BLACK,
+                SPECIAL: Palette.WHITE,
+            }
         }
     },
     Elements = {
@@ -110,3 +124,14 @@ var PAGE_DEFAULT = "DEFAULT",
     ACTION_BAR_MENU_ACTION = "menu",
     ACTION_BAR_BACK_ACTION = "back"
 
+//Avatar styles
+
+//Callout styles
+var CALLOUT_TOP = 1,
+    CALLOUT_TOP_DOMINANAT = 10,
+    CALLOUT_BOTTOM = 2,
+    CALLOUT_BOTTOM_DOMINANAT = 20,
+    CALLOUT_LEFT = 3,
+    CALLOUT_LEFT_DOMINANAT = 30,
+    CALLOUT_RIGHT = 4,
+    CALLOUT_RIGHT_DOMINANAT = 40;

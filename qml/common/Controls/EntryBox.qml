@@ -13,6 +13,7 @@ Item {
 
     property alias text: textBoxEdit.text
     property alias placeholder: textBoxPlaceholder.text
+    property alias inputMethodHints : textBoxEdit.inputMethodHints
 
     Rectangle{
         height: _RES.s_MARGIN
