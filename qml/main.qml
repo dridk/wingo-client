@@ -26,11 +26,17 @@ ApplicationWindow {
     property double latitude  : 43.601337
     property double longitude : 1.438675
 
+    property bool logged : false
+    property variant currentUser
+
 
     property variant pages: {        
         "Home":     Qt.resolvedUrl("pages/Home.qml"),
         "Post":     Qt.resolvedUrl("pages/Post.qml"),
-        "Pocket":   Qt.resolvedUrl("pages/Pocket.qml")
+        "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
+        "Login":    Qt.resolvedUrl("pages/Login.qml"),
+        "Account":  Qt.resolvedUrl("pages/Account.qml"),
+
     }
     function goBack(){
         stack.pop()
@@ -49,6 +55,9 @@ ApplicationWindow {
         gpsSource.start()
     }
 
+    function requestCurrentUser(){
+        currentUserRequester.get()
+    }
 
 //    FontLoader { id: font; name: "Droid Sans" }
     //cpp loaded
@@ -161,6 +170,24 @@ ApplicationWindow {
         source:"/config"
         onSuccess:  app.config = data.results
 
+    }
+
+    Request {
+        id: currentUserRequester
+        source:"/users/me"
+        onSuccess: {
+            console.debug("Current User loaded")
+            console.debug( data["results"])
+
+            app.currentUser = data["results"]
+            app.logged = true
+        }
+
+        onError: {
+            console.debug("Cannot load current user. Authified ?")
+            app.logged = false
+
+        }
     }
 
 

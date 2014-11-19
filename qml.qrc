@@ -62,5 +62,7 @@
         <file>qml/pages/Pocket/ActionBar.qml</file>
         <file>qml/pages/Pocket/OmniBar.qml</file>
         <file>qml/pages/Post/AddImage.qml</file>
+        <file>qml/pages/Login.qml</file>
+        <file>qml/pages/Account.qml</file>
     </qresource>
 </RCC>

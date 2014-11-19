@@ -15,6 +15,7 @@ Components.TouchSensorArea{
 
     property alias text: listItemLabel.text
     property alias icon: listItemIcon.name
+    opacity: enabled ? 1 : 0.2
 
     Widgets.Icon {
         id: listItemIcon

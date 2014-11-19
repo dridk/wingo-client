@@ -185,6 +185,10 @@ void Request::parseFinished()
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     QJsonDocument doc = QJsonDocument::fromJson(reply->readAll());
 
+    qDebug()<<reply->request().url();
+    qDebug()<<reply->request().rawHeaderList();
+    qDebug()<<doc.toJson();
+
     if (doc.object().contains("success")){
 
         if (doc.object().value("success").toBool()){
