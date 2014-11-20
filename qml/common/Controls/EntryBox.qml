@@ -8,7 +8,7 @@ Item {
     id: entryBox
     //Needed for QtCreator design mode
     width: 540
-    height: 48
+    height: _RES.s_LIST_ITEM_HEIGHT
     //-----------
 
     property alias text: textBoxEdit.text
@@ -43,7 +43,6 @@ Item {
             anchors.rightMargin: _RES.s_MARGIN
             anchors.leftMargin: _RES.s_MARGIN
             anchors.fill: parent
-            focus: textBox.focus
             activeFocusOnPress: true
 
             Label{

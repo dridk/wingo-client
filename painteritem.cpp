@@ -17,9 +17,6 @@ PainterItem::PainterItem(QQuickItem *parent) :
 
 
     mCachePixmap = QPixmap();
-
-
-
 }
 
 void PainterItem::setPenSize(int w)
@@ -35,6 +32,12 @@ void PainterItem::setPenColor(const QColor &color)
     mPen.setColor(color);
     emit penChanged();
 
+}
+
+void PainterItem::clear()
+{
+    mCachePainter.fillRect( 0, 0, width(), height(), Qt::white );
+    update();
 }
 
 bool PainterItem::save()
@@ -66,11 +69,11 @@ void PainterItem::paint(QPainter *painter)
         mCachePixmap = QPixmap(width(),height());
         mCachePixmap.fill(Qt::white);
         mCachePainter.begin(&mCachePixmap);
-
     }
+
     painter->setBrush(QBrush(Qt::white));
     painter->drawRect(contentsBoundingRect());
-   painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
+    painter->setRenderHint(QPainter::HighQualityAntialiasing,true);
 
     painter->drawPixmap(0,0,mCachePixmap);
 
@@ -78,19 +81,23 @@ void PainterItem::paint(QPainter *painter)
 
 void PainterItem::mousePressEvent(QMouseEvent *event)
 {
-
-
-
-
+    mCachePainter.setBrush(mPen.color());
     mCachePainter.setPen(mPen);
     mPenPos = event->pos();
-
-
 }
 
 void PainterItem::mouseReleaseEvent(QMouseEvent *event)
 {
+    QPoint diff = event->pos() - mPenPos;
+    int limit = 10;
 
+    if ( diff.x() < limit && diff.y() < limit ) {
+        QPen _pen = mPen;
+        _pen.setWidth(0);
+        mCachePainter.setPen(_pen);
+        mCachePainter.drawEllipse(event->pos(), mPen.width() / 2, mPen.width() / 2 );
+        update();
+    }
 }
 
 void PainterItem::mouseMoveEvent(QMouseEvent *event)
@@ -101,14 +108,10 @@ void PainterItem::mouseMoveEvent(QMouseEvent *event)
 
     if ((qAbs(diff.x()) > limit) || (qAbs(diff.y()) > limit)){
 
-    mCachePainter.drawLine(mPenPos, event->pos());
-    mPenPos = event->pos();
+        mCachePainter.drawLine(mPenPos, event->pos());
+        mPenPos = event->pos();
 
-    update();
-
+        update();
     }
-
-
-
 }
 

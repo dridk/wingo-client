@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import Wingo 1.0
 
+import "../scripts/Utilities.js" as Utilities
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
 import "../common/Layouts" as Layouts
@@ -42,8 +43,6 @@ Layouts.Page {
         if (omniBar.search !== "")
                 request["query"] = omniBar.search;
 
-        noteList.positionViewAtBeginning()
-        notesListModel.clear()
         notesServerRequest.get(request);
     }
     Component.onCompleted: refresh()
@@ -53,7 +52,11 @@ Layouts.Page {
         source: "/notes"
         onSuccess: {
             console.log( data.results.length )
+            var diff = Utilities.diffArray()
+
+            notesListModel.clear()
             notesListModel.append(data.results)
+            noteList.positionViewAtBeginning()
         }
         onError: {
             console.debug(message)

@@ -53,7 +53,7 @@ Componenets.WidgetItemBase {
         height: width
         anchors.top: parent.top
         anchors.right: parent.right
-        anchors.margins: -_RES.s_MARGIN
+        anchors.margins: -_RES.s_DOUBLE_MARGIN
         color: Style.Palette.LIGHTEN
         icon: Icons.AXE
         rounded: true

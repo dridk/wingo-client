@@ -26,6 +26,10 @@ Rectangle
 
     signal pageInteraction (variant mouse)
 
+    function back() { app.goBack() }
+    function menu() {}
+    function home() {}
+
     //Main Page structure
 //    Loader
 //    {

@@ -65,5 +65,7 @@
         <file>qml/pages/Post/AddImage.qml</file>
         <file>qml/pages/Login.qml</file>
         <file>qml/pages/Account.qml</file>
+        <file>qml/pages/Painter/Toolbar.qml</file>
+        <file>qml/pages/Painter/Palette.qml</file>
     </qresource>
 </RCC>

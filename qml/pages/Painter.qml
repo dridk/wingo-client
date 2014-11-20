@@ -7,101 +7,146 @@ import "../common/Layouts" as Layouts
 import "../common/Controls" as Widgets
 import "../common/ActionBar" as ActionBar
 
-import "../common"
-
-import "Post"
+import "Painter"
 
 Layouts.Page {
     id: page
+
     signal drawChange(string path)
+
+    function back() {
+        if (painterItem.save()) {
+            page.drawChange("file:///"+painterItem.path())
+        }
+        app.goBack();
+    }
+
     function loadImage(){
         painterItem.load()
     }
 
-    Item {
-        anchors.fill: parent
-        ActionBar.Widget {
-            id: actionBar
-            ActionBar.Title {
-                icon: Icons.CARRET_LEFT
-                text: "Painter"
-                onClicked: app.goBack()
-            }
-            ActionBar.Right{
-                ActionBar.Action {
-                    icon: Icons.LOGO
-                    onClicked: {
-                        if (painterItem.save()) {
-                            page.drawChange("file:///"+painterItem.path())
-                        }
-                        app.goBack()
+    ActionBar.Widget {
+        id: actionBar
+        style: Style.PAGE_SPECIAL
 
-
-                    }
-                }
-            }
+        ActionBar.Title {
+            icon: Icons.CARRET_LEFT
+            text: "Painter"
+            onClicked: page.back()
         }
 
-        Column {
-            anchors.top : actionBar.bottom
-            width: parent.width
-            Rectangle {
-                width: parent.width
-                height: 60
-                color: "lightgray"
-
-
-                Widgets.Icon {
-                    name: Icons.PEN
-
-
-                }
+        ActionBar.Right{
+            ActionBar.Button {
+                icon: Icons.PICTURE_ADD
             }
-
-            Rectangle {
-                width: parent.width
-                height: 60
-                color: "white"
-
-                ListModel {
-                    id:colorModel
-                    ListElement {colorName:"red"}
-                    ListElement {colorName:"brown"}
-                    ListElement {colorName:"blue"}
-                    ListElement {colorName:"green"}
-
-                }
-
-
-                ListView {
-                    id:colorView
-                    orientation: Qt.Horizontal
-                    model:colorModel
-                    anchors.fill: parent
-                    delegate: Rectangle {
-                        width : parent.height
-                        height: parent.height
-                        color :colorName
-                        border.color:  ListView.isCurrentItem ? "black" : "transparent"
-                        border.width: 2
-                        MouseArea {
-                            anchors.fill: parent
-                            onClicked: colorView.currentIndex = index
-                        }
-                    }
-                }
+            ActionBar.Button {
+                icon: Icons.UNDO
             }
+            ActionBar.Button {
+                icon: Icons.TRASH
+                onClicked: painterItem.clear()
+            }
+        }
+    }
+
+    Column {
+        anchors.top: actionBar.bottom
+        anchors.topMargin: _RES.s_MARGIN
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: _RES.s_MARGIN
+
+        Toolbar{
+            id: toolBar
+            onToolChanged: {
+                if (tool === t_PEN) painterItem.penColor = colorPicker.color;
+                else painterItem.penColor = "white";
+            }
+            onPenSizeChanged: painterItem.penSize = toolBar.penSize
+        }
+
+        Palette{
+            id: colorPicker
+            onColorChanged: if (toolBar.tool === toolBar.t_PEN) painterItem.penColor = color
+        }
+
+        Item{
+            width : parent.width
+            height : width
             PainterItem {
-                id:painterItem
-                width : parent.width
-                height : parent.width
-                penColor:colorModel.get(colorView.currentIndex).colorName
+                id: painterItem
+                anchors.fill: parent
+                anchors.margins: _RES.s_MARGIN
+                penColor: colorPicker.color
+                penSize: toolBar.penSize
             }
         }
-
     }
 
 }
+
+//    Column {
+//        anchors.top : actionBar.toolBar
+//        width: parent.width
+//        Rectangle {
+//            width: parent.width
+//            height: 60
+//            color: "lightgray"
+
+
+//            Widgets.Icon {
+//                name: Icons.PEN
+
+
+//            }
+//        }
+
+//        Rectangle {
+//            width: parent.width
+//            height: 60
+//            color: "white"
+
+//            ListModel {
+//                id:colorModel
+//                 ListElement {colorName: "red" }
+////                ListElement {colorName: Style.Palette.BLACK }
+////                ListElement {colorName: Style.Palette.DEEPSEA }
+////                ListElement {colorName: Style.Palette.CYAN }
+////                ListElement {colorName: Style.Palette.NIGHTSKY }
+////                ListElement {colorName: Style.Palette.MAGENTA }
+////                ListElement {colorName: Style.Palette.SUNRISE }
+////                ListElement {colorName: Style.Palette.YELLOW }
+//            }
+
+
+//            ListView {
+//                id:colorView
+//                orientation: Qt.Horizontal
+//                model:colorModel
+//                anchors.fill: parent
+//                delegate: Rectangle {
+//                    width : parent.height
+//                    height: parent.height
+//                    color :colorName
+//                    border.color:  ListView.isCurrentItem ? "black" : "transparent"
+//                    border.width: 2
+//                    MouseArea {
+//                        anchors.fill: parent
+//                        onClicked: colorView.currentIndex = index
+//                    }
+//                }
+//            }
+//        }
+
+//        PainterItem {
+//            id: painterItem
+//            width : parent.width
+//            height : width
+//            penColor: colorModel.get(colorView.currentIndex).colorName
+//        }
+//    }
+
+//}
 
 
 

@@ -31,6 +31,7 @@ TouchSensorArea {
                 anchors.verticalCenter: parent.verticalCenter
                 color: Style.Typography.Button[button.style]
                 visible: name? true: false
+                size: _RES.s_ICON_SIZE_SMALL
             }
 
             Label {
