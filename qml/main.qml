@@ -37,14 +37,14 @@ ApplicationWindow {
         "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
         "Login":    Qt.resolvedUrl("pages/Login.qml"),
         "Account":  Qt.resolvedUrl("pages/Account.qml"),
-
     }
+
     function goBack(){
-        stack.pop()
+        if (stack.depth > 1) stack.pop()
     }
 
     function goToPage(page){
-        stack.push(page);
+        stack.push(page)
     }
 
     function showMessage(message) {
@@ -120,10 +120,20 @@ ApplicationWindow {
         anchors.fill: parent
         // Implements back key navigation
         focus: true
-        Keys.onReleased: if (event.key === Qt.Key_Back && stackView.depth > 1) {
-                             stackView.pop();
-                             event.accepted = true;
-                         }
+        Keys.onReleased: {
+            if (event.key === Qt.Key_Back || event.key === Qt.Key_Backspace) {
+                 currentItem.back();
+                 event.accepted = true;
+             }
+            if (event.key === Qt.Key_Menu || event.key === Qt.Key_Meta ) {
+                currentItem.menu();
+                event.accepted = true;
+            }
+            if (event.key === Qt.Key_Home || event.key === Qt.Key_F12 ) {
+                currentItem.home(event);
+            }
+        }
+
         initialItem: Qt.resolvedUrl("pages/Splash.qml")
 
 

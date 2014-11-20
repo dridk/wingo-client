@@ -12,6 +12,9 @@ import "Home"
 Layouts.Page {
     id: page
 
+    function back() {/*do nothing*/}
+    function menu() {appMenu.toggleTray();}
+
     function goPost(){
         appMenu.contractTray();
         app.goToPage(app.pages["Post"]);

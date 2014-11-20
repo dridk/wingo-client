@@ -12,7 +12,7 @@ ActionBar.Widget {
     ActionBar.Title {
         icon: Icons.SANDWICH
         text: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
-        onClicked: appMenu.toggleTray()
+        onClicked: page.menu()
     }
     ActionBar.Right{
         ActionBar.Button{
