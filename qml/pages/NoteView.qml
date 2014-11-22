@@ -54,12 +54,22 @@ Layouts.Page {
         }
 
 
-   Text {
-        id:item
-        width: parent.width
-        anchors.centerIn: parent
-        wrapMode: Text.WordWrap
-   }
+        Text {
+            id:item
+            width: parent.width
+            anchors.centerIn: parent
+            wrapMode: Text.WordWrap
+        }
+
+        //======= JUST A TEST =====================
+        Image {
+            source:"http://localhost:5000/notes/"+noteId+"/map"
+
+            onStatusChanged: {
+                console.debug(source)
+            }
+        }
+        //======= JUST A TEST =====================
 
 
     }
@@ -67,7 +77,7 @@ Layouts.Page {
     Request {
         id:noteViewRequester
         onSuccess:  item.text = data["results"]["message"]
-         onError: app.showMessage(message)
+        onError: app.showMessage(message)
     }
 
     Request {
