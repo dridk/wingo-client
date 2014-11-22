@@ -35,6 +35,7 @@ Layouts.Page {
         app.goToPage(app.pages["Account"]);
     }
 
+
     function refresh(){
 
         var request = {
@@ -97,6 +98,14 @@ Layouts.Page {
             anchors.top: omniBar.bottom
             anchors.bottom: parent.bottom
             model: ListModel{id: notesListModel}
+
+            onPressed: {
+                var noteId = model.get(index).id
+                app.goToPage(app.pages["NoteView"]);
+                app.currentPage.noteId = noteId
+
+
+            }
 
             onVerticalMovementUpChanged: {
                 if (verticalMovementUp&&!atYEnd){
