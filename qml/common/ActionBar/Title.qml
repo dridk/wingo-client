@@ -37,6 +37,7 @@ Components.TouchSensorArea {
             text: "Action Bar"
             anchors.verticalCenter: parent.verticalCenter
             color: Style.Typography.Actionbar[actionBarTitle.style]
+
         }
         Item{
             width: _RES.s_MARGIN
