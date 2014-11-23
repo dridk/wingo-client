@@ -95,64 +95,55 @@ Layouts.Page {
     }
 // END OF EXAMPLE.. CAN BE REMOVED
 
-    Item{
-        anchors.fill: parent
-        ActionBar {
-            id: actionBar
-            anchors.top: parent.top
-            z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
+    ActionBar {
+        id: actionBar
+        anchors.top: parent.top
+        z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
+    }
+
+    OmniBar {
+        id: omniBar
+        anchors.top: actionBar.bottom
+        onContract: {addNoteActionButton.show(); refresh()}
+    }
+
+    Layouts.NoteListView {
+        id: noteList
+        anchors.top: omniBar.bottom
+        anchors.bottom: parent.bottom
+        model: ListModel{id: notesListModel}
+
+        onPressed: {
+            var noteId = model.get(index).id
+            app.goToPage(app.pages["View"]);
+            app.currentPage.noteId = noteId
+
+
         }
 
-        OmniBar {
-            id: omniBar
-            anchors.top: actionBar.bottom
-            onContract: {addNoteActionButton.show(); refresh()}
-        }
-
-        Layouts.NoteListView {
-            id: noteList
-            anchors.top: omniBar.bottom
-            anchors.bottom: parent.bottom
-            model: ListModel{id: notesListModel}
-
-            onPressed: {
-                var noteId = model.get(index).id
-                app.goToPage(app.pages["NoteView"]);
-                app.currentPage.noteId = noteId
-
-
+        onVerticalMovementUpChanged: {
+            if (verticalMovementUp&&!atYEnd){
+                omniBar.show();
+                addNoteActionButton.show()
             }
-
-            onVerticalMovementUpChanged: {
-                if (verticalMovementUp&&!atYEnd){
-                    omniBar.show();
-                    addNoteActionButton.show()
-                }
-            }
-            onDistancePassed: {
-                if(verticalMovementDown&&!atYBeginning) {
-                    addNoteActionButton.hide();
-                    omniBar.hide();
-                }
-            }
-            onRefresh: page.refresh()
         }
-
-        Widgets.ActionButton {
-            id: addNoteActionButton
-            onClicked: page.goPost()
+        onDistancePassed: {
+            if(verticalMovementDown&&!atYBeginning) {
+                addNoteActionButton.hide();
+                omniBar.hide();
+            }
         }
+        onRefresh: page.refresh()
+    }
+
+    Widgets.ActionButton {
+        id: addNoteActionButton
+        onClicked: page.goPost()
     }
 
     AppMenu{
         id: appMenu
     }
-
-
-
-
-
-
 
 
 }

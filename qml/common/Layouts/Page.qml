@@ -67,15 +67,15 @@ Rectangle
 //        anchors.bottom: parent.bottom
 //    }
 
-    //Page shadowing effect
-//    Rectangle
-//    {
-//        id: pageOverlay
-//        color: Style.Background.OVERLAY
-//        anchors.fill: parent
-//        opacity: 0
-//        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
-//    }
+//    Page shadowing effect
+    Rectangle
+    {
+        id: pageOverlay
+        color: Style.Background.OVERLAY
+        anchors.fill: parent
+        opacity: 0
+        Behavior on opacity {NumberAnimation{duration: page.backgroundAnimationDuration}}
+    }
 
     //Page click sensor
     //Used to detect onClickOutside events
@@ -87,15 +87,15 @@ Rectangle
 //        onClicked: pageInteraction (mouse)
 //    }
 
-//    states: [
-//        State {
-//            name: "DISABLED"
-//            when: !page.enabled
+    states: [
+        State {
+            name: "DISABLED"
+            when: !page.enabled
 
-//            PropertyChanges {
-//                target: pageOverlay
-//                opacity: 1
-//            }
-//        }
-//    ]
+            PropertyChanges {
+                target: pageOverlay
+                opacity: 1
+            }
+        }
+    ]
 }

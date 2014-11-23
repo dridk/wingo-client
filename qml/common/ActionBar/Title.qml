@@ -39,9 +39,9 @@ Components.TouchSensorArea {
             color: Style.Typography.Actionbar[actionBarTitle.style]
 
         }
-        Item{
-            width: _RES.s_MARGIN
-            height: parent.height
-        }
+//        Item{
+//            width: _RES.s_MARGIN
+//            height: parent.height
+//        }
     }
 }

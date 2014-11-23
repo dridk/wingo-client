@@ -44,6 +44,7 @@ var Background = {
                 ALTERNATIVE: Palette.SUNRISE,
                 UTILITY: Palette.SILVER,
                 SPECIAL: Palette.AZURES,
+                ACCENT: Palette.DEEPSEA
             }
         },
         Button: {
@@ -109,6 +110,7 @@ var Background = {
                 ALTERNATIVE: Palette.WHITE,
                 UTILITY: Palette.BLACK,
                 SPECIAL: Palette.WHITE,
+                ACCENT: Palette.WHITE
             }
         }
     },

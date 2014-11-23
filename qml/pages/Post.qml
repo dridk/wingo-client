@@ -51,7 +51,7 @@ Layouts.Page {
         }
 
         if (omniBar.maxTakes > -1)
-            post["limit"] = omniBar.noteTakeLimitModel[noteProperties.maxTakes] * 1;
+            post["limit"] = omniBar.noteTakeLimitModel[omniBar.maxTakes] * 1;
 
         console.debug("POST NOTE")
         postNoteRequester.post(post)
