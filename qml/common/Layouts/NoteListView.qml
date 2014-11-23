@@ -13,7 +13,7 @@ ListView {
     signal pressed(string index)
 
     delegate: NoteListItem {
-        onPressed: noteList.pressed(index)
+        onClicked: noteList.pressed(index)
     }
 
     property real triggerAnDistance: height * 0.2
@@ -43,16 +43,16 @@ ListView {
             distancePassed()
     }
 
-    section.property: "timestamp"
-    section.criteria: ViewSection.FullString
-    section.delegate: Item {
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: _RES.s_LIST_ITEM_HEIGHT
-        Widgets.Label {
-            text: section
-        }
-    }
+//    section.property: "timestamp"
+//    section.criteria: ViewSection.FullString
+//    section.delegate: Item {
+//        anchors.left: parent.left
+//        anchors.right: parent.right
+//        height: _RES.s_LIST_ITEM_HEIGHT
+//        Widgets.Label {
+//            text: section
+//        }
+//    }
 
 
     //    add: Transition {
