@@ -68,5 +68,6 @@
         <file>qml/pages/Painter/Toolbar.qml</file>
         <file>qml/pages/Painter/Palette.qml</file>
         <file>qml/scripts/noteListUtilities.js</file>
+        <file>qml/pages/NoteView.qml</file>
     </qresource>
 </RCC>

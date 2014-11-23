@@ -10,7 +10,10 @@ ListView {
     anchors.left: parent.left
     anchors.right: parent.right
     clip: true
+    signal pressed(string index)
+
     delegate: NoteListItem {
+        onPressed: noteList.pressed(index)
     }
 
     property real triggerAnDistance: height * 0.2

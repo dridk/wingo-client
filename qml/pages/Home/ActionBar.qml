@@ -9,7 +9,9 @@ import "../../common/Controls" as Widgets
 
 ActionBar.Widget {
     id: actionBar
+    property alias title : titleId.text
     ActionBar.Title {
+        id:titleId
         icon: Icons.SANDWICH
         text: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
         onClicked: page.menu()
@@ -19,7 +21,7 @@ ActionBar.Widget {
             icon: Icons.POCKET
             onClicked: page.goPocket()
             Widgets.Badge{
-                value: 3
+                value: app.logged ? app.currentUser["pocket_count"] : 0
                 style: "ACTIONBAR"
                 anchors.right: parent.right
                 anchors.rightMargin: _RES.s_MARGIN
@@ -31,4 +33,5 @@ ActionBar.Widget {
             onClicked: page.refresh()
         }
     }
+
 }

@@ -11,9 +11,12 @@ import "../Components" as Componenets
 import "../Controls" as Widgets
 
 Item{
+    id:root
     anchors.left: parent.left
     anchors.right: parent.right
     height: noteListItem.height + _RES.s_MARGIN
+
+    signal pressed()
 
 Componenets.WidgetItemBase{
     id: noteListItem
@@ -23,6 +26,7 @@ Componenets.WidgetItemBase{
     anchors.margins: _RES.s_MARGIN
     height: Math.max(_RES.s_NOTE_LIST_MIN_HEIGHT, noteLayout.height)
     property bool layoutMini: height === _RES.s_NOTE_LIST_MIN_HEIGHT
+    opacity: itemArea.pressed ? 0.2 : 1
 //    outerShadow: false
 
 
@@ -164,4 +168,15 @@ Componenets.WidgetItemBase{
         }
     }
 
-}}
+}
+
+
+MouseArea {
+    id:itemArea
+    anchors.fill: parent
+    onClicked:root.pressed()
+}
+
+
+
+}

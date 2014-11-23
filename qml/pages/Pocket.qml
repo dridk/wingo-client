@@ -17,24 +17,15 @@ Layouts.Page {
 
     function refresh(){
 
-        var request = {
-            "lat": app.latitude,
-            "lon": app.longitude,
-            "radius": omniBar.distance,
-            "order": omniBar.sortByDate ? "recent" : "popular"
-        }
-        if (omniBar.search !== "")
-                request["query"] = omniBar.search;
-
         noteList.positionViewAtBeginning()
         notesListModel.clear()
-        notesServerRequest.get(request);
+       pocketNoteRequester.get();
     }
     Component.onCompleted: refresh()
 
     Request {
-        id: notesServerRequest
-        source: "/notes"
+        id: pocketNoteRequester
+        source: "/users/pockets"
         onSuccess: {
             console.log( data.results.length )
             notesListModel.append(data.results)
