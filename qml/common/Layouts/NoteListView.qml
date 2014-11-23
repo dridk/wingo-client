@@ -40,6 +40,17 @@ ListView {
             distancePassed()
     }
 
+    section.property: "timestamp"
+    section.criteria: ViewSection.FullString
+    section.delegate: Item {
+        anchors.left: parent.left
+        anchors.right: parent.right
+        height: _RES.s_LIST_ITEM_HEIGHT
+        Widgets.Label {
+            text: section
+        }
+    }
+
 
     //    add: Transition {
     //            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }

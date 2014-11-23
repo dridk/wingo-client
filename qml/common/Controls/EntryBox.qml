@@ -15,6 +15,10 @@ Item {
     property alias placeholder: textBoxPlaceholder.text
     property alias inputMethodHints : textBoxEdit.inputMethodHints
 
+    function clear() {
+        text = "";
+    }
+
     Rectangle{
         height: _RES.s_MARGIN
 
@@ -68,7 +72,7 @@ Item {
                 color: entryBox.text === ""? Style.Icon.SUNKEN : Style.Icon.FADE
             }
 
-            onClicked: entryBox.text = ""
+            onClicked: entryBox.clear()
 
         }
     }

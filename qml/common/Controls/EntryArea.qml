@@ -18,6 +18,10 @@ WidgetItemBase {
     property alias textLength: textBoxEdit.length
     property int maxTextLength : -1
 
+    function clear() {
+        text = "";
+    }
+
     Item{
         id: textEntryBlockWrapper
         height: textBoxEdit.contentHeight

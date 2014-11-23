@@ -55,7 +55,10 @@ Layouts.Page {
         source: "/notes"
         onSuccess: {
             console.log( data.results.length )
-            var diff = Utilities.diffArray()
+//            var diff = Utilities.diffArray()
+            Utilities.applyFunction(data.results, function(item, index){
+
+            });
 
             notesListModel.clear()
             notesListModel.append(data.results)

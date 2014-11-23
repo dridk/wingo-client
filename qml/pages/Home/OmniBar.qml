@@ -17,7 +17,7 @@ OmniBar.Widget{
     property bool sortByDate: true
     property bool sortByPopularity: false
     property double distance: 1000
-    property string search: ""
+    property alias search: searchBar.text
 
     function filterBarSensorLabelText(){
         var t = "";
@@ -51,11 +51,8 @@ OmniBar.Widget{
         }
     }
 
-    OmniBar.SearchListItem{
-        text: filterBar.search
-        onTextChanged: {
-            filterBar.search = text
-        }
+    OmniBar.SearchListItem {
+        id: searchBar
     }
 
     OmniBar.MultiSelectListItem{
@@ -84,6 +81,6 @@ OmniBar.Widget{
 
     OmniBar.TagListView {
         model: ListModel{id:tagModel}
-        onClick: filterBar.search = tag
+        onClick: searchBar.text = tag
     }
 }
