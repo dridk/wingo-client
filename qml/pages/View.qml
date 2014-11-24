@@ -79,8 +79,13 @@ Layouts.Page {
     Request {
         id: noteViewRequester
         onSuccess: {
+
+            if (data["results"]["anonymous"] === false) {
+
             noteView.avatar = data["results"]["author"]["avatar"]
             noteView.nickname = data["results"]["author"]["nickname"]
+            }
+
             noteView.details = DateFormat.toNow(data["results"]["timestamp"],
                                                 [qsTr("just now"), qsTr(
                                                      "min ago"), qsTr("h ago"), qsTr(
