@@ -35,6 +35,7 @@ ApplicationWindow {
         "Home":     Qt.resolvedUrl("pages/Home.qml"),
         "Post":     Qt.resolvedUrl("pages/Post.qml"),
         "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
+        "Mynotes":   Qt.resolvedUrl("pages/Mynotes.qml"),
         "Login":    Qt.resolvedUrl("pages/Login.qml"),
         "Account":  Qt.resolvedUrl("pages/Account.qml"),
         "View":     Qt.resolvedUrl("pages/View.qml")
@@ -83,7 +84,7 @@ ApplicationWindow {
         property int s_BASE_UNIT: 8
 
         //Fonts::
-        property int s_TEXT_SIZE_MEDIUM: 20
+        property int s_TEXT_SIZE_MEDIUM: 22
         property int s_TEXT_SIZE_SMALL: 18
         property int s_TEXT_SIZE_MINI: 14
 

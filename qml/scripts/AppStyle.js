@@ -59,6 +59,14 @@ var Background = {
             DEFAULT: Palette.WHITE,
             ACTIONBAR: Palette.WHITE,
             ACCENT: Palette.MAGENTA
+        },
+        Tag: {
+            DEFAULT: Palette.AZURES,
+            DISABLED: Palette.SILVER,
+            ACTION: Palette.DEEPSEA,
+            ACCENT: Palette.SUNRISE,
+            HOT: Palette.MAGENTA,
+            BRIGHT: Palette.YELLOW
         }
     },
     Border = {
@@ -90,6 +98,14 @@ var Background = {
             DEFAULT: Palette.DEEPSEA,
             ACTIONBAR: Palette.MAGENTA,
             ACCENT: Palette.WHITE
+        },
+        Tag: {
+            DEFAULT: Palette.WHITE,
+            DISABLED: Palette.DARKGRAY,
+            ACTION: Palette.WHITE,
+            ACCENT: Palette.WHITE,
+            HOT: Palette.WHITE,
+            BRIGHT: Palette.BLACK
         }
     },
     Icon = {

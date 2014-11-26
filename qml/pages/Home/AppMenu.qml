@@ -32,6 +32,7 @@ SideBar.Widget {
         text: "My Notes"
         icon: Icons.NOTEBOOK
         enabled: app.logged
+        onClicked: page.goMynotes()
     }
     SideBar.SimpleListItem{
         text: "My Pocket"

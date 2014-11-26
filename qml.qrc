@@ -70,5 +70,10 @@
         <file>qml/scripts/noteListUtilities.js</file>
         <file>qml/pages/View.qml</file>
         <file>qml/pages/View/Note.qml</file>
+        <file>qml/common/Controls/TagItem.qml</file>
+        <file>qml/common/Layouts/TagListView.qml</file>
+        <file>qml/pages/Mynotes.qml</file>
+        <file>qml/pages/Mynotes/OmniBar.qml</file>
+        <file>qml/pages/Mynotes/ActionBar.qml</file>
     </qresource>
 </RCC>

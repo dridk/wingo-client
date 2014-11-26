@@ -54,10 +54,28 @@ Layouts.Page {
         }
     }
 
-    Note{
-        id: noteView
+    Flickable {
+        id: noteViewFlickable
+        flickableDirection: Flickable.VerticalFlick
         anchors.top: actionBar.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        contentHeight: noteViewColumn.height
+        boundsBehavior: Flickable.StopAtBounds
+        interactive: false
+        Column {
+            id: noteViewColumn
+            anchors.left: parent.left
+            anchors.right: parent.right
+            spacing: 0
+
+            Note{
+                id: noteView
+            }
+        }
     }
+
 
 //    Text {
 //        id: item
@@ -79,8 +97,8 @@ Layouts.Page {
     Request {
         id: noteViewRequester
         onSuccess: {
-            noteView.avatar = data["results"]["author"]["avatar"]
-            noteView.nickname = data["results"]["author"]["nickname"]
+            noteView.avatar = data["results"]["anonymous"]? "": data["results"]["author"]["avatar"]
+            noteView.nickname = data["results"]["anonymous"]? "Anonymous": data["results"]["author"]["nickname"]
             noteView.details = DateFormat.toNow(data["results"]["timestamp"],
                                                 [qsTr("just now"), qsTr(
                                                      "min ago"), qsTr("h ago"), qsTr(

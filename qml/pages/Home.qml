@@ -25,6 +25,11 @@ Layouts.Page {
         app.goToPage(app.pages["Pocket"]);
     }
 
+    function goMynotes(){
+        appMenu.contractTray();
+        app.goToPage(app.pages["Mynotes"]);
+    }
+
     function goLogin(){
         appMenu.contractTray();
         app.goToPage(app.pages["Login"]);

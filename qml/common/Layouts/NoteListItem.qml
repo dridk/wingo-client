@@ -150,7 +150,7 @@ Componenets.TouchSensorArea {
                 visible: noteTakesBadge.visible
                 Widgets.Badge {
                     id: noteTakesBadge
-                    value: 150 //takes
+                    value: takes
                     anchors.bottom: noteTakesIcon.bottom
                     z: 1
                 }

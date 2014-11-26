@@ -6,7 +6,7 @@ import "../scripts/AppStyle.js" as Style
 import "../common/Layouts" as Layouts
 import "../common/Controls" as Widgets
 
-import "Pocket"
+import "Mynotes"
 
 Layouts.Page {
     id: page

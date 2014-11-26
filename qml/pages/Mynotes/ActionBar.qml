@@ -13,7 +13,7 @@ ActionBar.Widget {
     ActionBar.Title {
         style: actionBar.style
         icon: Icons.CARRET_LEFT
-        text: "My Pocket"
+        text: "My Notes"
         onClicked: page.back()
     }
     ActionBar.Right{
