@@ -44,6 +44,7 @@ Componenets.WidgetItemBase {
             Widgets.Avatar{
                 id: userIdentityAvatar
                 Layout.fillWidth: false
+                source: "qrc:/qml/Res/images/anonymous.png"
             }
             Column {
                 anchors.top: parent.top
