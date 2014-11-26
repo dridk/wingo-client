@@ -25,15 +25,17 @@ Rectangle {
 
 
 
-    }
+        }
 
 
-    Image {
-        id:pin
-        source: "pin.png"
-        anchors.centerIn: flickable
-        anchors.verticalCenterOffset: -20
-        opacity: 0.5
+        Image {
+            id:pin
+            source: "pin.png"
+            anchors.centerIn: flickable
+            anchors.verticalCenterOffset: -20
+            opacity: 0.5
+        }
     }
+
 }
 
