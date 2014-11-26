@@ -75,5 +75,7 @@
         <file>qml/pages/Mynotes.qml</file>
         <file>qml/pages/Mynotes/OmniBar.qml</file>
         <file>qml/pages/Mynotes/ActionBar.qml</file>
+        <file>qml/pages/MapSelector.qml</file>
+        <file>qml/common/Controls/MapView.qml</file>
     </qresource>
 </RCC>

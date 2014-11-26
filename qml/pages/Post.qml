@@ -11,6 +11,9 @@ import "Post"
 Layouts.Page {
     id: page
 
+    property double selectLatitude : app.latitude
+    property double selectLongitude : app.longitude
+
     function post() {
         if (addImage.isEmpty)
             postData()
@@ -29,12 +32,12 @@ Layouts.Page {
         if(noteEdit.textLength === 0) return app.showMessage("Can't post an empty note");
 
         var post = {
-            "lat": app.latitude,
-            "lon": app.longitude,
+            "lat": selectLatitude,
+            "lon":selectLongitude,
             "author":"darwin", //TIPS... darwin, to make it works without auth
             "anonymous": omniBar.postAnonimous,
             "message":noteEdit.text
-//            "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
+            //            "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
         }
 
         if (omniBar.expiery > -1){
@@ -66,6 +69,15 @@ Layouts.Page {
         addImage.source = path;
     }
 
+    function updatePos(latitude, longitude){
+
+        selectLatitude = latitude
+        selectLongitude = longitude
+
+        console.debug("update",selectLatitude)
+
+    }
+
     Request{
         id:postNoteRequester
         source:"/notes"
@@ -82,8 +94,8 @@ Layouts.Page {
         id:postImageRequester
         source:"/notes/picture"
         onSuccess: {
-           addImage.pathGenerated =  data["results"]["path"]
-           page.postData()
+            addImage.pathGenerated =  data["results"]["path"]
+            page.postData()
         }
         onError: {
             app.showMessage("Cannot upload image " + message)
@@ -137,6 +149,22 @@ Layouts.Page {
         }
 
         onRemove: addImage.pathGenerated = ""
+    }
+
+    Widgets.Button {
+        anchors.top : addImage.bottom
+        anchors.topMargin: 20
+        anchors.horizontalCenter: parent.horizontalCenter
+        icon: Icons.LOGO
+        text: qsTr(selectLatitude+" - " + selectLongitude)
+        style: "ACTION"
+        onClicked: {
+
+            var mapSelector = Qt.resolvedUrl("MapSelector.qml")
+            app.goToPage(mapSelector)
+            app.currentPage.posChanged.connect(updatePos)
+
+        }
     }
 
 }

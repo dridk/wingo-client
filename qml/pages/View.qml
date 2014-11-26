@@ -85,13 +85,13 @@ Layouts.Page {
 //    }
 
     //======= JUST A TEST =====================
-//    Image {
-//        source: "http://localhost:5000/notes/" + noteId + "/map"
+    Image {
+        source: "http://localhost:5000/notes/" + noteId + "/map"
 
-//        onStatusChanged: {
-//            console.debug(source)
-//        }
-//    }
+        onStatusChanged: {
+            console.debug(source)
+        }
+    }
 
     //======= JUST A TEST =====================
     Request {
