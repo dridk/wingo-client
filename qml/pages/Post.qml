@@ -106,7 +106,6 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
-        z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
     }
 
     OmniBar {
@@ -120,6 +119,7 @@ Layouts.Page {
         id: noteEdit
         anchors.top: omniBar.bottom
         placeholder: qsTr("Type your note text here...")
+        z: 1
 
         anchors.left: parent.left
         anchors.right: parent.right
@@ -129,9 +129,26 @@ Layouts.Page {
         Component.onCompleted: noteEdit.forceActiveFocus()
     }
 
+    Widgets.MapView {
+        id: mapView
+        anchors.top: noteEdit.bottom
+        expandable: false
+        latitude: app.latitude
+        longitude: app.longitude
+        z: 0
+
+        onClick: {
+
+            var mapSelector = Qt.resolvedUrl("MapSelector.qml")
+            app.goToPage(mapSelector)
+            app.currentPage.posChanged.connect(updatePos)
+
+        }
+    }
+
     AddImage{
         id: addImage
-        anchors.top: noteEdit.bottom
+        anchors.top: mapView.bottom
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
         anchors.horizontalCenter: parent.horizontalCenter
         property url pathGenerated

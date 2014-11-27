@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import Wingo 1.0
 
+import "../../scripts/StringFormat.js" as StringFormat
 import "../../scripts/AppStyle.js" as Style
 import "../../scripts/Icons.js" as Icons
 import "../Components" as Componenets
@@ -11,12 +12,17 @@ Componenets.WidgetItemBase {
     anchors.right: parent.right
     height: _RES.s_LIST_ITEM_HEIGHT
 
+    color: Style.Background.WINDOW
+
     property string noteID: ""
     property double latitude: 0
     property double longitude: 0
     property double zoom: 15
 
     property bool expanded: false
+    property bool expandable: true
+
+    signal click
 
     function expand() {
         expanded = true
@@ -59,6 +65,15 @@ Componenets.WidgetItemBase {
             anchors.centerIn: parent
             anchors.verticalCenterOffset: _RES.scale(10)
 
+            Label{
+                anchors.centerIn: parent
+                anchors.verticalCenterOffset: - _RES.scale(10)
+                text: "Loading map..."
+                visible: mapLoader.status != Image.Ready
+                color: Style.Typography.QUOTE
+                font.pixelSize: _RES.s_TEXT_SIZE_SMALL
+            }
+
             Icon{
                 id: mapCursor
                 name: Icons.LOCATION
@@ -67,6 +82,8 @@ Componenets.WidgetItemBase {
                 color: Style.Palette.MAGENTA
                 visible: mapLoader.status === Image.Ready
                 size: _RES.s_ICON_SIZE_SMALL
+                iconStyle: Text.Outline
+                iconStyleColor: Style.Background.WINDOW
             }
         }
     }
@@ -75,9 +92,11 @@ Componenets.WidgetItemBase {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: _RES.s_MARGIN
-        text: parent.latitude + " " + parent.longitude
+        text: "@" + StringFormat.trim(parent.latitude, 20) + ", " + StringFormat.trim(parent.longitude, 20)
         color: Style.Palette.MAGENTA
         font.pixelSize: _RES.s_TEXT_SIZE_MINI
+        style: Text.Outline
+        styleColor: Style.Background.WINDOW
     }
 
     Request{
@@ -88,7 +107,10 @@ Componenets.WidgetItemBase {
         //TODO Make this draggable
         //so the map expands on drag, rather then on click
         anchors.fill: parent
-        onClicked: parent.toggle()
+        onClicked: {
+            if (parent.expandable) parent.toggle();
+            parent.click()
+        }
     }
 
     states: [

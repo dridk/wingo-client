@@ -199,6 +199,13 @@ function sprintf( format ) {
         return newString;
     };
 
+function trim(string, length, trimIndicator){
+    string = string + "";
+    length = length || 255;
+    trimIndicator = trimIndicator || "...";
+    return string.substring(0, length) + trimIndicator;
+}
+
 function setWordColor(string, color, pattern){
     pattern = pattern || /.*/g;
     return string.replace(pattern , "<font color='"+color+"'>$&</font>");
