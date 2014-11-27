@@ -17,7 +17,7 @@ Rectangle {
 
     PolygonItem {
         id: tip
-        width: parent.width * (tipSize/100)
+        width: tipSize
         height: width
 
         x: -width

@@ -63,7 +63,7 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         contentHeight: noteViewColumn.height
         boundsBehavior: Flickable.StopAtBounds
-        interactive: false
+        interactive: true
         Column {
             id: noteViewColumn
             anchors.left: parent.left
@@ -72,6 +72,37 @@ Layouts.Page {
 
             Note{
                 id: noteView
+                z: 3
+            }
+
+            Widgets.MapView{
+                id: mapView
+                noteID: noteId
+                z: 2
+            }
+
+            Layouts.CommentListView{
+                id: commentListView
+                z: 1
+                model: ListModel{
+                    Component.onCompleted: {
+                        this.append(
+                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
+                                        "timestamp": "2014-11-04 09:09:21.620000",
+                                        "message": "La Daurade : Fames ipsum porta fusce turpis luctus risus morbi lobortis ridiculus interdum lorem velit netus. Proin fames. Risus done #style #colorful"}
+                                    )
+                        this.append(
+                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
+                                        "timestamp": "2014-11-04 09:09:21.620000",
+                                        "message": "La Daurade : Fames ipsum porta fusce"}
+                                    )
+                        this.append(
+                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
+                                        "timestamp": "2014-11-04 09:09:21.620000",
+                                        "message": "La Daurade : Fames ipsum porta fusce turpis luctus risus velit netus. Proin fames. Risus done #style #colorful"}
+                                    )
+                    }
+                }
             }
         }
     }
@@ -85,13 +116,13 @@ Layouts.Page {
 //    }
 
     //======= JUST A TEST =====================
-    Image {
-        source: "http://localhost:5000/notes/" + noteId + "/map"
+//    Image {
+//        source: "http://localhost:5000/notes/" + noteId + "/map"
 
-        onStatusChanged: {
-            console.debug(source)
-        }
-    }
+//        onStatusChanged: {
+//            console.debug(source)
+//        }
+//    }
 
     //======= JUST A TEST =====================
     Request {
@@ -115,6 +146,8 @@ Layouts.Page {
 
             noteView.message = StringFormat.setWordColor(data["results"]["message"],
                                                          Style.Typography.LINK, /\#\w+/g)
+            mapView.latitude = data["results"]["lat"]
+            mapView.longitude = data["results"]["lon"]
         }
         onError: app.showMessage(message)
     }
