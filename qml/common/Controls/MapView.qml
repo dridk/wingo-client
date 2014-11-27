@@ -92,7 +92,7 @@ Componenets.WidgetItemBase {
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         anchors.margins: _RES.s_MARGIN
-        text: "@" + StringFormat.trim(parent.latitude, 20) + ", " + StringFormat.trim(parent.longitude, 20)
+        text: "@" + StringFormat.trim(parent.latitude, 10) + ", " + StringFormat.trim(parent.longitude, 10)
         color: Style.Palette.MAGENTA
         font.pixelSize: _RES.s_TEXT_SIZE_MINI
         style: Text.Outline

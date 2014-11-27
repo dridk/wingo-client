@@ -203,7 +203,7 @@ function trim(string, length, trimIndicator){
     string = string + "";
     length = length || 255;
     trimIndicator = trimIndicator || "...";
-    return string.substring(0, length) + trimIndicator;
+    return string.length > length? (string.substring(0, length) + trimIndicator) : string;
 }
 
 function setWordColor(string, color, pattern){
