@@ -40,6 +40,11 @@ Layouts.Page {
         app.goToPage(app.pages["Account"]);
     }
 
+    function goSettings() {
+        appMenu.contractTray();
+        app.goToPage(app.pages["Settings"]);
+    }
+
 
     function refresh(){
 

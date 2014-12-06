@@ -44,6 +44,7 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: "App Settings"
         icon: Icons.GEAR
+        onClicked: page.goSettings()
     }
     SideBar.SimpleListItem{
         text: "About"

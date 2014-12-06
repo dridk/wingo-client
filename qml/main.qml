@@ -35,10 +35,11 @@ ApplicationWindow {
         "Home":     Qt.resolvedUrl("pages/Home.qml"),
         "Post":     Qt.resolvedUrl("pages/Post.qml"),
         "Pocket":   Qt.resolvedUrl("pages/Pocket.qml"),
-        "Mynotes":   Qt.resolvedUrl("pages/Mynotes.qml"),
+        "Mynotes":  Qt.resolvedUrl("pages/Mynotes.qml"),
         "Login":    Qt.resolvedUrl("pages/Login.qml"),
         "Account":  Qt.resolvedUrl("pages/Account.qml"),
-        "View":     Qt.resolvedUrl("pages/View.qml")
+        "View":     Qt.resolvedUrl("pages/View.qml"),
+        "Settings": Qt.resolvedUrl("pages/Settings.qml")
     }
 
     function goBack(){

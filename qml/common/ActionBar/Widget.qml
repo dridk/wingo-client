@@ -17,7 +17,7 @@ Rectangle {
 
     z: 99 //Always on top of page layout
 
-    property string style: Style.PAGE_DEFAULT
+    property string style: parent.style || Style.PAGE_DEFAULT
 
     color: Style.Background.Actionbar[actionBar.style]
 
