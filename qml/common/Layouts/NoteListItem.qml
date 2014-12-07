@@ -147,7 +147,6 @@ Componenets.TouchSensorArea {
                 anchors.topMargin: -_RES.s_MARGIN
                 anchors.right: noteAvatar.right
                 anchors.rightMargin: _RES.s_BORDER
-                visible: noteTakesBadge.visible
                 Widgets.Badge {
                     id: noteTakesBadge
                     value: takes
@@ -156,6 +155,7 @@ Componenets.TouchSensorArea {
                 }
                 Widgets.Icon {
                     id: noteTakesIcon
+                    visible: noteTakesBadge.visible
                     name: Icons.POCKET
                     color: Style.Icon.SIDELINE
                     size: _RES.s_ICON_SIZE_SMALL

@@ -1,9 +1,10 @@
 import QtQuick 2.3
 import QtQuick.Layouts 1.1
 
+import "../Components" as Components
 import "../../scripts/AppStyle.js" as Style
 
-Rectangle {
+Components.WidgetItemBase {
     id: actionBar
     default property alias _contentChildren: actionBarRowLayout.data
 
@@ -25,16 +26,7 @@ Rectangle {
         id: actionBarRowLayout
         anchors.fill: parent
         spacing: _RES.s_MARGIN
+        opacity: parent.enabled? 1: 0.8
+        Behavior on opacity {NumberAnimation{duration: 100}}
     }
-
-    states: [
-        State {
-            name: "DISABLED"
-
-            PropertyChanges {
-                target: actionBar
-                enabled: false
-            }
-        }
-    ]
 }

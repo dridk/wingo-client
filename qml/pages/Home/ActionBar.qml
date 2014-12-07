@@ -9,6 +9,9 @@ import "../../common/Controls" as Widgets
 
 ActionBar.Widget {
     id: actionBar
+    z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
+    hasShadow: omniBar.hidden
+    enabled: !omniBar.expanded
     property alias title : titleId.text
     ActionBar.Title {
         id:titleId

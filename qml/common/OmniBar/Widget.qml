@@ -22,6 +22,7 @@ Item {
     property bool animateIconOnexpand: true
     property color iconBackgroundColor: Style.Background.WINDOW
     property bool expanded: omniBarTray.height > 0
+    property bool hidden: state == "HIDDEN"
     property bool fillHeight: false
     z: 99
 
@@ -110,6 +111,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.bottom
         height: app.height - (omniBar.y + omniBar.height)
+        onClicked: omniBar.contractTray()
     }
 
     Components.WidgetItemBase {

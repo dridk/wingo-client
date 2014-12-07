@@ -149,13 +149,13 @@ Layouts.Page {
             mapView.latitude = data["results"]["lat"]
             mapView.longitude = data["results"]["lon"]
         }
-        onError: app.showMessage(message)
+        onError: app.showMessage("ERROR", message)
     }
 
     Request {
         id: takeNoteRequester
         source: "/users/pockets"
-        onSuccess: app.showMessage("Note has been added in pocket")
-        onError: app.showMessage(message)
+        onSuccess: app.showMessage("SUCCESS", "Note has been added in pocket")
+        onError: app.showMessage("ERROR", message)
     }
 }

@@ -26,6 +26,11 @@ Rectangle
 
     signal pageInteraction (variant mouse)
 
+    function beforeShown(){}
+    function afterShown() {}
+    function beforeHidden(){}
+    function afterHidden() {}
+
     function back() { app.goBack() }
     function menu() {}
     function home() {}

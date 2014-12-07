@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "../Components" as Components
 import "../../scripts/AppStyle.js" as Style
 
 Item {
@@ -37,15 +38,21 @@ Item {
     // Block click throughts
 
     //Page shadowing effect
-    Rectangle
-    {
+    Components.OverlayBackground {
         id: overlay
-        color: Style.Background.OVERLAY
+        z: 0
         anchors.fill: parent
-        opacity: 0
-        Behavior on opacity {NumberAnimation{}}
-        MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: sideBar.contractTray()}
+        onClicked: sideBar.contractTray()
     }
+//    Rectangle
+//    {
+//        id: overlay
+//        color: Style.Background.OVERLAY
+//        anchors.fill: parent
+//        opacity: 0
+//        Behavior on opacity {NumberAnimation{}}
+//        MouseArea{anchors.fill: parent; enabled: parent.opacity > 0; onClicked: sideBar.contractTray()}
+//    }
 
     Rectangle{
         id: sideBarTray
@@ -75,7 +82,7 @@ Item {
 
             PropertyChanges {
                 target: overlay
-                opacity: 1
+                enabled: true
             }
         }
     ]

@@ -29,7 +29,7 @@ Layouts.Page {
     }
 
     function postData () {
-        if(noteEdit.textLength === 0) return app.showMessage("Can't post an empty note");
+        if(noteEdit.textLength === 0) return app.showMessage("ERROR","Can't post an empty note");
 
         var post = {
             "lat": selectLatitude,
@@ -85,7 +85,7 @@ Layouts.Page {
             app.showMessage("SUCCESS")
         }
         onError: {
-            app.showMessage("ERROR " + message)
+            app.showMessage("ERROR", message)
         }
     }
 
@@ -98,7 +98,7 @@ Layouts.Page {
             page.postData()
         }
         onError: {
-            app.showMessage("Cannot upload image " + message)
+            app.showMessage("ERROR", "Could not uploading image" + message)
         }
     }
 

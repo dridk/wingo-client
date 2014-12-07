@@ -23,7 +23,7 @@ Layouts.Page {
         }
 
         onError: {
-            app.showMessage("Bad login or password")
+            app.showMessage("Alert", "Bad login or password")
         }
 
 

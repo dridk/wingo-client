@@ -50,8 +50,9 @@ ApplicationWindow {
         stack.push(page)
     }
 
-    function showMessage(message) {
-        msgTextBox.text = message
+    function showMessage(title, text) {
+        msgBox.title = title
+        msgBox.text = text || ""
         msgBox.visible  = true
     }
 
@@ -155,7 +156,11 @@ ApplicationWindow {
             pushTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
-                        script: exitItem.enabled = false
+                        script: {
+                            exitItem.beforeHidden()
+                            enterItem.beforeShown()
+                            exitItem.enabled = false
+                        }
                     }
                     PropertyAnimation {
                         target: enterItem
@@ -163,18 +168,34 @@ ApplicationWindow {
                         from: enterItem.width
                         to: 0
                     }
+                    ScriptAction {
+                        script: {
+                            exitItem.afterHidden()
+                            enterItem.afterShown()
+                        }
+                    }
                 }
             }
             popTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
-                        script: enterItem.enabled = true
+                        script: {
+                            exitItem.beforeHidden()
+                            enterItem.beforeShown()
+                            enterItem.enabled = true
+                        }
                     }
                     PropertyAnimation {
                         target: exitItem
                         property: "x"
                         to: enterItem.width
                         from: 0
+                    }
+                    ScriptAction {
+                        script: {
+                            exitItem.afterHidden()
+                            enterItem.afterShown()
+                        }
                     }
                 }
             }
@@ -208,27 +229,37 @@ ApplicationWindow {
 
 
     //======== MESSAGE ERROR SHOW
-    Rectangle {
-        id:msgBox
-        width: parent.width
-        height: 200
-        anchors.centerIn: parent
-        color:"#00b8cc"
-        visible: false
-        Label {
-            id: msgTextBox
-            anchors.centerIn: parent
-            text: "ERROR happens"
-            color: "white"
-            font.pixelSize:25
+    MessageDialog {
+        id: msgBox
+        title: ""
+        text: ""
+        onAccepted: {
+            console.log("And of course you could only agree.")
+//            Qt.quit()
         }
-        MouseArea {
-            anchors.fill: parent
-            onClicked: msgBox.visible=false
-        }
-
-
+//        Component.onCompleted: visible = true
     }
+//    Rectangle {
+//        id:msgBox
+//        width: parent.width
+//        height: 200
+//        anchors.centerIn: parent
+//        color:"#00b8cc"
+//        visible: false
+//        Label {
+//            id: msgTextBox
+//            anchors.centerIn: parent
+//            text: "ERROR happens"
+//            color: "white"
+//            font.pixelSize:25
+//        }
+//        MouseArea {
+//            anchors.fill: parent
+//            onClicked: msgBox.visible=false
+//        }
+
+
+//    }
 
     //=========== POSITIONNING GPS
     PositionSource

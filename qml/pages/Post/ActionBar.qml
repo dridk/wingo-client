@@ -10,6 +10,7 @@ import "../../common/Controls" as Widgets
 ActionBar.Widget {
     id: actionBar
     z: omniBar.expanded? 1: 4 //We need this to make sure omniBar tray closes when clicked outside
+    hasShadow: false
 
     ActionBar.Title {
         icon: Icons.CARRET_LEFT

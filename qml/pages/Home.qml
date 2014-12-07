@@ -12,8 +12,9 @@ import "Home"
 Layouts.Page {
     id: page
 
+//    function beforeShown() {noteList.re}
     function back() {/*do nothing*/}
-    function menu() {appMenu.toggleTray();}
+    function menu() {appMenu.toggleTray()}
 
     function goPost(){
         appMenu.contractTray();
@@ -108,7 +109,6 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
-        z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
     }
 
     OmniBar {

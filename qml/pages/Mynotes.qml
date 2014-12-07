@@ -38,7 +38,6 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
-        z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
     }
 
     OmniBar {

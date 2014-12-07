@@ -80,5 +80,6 @@
         <file>qml/common/Layouts/CommentListView.qml</file>
         <file>qml/common/Layouts/CommentListItem.qml</file>
         <file>qml/pages/Settings.qml</file>
+        <file>qml/lib/Toaster.qml</file>
     </qresource>
 </RCC>
