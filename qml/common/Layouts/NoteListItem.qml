@@ -125,7 +125,7 @@ Componenets.TouchSensorArea {
             Image {
                 source: picture
                 width: parent.width
-                visible: picture == "" ? false : true
+                visible: picture == "null" ? false : true
 
 
             }

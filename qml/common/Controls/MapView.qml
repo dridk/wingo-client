@@ -39,7 +39,8 @@ Componenets.WidgetItemBase {
     function refresh() {
         var request = "";
         if (noteID !== "") {
-            request = "http://localhost:5000/notes/" + noteId + "/map"
+            request = "http://"+mapRequest.host+":"+mapRequest.port+"/notes/" + noteId + "/map"
+            console.debug("MAP REQUESTS : "+request)
         }else{
             //Use lat and lon here!!!
             request = ""
@@ -108,6 +109,7 @@ Componenets.WidgetItemBase {
 
     Request{
         id: mapRequest
+        // Hum... it's seems this is used only to get host and port from Map request picture... Very ugly...
     }
 
     MouseArea{
