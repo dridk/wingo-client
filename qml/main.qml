@@ -17,6 +17,7 @@ ApplicationWindow {
 
     Component.onCompleted: {
         configRequester.get()
+        locationRequest.get({"lat": app.latitude, "lon": app.longitude})
     }
     //Global configuration variable
     property variant config
@@ -25,6 +26,7 @@ ApplicationWindow {
     //USE THIS VALUE FOR DESKTOP TESTING
     property double latitude  : 43.601337
     property double longitude : 1.438675
+    property string positionTitle: ""
 
     property bool logged : false
     property variant currentUser
@@ -272,9 +274,19 @@ ApplicationWindow {
                 var coord = gpsSource.position.coordinate;
                 app.longitude = coord.longitude;
                 app.latitude = coord.latitude;
+                //Update location title
+                locationRequest.get({"lat": app.latitude, "lon": app.longitude})
             }
 
             //            console.debug(coord.longitude +" " +coord.latitude )
+        }
+    }
+
+    Request {
+        id:locationRequest
+        source:"/location/here"
+        onSuccess: {
+            app.positionTitle  = data["results"]
         }
     }
 

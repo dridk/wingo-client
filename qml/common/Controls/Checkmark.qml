@@ -16,6 +16,7 @@ Item {
     }
 
     Icon{
+        size: _RES.s_ICON_SIZE_SMALL
         name: checkmark.checked? Icons.CHECKMAK_FULL : Icons.CHECKMAK_BLANK
         anchors.centerIn: parent
         color: checkmark.checked? Style.Icon.ACCENT : Style.Icon.FADE

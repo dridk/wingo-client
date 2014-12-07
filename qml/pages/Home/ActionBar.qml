@@ -16,7 +16,7 @@ ActionBar.Widget {
     ActionBar.Title {
         id:titleId
         icon: Icons.SANDWICH
-        text: "80 Inverlochy Blvd<br><small>Toronto, ON</small>"
+        text: app.positionTitle
         onClicked: page.menu()
     }
     ActionBar.Right{

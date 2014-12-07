@@ -188,7 +188,7 @@ void Request::parseFinished()
 
     qDebug()<<reply->request().url();
     qDebug()<<reply->request().rawHeaderList();
-    qDebug()<<doc.toJson();
+//    qDebug()<<doc.toJson();
 
     if (doc.object().contains("success")){
 

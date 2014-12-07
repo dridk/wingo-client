@@ -106,14 +106,37 @@ Componenets.WidgetItemBase {
     MouseArea{
         //TODO Make this draggable
         //so the map expands on drag, rather then on click
+        property bool dragging: false
+        property real verticalOffset: 0
         anchors.fill: parent
         onClicked: {
             if (parent.expandable) parent.toggle();
             parent.click()
         }
+        onPressed: verticalOffset=mouseY
+        onReleased: {
+            if (dragging) parent.toggle()
+            dragging = false
+        }
+        onMouseYChanged: {
+            if(parent.expandable && pressed){
+                verticalOffset = mouseY - verticalOffset
+                var newHeight = mapView.height + verticalOffset
+                if (newHeight < mapLoader.height &&
+                        newHeight > _RES.s_LIST_ITEM_HEIGHT) mapView.height = newHeight
+                if (verticalOffset !== 0 ) dragging = true
+            }
+        }
     }
 
     states: [
+        State {
+            name: ""
+            PropertyChanges {
+                target: mapView
+                height: _RES.s_LIST_ITEM_HEIGHT
+            }
+        },
         State {
             name: "EXPANDED"
             when: mapView.expanded

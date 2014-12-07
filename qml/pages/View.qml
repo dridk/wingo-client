@@ -27,6 +27,7 @@ Layouts.Page {
     ActionBar.Widget {
         id: actionBar
         ActionBar.Title {
+            id: pageTitle
             style: actionBar.style
             icon: Icons.CARRET_LEFT
             text: noteId
@@ -148,8 +149,18 @@ Layouts.Page {
                                                          Style.Typography.LINK, /\#\w+/g)
             mapView.latitude = data["results"]["lat"]
             mapView.longitude = data["results"]["lon"]
+
+            locationRequest.get({lat:data["results"]["lat"],lon:data["results"]["lon"]})
         }
         onError: app.showMessage("ERROR", message)
+    }
+
+    Request {
+        id:locationRequest
+        source:"/location/here"
+        onSuccess: {
+            pageTitle.text = data["results"]
+        }
     }
 
     Request {

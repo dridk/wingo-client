@@ -59,11 +59,6 @@ Layouts.Page {
                 request["query"] = omniBar.search;
 
         notesServerRequest.get(request);
-
-        //Request location for titleBar
-        locationRequester.get({"lat": app.latitude, "lon":app.longitude})
-
-
     }
     Component.onCompleted: refresh()
 
@@ -86,14 +81,6 @@ Layouts.Page {
         }
 
 
-    }
-
-    Request {
-        id:locationRequester
-        source:"/location/here"
-        onSuccess: {
-            actionBar.title  = data["results"]
-        }
     }
 
 // EXAMPLE OF HOW TO USE isLoading and progress property
