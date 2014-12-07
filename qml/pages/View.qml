@@ -30,7 +30,7 @@ Layouts.Page {
             id: pageTitle
             style: actionBar.style
             icon: Icons.CARRET_LEFT
-            text: noteId
+            text: qsTr("Looking up note<br>location...")
             onClicked: page.back()
         }
 
@@ -166,7 +166,7 @@ Layouts.Page {
     Request {
         id: takeNoteRequester
         source: "/users/pockets"
-        onSuccess: app.showMessage("SUCCESS", "Note has been added in pocket")
+        onSuccess: app.makeToast(qsTr("Note placed into pocket"))
         onError: app.showMessage("ERROR", message)
     }
 }

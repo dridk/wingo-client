@@ -4,7 +4,9 @@ import QtQuick.Controls 1.2
 import QtPositioning 5.3
 import Wingo 1.0
 import "lib"
+import "lib/Toaster.js" as Toaster
 import "scripts/AppStyle.js" as Style
+import "common/Layouts" as Layouts
 
 ApplicationWindow {
     id: app
@@ -18,6 +20,7 @@ ApplicationWindow {
     Component.onCompleted: {
         configRequester.get()
         locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+        Toaster.parent(app)
     }
     //Global configuration variable
     property variant config
@@ -26,7 +29,7 @@ ApplicationWindow {
     //USE THIS VALUE FOR DESKTOP TESTING
     property double latitude  : 43.601337
     property double longitude : 1.438675
-    property string positionTitle: ""
+    property string positionTitle: qsTr("Looking up your<br>current location...")
 
     property bool logged : false
     property variant currentUser
@@ -58,6 +61,10 @@ ApplicationWindow {
         msgBox.visible  = true
     }
 
+    function makeToast(message){
+        Toaster.toast(message)
+    }
+
     function updateLocation(){
         gpsSource.start()
     }
@@ -65,13 +72,6 @@ ApplicationWindow {
     function requestCurrentUser(){
         currentUserRequester.get()
     }
-
-
-
-//    FontLoader { id: font; name: "Droid Sans" }
-    //cpp loaded
-    //FontLoader { id: iconFont; name: "Icon Font"; source: "Res/icons/icons.ttf"}
-
 
     ResolutionManagerCahce{
         id: _RES

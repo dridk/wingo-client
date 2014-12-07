@@ -26,6 +26,8 @@ ListView {
     property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
 
+    property alias busy: timeoutTimer.busy
+
     boundsBehavior: Flickable.DragOverBounds
 
     property int _contentY0: 0
@@ -58,10 +60,10 @@ ListView {
     //    add: Transition {
     //            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }
     //        }
-    Widgets.TimeoutIndicator {
+    Widgets.LoadingIndicator {
         id: timeoutTimer
         y: refreshOnPull
-           && noteList.contentOverTopBound ? _RES.s_MARGIN : -height
+           && (noteList.contentOverTopBound||busy) ? _RES.s_MARGIN : -height
         anchors.horizontalCenter: parent.horizontalCenter
         running: refreshOnPull && noteList.contentOverTopBound
         timeout: parent.refreshTimeout

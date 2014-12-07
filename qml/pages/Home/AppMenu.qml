@@ -24,34 +24,34 @@ SideBar.Widget {
     }
     SideBar.SectionHeader{text:"Places"}
     SideBar.SimpleListItem{
-        text: "New Note"
+        text: qsTr("New Note")
         icon: Icons.POST
         onClicked: page.goPost()
     }
     SideBar.SimpleListItem{
-        text: "My Notes"
+        text: qsTr("My Notes")
         icon: Icons.NOTEBOOK
         enabled: app.logged
         onClicked: page.goMynotes()
     }
     SideBar.SimpleListItem{
-        text: "My Pocket"
+        text: qsTr("My Pocket %1").arg(app.currentUser?"("+app.currentUser["pocket_count"]+")":"")
         icon: Icons.POCKET
         onClicked: page.goPocket()
         enabled: app.logged
     }
     SideBar.SectionHeader{text:"Options"}
     SideBar.SimpleListItem{
-        text: "App Settings"
+        text: qsTr("App Settings")
         icon: Icons.GEAR
         onClicked: page.goSettings()
     }
     SideBar.SimpleListItem{
-        text: "About"
+        text: qsTr("About")
         icon: Icons.INFO
     }
     SideBar.SimpleListItem{
-        text: "Legal"
+        text: qsTr("Legal")
         icon: Icons.INFO
     }
 

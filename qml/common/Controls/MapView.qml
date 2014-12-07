@@ -65,13 +65,12 @@ Componenets.WidgetItemBase {
             anchors.centerIn: parent
             anchors.verticalCenterOffset: _RES.scale(10)
 
-            Label{
+            LoadingIndicator{
                 anchors.centerIn: parent
                 anchors.verticalCenterOffset: - _RES.scale(10)
-                text: "Loading map..."
-                visible: mapLoader.status != Image.Ready
-                color: Style.Typography.QUOTE
-                font.pixelSize: _RES.s_TEXT_SIZE_SMALL
+                busy: mapLoader.status != Image.Ready
+                opacity: busy? 1: 0
+                Behavior on opacity {NumberAnimation{}}
             }
 
             Icon{

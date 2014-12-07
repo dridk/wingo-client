@@ -10,13 +10,12 @@ Rectangle {
     radius: width / 2
     color: Style.Background.WINDOW
 
-    property int progress: 0
+    property bool busy: false
     property alias timeout: indicatorTimer.interval
     property bool running: false
-    property int lineWidth: _RES.s_MARGIN
+    property int lineWidth: _RES.s_HALF_MARGIN
     property color lineColorTimeout: Style.Palette.SUNRISE
-    property color lineColorProgress: Style.Palette.SUNRISE
-
+    property color lineColorBusy: Style.Palette.CYAN
 
     signal timeoutTriggered
 
@@ -26,23 +25,24 @@ Rectangle {
 //        anchors.margins: _RES.s_MARGIN
         antialiasing: true
         property real progress: 0
-        property real pprogress: 0
         onPaint:{
             var l = indicator.lineWidth,
                 w = indicatorProgress.width,
                 h = indicatorProgress.height,
-                r = (w - l * 2) / 2,
-                p = Math.PI * progress,
-                pp = Math.PI * indicator.progress * 0.01;
+                r = (w - l * 3) / 2,
+                p1 = progress >= 0? 0: Math.PI * progress,
+                p2 = progress <= 0? 0: Math.PI * progress;
            var ctx = indicatorProgress.getContext('2d');
 
             ctx.save();
             ctx.clearRect(0, 0, w, h);
+            ctx.translate(w/2, h/2)
+            ctx.rotate(-Math.PI/2);
 
-            ctx.strokeStyle = indicator.lineColorTimeout;
+            ctx.strokeStyle = indicatorBusyAnimation.running? indicator.lineColorBusy : indicator.lineColorTimeout;
             ctx.lineWidth = indicator.lineWidth;
             ctx.beginPath();
-            ctx.arc(r + l, r + l, r, 0, p, true);
+            ctx.arc(0, 0, r, p1, p2, true);
             ctx.stroke();
             ctx.restore();
         }
@@ -50,20 +50,39 @@ Rectangle {
 
         NumberAnimation on progress {
             id: indicatorProgressAnimation
-            running: false
+            running: indicatorTimer.running
             duration: indicatorTimer.interval
             from: 0
             to: 2
         }
 
+        SequentialAnimation on progress {
+            id: indicatorBusyAnimation
+            running: indicator.busy && !indicatorProgressAnimation.running
+            loops: Animation.Infinite
+            NumberAnimation{
+                from: -2
+                to: 0
+                duration: 1000
+            }
+            NumberAnimation{
+                from: 0
+                to: 2
+                duration: 1000
+            }
+        }
+
     }
 
     Icon{
+        id: busyIndicator
         name: Icons.REFRESH
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: _RES.scale(2)
+        anchors.verticalCenterOffset: _RES.scale(1)
         size: _RES.s_ICON_SIZE_SMALL
         color: Style.Icon.SIDELINE
+//        Behavior on color{ColorAnimation{}}
+
     }
 
     Timer{
@@ -74,14 +93,13 @@ Rectangle {
         onTriggered: indicator.timeoutTriggered()
         function toggle(){
             if (indicator.running) {
-                indicatorProgressAnimation.restart();
                 indicatorTimer.restart();
             }else{
-                indicatorProgressAnimation.stop();
                 indicatorTimer.stop();
             }
         }
 
         Component.onCompleted: indicator.runningChanged.connect(toggle)
     }
+
 }

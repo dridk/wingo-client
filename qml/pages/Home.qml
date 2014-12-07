@@ -48,7 +48,6 @@ Layouts.Page {
 
 
     function refresh(){
-
         var request = {
             "lat": app.latitude,
             "lon": app.longitude,
@@ -66,6 +65,7 @@ Layouts.Page {
         id: notesServerRequest
         source: "/notes"
         onSuccess: {
+            app:makeToast("Sucessfully refreshed")
             console.log( data.results.length )
 //            var diff = Utilities.diffArray()
             Utilities.applyFunction(data.results, function(item, index){
@@ -78,19 +78,20 @@ Layouts.Page {
         }
         onError: {
             console.debug(message)
+            app.showMessage("ERROR", message)
         }
 
 
     }
 
 // EXAMPLE OF HOW TO USE isLoading and progress property
-    Text {
-        anchors.centerIn: parent
-        z:10
-        font.pixelSize: 40
-        text:"loading : " + notesServerRequest.downloadProgress*100 +"%"
-        visible: notesServerRequest.isLoading
-    }
+//    Text {
+//        anchors.centerIn: parent
+//        z:10
+//        font.pixelSize: 40
+//        text:"loading : " + notesServerRequest.downloadProgress*100 +"%"
+//        visible: notesServerRequest.isLoading
+//    }
 // END OF EXAMPLE.. CAN BE REMOVED
 
     ActionBar {
@@ -109,13 +110,12 @@ Layouts.Page {
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
         model: ListModel{id: notesListModel}
+        busy: notesServerRequest.isLoading
 
         onPressed: {
             var noteId = model.get(index).id
             app.goToPage(app.pages["View"]);
             app.currentPage.noteId = noteId
-
-
         }
 
         onVerticalMovementUpChanged: {

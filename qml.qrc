@@ -53,7 +53,6 @@
         <file>qml/common/ActionBar/Left.qml</file>
         <file>qml/common/ActionBar/Right.qml</file>
         <file>qml/common/Layouts/NoteListView.qml</file>
-        <file>qml/common/Controls/TimeoutIndicator.qml</file>
         <file>qml/pages/Home/ActionBar.qml</file>
         <file>qml/pages/Post.qml</file>
         <file>qml/pages/Post/ActionBar.qml</file>
@@ -80,6 +79,8 @@
         <file>qml/common/Layouts/CommentListView.qml</file>
         <file>qml/common/Layouts/CommentListItem.qml</file>
         <file>qml/pages/Settings.qml</file>
-        <file>qml/lib/Toaster.qml</file>
+        <file>qml/common/Controls/LoadingIndicator.qml</file>
+        <file>qml/lib/Toaster.js</file>
+        <file>qml/common/Layouts/ToastBasic.qml</file>
     </qresource>
 </RCC>

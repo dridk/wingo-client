@@ -21,6 +21,11 @@ Flow {
         height: _RES.s_MARGIN
     }
 
+    Widgets.Label{
+        text: qsTr("No tags found around you...")
+        visible: parent.model.count === 0
+    }
+
     Repeater {
         id: tagList
         Widgets.TagItem {

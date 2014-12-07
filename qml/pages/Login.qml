@@ -56,7 +56,7 @@ Layouts.Page {
             Widgets.EntryBox {
                 id:emailBox
                 placeholder: "Email"
-                text:"sacha@labsquare.org"
+                text:"eugene@labsquare.org"
                 inputMethodHints: Qt.ImhEmailCharactersOnly
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -65,7 +65,7 @@ Layouts.Page {
             Widgets.EntryBox {
                 id:passBox
                 placeholder: "Password"
-                text:"sacha"
+                text:"12345"
                 inputMethodHints: Qt.ImhHiddenText
                 anchors.left: parent.left
                 anchors.right: parent.right
