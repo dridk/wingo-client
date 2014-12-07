@@ -36,8 +36,8 @@ Layouts.Page {
             "lon":selectLongitude,
             "author":"darwin", //TIPS... darwin, to make it works without auth
             "anonymous": omniBar.postAnonimous,
-            "message":noteEdit.text
-            //            "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
+            "message":noteEdit.text,
+             "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
         }
 
         if (omniBar.expiery > -1){

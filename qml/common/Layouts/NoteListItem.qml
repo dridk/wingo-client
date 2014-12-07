@@ -119,6 +119,18 @@ Componenets.TouchSensorArea {
                 anchors.left: parent.left
                 height: _RES.s_HALF_DOUBLE_MARGIN
             }
+
+
+
+            Image {
+                source: picture
+                width: parent.width
+                visible: picture == "" ? false : true
+
+
+            }
+
+
         }
 
         Item {
