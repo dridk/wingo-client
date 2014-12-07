@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
     qmlRegisterType<PainterItem>("Wingo",1,0,"PainterItem");
     app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");
-    app.setApplicationVersion("0.1.0 alpha XuFu");
+    app.setApplicationVersion("0.2.0 Thorfinn");
 
 
     qDebug()<<app.applicationFilePath();
