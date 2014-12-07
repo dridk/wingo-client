@@ -11,7 +11,7 @@ OmniBar.Widget{
     id: filterBar
     icon: Icons.SEARCH
     animateIconOnexpand: false
-    fillHeight: true
+    fillHeight: false
     z: 2
 
     property bool sortByDate: true
@@ -23,6 +23,7 @@ OmniBar.Widget{
         var t = "";
         if (sortByDate) {t = "Recent"}
         else if (sortByPopularity) {t = "Popular"}
+        if (search) t += ", filtered "
         t += " " + DistanceFormat.format(distance, DistanceFormat.METER, ["right here", "m around", "km around", "far-far away"])
         return t
     }

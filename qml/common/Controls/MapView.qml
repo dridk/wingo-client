@@ -60,6 +60,7 @@ Componenets.WidgetItemBase {
 
         Image {
             id: mapLoader
+
             width: parent.width
             height: width
             anchors.centerIn: parent
@@ -68,7 +69,7 @@ Componenets.WidgetItemBase {
             LoadingIndicator{
                 anchors.centerIn: parent
                 anchors.verticalCenterOffset: - _RES.scale(10)
-                busy: mapLoader.status != Image.Ready
+                busy: mapLoader.status === Image.Loading
                 opacity: busy? 1: 0
                 Behavior on opacity {NumberAnimation{}}
             }
@@ -83,6 +84,13 @@ Componenets.WidgetItemBase {
                 size: _RES.s_ICON_SIZE_SMALL
                 iconStyle: Text.Outline
                 iconStyleColor: Style.Background.WINDOW
+            }
+
+            onStatusChanged: {
+                if (status === Image.Error) {
+                    mapView.state = "HIDDEN"
+                    app.makeToast(qsTr("Couldn't load map"))
+                }
             }
         }
     }
@@ -150,6 +158,14 @@ Componenets.WidgetItemBase {
             PropertyChanges {
                 target: mapCursor
                 size: _RES.s_ICON_SIZE
+            }
+        },
+        State{
+            name: "HIDDEN"
+            when: mapLoader.status === Image.Error
+            PropertyChanges {
+                target: mapView
+                height: 0
             }
         }
 

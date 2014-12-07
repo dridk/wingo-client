@@ -18,7 +18,7 @@ ListView {
 
     property real triggerAnDistance: height * 0.2
     property bool refreshOnPull: true
-    property int refreshTimeout: 1000
+    property int refreshTimeout: 1500
 
     property bool verticalMovementUp: verticalVelocity < 0
     property bool verticalMovementDown: verticalVelocity > 0

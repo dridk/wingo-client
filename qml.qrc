@@ -82,5 +82,8 @@
         <file>qml/common/Controls/LoadingIndicator.qml</file>
         <file>qml/lib/Toaster.js</file>
         <file>qml/common/Layouts/ToastBasic.qml</file>
+        <file>qml/common/MessageTray/Widget.qml</file>
+        <file>qml/common/Layouts/WingoApplicationWindow.qml</file>
+        <file>qml/lib/ResolutionManager.qml</file>
     </qresource>
 </RCC>

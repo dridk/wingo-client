@@ -18,6 +18,7 @@ Layouts.Page {
         source: "/users/login"
 
         onSuccess: {
+            app.makeToast("Log-in successful")
             app.requestCurrentUser()
             app.goBack()
         }
@@ -56,7 +57,7 @@ Layouts.Page {
             Widgets.EntryBox {
                 id:emailBox
                 placeholder: "Email"
-                text:"eugene@labsquare.org"
+                text:"sacha@labsquare.org"
                 inputMethodHints: Qt.ImhEmailCharactersOnly
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -65,7 +66,7 @@ Layouts.Page {
             Widgets.EntryBox {
                 id:passBox
                 placeholder: "Password"
-                text:"12345"
+                text:"sacha"
                 inputMethodHints: Qt.ImhHiddenText
                 anchors.left: parent.left
                 anchors.right: parent.right

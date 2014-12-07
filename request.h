@@ -15,6 +15,7 @@ class Request : public QObject
     Q_PROPERTY (int port READ port )
     Q_PROPERTY (bool isLoading READ isLoading NOTIFY isLoadingChanged)
     Q_PROPERTY (double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged)
+    Q_PROPERTY (bool debug READ debug WRITE debug)
 
 
 
@@ -30,7 +31,8 @@ public:
     int port() ;
     bool isLoading();
     double downloadProgress();
-
+    bool debug();
+    bool debug(const bool debug);
 
 public slots:
     void get(const QVariant& data = QVariant());
@@ -65,6 +67,7 @@ private:
     static QNetworkAccessManager * mManager;
     bool mIsLoading;
     double mDownloadProgress;
+    bool mDebug;
 
 
 };

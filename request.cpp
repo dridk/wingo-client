@@ -18,13 +18,13 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-#ifdef Q_OS_ANDROID
+//#ifdef Q_OS_ANDROID
     mUrl.setHost("wingo.labsquare.org");
     mUrl.setPort(80);
-#else
-    mUrl.setHost("localhost");
-    mUrl.setPort(5000);
-#endif
+//#else
+//    mUrl.setHost("localhost");
+//    mUrl.setPort(5000);
+//#endif
 
 
 
@@ -57,6 +57,16 @@ bool Request::isLoading()
 double Request::downloadProgress()
 {
     return mDownloadProgress;
+}
+
+bool Request::debug()
+{
+    return mDebug;
+}
+
+bool Request::debug(const bool debug)
+{
+    mDebug = debug;
 }
 
 const QString &Request::source()
@@ -188,7 +198,7 @@ void Request::parseFinished()
 
     qDebug()<<reply->request().url();
     qDebug()<<reply->request().rawHeaderList();
-//    qDebug()<<doc.toJson();
+    if (mDebug) qDebug()<<doc.toJson();
 
     if (doc.object().contains("success")){
 

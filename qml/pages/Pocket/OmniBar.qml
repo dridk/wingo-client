@@ -11,10 +11,11 @@ OmniBar.Widget{
     id: filterBar
     icon: Icons.SEARCH
     animateIconOnexpand: false
-    fillHeight: true
+    fillHeight: false
     z: 2
 
     property bool sortByDate: true
+    property bool sortByUpdated: false
     property bool sortByPopularity: false
     property double distance: 1000
     property string search: ""
@@ -22,8 +23,9 @@ OmniBar.Widget{
     function filterBarSensorLabelText(){
         var t = "";
         if (sortByDate) {t = "Recent"}
+        else if (sortByUpdated) {t = "Updated"}
         else if (sortByPopularity) {t = "Popular"}
-        t += " " + DistanceFormat.format(distance, DistanceFormat.METER, ["right here", "m around", "km around", "far-far away"])
+        t += " notes"
         return t
     }
 
@@ -60,27 +62,17 @@ OmniBar.Widget{
 
     OmniBar.MultiSelectListItem{
         selected: filterBar.sortByDate? 0 : 1
-        model : ["Recent notes", "Popular notes"]
+        model : ["Recent", "Updated", "Popular"]
         onClick: {
             console.log(value)
             filterBar.sortByDate = index === 0;
-            filterBar.sortByPopularity = index === 1;
+            filterBar.sortByUpdated = index === 1;
+            filterBar.sortByPopularity = index === 2;
             tagRequester.refresh()
         }
     }
 
-    OmniBar.MultiSelectListItem{
-        selected: app.config.allowed_radius.indexOf(filterBar.distance)
-        model : app.config === undefined ? 0 : Utilities.applyFunction(app.config.allowed_radius, function(v,i){
-            return DistanceFormat.format(v, DistanceFormat.METER);
-        })
-        onClick: {
-            filterBar.distance = app.config.allowed_radius[index];
-            tagRequester.refresh();
-        }
-    }
-
-    OmniBar.SectionHeader{text:"Trending tags"}
+    OmniBar.SectionHeader{text:qsTr("Trending tags")}
 
     OmniBar.TagListView {
         model: ListModel{id:tagModel}

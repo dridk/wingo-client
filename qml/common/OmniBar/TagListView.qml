@@ -22,7 +22,7 @@ Flow {
     }
 
     Widgets.Label{
-        text: qsTr("No tags found around you...")
+        text: qsTr("Looking for tags around you...")
         visible: parent.model.count === 0
     }
 

@@ -167,7 +167,9 @@ Item {
 
     function _computeHeight() {
         var fullHeight = app.height  - (_computeY() + omniBar.height),
-            trayHeight = fillHeight ? fullHeight : Math.min(fullHeight, filterBarTrayColumn.height)
+            trayHeight = fillHeight ? fullHeight : Math.min(fullHeight, (filterBarTrayColumn.height +
+                                                                         omniBarTrayFlickable.anchors.topMargin +
+                                                                         omniBarTrayFlickable.anchors.bottomMargin))
         if (trayHeight === fullHeight)
             omniBarTrayFlickable.interactive = true
         else

@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 
 import "../../scripts/AppStyle.js" as Style
 import "../Components" as Components
@@ -20,7 +21,7 @@ Components.TouchSensorArea{
     Components.ListItemBase {
         anchors.fill: parent
 
-        Row{
+        RowLayout{
             id: listItemRow
             spacing: _RES.s_BASE_UNIT
             anchors.rightMargin: _RES.s_DOUBLE_MARGIN
@@ -32,12 +33,14 @@ Components.TouchSensorArea{
                 name: ""
                 visible: name !== ""
                 anchors.verticalCenter: parent.verticalCenter
+                Layout.fillWidth: false
             }
 
             Widgets.Label{
                 id: listItemLabel
                 text: "test"
                 anchors.verticalCenter: parent.verticalCenter
+                Layout.fillWidth: true
             }
         }
     }
