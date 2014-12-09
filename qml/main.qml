@@ -28,6 +28,7 @@ WingoApplicationWindow {
     Component.onCompleted: {
         configRequester.get()
         locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+        currentUserRequester.get()
     }
 
 

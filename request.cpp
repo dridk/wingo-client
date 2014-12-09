@@ -3,6 +3,7 @@
 #include <QNetworkInterface>
 #include <QFileInfo>
 #include "app.h"
+#include "cookieJar.h"
 QNetworkAccessManager * Request::mManager = 0;
 
 Request::Request(QQuickItem *parent) :
@@ -14,6 +15,8 @@ Request::Request(QQuickItem *parent) :
     if (mManager == 0)
     {
         mManager = new QNetworkAccessManager;
+        mManager->setCookieJar(new CookieJar);
+
     }
 
 
