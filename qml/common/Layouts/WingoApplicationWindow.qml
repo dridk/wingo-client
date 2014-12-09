@@ -23,8 +23,8 @@ ApplicationWindow {
     //Current GPS location
 
     //USE THIS VALUE FOR DESKTOP TESTING
-    property double latitude  : 43.601337
-    property double longitude : 1.438675
+    property double latitude  : 43.8174759
+    property double longitude : -79.4210148
     property string positionTitle: qsTr("Looking up your<br>current location...")
 
     property bool logged : false

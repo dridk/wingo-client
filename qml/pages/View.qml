@@ -145,6 +145,8 @@ Layouts.Page {
             noteView.takes = data["results"]["takes"]
             noteView.expiration = data["results"]["expiration"]
 
+            if (data["results"]["picture"]) noteView.image = data["results"]["picture"]
+
             noteView.message = StringFormat.setWordColor(data["results"]["message"],
                                                          Style.Typography.LINK, /\#\w+/g)
             mapView.latitude = data["results"]["lat"]

@@ -108,11 +108,9 @@ Componenets.WidgetItemBase {
             }
         }
 
-        Image {
+
+        Widgets.PictureFrame{
             id: noteImage
-            anchors.left: parent.left
-            anchors.right: parent.right
-            fillMode: Image.PreserveAspectFit
         }
 
         Widgets.Label{

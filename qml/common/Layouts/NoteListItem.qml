@@ -57,6 +57,10 @@ Componenets.TouchSensorArea {
             anchors.rightMargin: _RES.s_MARGIN
             spacing: _RES.s_MARGIN
 
+            Widgets.PictureFrame{
+                source: picture
+            }
+
             Widgets.Label {
                 text: StringFormat.setWordColor(message,
                                                 Style.Typography.LINK, /\#\w+/g)
@@ -122,13 +126,13 @@ Componenets.TouchSensorArea {
 
 
 
-            Image {
-                source: picture
-                width: parent.width
-                visible: picture == "null" ? false : true
+//            Image {
+//                source: picture
+//                width: parent.width
+//                visible: picture == "null" ? false : true
 
 
-            }
+//            }
 
 
         }

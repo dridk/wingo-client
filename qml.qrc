@@ -85,5 +85,6 @@
         <file>qml/common/MessageTray/Widget.qml</file>
         <file>qml/common/Layouts/WingoApplicationWindow.qml</file>
         <file>qml/lib/ResolutionManager.qml</file>
+        <file>qml/common/Controls/PictureFrame.qml</file>
     </qresource>
 </RCC>
