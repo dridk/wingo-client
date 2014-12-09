@@ -8,10 +8,14 @@
 #include "cookieJar.h"
 #include <QDebug>
 #include <QStringList>
+#include <QCoreApplication>
 
 CookieJar::CookieJar(QObject *parent)
 :QNetworkCookieJar(parent)
 {
+
+    mSettings.beginGroup(qApp->applicationName());
+
 
 	foreach (QString key, mSettings.allKeys())
 	{
@@ -44,8 +48,8 @@ bool CookieJar::setCookiesFromUrl(const QList<QNetworkCookie>& cookieList,const 
 
 	Q_UNUSED(url);
 
-	if (cookieList.isEmpty())
-		return false;
+    if (cookieList.isEmpty())
+        return false;
 
 	foreach (QNetworkCookie cookie, cookieList)
 	{
