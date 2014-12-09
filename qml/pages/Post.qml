@@ -82,7 +82,7 @@ Layouts.Page {
         id:postNoteRequester
         source:"/notes"
         onSuccess: {
-            app.showMessage("SUCCESS")
+            app.makeToast("Note posted")
         }
         onError: {
             app.showMessage("ERROR", message)
