@@ -64,7 +64,7 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         contentHeight: noteViewColumn.height
         boundsBehavior: Flickable.StopAtBounds
-        interactive: true
+        interactive: !mapView.pressed
         Column {
             id: noteViewColumn
             anchors.left: parent.left
@@ -79,6 +79,7 @@ Layouts.Page {
             Widgets.MapView{
                 id: mapView
                 noteID: noteId
+                enabled: true
                 z: 2
             }
 

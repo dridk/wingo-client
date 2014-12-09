@@ -21,6 +21,7 @@ Componenets.WidgetItemBase {
 
     property bool expanded: false
     property bool expandable: true
+    property alias pressed : mouseArea.pressed
 
     signal click
 
@@ -113,6 +114,7 @@ Componenets.WidgetItemBase {
     }
 
     MouseArea{
+        id: mouseArea
         //TODO Make this draggable
         //so the map expands on drag, rather then on click
         property bool dragging: false
