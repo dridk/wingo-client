@@ -15,7 +15,7 @@ Layouts.Page {
     property double selectLongitude : app.longitude
 
     function post() {
-        actionBar.enabled = false
+        Qt.inputMethod.hide();
         if (addImage.isEmpty)
             postData()
         else
@@ -24,6 +24,8 @@ Layouts.Page {
 
 
     function postImage(){
+        if(noteEdit.textLength === 0) return app.makeToast(qsTr("Please say a few about the image"), Style.MESSAGE_PURPOSE_INFORM);
+        actionBar.enabled = false
         var path = Qt.resolvedUrl(addImage.source)
         console.debug(path)
         postImageRequester.postImage(path)
@@ -31,7 +33,7 @@ Layouts.Page {
 
     function postData () {
         if(noteEdit.textLength === 0) return app.makeToast("Can't post empty note", Style.MESSAGE_PURPOSE_INFORM);
-
+        actionBar.enabled = false
         var post = {
             "lat": selectLatitude,
             "lon":selectLongitude,
@@ -106,6 +108,7 @@ Layouts.Page {
         }
         onError: {
             app.showMessage("ERROR", "Could not uploading image" + message)
+            actionBar.enabled = true
         }
     }
 
