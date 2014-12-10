@@ -15,6 +15,7 @@ Layouts.Page {
     property double selectLongitude : app.longitude
 
     function post() {
+        actionBar.enabled = false
         if (addImage.isEmpty)
             postData()
         else
@@ -64,6 +65,10 @@ Layouts.Page {
         app.goBack();
     }
 
+    function beforeHidden(){
+        Qt.inputMethod.hide();
+    }
+
     function updateImage(path){
         addImage.source = " " // needs.. to avoid caching features
         addImage.source = path;
@@ -83,9 +88,11 @@ Layouts.Page {
         source:"/notes"
         onSuccess: {
             app.makeToast("Note posted")
+            page.back()
         }
         onError: {
             app.showMessage("ERROR", message)
+            actionBar.enabled = true
         }
     }
 
