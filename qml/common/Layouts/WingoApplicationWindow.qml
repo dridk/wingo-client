@@ -8,6 +8,8 @@ import "../../lib/Toaster.js" as Toaster
 import "../../scripts/Utilities.js" as Utilities
 import "../../scripts/AppStyle.js" as Style
 
+import "../MessageTray" as MessageTray
+
 ApplicationWindow {
     id: window
     visible: true
@@ -48,10 +50,9 @@ ApplicationWindow {
         msgBox.visible  = true
     }
 
-    function makeToast(message){
-        if (!Toaster.parent())
-            Toaster.parent(app);
-        Toaster.toast(message)
+    function makeToast(message, purpose){
+        purpose = purpose || Style.MESSAGE_PURPOSE_INFORM
+        return messageTray.message(message)
     }
 
     function updateLocation(){
@@ -69,7 +70,11 @@ ApplicationWindow {
 
     StackView {
         id: stack
-        anchors.fill: parent
+        anchors.bottom: messageTray.top
+        anchors.bottomMargin: 0
+        anchors.right: parent.right
+        anchors.left: parent.left
+        anchors.top: parent.top
         // Implements back key navigation
         focus: true
         Keys.onReleased: {
@@ -138,6 +143,11 @@ ApplicationWindow {
                 }
             }
         }
+    }
+
+    MessageTray.Widget {
+        id: messageTray
+        anchors.bottom: parent.bottom
     }
 
     Text {

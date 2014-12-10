@@ -29,7 +29,7 @@ Layouts.Page {
     }
 
     function postData () {
-        if(noteEdit.textLength === 0) return app.makeToast("Can't post empty note");
+        if(noteEdit.textLength === 0) return app.makeToast("Can't post empty note", Style.MESSAGE_PURPOSE_INFORM);
 
         var post = {
             "lat": selectLatitude,

@@ -39,4 +39,6 @@ PEN =  "\uF112",
 UNDO =  "\uF125",
 BRUSH_SIZE1 =  "\uF122",
 BRUSH_SIZE2 =  "\uF123",
-BRUSH_SIZE3 =  "\uF124";
+BRUSH_SIZE3 =  "\uF124",
+NOTICE =  "\uF128",
+ALERT =  "\uF129";

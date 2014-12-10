@@ -49,6 +49,7 @@ var Background = {
         },
         Button: {
             DEFAULT: Palette.NONE,
+            INVERTED: Palette.NONE,
             DISABLED: Palette.SILVER,
             PRESSED: Qt.rgba(0, 0, 0, 0.3),
             ACTION: Palette.DEEPSEA,
@@ -82,6 +83,7 @@ var Background = {
         ALERT: Palette.MAGENTA,
         FADE: Palette.GRAY,
         SELECTION: Palette.WHITE,
+        SUNKEN: Palette.SILVER,
         Actionbar: {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
@@ -90,6 +92,8 @@ var Background = {
         },
         Button: {
             DEFAULT: Palette.BLACK,
+            INVERTED: Palette.WHITE,
+            DISABLED: Palette.GRAY,
             ACTION: Palette.WHITE,
             ACCENT: Palette.BLACK,
             SUNKEN: Palette.BLACK
@@ -153,3 +157,11 @@ var CALLOUT_TOP = 1,
     CALLOUT_LEFT_DOMINANAT = 30,
     CALLOUT_RIGHT = 4,
     CALLOUT_RIGHT_DOMINANAT = 40;
+
+var MESSAGE_DURATION_SHORT = 5000,
+    MESSAGE_DURATION_LONG = 10000,
+    MESSAGE_DURATION_NEVER = 0;
+
+var MESSAGE_PURPOSE_INFORM = 0,
+    MESSAGE_PURPOSE_NOTIFY = 1,
+    MESSAGE_PURPOSE_ALERT = 2;

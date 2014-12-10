@@ -32,13 +32,21 @@ TouchSensorArea {
         hidden = true
     }
 
-    Image{
+//    Image{
+//        id: buttonShadow
+//        width: buttonContents.width + _RES.s_DOUBLE_MARGIN
+//        height: buttonContents.height + parent.width * 0.12 + _RES.s_DOUBLE_MARGIN
+//        source: "../../Res/images/actionButtonShadow.png"
+//        anchors.centerIn: parent
+//        anchors.verticalCenterOffset: _RES.s_MARGIN
+//    }
+    Image {
         id: buttonShadow
-        width: buttonContents.width + _RES.s_DOUBLE_MARGIN
-        height: buttonContents.height + parent.width * 0.12 + _RES.s_DOUBLE_MARGIN
-        source: "../../Res/images/actionButtonShadow.png"
+        width: buttonContents.width + _RES.s_TRIPPLE_MARGIN
+        height: width
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: _RES.s_MARGIN
+        anchors.verticalCenterOffset: _RES.s_HALF_MARGIN
+        source: "../../Res/images/shadowSquare.png"
     }
 
     CalloutRectangle {
@@ -64,7 +72,7 @@ TouchSensorArea {
             when: hidden
             PropertyChanges {
                 target: button
-                anchors.bottomMargin: -height
+                anchors.bottomMargin: -buttonShadow.height
             }
         }
     ]

@@ -86,5 +86,7 @@
         <file>qml/common/Layouts/WingoApplicationWindow.qml</file>
         <file>qml/lib/ResolutionManager.qml</file>
         <file>qml/common/Controls/PictureFrame.qml</file>
+        <file>qml/Res/images/shadowSquare.png</file>
+        <file>qml/common/MessageTray/Message.qml</file>
     </qresource>
 </RCC>

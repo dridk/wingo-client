@@ -91,7 +91,7 @@ Componenets.WidgetItemBase {
             onStatusChanged: {
                 if (status === Image.Error) {
                     mapView.state = "HIDDEN"
-                    app.makeToast(qsTr("Couldn't load map"))
+                    app.makeToast(qsTr("Couldn't load map"), Style.MESSAGE_PURPOSE_ALERT)
                 }
             }
         }

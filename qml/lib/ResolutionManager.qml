@@ -42,5 +42,5 @@ ResolutionManagerCahce{
     property int s_ACTION_BAR_BUTTON_SIZE: 40
     property int s_OMNI_BAR_HEIGHT: 56
     property int s_IMAGE_PREVIEWS_SIZE: 210
-    property int s_ACTION_BUTTON_SIZE: 82
+    property int s_ACTION_BUTTON_SIZE: 96
 }

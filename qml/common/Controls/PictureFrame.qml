@@ -34,7 +34,7 @@ Item {
             anchors.right: parent.right
             anchors.margins: _RES.s_MARGIN
             fillMode: Image.PreserveAspectFit
-            onStatusChanged: if (status === Image.Error) app.makeToast("Error loading image")
+            onStatusChanged: if (status === Image.Error) app.makeToast("Error loading image", Style.MESSAGE_PURPOSE_ALERT)
         }
 
         Icon{
