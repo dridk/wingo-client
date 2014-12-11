@@ -2,6 +2,7 @@
 #define APP_H
 
 #include <QObject>
+#include <QSettings>
 
 class App : public QObject
 {
@@ -12,6 +13,15 @@ public:
 
     Q_INVOKABLE static QString getDeviceId();
 
+    Q_INVOKABLE void setConfig(const QString& key, QVariant value);
+    Q_INVOKABLE QVariant getConfig(const QString& key);
+
+
+signals:
+    void configChanged(const QString& key);
+
+    private:
+    QSettings mSettings;
 };
 
 #endif // APP_H
