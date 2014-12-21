@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QNetworkInterface>
 #include <QFileInfo>
+#include <QDebug>
 #include "app.h"
 #include "cookieJar.h"
 QNetworkAccessManager * Request::mManager = 0;
@@ -62,15 +63,7 @@ double Request::downloadProgress()
     return mDownloadProgress;
 }
 
-bool Request::debug()
-{
-    return mDebug;
-}
 
-bool Request::debug(const bool debug)
-{
-    mDebug = debug;
-}
 
 const QString &Request::source()
 {
@@ -82,14 +75,14 @@ QString Request::host()
     return mUrl.host();
 }
 
-void Request::get(const QVariant &data)
+void Request::get(const QJsonValue &data)
 {
 
     QUrlQuery query;
 
-    foreach (QString key, data.toMap().keys()){
-        if (!data.toMap().value(key).isNull()){
-            query.addQueryItem(key,data.toMap().value(key).toString());
+    foreach (QString key, data.toObject().keys()){
+        if (data.toObject().value(key).isNull()){
+            query.addQueryItem(key,data.toObject().value(key).toString());
         }
     }
 
@@ -105,10 +98,10 @@ void Request::get(const QVariant &data)
 
 }
 
-void Request::post(const QVariant &data)
+void Request::post(const QJsonValue& data)
 {
 
-    QJsonDocument doc = QJsonDocument::fromVariant(data);
+    QJsonDocument doc(data.toObject());
     QNetworkRequest request = makeRequest(mUrl);
     QNetworkReply * reply = mManager->post(request, doc.toJson());
 
@@ -119,18 +112,18 @@ void Request::post(const QVariant &data)
 
 }
 
-void Request::put(const QVariant &data)
+void Request::put(const QJsonValue &data)
 {
-    QJsonDocument doc = QJsonDocument::fromVariant(data);
+    QJsonDocument doc(data.toObject());
     QNetworkRequest request = makeRequest(mUrl);
-    QNetworkReply * reply = mManager->put(request, doc.toJson());
+    QNetworkReply * reply = mManager->put(request,doc.toJson());
 
     connectReply(reply);
 
 
 }
 
-void Request::deleteResource(const QVariant &data)
+void Request::deleteResource()
 {
 
     QNetworkRequest request = makeRequest(mUrl);
@@ -142,8 +135,9 @@ void Request::deleteResource(const QVariant &data)
 
 }
 
-void Request::patch(const QVariant &data)
+void Request::patch(const QJsonValue &data)
 {
+    Q_UNUSED(data)
 
 }
 
@@ -224,6 +218,7 @@ void Request::parseFinished()
 void Request::parseError(QNetworkReply::NetworkError err)
 {
 
+    Q_UNUSED(err)
     setLoading(false);
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
     emit error(1, reply->errorString());

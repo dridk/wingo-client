@@ -4,6 +4,7 @@
 
 
 QQuickPen::QQuickPen(QObject *parent)
+    :QObject(parent)
 {
     mWidth = 0;
     mColor = Qt::black;

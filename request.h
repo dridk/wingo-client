@@ -15,7 +15,6 @@ class Request : public QObject
     Q_PROPERTY (int port READ port )
     Q_PROPERTY (bool isLoading READ isLoading NOTIFY isLoadingChanged)
     Q_PROPERTY (double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged)
-    Q_PROPERTY (bool debug READ debug WRITE debug)
 
 
 
@@ -31,17 +30,16 @@ public:
     int port() ;
     bool isLoading();
     double downloadProgress();
-    bool debug();
-    bool debug(const bool debug);
+
+
 
 public slots:
-    void get(const QVariant& data = QVariant());
-    void post(const QVariant& data= QVariant());
-    void put(const QVariant& data= QVariant());
-    void deleteResource(const QVariant& data= QVariant());
-    void patch(const QVariant& data= QVariant());
+    void get(const QJsonValue& data = QJsonValue());
+    void post(const QJsonValue& data= QJsonValue());
+    void put(const QJsonValue& data= QJsonValue());
+    void deleteResource();
+    void patch(const QJsonValue& data= QJsonValue());
     void postImage(const QString&);
-
 
 protected:
     void connectReply(QNetworkReply * reply);

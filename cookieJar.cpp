@@ -38,7 +38,7 @@ CookieJar::~CookieJar() {
 
 QList<QNetworkCookie> CookieJar::cookiesForUrl(const QUrl& url) const {
 
-
+    Q_UNUSED(url)
 	return mCurrentCookies.values();
 
 
