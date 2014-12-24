@@ -40,7 +40,7 @@ Componenets.WidgetItemBase {
     function refresh() {
         var request = "";
         if (noteID !== "") {
-            request = "http://"+mapRequest.host+":"+mapRequest.port+"/notes/" + noteId + "/map"
+            request = "http://"+mapRequest.host()+":"+mapRequest.port()+"/notes/" + noteId + "/map"
             console.debug("MAP REQUESTS : "+request)
         }else{
             //Use lat and lon here!!!
