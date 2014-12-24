@@ -21,13 +21,13 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-//#ifdef Q_OS_ANDROID
-//    mUrl.setHost("wingo.labsquare.org");
-//    mUrl.setPort(80);
-//#else
+    //#ifdef Q_OS_ANDROID
+    //    mUrl.setHost("wingo.labsquare.org");
+    //    mUrl.setPort(80);
+    //#else
     mUrl.setHost("localhost");
     mUrl.setPort(5000);
-//#endif
+    //#endif
 
 
 
@@ -80,9 +80,11 @@ void Request::get(const QJsonValue &data)
     QUrlQuery query;
 
     foreach (QString key, data.toObject().keys()){
-        if (data.toObject().value(key).isNull()){
-            query.addQueryItem(key,data.toObject().value(key).toString());
-        }
+        QString value = data.toObject().value(key).toVariant().toString();
+
+        query.addQueryItem(key,value);
+
+
     }
 
     mUrl.setQuery(query);

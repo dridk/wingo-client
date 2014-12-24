@@ -68,7 +68,7 @@ OmniBar.Widget{
     }
 
     OmniBar.MultiSelectListItem{
-        selected: app.config !== undefined ? app.config.allowed_radius.indexOf(filterBar.distance):""
+        selected: app.config.allowed_radius.indexOf(filterBar.distance)
         model : app.config === undefined ? 0 : Utilities.applyFunction(app.config.allowed_radius, function(v,i){
             return DistanceFormat.format(v, DistanceFormat.METER);
         })

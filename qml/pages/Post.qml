@@ -39,9 +39,14 @@ Layouts.Page {
             "lon":selectLongitude,
             "author":"darwin", //TIPS... darwin, to make it works without auth
             "anonymous": omniBar.postAnonimous,
-            "message":noteEdit.text,
-             "picture":addImage.pathGenerated  // Not yet... Picture request should be finished
+            "message":noteEdit.text
         }
+
+        if (addImage.pathGenerated != "")
+            post["picture"]=addImage.pathGenerated
+
+
+
 
         if (omniBar.expiery > -1){
             var expiery = new Date();
@@ -161,6 +166,7 @@ Layouts.Page {
         anchors.top: mapView.bottom
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
         anchors.horizontalCenter: parent.horizontalCenter
+        //DO not use url ... It doens't work when you POST to Rest
         property string pathGenerated
         onAdd: {
             var painter = Qt.resolvedUrl("Painter.qml")
