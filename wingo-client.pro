@@ -7,7 +7,8 @@ SOURCES += main.cpp \
     request.cpp \
     polygonitem.cpp \
     painteritem.cpp \
-    cookieJar.cpp
+    cookieJar.cpp \
+    restlistmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -22,7 +23,8 @@ HEADERS += \
     request.h \
     polygonitem.h \
     painteritem.h \
-    cookieJar.h
+    cookieJar.h \
+    restlistmodel.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

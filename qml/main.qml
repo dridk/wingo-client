@@ -14,76 +14,95 @@ WingoApplicationWindow {
     //-----------
     debug: true
 
-    pages: {
-        "Home":     Qt.resolvedUrl("/qml/pages/Home.qml"),
-        "Post":     Qt.resolvedUrl("/qml/pages/Post.qml"),
-        "Pocket":   Qt.resolvedUrl("/qml/pages/Pocket.qml"),
-        "Mynotes":  Qt.resolvedUrl("/qml/pages/Mynotes.qml"),
-        "Login":    Qt.resolvedUrl("/qml/pages/Login.qml"),
-        "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
-        "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
-        "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml")
-    }
 
-    Component.onCompleted: {
-        configRequester.get()
-        locationRequest.get({"lat": app.latitude, "lon": app.longitude})
-        currentUserRequester.get()
-    }
-
-
-    //======Added by Sacha
-    Request{
-        id:configRequester
-        source:"/config"
-        onSuccess:  app.config = data.results
-
-    }
-
-    Request {
-        id: currentUserRequester
-        source:"/users/me"
-        onSuccess: {
-            console.debug("Current User loaded")
-            console.debug( data["results"])
-
-            app.currentUser = data["results"]
-            app.logged = true
-        }
-
-        onError: {
-            console.debug("Cannot load current user. Authified ?")
-            app.logged = false
+    ListView {
+        anchors.fill: parent
+        model: RestListModel {
 
         }
-    }
 
+        delegate : Rectangle {
+            width: parent.width
+            height: 50
+            border.color: "red"
 
-    //=========== POSITIONNING GPS
-    PositionSource
-    {
-        id: gpsSource
-        updateInterval: 1000
-        active: Qt.platform.os == "android" ? true : false
-        onPositionChanged: {
-            if ( Qt.platform.os == "android") {
-                var coord = gpsSource.position.coordinate;
-                app.longitude = coord.longitude;
-                app.latitude = coord.latitude;
-                //Update location title
-                locationRequest.get({"lat": app.latitude, "lon": app.longitude})
-            }
-
-            //            console.debug(coord.longitude +" " +coord.latitude )
         }
+
+
     }
 
-    Request {
-        id:locationRequest
-        source:"/location/here"
-        onSuccess: {
-            app.positionTitle  = data["results"]
-        }
-    }
+
+
+//    pages: {
+//        "Home":     Qt.resolvedUrl("/qml/pages/Home.qml"),
+//        "Post":     Qt.resolvedUrl("/qml/pages/Post.qml"),
+//        "Pocket":   Qt.resolvedUrl("/qml/pages/Pocket.qml"),
+//        "Mynotes":  Qt.resolvedUrl("/qml/pages/Mynotes.qml"),
+//        "Login":    Qt.resolvedUrl("/qml/pages/Login.qml"),
+//        "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
+//        "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
+//        "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml")
+//    }
+
+//    Component.onCompleted: {
+//        configRequester.get()
+//        locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+//        currentUserRequester.get()
+//    }
+
+
+//    //======Added by Sacha
+//    Request{
+//        id:configRequester
+//        source:"/config"
+//        onSuccess:  app.config = data.results
+
+//    }
+
+//    Request {
+//        id: currentUserRequester
+//        source:"/users/me"
+//        onSuccess: {
+//            console.debug("Current User loaded")
+//            console.debug( data["results"])
+
+//            app.currentUser = data["results"]
+//            app.logged = true
+//        }
+
+//        onError: {
+//            console.debug("Cannot load current user. Authified ?")
+//            app.logged = false
+
+//        }
+//    }
+
+
+//    //=========== POSITIONNING GPS
+//    PositionSource
+//    {
+//        id: gpsSource
+//        updateInterval: 1000
+//        active: Qt.platform.os == "android" ? true : false
+//        onPositionChanged: {
+//            if ( Qt.platform.os == "android") {
+//                var coord = gpsSource.position.coordinate;
+//                app.longitude = coord.longitude;
+//                app.latitude = coord.latitude;
+//                //Update location title
+//                locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+//            }
+
+//            //            console.debug(coord.longitude +" " +coord.latitude )
+//        }
+//    }
+
+//    Request {
+//        id:locationRequest
+//        source:"/location/here"
+//        onSuccess: {
+//            app.positionTitle  = data["results"]
+//        }
+//    }
 
 }
