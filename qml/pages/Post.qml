@@ -161,7 +161,7 @@ Layouts.Page {
         anchors.top: mapView.bottom
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
         anchors.horizontalCenter: parent.horizontalCenter
-        property url pathGenerated
+        property string pathGenerated
         onAdd: {
             var painter = Qt.resolvedUrl("Painter.qml")
             app.goToPage(painter)

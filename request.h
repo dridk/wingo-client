@@ -11,8 +11,6 @@ class Request : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
-    Q_PROPERTY (QString host READ host )
-    Q_PROPERTY (int port READ port )
     Q_PROPERTY (bool isLoading READ isLoading NOTIFY isLoadingChanged)
     Q_PROPERTY (double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged)
 
@@ -26,8 +24,8 @@ public:
 
     void setSource(const QString& source);
     const QString& source();
-     QString host();
-    int port() ;
+    Q_INVOKABLE QString host();
+    Q_INVOKABLE int port() ;
     bool isLoading();
     double downloadProgress();
 

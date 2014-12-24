@@ -26,7 +26,6 @@ Layouts.Page {
     Request {
         id: pocketNoteRequester
         source: "/users/pockets"
-        debug: true
         onSuccess: {
             console.log( data.results.length )
             notesListModel.append(data.results)

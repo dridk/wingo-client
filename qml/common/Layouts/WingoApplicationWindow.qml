@@ -153,7 +153,7 @@ ApplicationWindow {
     Text {
         visible: window.debug
         anchors.bottom: parent.bottom
-        text: wingo.getDeviceId() + "\n" + configRequester.host+":"+configRequester.port+"\n pos:" + app.latitude +" , "+app.longitude
+        text: wingo.getDeviceId() + "\n" + configRequester.host()+":"+configRequester.port()+"\n pos:" + app.latitude +" , "+app.longitude
         opacity: 0.4
     }
 

@@ -65,7 +65,7 @@ WidgetItemBase {
                 anchors.rightMargin: _RES.s_MARGIN
                 anchors.leftMargin: _RES.s_MARGIN
                 anchors.fill: parent
-                focus: entryBox.focus
+                //focus: entryBox.focus
 //                activeFocusOnPress: true
                 selectByMouse: true
                 selectionColor: Style.Background.SELECTION
