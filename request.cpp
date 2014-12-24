@@ -22,11 +22,11 @@ Request::Request(QQuickItem *parent) :
 
     mUrl.setScheme("http");
     //#ifdef Q_OS_ANDROID
-    //    mUrl.setHost("wingo.labsquare.org");
-    //    mUrl.setPort(80);
+        mUrl.setHost("wingo.labsquare.org");
+        mUrl.setPort(80);
     //#else
-    mUrl.setHost("localhost");
-    mUrl.setPort(5000);
+//    mUrl.setHost("localhost");
+//    mUrl.setPort(5000);
     //#endif
 
 
