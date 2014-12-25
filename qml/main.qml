@@ -26,6 +26,11 @@ WingoApplicationWindow {
             height: 50
             border.color: "red"
 
+            Text {
+                anchors.centerIn: parent
+                text:$age
+            }
+
         }
 
 
