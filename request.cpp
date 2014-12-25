@@ -21,8 +21,8 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-    mUrl.setHost(App::instance()->host());
-    mUrl.setPort(App::instance()->port());
+//    mUrl.setHost(App::instance()->host());
+//    mUrl.setPort(App::instance()->port());
 
 
     mIsLoading = false;
@@ -236,7 +236,7 @@ QNetworkRequest Request::makeRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
     request.setRawHeader("Content-Type","application/json;charset=UTF-8");
-    request.setRawHeader("FROM",App::getDeviceId().toUtf8());
+//    request.setRawHeader("FROM",App::getDeviceId().toUtf8());
     return request;
 
 }

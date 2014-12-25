@@ -25,7 +25,7 @@ public:
 	 void removeLocalCookies();
 
 private:
-	QHash<QString,QNetworkCookie> mCurrentCookies;
+    QList<QNetworkCookie> mCurrentCookies;
 	QSettings mSettings;
 
 

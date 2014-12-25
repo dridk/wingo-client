@@ -11,56 +11,51 @@
 #include <QCoreApplication>
 
 CookieJar::CookieJar(QObject *parent)
-:QNetworkCookieJar(parent)
+    :QNetworkCookieJar(parent)
 {
 
-    mSettings.beginGroup(qApp->applicationName());
 
+    QByteArray raw = mSettings.value("cookie").toByteArray();
 
-	foreach (QString key, mSettings.allKeys())
-	{
-
-	QByteArray array = mSettings.value(key).toByteArray();
-	QNetworkCookie cookie = QNetworkCookie::parseCookies(array).first();
-
-	mCurrentCookies[cookie.name()] = cookie;
-
-
-	}
+    if (!raw.isEmpty()){
+       mCurrentCookies = QNetworkCookie::parseCookies(raw);
+    }
 
 
 }
 
 CookieJar::~CookieJar() {
-	// TODO Auto-generated destructor stub
+    // TODO Auto-generated destructor stub
 }
 
 
 QList<QNetworkCookie> CookieJar::cookiesForUrl(const QUrl& url) const {
 
     Q_UNUSED(url)
-	return mCurrentCookies.values();
+    return mCurrentCookies;
 
 
 }
 
 bool CookieJar::setCookiesFromUrl(const QList<QNetworkCookie>& cookieList,const QUrl& url) {
 
-	Q_UNUSED(url);
+    Q_UNUSED(url);
 
     if (cookieList.isEmpty())
         return false;
 
-	foreach (QNetworkCookie cookie, cookieList)
-	{
-		mCurrentCookies[cookie.name()] = cookie;
-		mSettings.setValue(cookie.name(), cookie.toRawForm());
-	}
+    mCurrentCookies = cookieList;
+
+
+    if (mCurrentCookies.length() >= 1) {
+
+        mSettings.setValue("cookie", mCurrentCookies.first().toRawForm());
+
+    }
 
 
 
-
-	return true;
+    return true;
 
 }
 

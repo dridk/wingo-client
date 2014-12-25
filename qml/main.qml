@@ -13,42 +13,37 @@ ApplicationWindow {
     height: 960//428
     visible: true
     //-----------
+
 //    debug: true
 
 
-//    ListView {
-//        anchors.fill: parent
-//        model: RestListModel {
-
-//        }
-
-//        delegate : Rectangle {
-//            width: parent.width
-//            height: 50
-//            border.color: "red"
-
-//            Text {
-//                anchors.centerIn: parent
-//                text:$age
-//            }
-
-//        }
-
-
-//    }
-
-
-    Text {
-        anchors.centerIn: parent
-        text : "valeur "+wingo.getConfig("test")
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                console.debug("save")
-                wingo.setConfig("test", "je viens de la config")
-            }
+        Request{
+            id:configRequester
+            source:"/config"
         }
+
+
+
+    ListView {
+        anchors.fill: parent
+        model:   RestListModel {
+
+        }
+
+
+        delegate : Rectangle {
+            width: parent.width
+            height: 50
+            border.color: "red"
+
+            Text {
+                anchors.centerIn: parent
+                text: $age
+            }
+
+        }
+
+
     }
 
 
