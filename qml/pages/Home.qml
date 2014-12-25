@@ -12,7 +12,7 @@ import "Home"
 Layouts.Page {
     id: page
 
-//    function beforeShown() {noteList.re}
+    //    function beforeShown() {noteList.re}
     function back() {/*do nothing*/}
     function menu() {appMenu.toggleTray()}
 
@@ -55,44 +55,29 @@ Layouts.Page {
             "order": omniBar.sortByDate ? "recent" : "popular"
         }
         if (omniBar.search !== "")
-                request["query"] = omniBar.search;
+            request["query"] = omniBar.search;
 
-        notesServerRequest.get(request);
+        notesListModel.get(request);
     }
+
+
     Component.onCompleted: refresh()
 
-    Request {
-        id: notesServerRequest
-        source: "/notes"
-        onSuccess: {
-            app:makeToast("Sucessfully refreshed")
-            console.log( data.results.length )
-//            var diff = Utilities.diffArray()
-            Utilities.applyFunction(data.results, function(item, index){
 
-            });
-
-            notesListModel.clear()
-            notesListModel.append(data.results)
+    RestListModel{
+        id: notesListModel
+        source:"/notes"
+        onSuccess : {
+            makeToast("Sucessfully refreshed")
             noteList.positionViewAtBeginning()
         }
+
         onError: {
             console.debug(message)
             app.showMessage("ERROR", message)
         }
-
-
     }
 
-// EXAMPLE OF HOW TO USE isLoading and progress property
-//    Text {
-//        anchors.centerIn: parent
-//        z:10
-//        font.pixelSize: 40
-//        text:"loading : " + notesServerRequest.downloadProgress*100 +"%"
-//        visible: notesServerRequest.isLoading
-//    }
-// END OF EXAMPLE.. CAN BE REMOVED
 
     ActionBar {
         id: actionBar
@@ -109,9 +94,8 @@ Layouts.Page {
         id: noteList
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
-        model: ListModel{id: notesListModel}
-        busy: notesServerRequest.isLoading
-
+        model: notesListModel
+        busy: notesListModel.isLoading
         onPressed: {
             var noteId = model.get(index).id
             app.goToPage(app.pages["View"]);
@@ -141,6 +125,4 @@ Layouts.Page {
     AppMenu{
         id: appMenu
     }
-
-
 }

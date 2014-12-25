@@ -12,6 +12,8 @@ class RestListModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
+    Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+
 
 public:
     RestListModel(QObject * parent = 0);
@@ -22,6 +24,8 @@ public:
     QHash<int, QByteArray> roleNames() const;
     void setSource(const QString& source);
     const QString &source();
+    bool isLoading();
+
 
 public slots:
     void get(const QJsonObject& params = QJsonObject());
@@ -36,6 +40,9 @@ protected slots:
 
 signals:
     void sourceChanged();
+    void isLoadingChanged();
+    void error(int code, QString message);
+    void success();
 
 protected:
     void createRoleNames();
@@ -47,6 +54,7 @@ private:
     QJsonObject mParams;
     Request * mRequest;
     int mCurrentPage;
+
 
 
 };

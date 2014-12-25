@@ -38,7 +38,7 @@ Componenets.TouchSensorArea {
                 text: DistanceFormat.toHere(
                           DistanceFormat.pointObject(app.latitude,
                                                      app.longitude),
-                          DistanceFormat.pointObject(lat, lon),
+                          DistanceFormat.pointObject($lat, $lon),
                           [qsTr("here"), qsTr("m"), qsTr("km"), qsTr("far...")])
                 font.pixelSize: _RES.s_TEXT_SIZE_MINI
                 color: Style.Typography.FADE
@@ -58,11 +58,11 @@ Componenets.TouchSensorArea {
             spacing: _RES.s_MARGIN
 
             Widgets.PictureFrame{
-                source: picture
+                source: $picture != undefined ?$picture : ""
             }
 
             Widgets.Label {
-                text: StringFormat.setWordColor(message,
+                text: StringFormat.setWordColor($message,
                                                 Style.Typography.LINK, /\#\w+/g)
                 anchors.right: parent.right
                 anchors.left: parent.left
@@ -99,7 +99,7 @@ Componenets.TouchSensorArea {
 
                 Widgets.Label {
                     //User name
-                    text: anonymous ? qsTr("Anonimous") : author.nickname
+                    text: $anonymous ? qsTr("Anonimous") : $author.nickname
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.LINK
                     Layout.fillWidth: false
@@ -107,7 +107,7 @@ Componenets.TouchSensorArea {
 
                 Widgets.Label {
                     //Post date
-                    text: DateFormat.toNow(timestamp,
+                    text: DateFormat.toNow($timestamp,
                                            [qsTr("just now"), qsTr(
                                                 "min ago"), qsTr("h ago"), qsTr(
                                                 "mon ago"), qsTr(
@@ -146,8 +146,8 @@ Componenets.TouchSensorArea {
 
             Widgets.Avatar {
                 id: noteAvatar
-                source: author && author.hasOwnProperty(
-                            'avatar') ? author.avatar : "qrc:/qml/Res/images/anonymous.png"
+                source: $author && $author.hasOwnProperty(
+                            'avatar') ? $author.avatar : "qrc:/qml/Res/images/anonymous.png"
                 anchors.top: parent.top
                 anchors.topMargin: noteListItem.layoutMini ? _RES.s_HALF_MARGIN : _RES.s_DOUBLE_MARGIN
                 anchors.right: parent.right
@@ -165,7 +165,7 @@ Componenets.TouchSensorArea {
                 anchors.rightMargin: _RES.s_BORDER
                 Widgets.Badge {
                     id: noteTakesBadge
-                    value: takes
+                    value: $takes
                     anchors.bottom: noteTakesIcon.bottom
                     z: 1
                 }

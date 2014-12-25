@@ -16,19 +16,16 @@ Layouts.Page {
     }
 
     function refresh(){
-
         noteList.positionViewAtBeginning()
-        notesListModel.clear()
-       pocketNoteRequester.get();
+       pocketNoteModel.get();
     }
     Component.onCompleted: refresh()
 
-    Request {
-        id: pocketNoteRequester
+    RestListModel {
+        id: pocketNoteModel
         source: "/users/pockets"
         onSuccess: {
-            console.log( data.results.length )
-            notesListModel.append(data.results)
+            console.log("pokets load success" )
         }
         onError: {
             console.debug(message)
@@ -51,7 +48,7 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         refreshOnPull: false
 
-        model: ListModel{id: notesListModel}
+        model: pocketNoteModel
 
         onVerticalMovementUpChanged: {
             if (verticalMovementUp&&!atYEnd){

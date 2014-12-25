@@ -4,42 +4,35 @@ RestListModel::RestListModel(QObject * parent)
     :QAbstractListModel(parent)
 {
 
-
     mRequest = new Request;
 
     connect(mRequest,SIGNAL(success(QJsonObject)),this,SLOT(loadData(QJsonObject)));
     connect(mRequest,SIGNAL(sourceChanged()),this,SIGNAL(sourceChanged()));
-
-
-
-
+    connect(mRequest,SIGNAL(isLoadingChanged()),this,SIGNAL(isLoadingChanged()));
+    connect(mRequest,SIGNAL(error(int,QString)),this,SIGNAL(error(int,QString)));
 }
+
 
 RestListModel::~RestListModel()
 {
-
+    delete mRequest;
 }
 
 QVariant RestListModel::data(const QModelIndex &index, int role) const
 {
-
     if (!index.isValid())
         return QVariant();
-
 
     foreach (int keyId , mRoleNames.keys()) {
 
         if (role == keyId) {
             QString key = mRoleNames.value(keyId);
+            //key is $keyname.. remove first character '$'
             key = key.right(key.length()-1);
             return mDatas.at(index.row()).toObject().value(key);
         }
-
     }
-
     return QVariant();
-
-
 }
 
 int RestListModel::rowCount(const QModelIndex &parent) const
@@ -53,16 +46,18 @@ QHash<int, QByteArray> RestListModel::roleNames() const
     return mRoleNames;
 }
 
-
 void RestListModel::setSource(const QString &source)
 {
     mRequest->setSource(source);
 
 }
-
 const QString &RestListModel::source()
 {
     return mRequest->source();
+}
+bool RestListModel::isLoading()
+{
+    return mRequest->isLoading();
 }
 void RestListModel::get(const QJsonObject &params)
 {
@@ -78,6 +73,9 @@ void RestListModel::loadData(QJsonObject data)
         createRoleNames();
         endResetModel();
     }
+
+    emit success();
+
 }
 
 void RestListModel::nextPage()
