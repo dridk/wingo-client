@@ -21,8 +21,8 @@ Request::Request(QQuickItem *parent) :
 
 
     mUrl.setScheme("http");
-//    mUrl.setHost(App::instance()->host());
-//    mUrl.setPort(App::instance()->port());
+    mUrl.setHost(App::instance()->host());
+    mUrl.setPort(App::instance()->port());
 
 
     mIsLoading = false;

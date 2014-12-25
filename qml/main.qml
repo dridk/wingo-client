@@ -17,16 +17,32 @@ ApplicationWindow {
 //    debug: true
 
 
-        Request{
-            id:configRequester
-            source:"/config"
+    Rectangle {
+        id:button
+        width: parent.width
+        height: 50
+        Text {
+            anchors.centerIn: parent
+            text:"button"
         }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked:  {
+               restModel.get()
+            }
+        }
+    }
 
 
 
     ListView {
-        anchors.fill: parent
+        anchors.top: button.bottom
+        anchors.bottom: parent.bottom
+        width: parent.width
         model:   RestListModel {
+            id:restModel
+            source :"/notes"
 
         }
 
@@ -38,13 +54,17 @@ ApplicationWindow {
 
             Text {
                 anchors.centerIn: parent
-                text: $age
+                text: $author.nickname
             }
+
+
 
         }
 
 
     }
+
+
 
 
 

@@ -51,7 +51,7 @@ private:
     QNetworkRequest makeRequest(const QUrl& url);
 
 signals:
-    void success(QVariant data);
+    void success(QJsonObject data);
     void error(int code, QString message);
     void sourceChanged();
     void isLoadingChanged();

@@ -4,35 +4,11 @@ RestListModel::RestListModel(QObject * parent)
     :QAbstractListModel(parent)
 {
 
-    QJsonObject item;
-    item.insert("nom", "schutz");
-    item.insert("age", 54);
 
-    QJsonObject item2;
-    item2.insert("nom", "perrine");
-    item2.insert("age", 23);
+    mRequest = new Request;
 
-    QJsonObject item3;
-    item3.insert("nom", "boby");
-    item3.insert("age", 34);
-
-
-    mDatas.append(item);
-    mDatas.append(item2);
-    mDatas.append(item3);
-
-
-    QJsonObject ref = mDatas.first().toObject();
-    int keyId = Qt::UserRole+1;
-    foreach (QString key , ref.keys())
-    {
-
-        QString roleName = "$"+key;
-        mRoleNames.insert(keyId, roleName.toUtf8());
-        keyId++;
-
-
-    }
+    connect(mRequest,SIGNAL(success(QJsonObject)),this,SLOT(loadData(QJsonObject)));
+    connect(mRequest,SIGNAL(sourceChanged()),this,SIGNAL(sourceChanged()));
 
 
 
@@ -51,10 +27,7 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
 
-
-
     foreach (int keyId , mRoleNames.keys()) {
-
 
         if (role == keyId) {
             QString key = mRoleNames.value(keyId);
@@ -75,15 +48,64 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
 
 int RestListModel::rowCount(const QModelIndex &parent) const
 {
-
     return mDatas.count();
-
-
 }
 
 QHash<int, QByteArray> RestListModel::roleNames() const
 {
     return mRoleNames;
+}
+
+void RestListModel::get(const QJsonValue &data)
+{
+
+    mRequest->get(data);
+
+
+}
+
+void RestListModel::setSource(const QString &source)
+{
+    mRequest->setSource(source);
+
+}
+
+const QString &RestListModel::source()
+{
+    return mRequest->source();
+}
+
+void RestListModel::loadData(QJsonObject data)
+{
+
+    if (data.length() > 0) {
+
+        beginResetModel();
+        mDatas = data.value("results").toArray();
+        createRoleNames();
+        endResetModel();
+
+    }
+
+}
+
+void RestListModel::createRoleNames()
+{
+    mRoleNames.clear();
+
+    if (mDatas.isEmpty())
+        return;
+
+    QJsonObject ref = mDatas.first().toObject();
+    int keyId = Qt::UserRole+1;
+    foreach (QString key , ref.keys())
+    {
+        QString roleName = "$"+key;
+        mRoleNames.insert(keyId, roleName.toUtf8());
+        keyId++;
+
+    }
+
 }
 
 
