@@ -1,11 +1,24 @@
 #include "app.h"
 #include <QNetworkInterface>
 #include <QCoreApplication>
+
+App * App::mInstance = NULL;
+
 App::App(QObject *parent) :
     QObject(parent)
 {
-    mSettings.beginGroup(qApp->applicationName());
 }
+
+
+App *App::instance()
+{
+
+if (mInstance == NULL) {
+    mInstance = new App();
+}
+return mInstance;
+}
+
 
 QString App::getDeviceId()
 {
@@ -15,25 +28,61 @@ QString App::getDeviceId()
         if (!(interface.flags() & QNetworkInterface::IsLoopBack))
             return interface.hardwareAddress();
     }
-
     return "0:0:0:0";
-
 }
 
 void App::setConfig(const QString &key, QVariant value)
 {
 
-    if ( value != mSettings.value(key)) {
+    QSettings settings;
+    settings.beginGroup(qApp->applicationName());
 
-        mSettings.setValue(key, value);
-        emit configChanged(key);
+
+    if ( value != settings.value(key)) {
+
+        settings.setValue(key, value);
+        emit instance()->configChanged(key);
     }
 
 }
 
 QVariant App::getConfig(const QString &key)
 {
+    QSettings settings;
+    settings.beginGroup(qApp->applicationName());
 
-    return mSettings.value(key);
+    return settings.value(key);
 
 }
+
+QString App::host() const
+{
+return mHost;
+}
+
+int App::port() const
+{
+    return mPort;
+}
+
+void App::setDomain(const QString &host, int port)
+{
+    instance()->setHost(host);
+    instance()->setPort(port);
+}
+
+void App::setHost(const QString &hostname)
+{
+
+    mHost = hostname;
+
+}
+
+void App::setPort(int port)
+{
+
+    mPort = port;
+
+}
+
+

@@ -6,34 +6,49 @@ import Wingo 1.0
 
 import "common/Layouts"
 
-WingoApplicationWindow {
+ApplicationWindow {
     id: app
     //Needed for QtCreator design mode
     width: 540//238
     height: 960//428
+    visible: true
     //-----------
-    debug: true
+//    debug: true
 
 
-    ListView {
-        anchors.fill: parent
-        model: RestListModel {
+//    ListView {
+//        anchors.fill: parent
+//        model: RestListModel {
 
-        }
+//        }
 
-        delegate : Rectangle {
-            width: parent.width
-            height: 50
-            border.color: "red"
+//        delegate : Rectangle {
+//            width: parent.width
+//            height: 50
+//            border.color: "red"
 
-            Text {
-                anchors.centerIn: parent
-                text:$age
+//            Text {
+//                anchors.centerIn: parent
+//                text:$age
+//            }
+
+//        }
+
+
+//    }
+
+
+    Text {
+        anchors.centerIn: parent
+        text : "valeur "+wingo.getConfig("test")
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                console.debug("save")
+                wingo.setConfig("test", "je viens de la config")
             }
-
         }
-
-
     }
 
 

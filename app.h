@@ -8,20 +8,35 @@ class App : public QObject
 {
     Q_OBJECT
 public:
-    explicit App(QObject *parent = 0);
-
+    static App *instance();
 
     Q_INVOKABLE static QString getDeviceId();
+    Q_INVOKABLE static void setConfig(const QString& key, QVariant value);
+    Q_INVOKABLE static QVariant getConfig(const QString& key);
+    Q_INVOKABLE QString host() const;
+    Q_INVOKABLE int port() const;
 
-    Q_INVOKABLE void setConfig(const QString& key, QVariant value);
-    Q_INVOKABLE QVariant getConfig(const QString& key);
+    static void setDomain(const QString& host, int port);
+
+    void setHost(const QString& hostname);
+    void setPort(int port);
+
+private:
+    explicit App(QObject *parent = 0);
+
 
 
 signals:
     void configChanged(const QString& key);
 
-    private:
+private:
     QSettings mSettings;
+    static App* mInstance;
+     QString mHost;
+     int mPort;
+
+
+
 };
 
 #endif // APP_H
