@@ -32,7 +32,7 @@ public:
 
 
 public slots:
-    void get(const QJsonValue& data = QJsonValue());
+    void get(const QJsonObject& params = QJsonObject());
     void post(const QJsonValue& data= QJsonValue());
     void put(const QJsonValue& data= QJsonValue());
     void deleteResource();

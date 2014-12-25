@@ -20,10 +20,16 @@ public:
     QVariant data(const QModelIndex &index, int role) const;
     int rowCount(const QModelIndex &parent) const;
     QHash<int, QByteArray> roleNames() const;
-    Q_INVOKABLE void get(const QJsonValue& data = QJsonValue());
-
     void setSource(const QString& source);
     const QString &source();
+
+public slots:
+    void get(const QJsonObject& params = QJsonObject());
+    void nextPage();
+    void previousPage();
+    void setPage(int page = 0);
+    void reload();
+
 
 protected slots:
     void loadData(QJsonObject data);
@@ -38,7 +44,9 @@ protected:
 private:
     QJsonArray mDatas;
     QHash<int, QByteArray> mRoleNames;
+    QJsonObject mParams;
     Request * mRequest;
+    int mCurrentPage;
 
 
 };

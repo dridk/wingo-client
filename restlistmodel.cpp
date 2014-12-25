@@ -35,11 +35,7 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
             return mDatas.at(index.row()).toObject().value(key);
         }
 
-
-
     }
-
-
 
     return QVariant();
 
@@ -48,6 +44,7 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
 
 int RestListModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return mDatas.count();
 }
 
@@ -56,13 +53,6 @@ QHash<int, QByteArray> RestListModel::roleNames() const
     return mRoleNames;
 }
 
-void RestListModel::get(const QJsonValue &data)
-{
-
-    mRequest->get(data);
-
-
-}
 
 void RestListModel::setSource(const QString &source)
 {
@@ -74,19 +64,44 @@ const QString &RestListModel::source()
 {
     return mRequest->source();
 }
-
+void RestListModel::get(const QJsonObject &params)
+{
+    mParams = params;
+    reload();
+}
 void RestListModel::loadData(QJsonObject data)
 {
-
     if (data.length() > 0) {
 
         beginResetModel();
         mDatas = data.value("results").toArray();
         createRoleNames();
         endResetModel();
-
     }
+}
 
+void RestListModel::nextPage()
+{
+    //Not yet implemented
+    reload();
+}
+
+void RestListModel::previousPage()
+{
+    //Not yet implemented
+    reload();
+}
+
+void RestListModel::setPage(int page)
+{
+    //Not yet implemented
+    reload();
+
+}
+
+void RestListModel::reload()
+{
+    mRequest->get(mParams);
 }
 
 void RestListModel::createRoleNames()

@@ -67,28 +67,19 @@ QString Request::host()
     return mUrl.host();
 }
 
-void Request::get(const QJsonValue &data)
+void Request::get(const QJsonObject &params)
 {
-
     QUrlQuery query;
-
-    foreach (QString key, data.toObject().keys()){
-        QString value = data.toObject().value(key).toVariant().toString();
-
+    foreach (QString key, params.keys()){
+        QString value = params.value(key).toVariant().toString();
         query.addQueryItem(key,value);
-
-
     }
-
     mUrl.setQuery(query);
 
     QNetworkRequest request = makeRequest(mUrl);
     request.setRawHeader("Content-Type","Content-type: text/plain");
     QNetworkReply * reply = mManager->get(request);
-
     connectReply(reply);
-
-
 
 }
 
