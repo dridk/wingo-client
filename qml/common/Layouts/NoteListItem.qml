@@ -110,8 +110,8 @@ Componenets.TouchSensorArea {
                     text: DateFormat.toNow($timestamp,
                                            [qsTr("just now"), qsTr(
                                                 "min ago"), qsTr("h ago"), qsTr(
-                                                "mon ago"), qsTr(
-                                                "days ago"), qsTr("yr ago")])
+                                                "days ago"), qsTr(
+                                                "mon ago"), qsTr("yr ago")])
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.QUOTE
                     Layout.fillWidth: false

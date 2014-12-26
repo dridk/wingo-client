@@ -1,15 +1,19 @@
 .pragma library
 .import "Utilities.js" as Utilities
 
-var MINUTES_LENGTH  = 1000 * 60;
-var HOURS_LENGTH    = MINUTES_LENGTH * 60;
-var DAYS_LENGTH     = HOURS_LENGTH * 24;
-var MONTH_LENGTH     = DAYS_LENGTH * 30;
-var YEARS_LENGTH    = DAYS_LENGTH * 365;
+var MINUTE_LENGTH  = 1;
+var HOUR_LENGTH    = MINUTE_LENGTH * 60;
+var DAY_LENGTH     = HOUR_LENGTH * 24;
+var YEAR_LENGTH    = DAY_LENGTH * 365;
+var MONTH_LENGTH   = YEAR_LENGTH / 12;
 
 function stringToDate(s) {
     if (!Utilities.isString(s)) return null;
-    return new Date(s);
+    var d = new Date(s);
+//    console.log(">"+d.toLocaleString())
+    return new Date(d.getTime() - d.getTimezoneOffset() * 60000 );
+//    console.log("??"+s)
+//    return d;
 }
 
 function timePassedBetweeen(date1, date2){
@@ -22,20 +26,21 @@ function toNow(date, dict) {
     if (!Utilities.isDateObject(date)) return null;
 
     var now = new Date(),
-        passed = Math.abs(now.getTime() - date.getTime());
+        passed = Math.abs(now - date);
+        passed /= 1000*60;
 
-    if (passed < MINUTES_LENGTH) {
+    if (passed < MINUTE_LENGTH) {
         return dict[0];
-    } else if (passed < HOURS_LENGTH) {
-        return Math.round(passed / MINUTES_LENGTH) + dict[1]
-    } else if (passed < DAYS_LENGTH) {
-        return Math.round(passed / HOURS_LENGTH) + dict[2]
+    } else if (passed < HOUR_LENGTH) {
+        return Math.round(passed / MINUTE_LENGTH) + dict[1]
+    } else if (passed < DAY_LENGTH) {
+        return Math.round(passed / HOUR_LENGTH) + dict[2]
     } else if (passed < MONTH_LENGTH) {
-        return Math.round(passed / DAYS_LENGTH) + dict[3]
-    } else if (passed < YEARS_LENGTH) {
+        return Math.round(passed / DAY_LENGTH) + dict[3]
+    } else if (passed < YEAR_LENGTH) {
         return Math.round(passed / MONTH_LENGTH) + dict[4]
     } else {
-        return Math.round(passed / YEARS_LENGTH) + dict[5]
+        return Math.round(passed / YEAR_LENGTH) + dict[5]
     }
 
 }
