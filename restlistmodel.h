@@ -26,9 +26,11 @@ public:
     const QString &source();
     bool isLoading();
 
+    Q_INVOKABLE QJsonValue get(int index) const;
+
 
 public slots:
-    void get(const QJsonObject& params = QJsonObject());
+    void setParams(const QJsonObject& params = QJsonObject());
     void nextPage();
     void previousPage();
     void setPage(int page = 0);

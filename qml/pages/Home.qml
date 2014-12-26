@@ -57,7 +57,8 @@ Layouts.Page {
         if (omniBar.search !== "")
             request["query"] = omniBar.search;
 
-        notesListModel.get(request);
+        notesListModel.setParams(request);
+        notesListModel.reload()
     }
 
 

@@ -59,10 +59,14 @@ bool RestListModel::isLoading()
 {
     return mRequest->isLoading();
 }
-void RestListModel::get(const QJsonObject &params)
+
+QJsonValue RestListModel::get(int index) const
+{
+    return mDatas.at(index);
+}
+void RestListModel::setParams(const QJsonObject &params)
 {
     mParams = params;
-    reload();
 }
 void RestListModel::loadData(QJsonObject data)
 {

@@ -86,24 +86,8 @@ Layouts.Page {
             Layouts.CommentListView{
                 id: commentListView
                 z: 1
-                model: ListModel{
-                    Component.onCompleted: {
-                        this.append(
-                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
-                                        "timestamp": "2014-11-04 09:09:21.620000",
-                                        "message": "La Daurade : Fames ipsum porta fusce turpis luctus risus morbi lobortis ridiculus interdum lorem velit netus. Proin fames. Risus done #style #colorful"}
-                                    )
-                        this.append(
-                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
-                                        "timestamp": "2014-11-04 09:09:21.620000",
-                                        "message": "La Daurade : Fames ipsum porta fusce"}
-                                    )
-                        this.append(
-                                 {"author": {"avatar": "http://api.randomuser.me/portraits/thumb/men/80.jpg","nickname": "greendog751"},
-                                        "timestamp": "2014-11-04 09:09:21.620000",
-                                        "message": "La Daurade : Fames ipsum porta fusce turpis luctus risus velit netus. Proin fames. Risus done #style #colorful"}
-                                    )
-                    }
+                model: RestListModel {
+                    source:""
                 }
             }
         }
