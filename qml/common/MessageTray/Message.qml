@@ -8,7 +8,7 @@ Componenets.ListItemBase {
     id: messageContainer
     anchors.left: parent.left
     anchors.right: parent.right
-    height: _RES.s_LIST_ITEM_DOUBLE_HEIGHT
+    height: _RES.s_LIST_ITEM_HEIGHT
 
     property alias text: listItemLabel.text
     property int purpose: Style.MESSAGE_PURPOSE_INFORM

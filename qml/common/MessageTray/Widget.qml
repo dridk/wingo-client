@@ -19,8 +19,26 @@ Rectangle {
             "timeout": options['timeout'] || Style.MESSAGE_DURATION_SHORT,
             "dismissible": options['dismissible'] || true
         }
-        console.log(JSON.stringify(properties))
+//        console.log(JSON.stringify(properties))
         var component = Qt.createComponent("Message.qml")
+        if (component.status === Component.Ready)
+            return component.createObject(tray, properties)
+        else
+            return null
+    }
+
+    function quesion(text, ask, callback, options) {
+        options = options || {}
+        var properties = {
+            "text": text,
+            "question": ask,
+            "callback": callback,
+            "purpose": options['purpose'] || Style.MESSAGE_PURPOSE_NOTIFY,
+            "timeout": options['timeout'] || Style.MESSAGE_DURATION_LONG,
+            "dismissible": options['dismissible'] || false
+        }
+//        console.log(JSON.stringify(properties))
+        var component = Qt.createComponent("Question.qml")
         if (component.status === Component.Ready)
             return component.createObject(tray, properties)
         else
