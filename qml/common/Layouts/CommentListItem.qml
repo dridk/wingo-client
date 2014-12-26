@@ -17,8 +17,8 @@ Item {
 
     Widgets.Avatar{
         id: commentAvatar
-        source: author && author.hasOwnProperty(
-                    'avatar') ? author.avatar : "qrc:/qml/Res/images/anonymous.png"
+        source: $author && $author.hasOwnProperty(
+                    'avatar') ? $author.avatar : "qrc:/qml/Res/images/anonymous.png"
         anchors.bottom: parent.commentBody
         anchors.bottomMargin: _RES.s_MARGIN
         anchors.right: parent.right
@@ -50,14 +50,14 @@ Item {
                 spacing: _RES.s_MARGIN
                 Widgets.Label {
                     //User name
-                    text: author.nickname
+                    text: $author.nickname
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.LINK
                 }
 
                 Widgets.Label {
                     //Post date
-                    text: DateFormat.toNow(timestamp,
+                    text: DateFormat.toNow($timestamp,
                                            [qsTr("just now"), qsTr(
                                                 "min ago"), qsTr("h ago"), qsTr(
                                                 "mon ago"), qsTr(
@@ -67,7 +67,7 @@ Item {
                 }
             }
             Widgets.Label{
-                text: StringFormat.setWordColor(message,
+                text: StringFormat.setWordColor($message,
                                                 Style.Typography.LINK, /\#\w+/g)
                 anchors.left: parent.left
                 anchors.right: parent.right

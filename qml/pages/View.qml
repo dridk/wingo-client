@@ -1,5 +1,6 @@
-import QtQuick 2.0
+import QtQuick 2.3
 import Wingo 1.0
+import QtQuick.Controls 1.3
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
@@ -22,6 +23,10 @@ Layouts.Page {
         console.debug("Load NoteView data " + noteId)
         noteViewRequester.source = "/notes/" + noteId
         noteViewRequester.get()
+
+        postCommentRequester.source="/notes/" + noteId +"/comments"
+        commentModel.source="/notes/" + noteId +"/comments"
+        commentModel.reload()
     }
 
     ActionBar.Widget {
@@ -76,6 +81,18 @@ Layouts.Page {
                 z: 3
             }
 
+            TextField {
+                width : parent.width
+                height: 50
+                text:"MESSAGE...."
+                onAccepted: {
+
+                    var request = {"message": text }
+                    postCommentRequester.post(request)
+
+                }
+            }
+
             Widgets.MapView{
                 id: mapView
                 noteID: noteId
@@ -87,11 +104,18 @@ Layouts.Page {
                 id: commentListView
                 z: 1
                 model: RestListModel {
-                    source:""
+                    id:commentModel
+
+                    onSuccess: console.debug("COMMENTS LOADED...")
+                    onError: console.debug(message)
+
+
                 }
             }
         }
     }
+
+
 
 
 //    Text {
@@ -155,5 +179,13 @@ Layouts.Page {
         source: "/users/pockets"
         onSuccess: app.makeToast(qsTr("Note placed into pocket"))
         onError: app.showMessage("ERROR", message)
+    }
+
+    Request {
+        id: postCommentRequester
+        onSuccess: {
+            commentModel.reload()
+        }
+
     }
 }
