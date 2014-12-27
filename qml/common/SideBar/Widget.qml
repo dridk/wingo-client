@@ -26,11 +26,16 @@ Item {
     }
 
     function expandTray(){
-        state = "EXPANDED"
-        expand()
+        if (state === "EXPANDED") return;
+        Qt.inputMethod.hide(); //Hide all input methods
+        focus = true;  //Focus UI on self
+        state = "EXPANDED";
+        expand();
     }
 
     function contractTray(){
+        if (state === "") return;
+        focus = false;  //Return Focus
         state = ""
         contract()
     }

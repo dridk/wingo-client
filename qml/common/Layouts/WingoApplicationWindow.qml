@@ -99,7 +99,8 @@ ApplicationWindow {
             pushTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
-                        script: {
+                        script: {                            
+                            Qt.inputMethod.hide(); //Hide all input methods
                             if(Utilities.isFunction(exitItem.beforeHidden)) exitItem.beforeHidden()
                             if(Utilities.isFunction(enterItem.beforeShown)) enterItem.beforeShown()
                             exitItem.enabled = false
@@ -123,6 +124,7 @@ ApplicationWindow {
                 SequentialAnimation {
                     ScriptAction {
                         script: {
+                            Qt.inputMethod.hide(); //Hide all input methods
                             if(Utilities.isFunction(exitItem.beforeHidden)) exitItem.beforeHidden()
                             if(Utilities.isFunction(enterItem.beforeShown)) enterItem.beforeShown()
                             enterItem.enabled = true

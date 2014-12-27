@@ -1,6 +1,6 @@
 import QtQuick 2.3
 import Wingo 1.0
-import QtQuick.Controls 1.3
+import QtQuick.Controls 1.2
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
@@ -81,23 +81,38 @@ Layouts.Page {
                 z: 3
             }
 
-            TextField {
-                width : parent.width
-                height: 50
-                text:"MESSAGE...."
-                onAccepted: {
+//            TextField {
+//                width : parent.width
+//                height: 50
+//                text:"MESSAGE...."
+//                onAccepted: {
 
-                    var request = {"message": text }
-                    postCommentRequester.post(request)
+//                    var request = {"message": text }
+//                    postCommentRequester.post(request)
 
-                }
-            }
+//                }
+//            }
 
             Widgets.MapView{
                 id: mapView
                 noteID: noteId
                 enabled: true
                 z: 2
+            }
+
+
+            Widgets.EntryBox {
+                id: commentView
+                anchors.top: omniBar.bottom
+                placeholder: qsTr("Leave your comment...")
+                z: 1
+
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+//                maxTextLength: 128
+
+
             }
 
             Layouts.CommentListView{

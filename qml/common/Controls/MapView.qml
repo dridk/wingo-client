@@ -26,15 +26,19 @@ Componenets.WidgetItemBase {
     signal click
 
     function expand() {
+        focus = true;
+        Qt.inputMethod.hide();
         expanded = true
     }
 
     function contract() {
+        focus = false;
         expanded = false
     }
 
     function toggle() {
-        expanded = !expanded
+        if (expanded) contract();
+        else expand();
     }
 
     function refresh() {

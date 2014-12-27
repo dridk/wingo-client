@@ -76,7 +76,7 @@ WidgetItemBase {
                     anchors.bottom: parent.bottom
                     text: "Placeholder..."
                     color: Style.Typography.FADE
-                    visible: !parent.text
+                    visible: !parent.focus && !parent.text.length
                 }
 
             }

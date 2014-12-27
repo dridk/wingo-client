@@ -46,12 +46,15 @@ Item {
 
     function expandTray() {
         if (state === "EXPANDED") return;
-        state = "EXPANDED"
-        expand()
+        Qt.inputMethod.hide(); //Hide all input methods
+        focus = true;  //Focus UI on self
+        state = "EXPANDED";
+        expand();
     }
 
     function contractTray() {
         if (state === "") return;
+        focus = false;  //Return Focus
         state = ""
         omniBarTrayFlickable.contentY = 0
         contract()

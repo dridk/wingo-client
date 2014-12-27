@@ -47,14 +47,16 @@ Item {
             anchors.rightMargin: _RES.s_MARGIN
             anchors.leftMargin: _RES.s_MARGIN
             anchors.fill: parent
-            activeFocusOnPress: true
+
+
+//            activeFocusOnPress: true
 
             Label{
                 id: textBoxPlaceholder
                 text: "Placeholder..."
                 anchors.fill: parent
                 color: Style.Typography.FADE
-                visible: !parent.text
+                visible: !parent.focus && !parent.text.length
             }
 
         }

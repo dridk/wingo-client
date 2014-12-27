@@ -72,9 +72,6 @@ Layouts.Page {
         app.goBack();
     }
 
-    function beforeHidden(){
-        Qt.inputMethod.hide();
-    }
 
     function updateImage(path){
         addImage.source = " " // needs.. to avoid caching features
@@ -128,7 +125,6 @@ Layouts.Page {
         anchors.top: actionBar.bottom
         noteExpieryModel: ["1day", "5day", "15day", "1Mo", "6Mo", "1Yr", "3Yr"]
         noteTakeLimitModel: ["5", "10", "15", "30", "80", "100", "300"]
-        onExpand: Qt.inputMethod.hide(); //Hide keyboard when the omnibar expands
     }
 
     Widgets.EntryArea {
