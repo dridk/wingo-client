@@ -29,10 +29,14 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
             QString key = mRoleNames.value(keyId);
             //key is $keyname.. remove first character '$'
             key = key.right(key.length()-1);
-            return mDatas.at(index.row()).toObject().value(key);
+            QJsonObject obj = mDatas.at(index.row()).toObject();
+            if (obj.keys().contains(key))
+                return obj.value(key);
+            else
+                return QJsonValue::Undefined;
         }
     }
-    return QVariant();
+    return QJsonValue::Undefined;
 }
 
 int RestListModel::rowCount(const QModelIndex &parent) const
@@ -113,14 +117,26 @@ void RestListModel::createRoleNames()
     if (mDatas.isEmpty())
         return;
 
-    QJsonObject ref = mDatas.first().toObject();
+    //Load all keys.. by looping arround all items
+    QSet<QString> mKeys;
+    foreach (QJsonValue val, mDatas) {
+
+        QJsonObject obj = val.toObject();
+        foreach (QString key, obj.keys()){
+
+            mKeys.insert(key);
+        }
+    }
+
+    qDebug()<<mKeys;
+
+    //Create roles names !
     int keyId = Qt::UserRole+1;
-    foreach (QString key , ref.keys())
+    foreach (QString key , mKeys)
     {
         QString roleName = "$"+key;
         mRoleNames.insert(keyId, roleName.toUtf8());
         keyId++;
-
     }
 
 }
