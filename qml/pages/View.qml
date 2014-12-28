@@ -101,18 +101,25 @@ Layouts.Page {
             }
 
 
-            Widgets.EntryBox {
+            Widgets.EntryArea {
                 id: commentView
-                anchors.top: omniBar.bottom
                 placeholder: qsTr("Leave your comment...")
                 z: 1
 
                 anchors.left: parent.left
                 anchors.right: parent.right
 
-//                maxTextLength: 128
+                maxTextLength: 128
 
+                action: Icons.SEND
 
+                onActionPressed: {
+
+                    var request = {"message": text }
+                    postCommentRequester.post(request)
+                    clear()
+
+                }
             }
 
             Layouts.CommentListView{

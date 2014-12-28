@@ -7,6 +7,16 @@ TouchSensorArea {
     width: buttonContents.width
     height: _RES.s_ICON_SIZE
 
+    //ENUMS
+    readonly property string enum_DEFAULT:  "DEFAULT"
+    readonly property string enum_INVERTED: "INVERTED"
+    readonly property string enum_DISABLED: "DISABLED"
+    readonly property string enum_PRESSED:  "PRESSED"
+    readonly property string enum_ACTION:   "ACTION"
+    readonly property string enum_ACCENT:   "ACCENT"
+    readonly property string enum_SUNKEN:   "SUNKEN"
+    //-----
+
     property string style: "DEFAULT"
     property alias color: buttonContents.color
     property alias icon: buttonIcon.name
