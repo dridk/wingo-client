@@ -17,19 +17,22 @@ WidgetItemBase {
     property alias placeholder: textBoxPlaceholder.text
     property alias textLength: textBoxEdit.length
     property int maxTextLength : -1
+    property string action: ""
 
     function clear() {
         text = "";
     }
 
-    Item{
+    signal actionPressed
+
+    Item {
         id: textEntryBlockWrapper
         height: textBoxEdit.contentHeight
-        anchors.right: parent.right
+        anchors.right: actionBlockWrapper.left
         anchors.left: parent.left
         anchors.top: parent.top
         anchors.leftMargin: _RES.s_DOUBLE_MARGIN
-        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+        anchors.rightMargin: _RES.s_MARGIN
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
 
         Rectangle{
@@ -53,7 +56,7 @@ WidgetItemBase {
             anchors.rightMargin: _RES.s_BORDER
             anchors.leftMargin: _RES.s_BORDER
 
-            TextEdit{
+            TextEdit {
                 id: textBoxEdit
                 font.pixelSize: _RES.s_TEXT_SIZE_MEDIUM
                 textFormat: Text.PlainText
@@ -71,7 +74,7 @@ WidgetItemBase {
                 selectionColor: Style.Background.SELECTION
                 selectedTextColor: Style.Typography.SELECTION
 
-                Label{
+                Label {
                     id: textBoxPlaceholder
                     anchors.bottom: parent.bottom
                     text: "Placeholder..."
@@ -82,12 +85,30 @@ WidgetItemBase {
             }
         }
     }
-    Label{
-        id: wordCount
+    Item {
+        id: actionBlockWrapper
+        anchors.top: textEntryBlockWrapper.top
+        anchors.bottom: textEntryBlockWrapper.bottom
         anchors.right: parent.right
+        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+        width: entryBox.action == ""? 0 : actionButton.width
+
+        Button {
+            id: actionButton
+            anchors.centerIn: parent
+            icon: entryBox.action
+//            style: enum_ACCENT
+            visible: entryBox.action !== ""
+            enabled: textBoxEdit.text.length
+            onClicked: entryBox.actionPressed()
+        }
+    }
+
+    Label {
+        id: wordCount
+        anchors.right: textEntryBlockWrapper.right
         anchors.top: textEntryBlockWrapper.bottom
         anchors.topMargin: _RES.s_MARGIN
-        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
         font.pixelSize: _RES.s_TEXT_SIZE_SMALL
         color: textBoxEdit.length < entryBox.maxTextLength? Style.Typography.ACCENT : Style.Typography.ALERT
         text: textBoxEdit.length

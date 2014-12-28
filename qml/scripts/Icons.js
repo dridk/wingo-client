@@ -41,4 +41,6 @@ BRUSH_SIZE1 =  "\uF122",
 BRUSH_SIZE2 =  "\uF123",
 BRUSH_SIZE3 =  "\uF124",
 NOTICE =  "\uF128",
-ALERT =  "\uF129";
+ALERT =  "\uF129",
+COMMENT =  "\uF12A",
+SEND =  "\uF12B";
