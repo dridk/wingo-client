@@ -24,7 +24,7 @@ Layouts.Page {
 
     RestListModel {
         id: pocketNoteModel
-        source: "/users/pockets"
+        source: "/users/mynotes"
         onSuccess: {
             console.log("my notes loaded")
         }
