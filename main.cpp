@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");
-    app.setApplicationVersion("0.2.0 Thorfinn");
+    app.setApplicationVersion("0.2.1 Thorfinn");
 
 
 
