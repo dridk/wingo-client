@@ -88,5 +88,6 @@
         <file>qml/common/Controls/PictureFrame.qml</file>
         <file>qml/Res/images/shadowSquare.png</file>
         <file>qml/common/MessageTray/Message.qml</file>
+        <file>qml/pages/Photo.qml</file>
     </qresource>
 </RCC>

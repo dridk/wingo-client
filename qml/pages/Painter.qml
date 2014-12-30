@@ -1,5 +1,6 @@
 import QtQuick 2.3
 import Wingo 1.0
+import QtMultimedia 5.4
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
@@ -11,6 +12,7 @@ import "Painter"
 
 Layouts.Page {
     id: page
+    property bool videoMode : false
 
     signal drawChange(string path)
 
@@ -38,6 +40,11 @@ Layouts.Page {
         ActionBar.Right{
             ActionBar.Button {
                 icon: Icons.PICTURE_ADD
+
+                onClicked: {
+                videoMode = !videoMode
+
+                }
             }
             ActionBar.Button {
                 icon: Icons.UNDO
@@ -79,7 +86,46 @@ Layouts.Page {
                 anchors.margins: _RES.s_MARGIN
                 penColor: colorPicker.color
                 penSize: toolBar.penSize
+                visible: !videoMode
             }
+
+            //======== VIDEO MODE ================
+
+            VideoOutput {
+                  source: camera
+                  anchors.fill: parent
+                  anchors.margins: _RES.s_MARGIN
+                  visible: videoMode
+
+
+                  MouseArea {
+                      anchors.fill: parent
+                      onClicked: camera.imageCapture.capture()
+                  }
+              }
+
+            Camera {
+                  id: camera
+                  imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
+
+                  exposure {
+                      exposureCompensation: -1.0
+                      exposureMode: Camera.ExposurePortrait
+                  }
+
+                  flash.mode: Camera.FlashRedEyeReduction
+
+                  imageCapture {
+                      onImageSaved:  {
+                         painterItem.loadFromPath(path)
+                         videoMode = false
+                      }
+                  }
+              }
+
+            //======== END VIDEO MODE ================
+
+
         }
     }
 

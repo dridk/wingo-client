@@ -20,6 +20,8 @@ public:
     Q_INVOKABLE void clear();
     Q_INVOKABLE bool save();
     Q_INVOKABLE bool load();
+    Q_INVOKABLE bool loadFromPath(const QString& path);
+
     Q_INVOKABLE QString path() const;
 
 

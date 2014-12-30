@@ -25,7 +25,8 @@ WingoApplicationWindow{
             "Login":    Qt.resolvedUrl("/qml/pages/Login.qml"),
             "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
             "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
-            "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml")
+            "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml"),
+            "Photo":    Qt.resolvedUrl("/qml/pages/Photo.qml")
         }
 
         Component.onCompleted: {

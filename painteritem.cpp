@@ -54,6 +54,18 @@ bool PainterItem::load()
 
 }
 
+bool PainterItem::loadFromPath(const QString &path)
+{
+
+    QPixmap pix;
+    if (!pix.load(path))
+        return false;
+
+    mCachePainter.drawPixmap(0,0,pix.width(), pix.height(),pix);
+    update();
+
+}
+
 QString PainterItem::path() const
 {
     QString filename = QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QDir::separator() + "wingo.png";
