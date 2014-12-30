@@ -128,7 +128,6 @@ void RestListModel::createRoleNames()
         }
     }
 
-    qDebug()<<mKeys;
 
     //Create roles names !
     int keyId = Qt::UserRole+1;

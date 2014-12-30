@@ -97,11 +97,27 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         model: notesListModel
         busy: notesListModel.isLoading
-        onPressed: {
-            var noteId = model.get(index).id
-            app.goToPage(app.pages["View"]);
-            app.currentPage.noteId = noteId
+
+        delegate: Layouts.NoteListItem {
+            lat: $lat
+            lon: $lon
+            timestamp: $timestamp
+            message: $message
+            anonymous: $anonymous
+            nickname: $anonymous ? "" :$author.nickname
+            avatar: $anonymous ? "" :$author.avatar
+            takesCount: $takes
+            picture: $picture == undefined ? "" : $picture
+
+
+            onClicked: {
+                var noteId = notesListModel.get(index).id
+                app.goToPage(app.pages["View"]);
+                app.currentPage.noteId = noteId
+            }
         }
+
+
 
         onVerticalMovementUpChanged: {
             if (verticalMovementUp&&!atYEnd){

@@ -48,6 +48,30 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         refreshOnPull: false
 
+        delegate: Layouts.NoteListItem {
+            lat: $lat
+            lon: $lon
+            timestamp: $timestamp
+            message: $message
+            //POCKET NOTE IS A COPY A NOTES... THERE ARE NO AUTHOR.
+            // YOU CAN GO TO THE ORIGINAL NOTES TO SEE IT
+//            anonymous: $anonymous
+//            nickname: $anonymous ? "" :$author.nickname
+            avatar: "https://static-unitag.com/images/qrcode/qrcode_unitag.png?mh=b915089b"
+//            takesCount: $takes
+            picture: $picture == undefined ? "" : $picture
+
+            onClicked: {
+                console.debug("pocket clicked")
+            }
+
+            Text {
+                text :$signature
+                anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+        }
+
         model: pocketNoteModel
 
         onVerticalMovementUpChanged: {

@@ -51,6 +51,26 @@ Layouts.Page {
 
         model: pocketNoteModel
 
+
+
+        delegate: Layouts.NoteListItem {
+            lat: $lat
+            lon: $lon
+            timestamp: $timestamp
+            message: $message
+            anonymous: $anonymous
+            nickname: $anonymous ? "" :$author.nickname
+            avatar: $anonymous ? "" :$author.avatar
+            takesCount: $takes
+            picture: $picture == undefined ? "" : $picture
+
+
+            onClicked: {
+              console.log("my notes clicked")
+            }
+        }
+
+
         onVerticalMovementUpChanged: {
             if (verticalMovementUp&&!atYEnd){
                 omniBar.show();
