@@ -2,91 +2,144 @@ import QtQuick 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
+import QtLocation 5.3
 import Wingo 1.0
 
 import "common/Layouts"
 
 WingoApplicationWindow{
+
     id: app
-    //Needed for QtCreator design mode
     width: 540//238
     height: 960//428
     visible: true
-    //-----------
+    //---------------------------
+    //Application global property
+    //---------------------------
+    property alias coordinate    : location.coordinate
+    property bool debug          : true
+    property bool logged         : false
+    property string positionTitle: qsTr("Looking up your<br>current location...")
+    property variant config
+    property variant currentUser
 
-    debug: true
+    //---------------------------
+    //Application global function
+    //---------------------------
+
+    function updateLocation(){
+        gpsSource.start()
+    }
+
+    function requestCurrentUser(){
+        currentUserRequester.get()
+    }
+
+    //---------------------------
+    //Application global page
+    //---------------------------
+
+    pages: { "Home":     Qt.resolvedUrl("/qml/pages/Home.qml"),
+             "Post":     Qt.resolvedUrl("/qml/pages/Post.qml"),
+             "Pocket":   Qt.resolvedUrl("/qml/pages/Pocket.qml"),
+             "Mynotes":  Qt.resolvedUrl("/qml/pages/Mynotes.qml"),
+             "Login":    Qt.resolvedUrl("/qml/pages/Login.qml"),
+             "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
+             "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
+             "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml"),
+             "Photo":    Qt.resolvedUrl("/qml/pages/Photo.qml")
+    }
+
+    //---------------------------
+    //Application onLoad Actions
+    //---------------------------
+
+    Component.onCompleted: {
+        //Request configuration
+        configRequester.get()
+        //Request current User
+        currentUserRequester.get()
+        //Request current address
+        locationRequest.get({
+                                "lat": app.coordinate.latitude,
+                                "lon": app.coordinate.longitude
+                            })
+    }
 
 
-        pages: {
-            "Home":     Qt.resolvedUrl("/qml/pages/Home.qml"),
-            "Post":     Qt.resolvedUrl("/qml/pages/Post.qml"),
-            "Pocket":   Qt.resolvedUrl("/qml/pages/Pocket.qml"),
-            "Mynotes":  Qt.resolvedUrl("/qml/pages/Mynotes.qml"),
-            "Login":    Qt.resolvedUrl("/qml/pages/Login.qml"),
-            "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
-            "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
-            "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml"),
-            "Photo":    Qt.resolvedUrl("/qml/pages/Photo.qml")
+    //---------------------------
+    //Application Global Component
+    //---------------------------
+
+    //Current Location Component
+    Location {
+        id: location
+        coordinate {
+            latitude: 43.8174759
+            longitude: -79.4210148
+        }
+    }
+    //Config Request Comonent
+    Request{
+        id:configRequester
+        source:"/config"
+        onSuccess:  app.config = data.results
+
+    }
+    //Current address Request
+    Request {
+        id:locationRequest
+        source:"/location/here"
+        onSuccess: {
+            app.positionTitle  = data["results"]
+        }
+    }
+
+    //Current User Request
+    Request {
+        id: currentUserRequester
+        source:"/users/me"
+        onSuccess: {
+            app.currentUser = data["results"]
+            app.logged = true
         }
 
-        Component.onCompleted: {
-            configRequester.get()
-            locationRequest.get({"lat": app.coordinate.latitude,
-                                 "lon": app.coordinate.longitude})
-            currentUserRequester.get()
-        }
-
-
-        //======Added by Sacha
-        Request{
-            id:configRequester
-            source:"/config"
-            onSuccess:  app.config = data.results
+        onError: {
+            console.debug("Cannot load current user. Authified ?")
+            app.logged = false
 
         }
+    }
 
-        Request {
-            id: currentUserRequester
-            source:"/users/me"
-            onSuccess: {
-                console.debug("Current User loaded")
-                console.debug( data["results"])
 
-                app.currentUser = data["results"]
-                app.logged = true
+    //Current Position Request
+    PositionSource
+    {
+        id: gpsSource
+        updateInterval: 1000
+        active: Qt.platform.os == "android" ? true : false
+        onPositionChanged: {
+            if ( Qt.platform.os == "android") {
+                app.coordinate = gpsSource.position.coordinate;
+                //Update location title
+                locationRequest.get({"lat": app.coordinate.latitude,
+                                        "lon": app.coordinate.longitude})
             }
 
-            onError: {
-                console.debug("Cannot load current user. Authified ?")
-                app.logged = false
-
-            }
         }
+    }
 
 
-        //=========== POSITIONNING GPS
-        PositionSource
-        {
-            id: gpsSource
-            updateInterval: 1000
-            active: Qt.platform.os == "android" ? true : false
-            onPositionChanged: {
-                if ( Qt.platform.os == "android") {
-                    app.coordinate = gpsSource.position.coordinate;
-                    //Update location title
-                    locationRequest.get({"lat": app.coordinate.latitude,
-                                         "lon": app.coordinate.longitude})
-                }
+    Text {
+        visible: app.debug
+        anchors.bottom: parent.bottom
+        text: wingo.getDeviceId() + "\n" +
+              configRequester.host()+":"+
+              configRequester.port()+
+              "\n pos:" + app.coordinate.latitude +" , "+app.coordinate.longitude
+        opacity: 0.4
+    }
 
-            }
-        }
 
-        Request {
-            id:locationRequest
-            source:"/location/here"
-            onSuccess: {
-                app.positionTitle  = data["results"]
-            }
-        }
 
 }
