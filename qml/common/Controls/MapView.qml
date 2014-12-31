@@ -96,9 +96,29 @@ Componenets.WidgetItemBase {
                 latitude: mapView.latitude
                 longitude: mapView.longitude
             }
-            zoomLevel: mapLoader.minimumZoomLevel
+            zoomLevel: mapLoader.maximumZoomLevel - 5
 
-            gesture.enabled: true
+//            gesture.enabled: true
+
+//            LoadingIndicator{
+//                anchors.centerIn: parent
+//                anchors.verticalCenterOffset: - _RES.scale(10)
+//                busy: mapLoader.status === Image.Loading
+//                opacity: busy? 1: 0
+//                Behavior on opacity {NumberAnimation{}}
+//            }
+
+//            Icon{
+//                id: mapCursor
+//                name: Icons.LOCATION
+//                anchors.centerIn: parent
+//                anchors.verticalCenterOffset: - _RES.scale(10)
+//                color: Style.Palette.MAGENTA
+//                visible: mapLoader.status === Image.Ready
+//                size: _RES.s_ICON_SIZE_SMALL
+//                iconStyle: Text.Outline
+//                iconStyleColor: Style.Background.WINDOW
+//            }
         }
     }
 
