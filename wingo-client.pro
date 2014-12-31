@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick network positioning
+QT += qml quick network positioning svg
 
 SOURCES += main.cpp \
     app.cpp \

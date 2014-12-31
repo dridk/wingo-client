@@ -26,8 +26,7 @@ Layouts.Page {
 
 
         Widgets.PhotoButton {
-            width: parent.width/8
-            height:  parent.width/8
+
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             anchors.bottomMargin: 50

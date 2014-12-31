@@ -2,9 +2,9 @@ import QtQuick 2.0
 
 Image {
     id:root
-    source:"qrc:/qml/Res/images/camera75.svg"
-    sourceSize.width: width * scale
-    sourceSize.height: height * scale
+    source:"http://appicns.com/appicns/svg/appicns_Photobooth.svg"
+//    sourceSize.width: width * scale
+//    sourceSize.height: height * scale
     scale : area.pressed ? 2 : 1
     signal clicked()
 
