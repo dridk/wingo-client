@@ -71,9 +71,7 @@ WingoApplicationWindow{
             active: Qt.platform.os == "android" ? true : false
             onPositionChanged: {
                 if ( Qt.platform.os == "android") {
-                    var coord = gpsSource.position.coordinate;
-                    app.longitude = coord.longitude;
-                    app.latitude = coord.latitude;
+                    app.location = gpsSource.position.coordinate;
                     //Update location title
                     locationRequest.get({"lat": app.latitude, "lon": app.longitude})
                 }

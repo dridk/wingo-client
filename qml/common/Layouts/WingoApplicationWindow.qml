@@ -2,6 +2,8 @@ import QtQuick 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
+import QtLocation 5.3
+
 import Wingo 1.0
 import "../../lib"
 import "../../lib/Toaster.js" as Toaster
@@ -24,9 +26,20 @@ ApplicationWindow {
     property variant config
     //Current GPS location
 
+    property alias latitude  : location.coordinate.latitude
+    property double longitude : location.coordinate.longitude
+    property alias coordinate : location.coordinate
+
     //USE THIS VALUE FOR DESKTOP TESTING
-    property double latitude  : 43.8174759
-    property double longitude : -79.4210148
+
+    Location {
+        id: location
+        coordinate {
+            latitude: 43.8174759
+            longitude: -79.4210148
+        }
+    }
+
     property string positionTitle: qsTr("Looking up your<br>current location...")
 
     property bool logged : false

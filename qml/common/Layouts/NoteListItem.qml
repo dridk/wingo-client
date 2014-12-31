@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtPositioning 5.2
 
 import "../../scripts/Icons.js" as Icons
 import "../../scripts/AppStyle.js" as Style
@@ -48,11 +49,9 @@ Componenets.TouchSensorArea {
             Widgets.Label {
                 rotation: -90
                 anchors.centerIn: parent
-                text: DistanceFormat.toHere(
-                          DistanceFormat.pointObject(app.latitude,
-                                                     app.longitude),
-                          DistanceFormat.pointObject(lat, lon),
-                          [qsTr("here"), qsTr("m"), qsTr("km"), qsTr("far...")])
+                    text: DistanceFormat.toHere(app.coordinate,
+                                            QtPositioning.coordinate(lat, lon),
+                                           [qsTr("here"), qsTr("m"), qsTr("km"), qsTr("far...")])
                 font.pixelSize: _RES.s_TEXT_SIZE_MINI
                 color: Style.Typography.FADE
                 Layout.fillWidth: true
