@@ -24,7 +24,8 @@ Layouts.Page {
     }
 
     Component.onCompleted: {
-        placeRequester.get({"lat": app.latitude, "lon":app.longitude})
+        placeRequester.get({"lat": app.coordinate.latitude,
+                            "lon":app.coordinate.longitude})
 
     }
 

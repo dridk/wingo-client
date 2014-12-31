@@ -51,12 +51,10 @@ function convert (value, from, to) {
 }
 
 function format( distance, units, dict) {
-//    dict = dict || DEFAULT_DICTIONARY;
+    dict = dict || DEFAULT_DICTIONARY;
 //    units = units || KM;
 
 //    distance = units === METER ? distance : convert(distance, units, KM);
-
-   console.debug(distance)
 
 
     if (distance < METER * 5) { // less then 5meters is here

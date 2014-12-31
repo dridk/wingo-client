@@ -49,8 +49,8 @@ Layouts.Page {
 
     function refresh(){
         var request = {
-            "lat": app.latitude,
-            "lon": app.longitude,
+            "lat": app.coordinate.latitude,
+            "lon": app.coordinate.longitude,
             "radius": omniBar.distance,
             "order": omniBar.sortByDate ? "recent" : "popular"
         }

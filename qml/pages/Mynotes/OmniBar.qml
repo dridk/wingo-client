@@ -47,7 +47,9 @@ OmniBar.Widget{
         }
 
         function refresh(){
-            tagRequester.get({"lat": app.latitude, "lon": app.longitude, "radius": filterBar.distance})
+            tagRequester.get({"lat"   : app.coordinate.latitude,
+                              "lon"   : app.coordinate.longitude,
+                              "radius": filterBar.distance})
         }
     }
 

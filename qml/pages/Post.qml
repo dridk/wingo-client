@@ -1,5 +1,6 @@
 import QtQuick 2.0
 import Wingo 1.0
+import QtPositioning 5.3
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
@@ -11,8 +12,13 @@ import "Post"
 Layouts.Page {
     id: page
 
-    property double selectLatitude : app.latitude
-    property double selectLongitude : app.longitude
+
+    Location {
+        id:selectLocation
+        coordinate: app.coordinate
+    }
+
+
 
     function post() {
         Qt.inputMethod.hide();
@@ -35,9 +41,8 @@ Layouts.Page {
         if(noteEdit.textLength === 0) return app.makeToast("Can't post empty note", Style.MESSAGE_PURPOSE_INFORM);
         actionBar.enabled = false
         var post = {
-            "lat": selectLatitude,
-            "lon":selectLongitude,
-            "author":"darwin", //TIPS... darwin, to make it works without auth
+            "lat": selectLocation.coordinate.latitude,
+            "lon":selectLocation.coordinate.longitude,
             "anonymous": omniBar.postAnonimous,
             "message":noteEdit.text
         }
@@ -80,10 +85,9 @@ Layouts.Page {
 
     function updatePos(latitude, longitude){
 
-        selectLatitude = latitude
-        selectLongitude = longitude
+        selectLocation.coordinate.latitude = latitude
+        selectLocation.coordinate.longitude = longitude
 
-        console.debug("update",selectLatitude)
 
     }
 
@@ -186,7 +190,7 @@ Layouts.Page {
         anchors.topMargin: 20
         anchors.horizontalCenter: parent.horizontalCenter
         icon: Icons.LOGO
-        text: qsTr(selectLatitude+" - " + selectLongitude)
+        text: "set location"
         style: "ACTION"
         onClicked: {
 

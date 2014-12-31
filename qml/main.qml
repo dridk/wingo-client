@@ -31,7 +31,8 @@ WingoApplicationWindow{
 
         Component.onCompleted: {
             configRequester.get()
-            locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+            locationRequest.get({"lat": app.coordinate.latitude,
+                                 "lon": app.coordinate.longitude})
             currentUserRequester.get()
         }
 
@@ -71,12 +72,12 @@ WingoApplicationWindow{
             active: Qt.platform.os == "android" ? true : false
             onPositionChanged: {
                 if ( Qt.platform.os == "android") {
-                    app.location = gpsSource.position.coordinate;
+                    app.coordinate = gpsSource.position.coordinate;
                     //Update location title
-                    locationRequest.get({"lat": app.latitude, "lon": app.longitude})
+                    locationRequest.get({"lat": app.coordinate.latitude,
+                                         "lon": app.coordinate.longitude})
                 }
 
-                //            console.debug(coord.longitude +" " +coord.latitude )
             }
         }
 

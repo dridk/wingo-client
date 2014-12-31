@@ -168,10 +168,8 @@ Layouts.Page {
                                                      "mon ago"), qsTr(
                                                      "days ago"), qsTr("yr ago")]) +
                     ", " +
-                    DistanceFormat.toHere(
-                                              DistanceFormat.pointObject(app.latitude,
-                                                                         app.longitude),
-                                              DistanceFormat.pointObject(data["results"]["lat"], data["results"]["lon"]),
+                    DistanceFormat.toHere(app.coordinate,
+                                              QtPositioning.coordinate(data["results"]["lat"], data["results"]["lon"]),
                                               [qsTr("here"), qsTr("m"), qsTr("km"), qsTr("far...")])
             noteView.takes = data["results"]["takes"]
             noteView.expiration = data["results"]["expiration"]
