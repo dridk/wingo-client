@@ -149,8 +149,8 @@ Layouts.Page {
         id: mapView
         anchors.top: noteEdit.bottom
         expandable: false
-        latitude: app.latitude
-        longitude: app.longitude
+        latitude: app.coordinate.latitude
+        longitude: app.coordinate.longitude
         z: 0
 
         onClick: {
