@@ -89,5 +89,7 @@
         <file>qml/Res/images/shadowSquare.png</file>
         <file>qml/common/MessageTray/Message.qml</file>
         <file>qml/pages/Photo.qml</file>
+        <file>qml/common/Controls/PhotoButton.qml</file>
+        <file>qml/Res/images/camera75.svg</file>
     </qresource>
 </RCC>

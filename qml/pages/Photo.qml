@@ -13,8 +13,51 @@ import "../common/ActionBar" as ActionBar
 
 Layouts.Page {
     id: page
+    color: "black"
+    // DO we provide a dedicated Layout for Photos ?
 
-// DO we provide a dedicated Layout for Photos ?
+    signal imageCaptured(string path)
+
+    VideoOutput {
+        source: camera
+        anchors.fill: parent
+        autoOrientation: true
+
+
+
+        Widgets.PhotoButton {
+            width: parent.width/8
+            height:  parent.width/8
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 50
+            onClicked: camera.imageCapture.capture()
+
+        }
+
+    }
+
+    Camera {
+        id: camera
+        imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
+
+        exposure {
+            exposureCompensation: -1.0
+            exposureMode: Camera.ExposurePortrait
+        }
+
+        flash.mode: Camera.FlashRedEyeReduction
+
+
+        imageCapture {
+            onImageSaved: {
+                page.imageCaptured(path)
+                page.back()
+            }
+        }
+    }
+
+
 
 
 }
