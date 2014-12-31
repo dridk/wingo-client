@@ -1,6 +1,7 @@
 import QtQuick 2.3
 import Wingo 1.0
 import QtQuick.Controls 1.2
+import QtPositioning 5.2
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
