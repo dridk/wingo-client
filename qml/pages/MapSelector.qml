@@ -1,5 +1,7 @@
 import QtQuick 2.0
 import Wingo 1.0
+import QtPositioning 5.3
+import QtLocation 5.3
 
 import "../scripts/Icons.js" as Icons
 import "../scripts/AppStyle.js" as Style
@@ -38,15 +40,61 @@ Layouts.Page {
 
 
 
+    Plugin {
+            id: locationPlugin
+            allowExperimental: true
+            name: "nokia"
+            PluginParameter { name: "app_id"; value: "gSIJpP4LI9XNNUl2CKYt" }
+            PluginParameter { name: "token"; value: "jCjx8lcKnDsGXbRXSIDe9w" }
+
+
+            // code here to choose the plugin as necessary
+        }
+
+
+
+
+
+
     ListView {
         width: parent.width
         anchors.top: actionBar.bottom
         anchors.bottom: parent.bottom
         model: placeModel
-        header : Rectangle {
+
+        header : Map {
+            id:map
+            plugin: locationPlugin
             width: parent.width
             height: parent.width
-            color: "blue"
+            focus : true
+            maximumZoomLevel : 15.5
+            minimumZoomLevel : 15.5
+
+            center {
+                  latitude: app.coordinate.latitude
+                  longitude: app.coordinate.longitude
+              }
+            Component.onCompleted: {
+                map.addMapItem()
+            }
+
+            zoomLevel:  app.accurenty
+
+            onZoomLevelChanged: console.debug(zoomLevel)
+
+            MapCircle {
+                color: "red"
+                opacity: 0.4
+                radius: 50
+
+                center {
+                      latitude: app.coordinate.latitude
+                      longitude: app.coordinate.longitude
+                  }
+            }
+
+
         }
 
         delegate: Rectangle {

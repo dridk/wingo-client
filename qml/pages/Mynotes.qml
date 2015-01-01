@@ -18,12 +18,12 @@ Layouts.Page {
     function refresh(){
 
         noteList.positionViewAtBeginning()
-        pocketNoteModel.reload()
+        myNoteModel.reload()
     }
     Component.onCompleted: refresh()
 
     RestListModel {
-        id: pocketNoteModel
+        id: myNoteModel
         source: "/users/mynotes"
         onSuccess: {
             console.log("my notes loaded")
@@ -49,7 +49,7 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         refreshOnPull: false
 
-        model: pocketNoteModel
+        model: myNoteModel
 
 
 
@@ -66,7 +66,9 @@ Layouts.Page {
 
 
             onClicked: {
-              console.log("my notes clicked")
+                var noteId = myNoteModel.get(index).id
+                app.goToPage(app.pages["View"]);
+                app.currentPage.noteId = noteId
             }
         }
 

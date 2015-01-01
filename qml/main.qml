@@ -17,6 +17,7 @@ WingoApplicationWindow{
     //Application global property
     //---------------------------
     property alias coordinate    : location.coordinate
+    property double accurenty    : 5
     property bool debug          : true
     property bool logged         : false
     property string positionTitle: qsTr("Looking up your<br>current location...")
@@ -120,10 +121,26 @@ WingoApplicationWindow{
         active: Qt.platform.os == "android" ? true : false
         onPositionChanged: {
             if ( Qt.platform.os == "android") {
-                app.coordinate = gpsSource.position.coordinate;
-                //Update location title
-                locationRequest.get({"lat": app.coordinate.latitude,
-                                        "lon": app.coordinate.longitude})
+                var pos =  gpsSource.position;
+                app.coordinate = pos.coordinate;
+
+                app.accurenty  = 0
+                //                //Update location title
+                //                locationRequest.get({"lat": app.coordinate.latitude,
+                //                                        "lon": app.coordinate.longitude})
+
+                if (pos.horizontalAccuracyValid && pos.verticalAccuracyValid)
+                    app.accurenty = (pos.horizontalAccuracy + pos.verticalAccuracy) /2
+
+                else if (pos.horizontalAccuracyValid )
+                    app.accurenty = pos.horizontalAccuracy
+                else if (pos.verticalAccuracy )
+                    app.accurenty = pos.verticalAccuracy
+
+
+
+
+
             }
 
         }

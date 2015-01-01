@@ -62,7 +62,9 @@ Layouts.Page {
             picture: $picture == undefined ? "" : $picture
 
             onClicked: {
-                console.debug("pocket clicked")
+                var noteId = pocketNoteModel.get(index).parent
+                app.goToPage(app.pages["View"]);
+                app.currentPage.noteId = noteId
             }
 
             Text {
