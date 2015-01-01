@@ -75,6 +75,8 @@ Layouts.Page {
 
     function back() {
         app.goBack();
+        app.currentPage.refresh()
+
     }
 
 

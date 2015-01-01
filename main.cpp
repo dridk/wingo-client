@@ -14,8 +14,8 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
 
-   App::setDomain("wingo.labsquare.org",80);
-//    App::setDomain("localhost",5000);
+//   App::setDomain("wingo.labsquare.org",80);
+    App::setDomain("localhost",5000);
 
 
     qmlRegisterType<Request>("Wingo",1,0,"Request");
