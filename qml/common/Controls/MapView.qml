@@ -7,6 +7,7 @@ import "../../scripts/StringFormat.js" as StringFormat
 import "../../scripts/AppStyle.js" as Style
 import "../../scripts/Icons.js" as Icons
 import "../Components" as Componenets
+import "./" as Widgets
 
 Componenets.WidgetItemBase {
     id: mapView
@@ -96,11 +97,11 @@ Componenets.WidgetItemBase {
 
             gesture.enabled: false
 
-            MapCircle{
-                center: parent.center
-                radius: 5
-                color: 'green'
-            }
+//            MapCircle{
+//                center: parent.center
+//                radius: 5
+//                color: 'green'
+//            }
 
             MapCircle{
                 center: mapView.me
@@ -116,18 +117,32 @@ Componenets.WidgetItemBase {
 //                Behavior on opacity {NumberAnimation{}}
 //            }
 
-//            Icon{
-//                id: mapCursor
-//                name: Icons.LOCATION
-//                anchors.centerIn: parent
-//                anchors.verticalCenterOffset: - _RES.scale(10)
-//                color: Style.Palette.MAGENTA
-//                visible: mapLoader.status === Image.Ready
-//                size: _RES.s_ICON_SIZE_SMALL
-//                iconStyle: Text.Outline
-//                iconStyleColor: Style.Background.WINDOW
-//            }
+            MapQuickItem {
+                coordinate: parent.center
+                zoomLevel: parent.zoomLevel
+                anchorPoint.x: mapCursor.width / 2
+                anchorPoint.y: mapCursor.height * 0.8
+                sourceItem: Widgets.Icon{
+                    id: mapCursor
+                    name: Icons.LOCATION
+                    color: Style.Palette.MAGENTA
+                    size: _RES.s_ICON_SIZE_SMALL
+                    iconStyle: Text.Outline
+                    iconStyleColor: Style.Background.WINDOW
+                }
+            }
         }
+    }
+
+    Widgets.Label{
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: _RES.s_MARGIN
+        text: "@" + StringFormat.trim(parent.center.latitude, 10) + ", " + StringFormat.trim(parent.center.longitude, 10)
+        color: Style.Palette.MAGENTA
+        font.pixelSize: _RES.s_TEXT_SIZE_MINI
+        style: Text.Outline
+        styleColor: Style.Background.WINDOW
     }
 
     MouseArea{
@@ -177,10 +192,10 @@ Componenets.WidgetItemBase {
                 target: mapLoader
                 gesture.enabled: true
             }
-//            PropertyChanges {
-//                target: mapCursor
-//                size: _RES.s_ICON_SIZE
-//            }
+            PropertyChanges {
+                target: mapCursor
+                size: _RES.s_ICON_SIZE
+            }
         },
         State{
             name: "HIDDEN"
