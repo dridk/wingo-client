@@ -151,8 +151,8 @@ Layouts.Page {
         id: mapView
         anchors.top: noteEdit.bottom
         expandable: false
-        latitude: app.coordinate.latitude
-        longitude: app.coordinate.longitude
+        center: app.coordinate
+
         z: 0
 
         onClick: {

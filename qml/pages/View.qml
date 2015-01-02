@@ -179,8 +179,10 @@ Layouts.Page {
 
             noteView.message = StringFormat.setWordColor(data["results"]["message"],
                                                          Style.Typography.LINK, /\#\w+/g)
-            mapView.latitude = data["results"]["lat"]
-            mapView.longitude = data["results"]["lon"]
+            mapView.center = QtPositioning.coordinate(
+                data["results"]["lat"],
+                data["results"]["lon"]
+            )
 
             locationRequest.get({lat:data["results"]["lat"],lon:data["results"]["lon"]})
         }

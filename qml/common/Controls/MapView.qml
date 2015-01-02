@@ -17,8 +17,8 @@ Componenets.WidgetItemBase {
     color: Style.Background.WINDOW
 
     property string noteID: ""
-    property double latitude: 0
-    property double longitude: 0
+    property alias center: mapLoader.center
+    property var me: app.coordinate
     property double zoom: 15
 
     property bool expanded: false
@@ -92,13 +92,21 @@ Componenets.WidgetItemBase {
 
             plugin: locationPlugin
 
-            center {
-                latitude: mapView.latitude
-                longitude: mapView.longitude
-            }
             zoomLevel: mapLoader.maximumZoomLevel - 5
 
-//            gesture.enabled: true
+            gesture.enabled: false
+
+            MapCircle{
+                center: parent.center
+                radius: 5
+                color: 'green'
+            }
+
+            MapCircle{
+                center: mapView.me
+                radius: 5
+                color: 'red'
+            }
 
 //            LoadingIndicator{
 //                anchors.centerIn: parent
@@ -165,10 +173,10 @@ Componenets.WidgetItemBase {
                 target: mapView
                 height: mapLoader.height
             }
-//            PropertyChanges {
-//                target: mapLoader
-//                anchors.verticalCenterOffset: 0
-//            }
+            PropertyChanges {
+                target: mapLoader
+                gesture.enabled: true
+            }
 //            PropertyChanges {
 //                target: mapCursor
 //                size: _RES.s_ICON_SIZE
