@@ -166,8 +166,8 @@ Layouts.Page {
             noteView.details = DateFormat.toNow(data["results"]["timestamp"],
                                                 [qsTr("just now"), qsTr(
                                                      "min ago"), qsTr("h ago"), qsTr(
-                                                     "mon ago"), qsTr(
-                                                     "days ago"), qsTr("yr ago")]) +
+                                                     "days ago"),
+                                                    qsTr("mon ago"), qsTr("yr ago")]) +
                     ", " +
                     DistanceFormat.toHere(app.coordinate,
                                               QtPositioning.coordinate(data["results"]["lat"], data["results"]["lon"]),

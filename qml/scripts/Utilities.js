@@ -40,6 +40,11 @@ function isFunction(v){
     return Object.prototype.toString.call( v ) === "[object Function]"
 }
 
+function isPlural(n){
+    if(!isNumber(n))return false;
+    return n > 1;
+}
+
 //Mathmatical
 function toRadians(deg) {
     return deg * ( Math.PI/180 );
