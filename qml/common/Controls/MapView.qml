@@ -145,17 +145,17 @@ Componenets.WidgetItemBase {
         styleColor: Style.Background.WINDOW
     }
 
-    MouseArea{
-        id: mouseArea
-        //TODO Make this draggable
-        //so the map expands on drag, rather then on click
-        property bool dragging: false
-        property real verticalOffset: 0
-        anchors.fill: parent
-        onClicked: {
-            if (parent.expandable) parent.toggle();
-            parent.click()
-        }
+//    MouseArea{
+//        id: mouseArea
+//        //TODO Make this draggable
+//        //so the map expands on drag, rather then on click
+//        property bool dragging: false
+//        property real verticalOffset: 0
+//        anchors.fill: parent
+//        onClicked: {
+//            if (parent.expandable) parent.toggle();
+//            parent.click()
+//        }
 //        onPressed: verticalOffset=mouseY
 //        onReleased: {
 //            if (dragging) parent.toggle()
@@ -170,6 +170,17 @@ Componenets.WidgetItemBase {
 //                if (verticalOffset !== 0 ) dragging = true
 //            }
 //        }
+//    }
+
+    Widgets.Button{
+        id: mouseArea
+        icon: Icons.CARRET_DOWN
+        anchors.bottom: parent.bottom
+        anchors.right: parent.right
+        onClicked: {
+            if (parent.expandable) parent.toggle();
+            parent.click()
+        }
     }
 
 
@@ -195,6 +206,10 @@ Componenets.WidgetItemBase {
             PropertyChanges {
                 target: mapCursor
                 size: _RES.s_ICON_SIZE
+            }
+            PropertyChanges {
+                target: mouseArea
+                icon: Icons.CARRET_UP
             }
         },
         State{
