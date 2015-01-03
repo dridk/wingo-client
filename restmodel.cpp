@@ -143,3 +143,9 @@ void RestModel::createRoleNames()
 
 
 
+
+
+int RestModel::count() const
+{
+    return mDatas.count();
+}

@@ -9,6 +9,8 @@
 #include "painteritem.h"
 #include "app.h"
 #include "restmodel.h"
+#include "filterrestmodel.h"
+
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -21,6 +23,7 @@ App::setDomain("wingo.labsquare.org",80);
     qmlRegisterType<PolygonItem>("Wingo",1,0,"PolygonItem");
     qmlRegisterType<PainterItem>("Wingo",1,0,"PainterItem");
     qmlRegisterType<RestModel>("Wingo",1,0,"RestModel");
+    qmlRegisterType<FilterRestModel>("Wingo",1,0,"FilterRestModel");
 
     app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");

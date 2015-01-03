@@ -71,12 +71,30 @@ Layouts.Page {
         onSuccess : {
             makeToast("Sucessfully refreshed")
             noteList.positionViewAtBeginning()
+
+            noteFilterModel.fi
+            noteFilterModel.setFilterKey("$anonymous")
+            noteFilterModel.setFilterRegExp(/.*/)
+
+
+
+
         }
 
         onError: {
             console.debug(message)
             app.showMessage("ERROR", message)
+
+            console.debug(notesListModel.count())
         }
+    }
+
+    FilterRestModel {
+        id:noteFilterModel
+        filterCaseSensitivity: Qt.CaseInsensitive
+        restModel : notesListModel
+
+
     }
 
 
@@ -95,7 +113,7 @@ Layouts.Page {
         id: noteList
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
-        model: notesListModel
+        model: noteFilterModel
         busy: notesListModel.isLoading
 
         delegate: Layouts.NoteListItem {
