@@ -27,13 +27,14 @@ public:
     bool isLoading();
 
     Q_INVOKABLE QJsonValue get(int index) const;
+    void setMaxId(const QString& maxId);
 
 
 public slots:
     void setParams(const QJsonObject& params = QJsonObject());
     void nextPage();
-    void previousPage();
-    void setPage(int page = 0);
+    void resetPage();
+
     void reload();
 
 
@@ -56,6 +57,7 @@ private:
     QJsonObject mParams;
     Request * mRequest;
     int mCurrentPage;
+    QString mMaxId;
 
 
 

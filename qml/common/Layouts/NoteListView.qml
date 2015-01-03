@@ -21,10 +21,23 @@ ListView {
     property bool contentOverTopBound: contentY < 0
     property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
+    property int currentCount : 0
+
 
     property alias busy: timeoutTimer.busy
 
     boundsBehavior: Flickable.DragOverBounds
+
+    // emit when touch bottom. This is use to ask new data for populate
+    signal newPageRequest()
+
+    onAtYEndChanged: {
+        if (atYEnd){
+            if (count > 0 )
+            newPageRequest()
+        }
+    }
+
 
     property int _contentY0: 0
     onFlickStarted: {
@@ -40,6 +53,8 @@ ListView {
         if (contentDistanceTraveled > triggerAnDistance)
             distancePassed()
     }
+
+
 
 //    section.property: "timestamp"
 //    section.criteria: ViewSection.FullString

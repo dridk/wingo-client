@@ -5,6 +5,7 @@ RestListModel::RestListModel(QObject * parent)
 {
 
     mRequest = new Request;
+    mMaxId = "";
 
     connect(mRequest,SIGNAL(success(QJsonObject)),this,SLOT(loadData(QJsonObject)));
     connect(mRequest,SIGNAL(sourceChanged()),this,SIGNAL(sourceChanged()));
@@ -68,6 +69,11 @@ QJsonValue RestListModel::get(int index) const
 {
     return mDatas.at(index);
 }
+
+void RestListModel::setMaxId(const QString &maxId)
+{
+    mMaxId = maxId;
+}
 void RestListModel::setParams(const QJsonObject &params)
 {
     mParams = params;
@@ -78,6 +84,11 @@ void RestListModel::loadData(QJsonObject data)
 
         beginResetModel();
         mDatas = data.value("results").toArray();
+
+        if (data.contains("max_id")){
+            setMaxId(data.value("max_id").toString());
+        }
+
         createRoleNames();
         endResetModel();
     }
@@ -89,21 +100,19 @@ void RestListModel::loadData(QJsonObject data)
 void RestListModel::nextPage()
 {
     //Not yet implemented
+    mParams["max_id"] = mMaxId;
     reload();
 }
 
-void RestListModel::previousPage()
+
+void RestListModel::resetPage()
 {
-    //Not yet implemented
-    reload();
-}
-
-void RestListModel::setPage(int page)
-{
-    //Not yet implemented
+    mParams["max_id"] = "";
     reload();
 
 }
+
+
 
 void RestListModel::reload()
 {

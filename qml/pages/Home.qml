@@ -132,6 +132,7 @@ Layouts.Page {
             }
         }
         onRefresh: page.refresh()
+        onNewPageRequest: notesListModel.nextPage()
     }
 
     Widgets.ActionButton {
