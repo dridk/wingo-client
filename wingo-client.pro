@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick network positioning
+QT += qml quick network positioning svg
 
 SOURCES += main.cpp \
     app.cpp \
@@ -30,3 +30,6 @@ ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 OTHER_FILES += \
     android/AndroidManifest.xml
+
+DISTFILES += \
+    qml/Res/images/camera75.svg
