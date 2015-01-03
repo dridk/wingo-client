@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import "../Controls" as Widgets
 
 Column {
     anchors.left: parent.left
@@ -11,6 +12,12 @@ Column {
         anchors.left: parent.left
         anchors.right: parent.right
         height: _RES.s_MARGIN
+    }
+
+    Widgets.LoadingIndicator{
+        busy: parent.model.isLoading
+        anchors.horizontalCenter: parent.horizontalCenter
+        visible: busy? 1 : 0
     }
 
     Repeater {

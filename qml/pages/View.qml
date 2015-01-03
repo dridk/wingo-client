@@ -126,6 +126,9 @@ Layouts.Page {
             Layouts.CommentListView{
                 id: commentListView
                 z: 1
+
+                opacity: commentModel.isLoading? 0.8: 1
+
                 model: RestListModel {
                     id:commentModel
 
@@ -135,6 +138,7 @@ Layouts.Page {
 
                 }
             }
+
         }
     }
 

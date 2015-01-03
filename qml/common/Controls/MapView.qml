@@ -25,6 +25,7 @@ Componenets.WidgetItemBase {
     property bool expanded: false
     property bool expandable: true
     property alias pressed : mouseArea.pressed
+    property bool allowGestures: false
 
     signal click
 
@@ -198,10 +199,11 @@ Componenets.WidgetItemBase {
             PropertyChanges {
                 target: mapView
                 height: mapLoader.height
+                focus: true
             }
             PropertyChanges {
                 target: mapLoader
-                gesture.enabled: true
+                gesture.enabled: allowGestures && true
             }
             PropertyChanges {
                 target: mapCursor

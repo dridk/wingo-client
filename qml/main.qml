@@ -2,7 +2,6 @@ import QtQuick 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
-import QtLocation 5.3
 import Wingo 1.0
 
 import "common/Layouts"
