@@ -21,7 +21,7 @@ Layouts.Page {
     }
     Component.onCompleted: refresh()
 
-    RestListModel {
+    RestModel {
         id: pocketNoteModel
         source: "/users/pockets"
         onSuccess: {

@@ -126,7 +126,7 @@ Layouts.Page {
             Layouts.CommentListView{
                 id: commentListView
                 z: 1
-                model: RestListModel {
+                model: RestModel {
                     id:commentModel
 
                     onSuccess: console.debug("COMMENTS LOADED...")

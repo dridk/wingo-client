@@ -8,7 +8,7 @@
 #include <QJsonArray>
 #include "request.h"
 
-class RestListModel : public QAbstractListModel
+class RestModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
@@ -16,8 +16,8 @@ class RestListModel : public QAbstractListModel
 
 
 public:
-    RestListModel(QObject * parent = 0);
-    ~RestListModel();
+    RestModel(QObject * parent = 0);
+    ~RestModel();
 
     QVariant data(const QModelIndex &index, int role) const;
     int rowCount(const QModelIndex &parent) const;
