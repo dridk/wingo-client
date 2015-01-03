@@ -18,6 +18,12 @@ Layouts.Page {
 
     signal imageCaptured(string path)
 
+
+
+
+
+
+
     VideoOutput {
         source: camera
         anchors.fill: parent
@@ -25,14 +31,6 @@ Layouts.Page {
 
 
 
-        Widgets.PhotoButton {
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 50
-            onClicked: camera.imageCapture.capture()
-
-        }
 
     }
 
@@ -56,6 +54,26 @@ Layouts.Page {
         }
     }
 
+
+
+    Rectangle {
+        width: 600
+        height: 600
+        color: "white"
+        opacity: 0.4
+
+        MouseArea{
+            anchors.fill: parent
+            drag.target: parent
+            drag.axis: Drag.XAndYAxis
+            drag.minimumX: 0
+            drag.maximumX: page.width - parent.width
+            drag.minimumY: 0
+            drag.maximumY: parent.height
+            onDoubleClicked: camera.imageCapture.capture()
+        }
+
+    }
 
 
 

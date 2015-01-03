@@ -3,8 +3,8 @@ import QtQuick 2.0
 Image {
     id:root
     source:"http://appicns.com/appicns/svg/appicns_Photobooth.svg"
-//    sourceSize.width: width * scale
-//    sourceSize.height: height * scale
+    sourceSize.width: width
+    sourceSize.height: height
     scale : area.pressed ? 2 : 1
     signal clicked()
 
