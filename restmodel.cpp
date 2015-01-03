@@ -68,6 +68,19 @@ QJsonValue RestModel::get(int index) const
 {
     return mDatas.at(index);
 }
+
+bool RestModel::remove(int index)
+{
+    if (index >= mDatas.count()){
+        qDebug()<<"remove index out or range";
+        return false;
+    }
+
+    beginRemoveRows(QModelIndex(),index,index);
+    mDatas.removeAt(index);
+    endRemoveRows();
+    return true;
+}
 void RestModel::setParams(const QJsonObject &params)
 {
     mParams = params;

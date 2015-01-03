@@ -13,6 +13,7 @@ ActionBar.Widget {
     hasShadow: omniBar.hidden
     enabled: !omniBar.expanded
     style: "ALTERNATIVE"
+    signal checkmakClicked()
     ActionBar.Title {
         style: actionBar.style
         icon: Icons.CARRET_LEFT
@@ -22,6 +23,7 @@ ActionBar.Widget {
     ActionBar.Right{
         ActionBar.Button{
             icon: Icons.CHECKMAK_FULL
+            onClicked:checkmakClicked()
         }
         ActionBar.Button{
             icon: Icons.ARCHIVE

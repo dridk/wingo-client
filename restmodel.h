@@ -27,6 +27,8 @@ public:
     bool isLoading();
 
     Q_INVOKABLE QJsonValue get(int index) const;
+    Q_INVOKABLE bool remove(int index) ;
+
 
 
 public slots:

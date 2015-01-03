@@ -21,10 +21,21 @@ ListView {
     property bool contentOverTopBound: contentY < 0
     property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
+    property bool selectionsMode : false
 
     property alias busy: timeoutTimer.busy
 
     boundsBehavior: Flickable.DragOverBounds
+
+
+    header:  Rectangle {
+        width: parent.width
+        height:selectionsMode ?  200 : 0
+        color: "red"
+        visible: selectionsMode
+
+
+    }
 
     property int _contentY0: 0
     onFlickStarted: {
