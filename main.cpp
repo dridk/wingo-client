@@ -8,19 +8,19 @@
 #include "polygonitem.h"
 #include "painteritem.h"
 #include "app.h"
-#include "restlistmodel.h"
+#include "restmodel.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
 
-App::setDomain("wingo.labsquare.org",80);
-//   App::setDomain("localhost",5000);
+// App::setDomain("wingo.labsquare.org",80);
+  App::setDomain("localhost",5000);
 
 
     qmlRegisterType<Request>("Wingo",1,0,"Request");
     qmlRegisterType<PolygonItem>("Wingo",1,0,"PolygonItem");
     qmlRegisterType<PainterItem>("Wingo",1,0,"PainterItem");
-    qmlRegisterType<RestListModel>("Wingo",1,0,"RestListModel");
+    qmlRegisterType<RestModel>("Wingo",1,0,"RestModel");
 
     app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");

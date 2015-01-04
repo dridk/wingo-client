@@ -21,7 +21,7 @@ Layouts.Page {
     }
     Component.onCompleted: refresh()
 
-    RestListModel {
+    RestModel {
         id: pocketNoteModel
         source: "/users/pockets"
         onSuccess: {
@@ -35,6 +35,7 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
+        onCheckmakClicked: noteList.selectionsMode = !noteList.selectionsMode
     }
 
     OmniBar {
@@ -62,9 +63,20 @@ Layouts.Page {
             picture: $picture == undefined ? "" : $picture
 
             onClicked: {
+                if (!noteList.selectionsMode){
+                    // Remind : packet has parent, not id
                 var noteId = pocketNoteModel.get(index).parent
                 app.goToPage(app.pages["View"]);
                 app.currentPage.noteId = noteId
+                }
+                else {
+                    // Remind : packet has parent, not id
+                    console.debug("DELETE")
+                    var noteId = pocketNoteModel.get(index).parent;
+                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+                    pocketNoteRequest.deleteResource();
+                    pocketNoteModel.remove(index)
+                }
             }
 
             Text {
@@ -87,6 +99,15 @@ Layouts.Page {
             }
         }
         onRefresh: page.refresh()
+    }
+
+    Request {
+        id:pocketNoteRequest
+
+        //success message is un necessary...
+        onSuccess: app.showMessage("delete from pockets", "Delete success")
+        onError: app.showMessage("delete from pockets","Cannot delete notes")
+
     }
 
 }

@@ -65,7 +65,7 @@ Layouts.Page {
     Component.onCompleted: refresh()
 
 
-    RestListModel{
+    RestModel{
         id: notesListModel
         source:"/notes"
         onSuccess : {

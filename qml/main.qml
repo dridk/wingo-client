@@ -12,6 +12,7 @@ WingoApplicationWindow{
     width: 540//238
     height: 960//428
     visible: true
+
     //---------------------------
     //Application global property
     //---------------------------
@@ -64,6 +65,8 @@ WingoApplicationWindow{
                                 "lat": app.coordinate.latitude,
                                 "lon": app.coordinate.longitude
                             })
+
+
     }
 
 

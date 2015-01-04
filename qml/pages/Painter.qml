@@ -12,7 +12,6 @@ import "Painter"
 
 Layouts.Page {
     id: page
-    property bool videoMode : false
 
     signal drawChange(string path)
 
@@ -25,6 +24,11 @@ Layouts.Page {
 
     function loadImage(){
         painterItem.load()
+    }
+
+    function loadBackground(path){
+        console.debug(path)
+       painterItem.loadFromPath(path)
     }
 
     ActionBar.Widget {
@@ -42,7 +46,9 @@ Layouts.Page {
                 icon: Icons.PICTURE_ADD
 
                 onClicked: {
-                videoMode = !videoMode
+                   app.goToPage(app.pages.Photo)
+                   app.currentPage.imageCaptured.connect(loadBackground)
+
 
                 }
             }
@@ -86,42 +92,9 @@ Layouts.Page {
                 anchors.margins: _RES.s_MARGIN
                 penColor: colorPicker.color
                 penSize: toolBar.penSize
-                visible: !videoMode
+
             }
 
-            //======== VIDEO MODE ================
-
-            VideoOutput {
-                  source: camera
-                  anchors.fill: parent
-                  anchors.margins: _RES.s_MARGIN
-                  visible: videoMode
-
-
-                  MouseArea {
-                      anchors.fill: parent
-                      onClicked: camera.imageCapture.capture()
-                  }
-              }
-
-            Camera {
-                  id: camera
-                  imageProcessing.whiteBalanceMode: CameraImageProcessing.WhiteBalanceFlash
-
-                  exposure {
-                      exposureCompensation: -1.0
-                      exposureMode: Camera.ExposurePortrait
-                  }
-
-                  flash.mode: Camera.FlashRedEyeReduction
-
-                  imageCapture {
-                      onImageSaved:  {
-                         painterItem.loadFromPath(path)
-                         videoMode = false
-                      }
-                  }
-              }
 
             //======== END VIDEO MODE ================
 

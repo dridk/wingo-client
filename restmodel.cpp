@@ -1,6 +1,6 @@
-#include "restlistmodel.h"
+#include "restmodel.h"
 
-RestListModel::RestListModel(QObject * parent)
+RestModel::RestModel(QObject * parent)
     :QAbstractListModel(parent)
 {
 
@@ -13,12 +13,12 @@ RestListModel::RestListModel(QObject * parent)
 }
 
 
-RestListModel::~RestListModel()
+RestModel::~RestModel()
 {
     delete mRequest;
 }
 
-QVariant RestListModel::data(const QModelIndex &index, int role) const
+QVariant RestModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
@@ -39,40 +39,53 @@ QVariant RestListModel::data(const QModelIndex &index, int role) const
     return QJsonValue::Undefined;
 }
 
-int RestListModel::rowCount(const QModelIndex &parent) const
+int RestModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
     return mDatas.count();
 }
 
-QHash<int, QByteArray> RestListModel::roleNames() const
+QHash<int, QByteArray> RestModel::roleNames() const
 {
     return mRoleNames;
 }
 
-void RestListModel::setSource(const QString &source)
+void RestModel::setSource(const QString &source)
 {
     mRequest->setSource(source);
 
 }
-const QString &RestListModel::source()
+const QString &RestModel::source()
 {
     return mRequest->source();
 }
-bool RestListModel::isLoading()
+bool RestModel::isLoading()
 {
     return mRequest->isLoading();
 }
 
-QJsonValue RestListModel::get(int index) const
+QJsonValue RestModel::get(int index) const
 {
     return mDatas.at(index);
 }
-void RestListModel::setParams(const QJsonObject &params)
+
+bool RestModel::remove(int index)
+{
+    if (index >= mDatas.count()){
+        qDebug()<<"remove index out or range";
+        return false;
+    }
+
+    beginRemoveRows(QModelIndex(),index,index);
+    mDatas.removeAt(index);
+    endRemoveRows();
+    return true;
+}
+void RestModel::setParams(const QJsonObject &params)
 {
     mParams = params;
 }
-void RestListModel::loadData(QJsonObject data)
+void RestModel::loadData(QJsonObject data)
 {
     if (data.length() > 0) {
 
@@ -86,31 +99,31 @@ void RestListModel::loadData(QJsonObject data)
 
 }
 
-void RestListModel::nextPage()
+void RestModel::nextPage()
 {
     //Not yet implemented
     reload();
 }
 
-void RestListModel::previousPage()
+void RestModel::previousPage()
 {
     //Not yet implemented
     reload();
 }
 
-void RestListModel::setPage(int page)
+void RestModel::setPage(int page)
 {
     //Not yet implemented
     reload();
 
 }
 
-void RestListModel::reload()
+void RestModel::reload()
 {
     mRequest->get(mParams);
 }
 
-void RestListModel::createRoleNames()
+void RestModel::createRoleNames()
 {
     mRoleNames.clear();
 

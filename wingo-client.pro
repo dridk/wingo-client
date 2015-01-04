@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick network positioning
+QT += qml quick network positioning svg
 
 SOURCES += main.cpp \
     app.cpp \
@@ -8,7 +8,7 @@ SOURCES += main.cpp \
     polygonitem.cpp \
     painteritem.cpp \
     cookieJar.cpp \
-    restlistmodel.cpp
+    restmodel.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,9 +24,12 @@ HEADERS += \
     polygonitem.h \
     painteritem.h \
     cookieJar.h \
-    restlistmodel.h
+    restmodel.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 
 OTHER_FILES += \
     android/AndroidManifest.xml
+
+DISTFILES += \
+    qml/Res/images/camera75.svg
