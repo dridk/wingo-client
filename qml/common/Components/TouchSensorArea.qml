@@ -6,7 +6,8 @@ MouseArea {
         id: shader
         anchors.fill: parent
         color: Style.Background.Button.PRESSED
-        opacity: parent.pressed? 1 : 0
+//        opacity: parent.pressed? 1 : 0
+        opacity: parent.pressed && !parent.drag.active? 1 : 0
         z: 99 //Keep this over all other components in the stack
         Behavior on opacity {NumberAnimation{}}
     }

@@ -61,22 +61,36 @@ Layouts.Page {
             avatar: "https://static-unitag.com/images/qrcode/qrcode_unitag.png?mh=b915089b"
 //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
+            draggable: true
 
             onClicked: {
-                if (!noteList.selectionsMode){
+//                if (!noteList.selectionsMode){
                     // Remind : packet has parent, not id
                 var noteId = pocketNoteModel.get(index).parent
                 app.goToPage(app.pages["View"]);
                 app.currentPage.noteId = noteId
-                }
-                else {
+//                }
+//                else {
+//                    // Remind : packet has parent, not id
+//                    console.debug("DELETE")
+//                    var noteId = pocketNoteModel.get(index).parent;
+//                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+//                    pocketNoteRequest.deleteResource();
+//                    pocketNoteModel.remove(index)
+//                }
+            }
+
+            onDraggedIn: {
+                console.debug("DELETE Cancel")
+            }
+
+            onDraggedOut: {
                     // Remind : packet has parent, not id
                     console.debug("DELETE")
-                    var noteId = pocketNoteModel.get(index).parent;
-                    pocketNoteRequest.source = "/users/pockets/"+noteId;
-                    pocketNoteRequest.deleteResource();
-                    pocketNoteModel.remove(index)
-                }
+//                    var noteId = pocketNoteModel.get(index).parent;
+//                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+//                    pocketNoteRequest.deleteResource();
+//                    pocketNoteModel.remove(index)
             }
 
             Text {

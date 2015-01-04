@@ -28,16 +28,49 @@ Componenets.TouchSensorArea {
     property int takesCount
     property string message
 
+    property bool draggable: false
 
+//    property alias actionArea: filterBarTrayColumn.data
+
+    signal draggedOut
+    signal draggedIn
+
+    drag.target: noteListItem
+    drag.axis: draggable? Drag.XAxis: Drag.None
+    drag.minimumX: -width
+    drag.maximumX:  width
+
+    onReleased: {
+        if (noteListItem.x > width * 0.5){
+            noteListItem.x = width
+            draggedOut()
+        }else{
+            noteListItem.x = 0
+            draggedIn()
+        }
+    }
+
+//    Row {
+//        id: actionArea
+//        anchors.fill: parent
+//        Widgets.Button{
+//            text: "Delete"
+//        }
+//    }
 
     Componenets.WidgetItemBase {
         id: noteListItem
         anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+        x:0
+        width: parent.width
+//        anchors.left: parent.left
+//        anchors.right: parent.right
         anchors.margins: _RES.s_MARGIN
         height: Math.max(_RES.s_NOTE_LIST_MIN_HEIGHT, noteLayout.height)
         property bool layoutMini: height === _RES.s_NOTE_LIST_MIN_HEIGHT
+
+        Behavior on x { NumberAnimation{}}
+        opacity: 1 - (x / width * 0.8)
 
         //    outerShadow: false
         Item {
