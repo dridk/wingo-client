@@ -7,6 +7,7 @@ Item {
     id: container
     anchors.left: parent.left
     anchors.right: parent.right
+    anchors.margins: _RES.s_DOUBLE_MARGIN
     height: frame.height + _RES.s_MARGIN
 
     property alias source: picture.source
@@ -35,6 +36,7 @@ Item {
             anchors.margins: _RES.s_MARGIN
             fillMode: Image.PreserveAspectFit
             onStatusChanged: if (status === Image.Error) app.makeToast("Error loading image", Style.MESSAGE_PURPOSE_ALERT)
+            cache: true
         }
 
         Icon{
@@ -42,15 +44,27 @@ Item {
            color: Style.Icon.SIDELINE
            size: _RES.s_ICON_SIZE_BIG
            anchors.centerIn: parent
-           visible: picture.status === Image.Null || picture.status === Image.Error
+           visible: picture.status !== Image.Ready
+
+           SequentialAnimation on opacity {
+               running: parent.visible
+               loops: Animation.Infinite
+
+               NumberAnimation {
+                   to: 0.5
+               }
+               NumberAnimation {
+                   to: 1
+               }
+           }
         }
 
-        LoadingIndicator{
-            id: loadingIndicator
-            anchors.centerIn: parent
-            busy: picture.status === Image.Loading
-            opacity: busy? 1 : 0
-            Behavior on opacity {NumberAnimation{}}
-        }
+//        LoadingIndicator{
+//            id: loadingIndicator
+//            anchors.centerIn: parent
+//            busy: picture.status === Image.Loading
+//            opacity: busy? 1 : 0
+//            Behavior on opacity {NumberAnimation{}}
+//        }
     }
 }

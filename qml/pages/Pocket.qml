@@ -86,7 +86,8 @@ Layouts.Page {
 
             onDraggedOut: {
                     // Remind : packet has parent, not id
-                    console.debug("DELETE")
+                console.debug("DELETE")
+                app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
 //                    var noteId = pocketNoteModel.get(index).parent;
 //                    pocketNoteRequest.source = "/users/pockets/"+noteId;
 //                    pocketNoteRequest.deleteResource();
