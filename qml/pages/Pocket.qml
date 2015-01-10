@@ -10,6 +10,7 @@ import "Pocket"
 
 Layouts.Page {
     id: page
+    property bool selectionMode : false
 
     function refresh(){
         noteList.positionViewAtBeginning()
@@ -32,7 +33,11 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
-        onCheckmakClicked: noteList.selectionsMode = !noteList.selectionsMode
+        onCheckmakClicked:{
+             page.selectionMode = !page.selectionMode
+            console.debug(page.selectionMode)
+        }
+
         onBackClicked: app.goBack()
     }
 
@@ -46,6 +51,21 @@ Layouts.Page {
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
         refreshOnPull: false
+        header:  Rectangle {
+            width: parent.width
+            height:page.selectionMode ? 200 : 0
+            visible: page.selectionMode
+            onHeightChanged: {
+                noteList.positionViewAtBeginning()
+            }
+            Text {
+                text: "Drag to remove items"
+                anchors.centerIn: parent
+            }
+
+
+
+        }
 
         delegate: Layouts.NoteListItem {
             lat: $lat
@@ -62,7 +82,7 @@ Layouts.Page {
             avatar: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=00B8CC&data="+$signature
 //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
-            draggable: true
+            draggable: page.selectionMode
 
             onClicked: {
 //                if (!noteList.selectionsMode){
@@ -89,10 +109,10 @@ Layouts.Page {
                     // Remind : packet has parent, not id
                 console.debug("DELETE")
                 app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
-//                    var noteId = pocketNoteModel.get(index).parent;
-//                    pocketNoteRequest.source = "/users/pockets/"+noteId;
-//                    pocketNoteRequest.deleteResource();
-//                    pocketNoteModel.remove(index)
+                  var noteId = pocketNoteModel.get(index).parent;
+                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+                    pocketNoteRequest.deleteResource();
+                    pocketNoteModel.remove(index)
             }
 
             Text {
