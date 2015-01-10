@@ -141,7 +141,12 @@ Layouts.Page {
         id:pocketNoteRequest
 
         //success message is un necessary...
-        onSuccess: app.showMessage("delete from pockets", "Delete success")
+        onSuccess: {
+            app.showMessage("delete from pockets", "Delete success")
+            app.pocket_count--
+
+
+        }
         onError: app.showMessage("delete from pockets","Cannot delete notes")
 
     }
