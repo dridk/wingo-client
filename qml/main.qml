@@ -23,6 +23,8 @@ WingoApplicationWindow{
     property string positionTitle: qsTr("Looking up your<br>current location...")
     property variant config
     property variant currentUser
+    property int pocket_count
+    property int mynote_count
 
     //---------------------------
     //Application global function
@@ -103,12 +105,14 @@ WingoApplicationWindow{
         id: currentUserRequester
         source:"/users/me"
         onSuccess: {
-            app.currentUser = data["results"]
+            app.currentUser  = data["results"]
+            app.pocket_count = app.currentUser["pocket_count"]
+            app.mynote_count = app.currentUser["mynote_count"]
             app.logged = true
         }
 
         onError: {
-            console.debug("Cannot load current user. Authified ?")
+            console.debug("Cannot load current user. Autentified ?")
             app.logged = false
 
         }

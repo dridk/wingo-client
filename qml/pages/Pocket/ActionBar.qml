@@ -14,11 +14,13 @@ ActionBar.Widget {
     enabled: !omniBar.expanded
     style: "ALTERNATIVE"
     signal checkmakClicked()
+    signal backClicked()
+
     ActionBar.Title {
         style: actionBar.style
         icon: Icons.CARRET_LEFT
         text: "My Pocket"
-        onClicked: page.back()
+        onClicked: backClicked()
     }
     ActionBar.Right{
         ActionBar.Button{

@@ -13,18 +13,21 @@ ActionBar.Widget {
     hasShadow: omniBar.hidden
     enabled: !omniBar.expanded
     property alias title : titleId.text
+    signal menuClicked()
+    signal refreshClicked()
+
     ActionBar.Title {
         id:titleId
         icon: Icons.SANDWICH
         text: app.positionTitle
-        onClicked: page.menu()
+        onClicked: menuClicked()
     }
     ActionBar.Right{
         ActionBar.Button{
             icon: Icons.POCKET
             onClicked: page.goPocket()
             Widgets.Badge{
-                value: app.logged ? app.currentUser["pocket_count"] : 0
+                value: app.logged ? app.pocket_count : 0
                 style: "ACTIONBAR"
                 anchors.right: parent.right
                 anchors.rightMargin: _RES.s_MARGIN
@@ -33,7 +36,7 @@ ActionBar.Widget {
         }
         ActionBar.Button{
             icon: Icons.REFRESH
-            onClicked: page.refresh()
+            onClicked: refreshClicked()
         }
     }
 

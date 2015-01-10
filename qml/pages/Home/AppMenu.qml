@@ -29,13 +29,13 @@ SideBar.Widget {
         onClicked: page.goPost()
     }
     SideBar.SimpleListItem{
-        text: qsTr("My Notes")
+        text: qsTr("My Notes %1").arg(app.currentUser?"("+app.mynote_count+")":"")
         icon: Icons.NOTEBOOK
         enabled: app.logged
         onClicked: page.goMynotes()
     }
     SideBar.SimpleListItem{
-        text: qsTr("My Pocket %1").arg(app.currentUser?"("+app.currentUser["pocket_count"]+")":"")
+        text: qsTr("My Pocket %1").arg(app.currentUser?"("+app.pocket_count+")":"")
         icon: Icons.POCKET
         onClicked: page.goPocket()
         enabled: app.logged

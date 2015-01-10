@@ -203,7 +203,10 @@ Layouts.Page {
     Request {
         id: takeNoteRequester
         source: "/users/pockets"
-        onSuccess: app.makeToast(qsTr("Note placed into pocket"))
+        onSuccess: {
+            app.makeToast(qsTr("Note placed into pocket"))
+            app.pocket_count++
+         }
         onError: app.showMessage("ERROR", message)
     }
 

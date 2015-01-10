@@ -83,6 +83,8 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
+        onMenuClicked: page.menu()
+        onRefreshClicked: page.refresh()
     }
 
     OmniBar {

@@ -11,14 +11,11 @@ import "Pocket"
 Layouts.Page {
     id: page
 
-    function back(){
-        app.goBack();
-    }
-
     function refresh(){
         noteList.positionViewAtBeginning()
        pocketNoteModel.reload();
     }
+
     Component.onCompleted: refresh()
 
     RestModel {
@@ -36,6 +33,7 @@ Layouts.Page {
         id: actionBar
         anchors.top: parent.top
         onCheckmakClicked: noteList.selectionsMode = !noteList.selectionsMode
+        onBackClicked: app.goBack()
     }
 
     OmniBar {

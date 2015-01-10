@@ -98,6 +98,7 @@ Layouts.Page {
         source:"/notes"
         onSuccess: {
             app.makeToast("Note posted")
+            app.mynote_count++
             page.back()
         }
         onError: {
