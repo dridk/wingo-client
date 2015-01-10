@@ -26,12 +26,14 @@ ActionBar.Widget {
         ActionBar.Button{
             icon: Icons.POCKET
             onClicked: page.goPocket()
+            enabled: app.logged
             Widgets.Badge{
                 value: app.logged ? app.pocket_count : 0
                 style: "ACTIONBAR"
                 anchors.right: parent.right
                 anchors.rightMargin: _RES.s_MARGIN
                 anchors.verticalCenter: parent.verticalCenter
+
             }
         }
         ActionBar.Button{
