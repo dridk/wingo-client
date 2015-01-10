@@ -13,6 +13,7 @@ class RestModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
+    Q_PROPERTY(QString maxId READ maxId WRITE setMaxId NOTIFY maxIdChanged)
 
 
 public:
@@ -25,18 +26,24 @@ public:
     void setSource(const QString& source);
     const QString &source();
     bool isLoading();
+    const QString &maxId() const;
 
     Q_INVOKABLE QJsonValue get(int index) const;
+    Q_INVOKABLE QJsonValue first() const;
+    Q_INVOKABLE QJsonValue last() const;
+    Q_INVOKABLE int count() const;
+
     Q_INVOKABLE bool remove(int index) ;
 
 
 
 public slots:
     void setParams(const QJsonObject& params = QJsonObject());
-    void nextPage();
-    void previousPage();
-    void setPage(int page = 0);
+    void setMaxId(const QString& id);
+
+
     void reload();
+    void clear();
 
 
 protected slots:
@@ -47,6 +54,7 @@ signals:
     void isLoadingChanged();
     void error(int code, QString message);
     void success();
+    void maxIdChanged();
 
 protected:
     void createRoleNames();

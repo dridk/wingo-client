@@ -22,10 +22,23 @@ ListView {
     property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
     property bool selectionsMode : false
+    property int currentCount : 0
+
 
     property alias busy: timeoutTimer.busy
 
     boundsBehavior: Flickable.DragOverBounds
+
+    signal newPageRequest()
+
+    onAtYEndChanged: {
+        if ((atYEnd) && (currentCount != count)){
+            newPageRequest()
+            currentCount = count
+        }
+    }
+
+
 
 
     header:  Rectangle {

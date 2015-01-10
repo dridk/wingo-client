@@ -48,6 +48,7 @@ Layouts.Page {
 
 
     function refresh(){
+
         var request = {
             "lat": app.coordinate.latitude,
             "lon": app.coordinate.longitude,
@@ -58,8 +59,11 @@ Layouts.Page {
             request["query"] = omniBar.search;
 
         notesListModel.setParams(request);
+        notesListModel.clear()
         notesListModel.reload()
     }
+
+
 
 
     Component.onCompleted: refresh()
@@ -69,8 +73,7 @@ Layouts.Page {
         id: notesListModel
         source:"/notes"
         onSuccess : {
-            makeToast("Sucessfully refreshed")
-            noteList.positionViewAtBeginning()
+
         }
 
         onError: {
@@ -99,6 +102,7 @@ Layouts.Page {
         anchors.bottom: parent.bottom
         model: notesListModel
         busy: notesListModel.isLoading
+        enabled: !notesListModel.isLoading
 
         delegate: Layouts.NoteListItem {
             lat: $lat
@@ -117,7 +121,7 @@ Layouts.Page {
                 app.goToPage(app.pages["View"]);
                 app.currentPage.noteId = noteId
             }
-        }
+                    }
 
 
 
@@ -134,6 +138,12 @@ Layouts.Page {
             }
         }
         onRefresh: page.refresh()
+
+        onNewPageRequest: {
+            var lastNoteId = notesListModel.last().id;
+            notesListModel.setMaxId(lastNoteId)
+            notesListModel.reload()
+        }
     }
 
     Widgets.ActionButton {

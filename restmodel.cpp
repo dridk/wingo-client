@@ -6,6 +6,7 @@ RestModel::RestModel(QObject * parent)
 
     mRequest = new Request;
 
+
     connect(mRequest,SIGNAL(success(QJsonObject)),this,SLOT(loadData(QJsonObject)));
     connect(mRequest,SIGNAL(sourceChanged()),this,SIGNAL(sourceChanged()));
     connect(mRequest,SIGNAL(isLoadingChanged()),this,SIGNAL(isLoadingChanged()));
@@ -64,9 +65,29 @@ bool RestModel::isLoading()
     return mRequest->isLoading();
 }
 
+const QString &RestModel::maxId() const
+{
+    return mParams.value("max_id").toString();
+}
+
 QJsonValue RestModel::get(int index) const
 {
     return mDatas.at(index);
+}
+
+QJsonValue RestModel::first() const
+{
+    return mDatas.first();
+}
+
+QJsonValue RestModel::last() const
+{
+    return mDatas.last();
+}
+
+int RestModel::count() const
+{
+    return mDatas.count();
 }
 
 bool RestModel::remove(int index)
@@ -85,42 +106,56 @@ void RestModel::setParams(const QJsonObject &params)
 {
     mParams = params;
 }
+
+void RestModel::setMaxId(const QString &id)
+{
+    if (id.isEmpty())
+        mParams.remove("max_id");
+    else
+        mParams["max_id"] = id;
+
+    emit maxIdChanged();
+}
 void RestModel::loadData(QJsonObject data)
 {
-    if (data.length() > 0) {
 
-        beginResetModel();
-        mDatas = data.value("results").toArray();
+    qDebug()<<"========";
+    qDebug()<<data;
+
+    int curCount = mDatas.count();
+    int newCount = data.value("results").toArray().count();
+
+    qDebug()<<curCount;
+    qDebug()<<newCount;
+
+    if (newCount > 0 )
+    {
+        beginInsertRows(QModelIndex(),curCount, curCount+newCount-1);
+        foreach ( QJsonValue value, data.value("results").toArray())
+        {
+            mDatas.append(value);
+        }
+
+
         createRoleNames();
-        endResetModel();
+        endInsertRows();
+        emit success();
     }
 
-    emit success();
 
 }
 
-void RestModel::nextPage()
-{
-    //Not yet implemented
-    reload();
-}
-
-void RestModel::previousPage()
-{
-    //Not yet implemented
-    reload();
-}
-
-void RestModel::setPage(int page)
-{
-    //Not yet implemented
-    reload();
-
-}
 
 void RestModel::reload()
 {
     mRequest->get(mParams);
+}
+
+void RestModel::clear()
+{
+    beginResetModel();
+    mDatas = QJsonArray();
+    endResetModel();
 }
 
 void RestModel::createRoleNames()
