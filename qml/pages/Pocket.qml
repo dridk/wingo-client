@@ -13,7 +13,7 @@ Layouts.Page {
 
     function refresh(){
         noteList.positionViewAtBeginning()
-       pocketNoteModel.reload();
+       pocketNoteModel.load();
     }
 
     Component.onCompleted: refresh()

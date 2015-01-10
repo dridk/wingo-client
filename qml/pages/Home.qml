@@ -60,7 +60,7 @@ Layouts.Page {
 
         notesListModel.setParams(request);
         notesListModel.clear()
-        notesListModel.reload()
+        notesListModel.load()
     }
 
 
@@ -142,7 +142,7 @@ Layouts.Page {
         onNewPageRequest: {
             var lastNoteId = notesListModel.last().id;
             notesListModel.setMaxId(lastNoteId)
-            notesListModel.reload()
+            notesListModel.load()
         }
     }
 

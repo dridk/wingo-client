@@ -27,7 +27,7 @@ Layouts.Page {
 
         postCommentRequester.source="/notes/" + noteId +"/comments"
         commentModel.source="/notes/" + noteId +"/comments"
-        commentModel.reload()
+        commentModel.load()
     }
 
     ActionBar.Widget {
@@ -213,7 +213,7 @@ Layouts.Page {
     Request {
         id: postCommentRequester
         onSuccess: {
-            commentModel.reload()
+            commentModel.load()
         }
 
     }

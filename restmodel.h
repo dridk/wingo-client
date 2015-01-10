@@ -42,7 +42,7 @@ public slots:
     void setMaxId(const QString& id);
 
 
-    void reload();
+    void load();
     void clear();
 
 

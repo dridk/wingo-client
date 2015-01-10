@@ -18,7 +18,7 @@ Layouts.Page {
     function refresh(){
 
         noteList.positionViewAtBeginning()
-        myNoteModel.reload()
+        myNoteModel.load()
     }
     Component.onCompleted: refresh()
 

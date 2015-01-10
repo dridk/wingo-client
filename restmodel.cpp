@@ -146,7 +146,7 @@ void RestModel::loadData(QJsonObject data)
 }
 
 
-void RestModel::reload()
+void RestModel::load()
 {
     mRequest->get(mParams);
 }
