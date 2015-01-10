@@ -50,7 +50,8 @@ WingoApplicationWindow{
              "Account":  Qt.resolvedUrl("/qml/pages/Account.qml"),
              "View":     Qt.resolvedUrl("/qml/pages/View.qml"),
              "Settings": Qt.resolvedUrl("/qml/pages/Settings.qml"),
-             "Photo":    Qt.resolvedUrl("/qml/pages/Photo.qml")
+             "Photo":    Qt.resolvedUrl("/qml/pages/Photo.qml"),
+             "About":    Qt.resolvedUrl("/qml/pages/About.qml")
     }
 
     //---------------------------

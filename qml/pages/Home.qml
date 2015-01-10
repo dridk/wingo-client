@@ -46,6 +46,10 @@ Layouts.Page {
         app.goToPage(app.pages["Settings"]);
     }
 
+    function goAbout(){
+        appMenu.contractTray();
+        app.goToPage(app.pages["About"]);
+    }
 
     function refresh(){
 

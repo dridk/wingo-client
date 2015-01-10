@@ -49,6 +49,7 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: qsTr("About")
         icon: Icons.INFO
+        onClicked: page.goAbout()
     }
     SideBar.SimpleListItem{
         text: qsTr("Legal")

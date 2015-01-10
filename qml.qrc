@@ -90,8 +90,8 @@
         <file>qml/common/MessageTray/Message.qml</file>
         <file>qml/pages/Photo.qml</file>
         <file>qml/common/Controls/MapView.qml</file>
-
         <file>qml/common/Controls/PhotoButton.qml</file>
         <file>qml/Res/images/camera75.svg</file>
+        <file>qml/pages/About.qml</file>
     </qresource>
 </RCC>

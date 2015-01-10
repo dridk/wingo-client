@@ -56,7 +56,10 @@ Layouts.Page {
             // YOU CAN GO TO THE ORIGINAL NOTES TO SEE IT
 //            anonymous: $anonymous
 //            nickname: $anonymous ? "" :$author.nickname
-            avatar: "https://static-unitag.com/images/qrcode/qrcode_unitag.png?mh=b915089b"
+
+            //QR CODE : CHECK http://goqr.me/api/doc/create-qr-code/#general_tos
+
+            avatar: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=00B8CC&data="+$signature
 //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
             draggable: true
