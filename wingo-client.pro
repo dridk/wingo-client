@@ -8,7 +8,8 @@ SOURCES += main.cpp \
     polygonitem.cpp \
     painteritem.cpp \
     cookieJar.cpp \
-    restmodel.cpp
+    restmodel.cpp \
+    maskimage.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,7 +25,8 @@ HEADERS += \
     polygonitem.h \
     painteritem.h \
     cookieJar.h \
-    restmodel.h
+    restmodel.h \
+    maskimage.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

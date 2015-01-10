@@ -173,6 +173,33 @@ void Request::postImage(const QString &filename)
 
 }
 
+void Request::getImage(const QUrl & url)
+{
+
+    QNetworkRequest request(url);
+    QNetworkReply * reply =  mManager->get(request);
+
+    mImage = new QImage();
+    connect(reply,SIGNAL(finished()),this,SLOT(parseImage()));
+
+
+}
+
+void Request::parseImage()
+{
+QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+mImage->loadFromData(reply->readAll());
+
+if (mImage->isNull())
+    emit error(0,QString("Cannot load image from ")+ reply->url().toString());
+
+else
+    emit imageLoaded();
+
+
+
+
+}
 
 
 void Request::parseFinished()
@@ -227,7 +254,7 @@ QNetworkRequest Request::makeRequest(const QUrl &url)
 {
     QNetworkRequest request(url);
     request.setRawHeader("Content-Type","application/json;charset=UTF-8");
-//    request.setRawHeader("FROM",App::getDeviceId().toUtf8());
+    //    request.setRawHeader("FROM",App::getDeviceId().toUtf8());
     return request;
 
 }

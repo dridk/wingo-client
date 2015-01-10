@@ -6,6 +6,7 @@
 #include <QtNetwork>
 #include <QJsonDocument>
 #include <QHttpMultiPart>
+#include <QImage>
 
 class Request : public QObject
 {
@@ -38,6 +39,7 @@ public slots:
     void deleteResource();
     void patch(const QJsonValue& data= QJsonValue());
     void postImage(const QString&);
+    void getImage(const QUrl& );
 
 protected:
     void connectReply(QNetworkReply * reply);
@@ -45,6 +47,7 @@ protected:
 private slots:
     void parseFinished();
     void parseError(QNetworkReply::NetworkError err);
+    void parseImage();
     void setDownloadProgress(qint64 value, qint64 total);
 
 private:
@@ -56,6 +59,7 @@ signals:
     void sourceChanged();
     void isLoadingChanged();
     void downloadProgressChanged();
+    void imageLoaded();
 
 private:
     QUrl mUrl;
@@ -64,6 +68,7 @@ private:
     bool mIsLoading;
     double mDownloadProgress;
     bool mDebug;
+    QImage * mImage;
 
 
 };
