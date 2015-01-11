@@ -21,7 +21,7 @@ Item{
         id: avatarPlaceholder
         anchors.centerIn: parent
         name: Icons.LOGO
-        visible: !avatarImage.visible
+        visible: avatarImage.status == MaskImage.Ready
     }
 
     MaskImage {
@@ -29,7 +29,10 @@ Item{
         anchors.fill: parent
         anchors.margins: _RES.s_HALF_MARGIN
         mask : "qrc:/qml/Res/images/mask.png"
-//        visible: status === Image.Ready
+
+        sourceMode : MaskImage.CompositionMode_SourceOut
+        destinationMode: MaskImage.CompositionMode_DestinationOut
+//        visible: status === MaskImage.Ready
     }
 
 
