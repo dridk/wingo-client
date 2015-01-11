@@ -65,6 +65,8 @@ Layouts.Page {
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
         refreshOnPull: false
+        busy: myNoteModel.isLoading
+        enabled: !myNoteModel.isLoading
 
         model: myNoteModel
 

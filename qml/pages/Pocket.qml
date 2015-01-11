@@ -60,6 +60,8 @@ Layouts.Page {
         id: noteList
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
+        busy: pocketNoteModel.isLoading
+        enabled: !pocketNoteModel.isLoading
         refreshOnPull: false
 
         delegate: Layouts.NoteListItem {

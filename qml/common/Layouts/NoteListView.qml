@@ -74,8 +74,8 @@ ListView {
     //        }
     Widgets.LoadingIndicator {
         id: timeoutTimer
-        y: refreshOnPull
-           && (noteList.contentOverTopBound||busy) ? _RES.s_MARGIN : -height
+        y: ((refreshOnPull&&noteList.contentOverTopBound)
+            ||busy) ? _RES.s_MARGIN : -height
         anchors.horizontalCenter: parent.horizontalCenter
         running: refreshOnPull && noteList.contentOverTopBound
         timeout: parent.refreshTimeout
