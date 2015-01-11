@@ -17,12 +17,12 @@ Item{
 
     property alias source: avatarImage.source
 
-    Icon{
-        id: avatarPlaceholder
-        anchors.centerIn: parent
-        name: Icons.LOGO
-        visible: avatarImage.status == MaskImage.Ready
-    }
+//    Icon{
+//        id: avatarPlaceholder
+//        anchors.centerIn: parent
+//        name: Icons.LOGO
+//        visible: avatarImage.status == MaskImage.Ready
+//    }
 
     MaskImage {
         id: avatarImage

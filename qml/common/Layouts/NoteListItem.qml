@@ -191,7 +191,7 @@ Componenets.TouchSensorArea {
 
             Widgets.Avatar {
                 id: noteAvatar
-                source: avatar == undefined ?"qrc:/qml/Res/images/anonymous.png" : avatar
+                source: avatar == undefined || avatar=="" ?"qrc:/qml/Res/images/anonymous.png" : avatar
                 anchors.top: parent.top
                 anchors.topMargin: noteListItem.layoutMini ? _RES.s_HALF_MARGIN : _RES.s_DOUBLE_MARGIN
                 anchors.right: parent.right
