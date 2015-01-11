@@ -43,6 +43,8 @@ Layouts.Page {
             for(var i = 0; i < noteList.count; i++){
             }
 
+            page.selectionMode = false
+
             app.makeToast("Note(s) removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
         }
 

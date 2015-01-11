@@ -28,6 +28,7 @@ ActionBar.Widget {
     ActionBar.Right{
         ActionBar.Button{
             icon: Icons.CHECKMAK_FULL
+            toggled: actionBar.showTrash
             onClicked:checkmakClicked()
         }
         ActionBar.Button{

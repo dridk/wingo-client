@@ -14,6 +14,7 @@ Componenets.TouchSensorArea {
     width: height
     Layout.fillHeight: true
     preventStealing: true
+    property bool toggled: false
 
     opacity: enabled? 1 : 0.8
 
@@ -26,5 +27,16 @@ Componenets.TouchSensorArea {
         anchors.verticalCenter: parent.verticalCenter
         color: Style.Icon.Actionbar[button.style]
         size: _RES.s_ACTION_BAR_BUTTON_SIZE
+    }
+
+    Rectangle{
+        id: buttonSelected
+        visible: parent.toggled
+        color: Style.Icon.Actionbar[button.style]
+        opacity: 0.5
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        height: _RES.s_HALF_MARGIN
     }
 }
