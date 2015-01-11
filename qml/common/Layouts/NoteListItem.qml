@@ -129,17 +129,9 @@ Componenets.TouchSensorArea {
 
                 Widgets.Label {
                     //User name
-                    text: qsTr("posted by")
+                    text: qsTr("posted")
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.QUOTE
-                    Layout.fillWidth: false
-                }
-
-                Widgets.Label {
-                    //User name
-                    text: anonymous ? qsTr("Anonimous") : nickname
-                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
-                    color: Style.Typography.LINK
                     Layout.fillWidth: false
                 }
 
@@ -152,6 +144,22 @@ Componenets.TouchSensorArea {
                                                 "mon ago"), qsTr("yr ago")])
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.QUOTE
+                    Layout.fillWidth: false
+                }
+
+                Widgets.Label {
+                    //User name
+                    text: qsTr("by")
+                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    color: Style.Typography.QUOTE
+                    Layout.fillWidth: false
+                }
+
+                Widgets.Label {
+                    //User name
+                    text: anonymous ? qsTr("Anonimous") : nickname
+                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    color: Style.Typography.LINK
                     Layout.fillWidth: false
                 }
             }

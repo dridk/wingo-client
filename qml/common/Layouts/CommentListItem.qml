@@ -44,16 +44,17 @@ Item {
             anchors.margins: _RES.s_DOUBLE_MARGIN
             spacing: _RES.s_MARGIN
 
-            Row{
+            Widgets.Label{
+                text: StringFormat.setWordColor($message,
+                                                Style.Typography.LINK, /\#\w+/g)
                 anchors.left: parent.left
                 anchors.right: parent.right
+                wrapMode: Text.WordWrap
+            }
+
+            Row{
+                anchors.right: parent.right
                 spacing: _RES.s_MARGIN
-                Widgets.Label {
-                    //User name
-                    text: $author.nickname
-                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
-                    color: Style.Typography.LINK
-                }
 
                 Widgets.Label {
                     //Post date
@@ -65,13 +66,13 @@ Item {
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.QUOTE
                 }
-            }
-            Widgets.Label{
-                text: StringFormat.setWordColor($message,
-                                                Style.Typography.LINK, /\#\w+/g)
-                anchors.left: parent.left
-                anchors.right: parent.right
-                wrapMode: Text.WordWrap
+
+                Widgets.Label {
+                    //User name
+                    text: qsTr("by ") + $author.nickname
+                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    color: Style.Typography.LINK
+                }
             }
         }
 
