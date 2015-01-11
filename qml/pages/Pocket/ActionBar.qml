@@ -13,7 +13,10 @@ ActionBar.Widget {
     hasShadow: omniBar.hidden
     enabled: !omniBar.expanded
     style: "ALTERNATIVE"
+    property alias showTrash: trashButton.visible
+
     signal checkmakClicked()
+    signal trashClicked()
     signal backClicked()
 
     ActionBar.Title {
@@ -28,7 +31,10 @@ ActionBar.Widget {
             onClicked:checkmakClicked()
         }
         ActionBar.Button{
-            icon: Icons.ARCHIVE
+            id: trashButton
+            icon: Icons.TRASH
+            visible: false
+            onClicked:trashClicked()
         }
     }
 }

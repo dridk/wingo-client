@@ -33,9 +33,17 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
+        showTrash: page.selectionMode
+
         onCheckmakClicked:{
              page.selectionMode = !page.selectionMode
             console.debug(page.selectionMode)
+        }
+        onTrashClicked: {
+            for(var i = 0; i < noteList.count; i++){
+            }
+
+            app.makeToast("Note(s) removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
         }
 
         onBackClicked: app.goBack()
@@ -51,21 +59,6 @@ Layouts.Page {
         anchors.top: omniBar.bottom
         anchors.bottom: parent.bottom
         refreshOnPull: false
-        header:  Rectangle {
-            width: parent.width
-            height:page.selectionMode ? 200 : 0
-            visible: page.selectionMode
-            onHeightChanged: {
-                noteList.positionViewAtBeginning()
-            }
-            Text {
-                text: "Drag to remove items"
-                anchors.centerIn: parent
-            }
-
-
-
-        }
 
         delegate: Layouts.NoteListItem {
             lat: $lat
@@ -82,38 +75,38 @@ Layouts.Page {
             avatar: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=00B8CC&data="+$signature
 //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
-            draggable: page.selectionMode
+            selectable: page.selectionMode
 
             onClicked: {
-//                if (!noteList.selectionsMode){
-                    // Remind : packet has parent, not id
-                var noteId = pocketNoteModel.get(index).parent
-                app.goToPage(app.pages["View"]);
-                app.currentPage.noteId = noteId
-//                }
-//                else {
+                if (page.selectionMode){
+                    selectionToggle()
+                    //do something
+                }else{
+                        // Remind : packet has parent, not id
+                    var noteId = pocketNoteModel.get(index).parent
+                    app.goToPage(app.pages["View"]);
+                    app.currentPage.noteId = noteId
+                }
+            }
+
+            function remove(){
+                if (!selected) return;
+              var noteId = pocketNoteModel.get(index).parent;
+                console.debug("DELETE " + noteId)
+                pocketNoteRequest.source = "/users/pockets/"+noteId;
+                pocketNoteRequest.deleteResource();
+                pocketNoteModel.remove(index)
+            }
+
+//            onDraggedOut: {
 //                    // Remind : packet has parent, not id
-//                    console.debug("DELETE")
-//                    var noteId = pocketNoteModel.get(index).parent;
+//                console.debug("DELETE")
+//                app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
+//                  var noteId = pocketNoteModel.get(index).parent;
 //                    pocketNoteRequest.source = "/users/pockets/"+noteId;
 //                    pocketNoteRequest.deleteResource();
 //                    pocketNoteModel.remove(index)
-//                }
-            }
-
-            onDraggedIn: {
-                console.debug("DELETE Cancel")
-            }
-
-            onDraggedOut: {
-                    // Remind : packet has parent, not id
-                console.debug("DELETE")
-                app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
-                  var noteId = pocketNoteModel.get(index).parent;
-                    pocketNoteRequest.source = "/users/pockets/"+noteId;
-                    pocketNoteRequest.deleteResource();
-                    pocketNoteModel.remove(index)
-            }
+//            }
 
             Text {
                 text :$signature

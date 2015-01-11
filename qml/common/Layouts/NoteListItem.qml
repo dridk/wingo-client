@@ -28,35 +28,30 @@ Componenets.TouchSensorArea {
     property int takesCount
     property string message
 
-    property bool draggable: false
+    property bool selectable: false
+    property alias selected: itemSelected.checked
 
 //    property alias actionArea: filterBarTrayColumn.data
 
-    signal draggedOut
-    signal draggedIn
-
-    drag.target: noteListItem
-    drag.axis: draggable? Drag.XAxis: Drag.None
-    drag.minimumX: -width
-    drag.maximumX:  width
-
-    onReleased: {
-        if (noteListItem.x > width * 0.5){
-            noteListItem.x = width
-            draggedOut()
-        }else{
-            noteListItem.x = 0
-            draggedIn()
-        }
+    function select(){
+        itemSelected.checked = true
     }
 
-//    Row {
-//        id: actionArea
-//        anchors.fill: parent
-//        Widgets.Button{
-//            text: "Delete"
-//        }
-//    }
+    function deselect(){
+        itemSelected.checked = false
+    }
+
+    function selectionToggle(){
+        itemSelected.checked = !itemSelected.checked
+    }
+
+    Widgets.Checkmark {
+        id: itemSelected
+        anchors.left: parent.left
+        anchors.leftMargin: _RES.s_MARGIN
+        anchors.verticalCenter: parent.verticalCenter
+        enabled: false
+    }
 
     Componenets.WidgetItemBase {
         id: noteListItem
@@ -226,4 +221,21 @@ Componenets.TouchSensorArea {
             }
         }
     }
+
+    states: [
+        State {
+            name: "SELECTION"
+            when: selectable
+            PropertyChanges {
+                target: noteListItem
+                x: itemSelected.width + _RES.s_DOUBLE_MARGIN
+            }
+            PropertyChanges {
+                target: itemSelected
+                enabled: true
+                checked: false
+            }
+        }
+
+    ]
 }

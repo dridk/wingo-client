@@ -64,7 +64,7 @@ Layouts.Page {
             takesCount: $takes
             picture: $picture == undefined ? "" : $picture
 
-            draggable: true
+            selectable: true
 
             onClicked: {
                 var noteId = myNoteModel.get(index).id
