@@ -4,7 +4,7 @@
 #include <QQuickPaintedItem>
 #include <QPixmap>
 #include <QPainter>
-#include <QNetworkAccessManager>
+#include <QtNetwork>
 
 class MaskImage : public QQuickPaintedItem
 {
@@ -27,7 +27,11 @@ public:
     Q_INVOKABLE void setComposition(QPainter::CompositionMode source,QPainter::CompositionMode destination);
 
 protected:
-    void downloadImage();
+    void downloadImage(const QUrl& url);
+    void checkSize();
+
+protected slots:
+    void parseImage();
 
 signals:
     void sourceChanged();
@@ -37,7 +41,7 @@ signals:
 private:
     QUrl mSource;
     QUrl mMask;
-    QPixmap mOriginalPix;
+    QPixmap mSourcePix;
     QPixmap mMaskPix;
     static QNetworkAccessManager * mManager;
     QPainter::CompositionMode mSourceMode;

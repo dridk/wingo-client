@@ -8,6 +8,13 @@ MaskImage::MaskImage()
 {
     mSourceMode      = QPainter::CompositionMode_SourceOut;
     mDestinationMode = QPainter::CompositionMode_DestinationOut;
+
+    if (mManager == 0)
+    {
+        mManager = new QNetworkAccessManager;
+
+    }
+
 }
 
 MaskImage::~MaskImage()
@@ -18,13 +25,13 @@ MaskImage::~MaskImage()
 void MaskImage::paint(QPainter *painter)
 {
 
-    if (!mOriginalPix.isNull())
+    if (!mSourcePix.isNull())
     {
 
 
 
         painter->setCompositionMode(mSourceMode);
-        painter->drawPixmap(boundingRect(),mOriginalPix, mOriginalPix.rect());
+        painter->drawPixmap(boundingRect(),mSourcePix, mSourcePix.rect());
 
         painter->setCompositionMode(mDestinationMode);
         painter->drawPixmap(boundingRect(),mMaskPix, mMaskPix.rect());
@@ -43,17 +50,20 @@ void MaskImage::setSource(const QUrl &source)
 {
 
     mSource = source;
-    mOriginalPix = QPixmap(":"+source.toDisplayString(QUrl::RemoveScheme));
 
-    if (boundingRect().isEmpty())
-    {
-        setWidth(mOriginalPix.width());
-        setHeight(mOriginalPix.height());
+    if ((mSource.scheme() == "http" ) || (mSource.scheme() == "https")) {
+
+        downloadImage(source);
+
     }
 
+    else {
+        mSourcePix = QPixmap(":"+source.toDisplayString(QUrl::RemoveScheme));
+        checkSize();
+        update();
 
+    }
 
-    update();
 
 }
 
@@ -79,12 +89,44 @@ void MaskImage::setComposition(QPainter::CompositionMode source, QPainter::Compo
     update();
 }
 
-void MaskImage::downloadImage()
+void MaskImage::downloadImage(const QUrl& url)
 {
 
+    QNetworkRequest request(url);
+    QNetworkReply * reply =  mManager->get(request);
+
+
+    connect(reply,SIGNAL(finished()),this,SLOT(parseImage()));
 
 
 
+
+}
+
+void MaskImage::checkSize()
+{
+    if (boundingRect().isEmpty())
+    {
+        setWidth(mSourcePix.width());
+        setHeight(mSourcePix.height());
+    }
+}
+
+void MaskImage::parseImage()
+{
+    QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
+    qDebug()<<"loaded..";
+
+    if (reply->error() == QNetworkReply::NoError){
+
+        mSourcePix.loadFromData(reply->readAll());
+        checkSize();
+
+        update();
+
+    }
+
+    reply->deleteLater();
 
 
 }

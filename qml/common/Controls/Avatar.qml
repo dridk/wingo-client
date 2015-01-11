@@ -24,11 +24,12 @@ Item{
         visible: !avatarImage.visible
     }
 
-    Image {
+    MaskImage {
         id: avatarImage
         anchors.fill: parent
         anchors.margins: _RES.s_HALF_MARGIN
-        visible: status === Image.Ready
+        mask : "qrc:/qml/Res/images/mask.png"
+//        visible: status === Image.Ready
     }
 
 
