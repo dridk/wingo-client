@@ -7,6 +7,7 @@ Column {
     spacing: _RES.s_MARGIN
 
     property alias model: commentListViewRepeater.model
+    property bool busy: false
 
     Item{
         anchors.left: parent.left
@@ -15,7 +16,7 @@ Column {
     }
 
     Widgets.LoadingIndicator{
-        busy: parent.model.isLoading
+        busy: parent.model.isLoading || parent.busy
         anchors.horizontalCenter: parent.horizontalCenter
         visible: busy? 1 : 0
     }

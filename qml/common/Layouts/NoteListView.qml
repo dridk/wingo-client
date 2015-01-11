@@ -14,7 +14,7 @@ ListView {
 
     property real triggerAnDistance: height * 0.2
     property bool refreshOnPull: true
-    property int refreshTimeout: 1500
+    property int refreshTimeout: 1000
 
     property bool verticalMovementUp: verticalVelocity < 0
     property bool verticalMovementDown: verticalVelocity > 0
@@ -37,11 +37,6 @@ ListView {
         }
     }
 
-
-
-
-
-
     property int _contentY0: 0
     onFlickStarted: {
         _contentY0 = contentY
@@ -57,21 +52,6 @@ ListView {
             distancePassed()
     }
 
-//    section.property: "timestamp"
-//    section.criteria: ViewSection.FullString
-//    section.delegate: Item {
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        height: _RES.s_LIST_ITEM_HEIGHT
-//        Widgets.Label {
-//            text: section
-//        }
-//    }
-
-
-    //    add: Transition {
-    //            NumberAnimation { properties: "y"; from: noteList.height; duration: 300; easing: Easing.InOutQuad }
-    //        }
     Widgets.LoadingIndicator {
         id: timeoutTimer
         y: ((refreshOnPull&&noteList.contentOverTopBound)

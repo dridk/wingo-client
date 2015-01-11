@@ -65,6 +65,7 @@ Item {
             height: parent.height
             width: height
             anchors.right: parent.right
+            opacity: enabled? 1: 0.5
 
             Icon{
                 name: Icons.AXE

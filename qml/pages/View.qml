@@ -123,10 +123,11 @@ Layouts.Page {
                 }
             }
 
-            Layouts.CommentListView{
+            Layouts.CommentListView {
                 id: commentListView
                 z: 1
-                opacity: commentModel.isLoading? 0.8: 1
+                busy: postCommentRequester.isLoading
+                opacity: busy? 0.8: 1
 
                 model: RestModel {
                     id:commentModel
@@ -136,6 +137,7 @@ Layouts.Page {
 
 
                 }
+
             }
 
         }
@@ -213,6 +215,7 @@ Layouts.Page {
     Request {
         id: postCommentRequester
         onSuccess: {
+            commentModel.clear()
             commentModel.load()
         }
 

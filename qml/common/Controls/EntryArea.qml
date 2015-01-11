@@ -97,9 +97,9 @@ WidgetItemBase {
             id: actionButton
             anchors.centerIn: parent
             icon: entryBox.action
-//            style: enum_ACCENT
             visible: entryBox.action !== ""
             enabled: textBoxEdit.text.length
+            opacity: enabled? 1: 0.5
             onClicked: entryBox.actionPressed()
         }
     }

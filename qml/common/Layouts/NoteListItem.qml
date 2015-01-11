@@ -25,13 +25,11 @@ Componenets.TouchSensorArea {
     property string nickname
     property url avatar
     property string timestamp
-    property int takesCount
+    property alias takesCount: noteTakesBadge.value
     property string message
 
     property bool selectable: false
     property alias selected: itemSelected.checked
-
-//    property alias actionArea: filterBarTrayColumn.data
 
     function select(){
         itemSelected.checked = true
@@ -199,15 +197,8 @@ Componenets.TouchSensorArea {
                 id: noteTakesRow
                 spacing: -_RES.s_MARGIN
                 anchors.top: noteAvatar.bottom
-                anchors.topMargin: -_RES.s_MARGIN
-                anchors.right: noteAvatar.right
-                anchors.rightMargin: _RES.s_BORDER
-                Widgets.Badge {
-                    id: noteTakesBadge
-                    value: takesCount
-                    anchors.bottom: noteTakesIcon.bottom
-                    z: 1
-                }
+                anchors.topMargin: -_RES.s_DOUBLE_MARGIN
+                anchors.horizontalCenter: parent.horizontalCenter
                 Widgets.Icon {
                     id: noteTakesIcon
                     visible: noteTakesBadge.visible
@@ -216,7 +207,14 @@ Componenets.TouchSensorArea {
                     size: _RES.s_ICON_SIZE_SMALL
                     iconStyle: Text.Outline
                     iconStyleColor: Style.Background.WINDOW
-                    z: 0
+//                    z: 0
+                }
+                Widgets.Badge {
+                    id: noteTakesBadge
+//                    value: 5
+                    anchors.verticalCenter: parent.verticalCenter
+                    style: "ALTERNATIVE"
+//                    z: 1
                 }
             }
         }

@@ -60,8 +60,11 @@ var Background = {
         },
         Badge: {
             DEFAULT: Palette.WHITE,
+            ALTERNATIVE: Palette.SUNRISE,
+            BRIGHT: Palette.YELLOW,
             ACTIONBAR: Palette.WHITE,
-            ACCENT: Palette.MAGENTA
+            ACCENT: Palette.MAGENTA,
+            SPECIAL: Palette.DEEPSEA
         },
         Tag: {
             DEFAULT: Palette.AZURES,
@@ -103,8 +106,11 @@ var Background = {
         },
         Badge: {
             DEFAULT: Palette.DEEPSEA,
+            ALTERNATIVE: Palette.WHITE,
+            BRIGHT: Palette.BLACK,
             ACTIONBAR: Palette.MAGENTA,
-            ACCENT: Palette.WHITE
+            ACCENT: Palette.WHITE,
+            SPECIAL: Palette.WHITE
         },
         Tag: {
             DEFAULT: Palette.WHITE,
