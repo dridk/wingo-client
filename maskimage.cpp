@@ -32,7 +32,7 @@ void MaskImage::paint(QPainter *painter)
     if (!mSourcePix.isNull())
     {
 
-
+        painter->setRenderHints(QPainter::Antialiasing | QPainter::SmoothPixmapTransform);
 
         painter->setCompositionMode(QPainter::CompositionMode(mSourceMode));
         painter->drawPixmap(boundingRect(),mSourcePix, mSourcePix.rect());
