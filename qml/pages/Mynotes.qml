@@ -10,6 +10,7 @@ import "Mynotes"
 
 Layouts.Page {
     id: page
+    property bool selectionMode : false
 
     function back(){
         app.goBack();
@@ -36,6 +37,20 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
+        showTrash: page.selectionMode
+
+        onCheckmakClicked:{
+             page.selectionMode = !page.selectionMode
+            console.debug(page.selectionMode)
+        }
+        onTrashClicked: {
+            for(var i = 0; i < noteList.count; i++){
+            }
+
+            app.makeToast("Note(s) removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
+        }
+
+        onBackClicked: app.goBack()
     }
 
     OmniBar {
@@ -64,12 +79,26 @@ Layouts.Page {
             takesCount: $takes
             picture: $picture == undefined ? "" : $picture
 
-            selectable: true
+            selectable: page.selectionMode
+
+            function remove(){
+                if (!selected) return;
+              var noteId = pocketNoteModel.get(index).parent;
+                console.debug("DELETE " + noteId)
+                pocketNoteRequest.source = "/users/pockets/"+noteId;
+                pocketNoteRequest.deleteResource();
+                pocketNoteModel.remove(index)
+            }
 
             onClicked: {
-                var noteId = myNoteModel.get(index).id
-                app.goToPage(app.pages["View"]);
-                app.currentPage.noteId = noteId
+                if (page.selectionMode){
+                    selectionToggle()
+                    //do something
+                }else{
+                    var noteId = myNoteModel.get(index).id
+                    app.goToPage(app.pages["View"]);
+                    app.currentPage.noteId = noteId
+                }
             }
         }
 

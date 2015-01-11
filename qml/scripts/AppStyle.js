@@ -36,12 +36,14 @@ var Background = {
         SELECTION: Palette.DEEPSEA,
         Actionbar: {
             DEFAULT: Palette.CYAN,
-            ALTERNATIVE: Palette.MAGENTA,
+            ALTERNATIVE: Palette.MAGENTA,        
+            BRIGHT: Palette.SUNRISE,
             UTILITY: Palette.GRAY,
             SPECIAL: Palette.NIGHTSKY,
             Action: {
                 DEFAULT: Palette.YELLOW,
                 ALTERNATIVE: Palette.SUNRISE,
+                BRIGHT: Palette.YELLOW,
                 UTILITY: Palette.SILVER,
                 SPECIAL: Palette.AZURES,
                 ACCENT: Palette.DEEPSEA
@@ -87,6 +89,7 @@ var Background = {
         Actionbar: {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
+            BRIGHT: Palette.WHITE,
             UTILITY: Palette.WHITE,
             SPECIAL: Palette.WHITE
         },
@@ -123,11 +126,13 @@ var Background = {
         Actionbar: {
             DEFAULT: Palette.WHITE,
             ALTERNATIVE: Palette.WHITE,
+            BRIGHT: Palette.WHITE,
             UTILITY: Palette.WHITE,
             SPECIAL: Palette.WHITE,
             Action: {
                 DEFAULT: Palette.BLACK,
-                ALTERNATIVE: Palette.WHITE,
+                ALTERNATIVE: Palette.WHITE,            
+                BRIGHT: Palette.WHITE,
                 UTILITY: Palette.BLACK,
                 SPECIAL: Palette.WHITE,
                 ACCENT: Palette.WHITE

@@ -12,19 +12,29 @@ ActionBar.Widget {
     z: omniBar.expanded? 0: 4 //We need this to make sure omniBar tray closes when clicked outside
     hasShadow: omniBar.hidden
     enabled: !omniBar.expanded
-    style: "ALTERNATIVE"
+    style: "BRIGHT"
+    property alias showTrash: trashButton.visible
+
+    signal checkmakClicked()
+    signal trashClicked()
+    signal backClicked()
+
     ActionBar.Title {
         style: actionBar.style
         icon: Icons.CARRET_LEFT
         text: "My Notes"
-        onClicked: page.back()
+        onClicked: backClicked()
     }
     ActionBar.Right{
         ActionBar.Button{
             icon: Icons.CHECKMAK_FULL
+            onClicked: checkmakClicked()
         }
         ActionBar.Button{
-            icon: Icons.ARCHIVE
+            id: trashButton
+            icon: Icons.TRASH
+            visible: false
+            onClicked:trashClicked()
         }
     }
 }
