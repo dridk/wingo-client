@@ -119,14 +119,10 @@ void RestModel::setMaxId(const QString &id)
 void RestModel::loadData(QJsonObject data)
 {
 
-    qDebug()<<"========";
-    qDebug()<<data;
 
     int curCount = mDatas.count();
     int newCount = data.value("results").toArray().count();
 
-    qDebug()<<curCount;
-    qDebug()<<newCount;
 
     if (newCount > 0 )
     {

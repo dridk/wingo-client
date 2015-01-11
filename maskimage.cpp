@@ -163,8 +163,6 @@ void MaskImage::downloadProgress(qint64 bytes, qint64 total)
 void MaskImage::parseImage()
 {
     QNetworkReply* reply = qobject_cast<QNetworkReply*>(sender());
-    qDebug()<<"loaded..";
-
     if (reply->error() == QNetworkReply::NoError){
         mSourcePix.loadFromData(reply->readAll());
         if ( mSourcePix.isNull())
