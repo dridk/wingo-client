@@ -78,21 +78,19 @@ Componenets.WidgetItemBase {
                 Row {
                     id: noteTakesRow
                     spacing: -_RES.s_MARGIN
-                    visible: noteTakesBadge.visible
-                    Widgets.Badge {
-                        id: noteTakesBadge
-                        value: 150 //takes
-                        anchors.bottom: noteTakesIcon.bottom
-                        z: 1
-                    }
                     Widgets.Icon {
                         id: noteTakesIcon
+                        visible: noteTakesBadge.visible
                         name: Icons.POCKET
                         color: Style.Icon.SIDELINE
                         size: _RES.s_ICON_SIZE_SMALL
                         iconStyle: Text.Outline
                         iconStyleColor: Style.Background.WINDOW
-                        z: 0
+                    }
+                    Widgets.Badge {
+                        id: noteTakesBadge
+                        anchors.verticalCenter: parent.verticalCenter
+                        style: "ALTERNATIVE"
                     }
                 }
                 Widgets.Label {
