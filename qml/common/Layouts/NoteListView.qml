@@ -52,6 +52,13 @@ ListView {
             distancePassed()
     }
 
+    Widgets.ScrollIndicator {
+        contentHeight: parent.contentHeight
+        contentPosition: parent.contentY
+//        opacity: parent.flicking? 1: 0
+//        Behavior on opacity { NumberAnimation{duration: 1000} }
+    }
+
     Widgets.LoadingIndicator {
         id: timeoutTimer
         y: ((refreshOnPull&&noteList.contentOverTopBound)

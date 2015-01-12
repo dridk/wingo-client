@@ -144,6 +144,14 @@ Layouts.Page {
     }
 
 
+    Widgets.ScrollIndicator {
+        contentHeight: noteViewFlickable.contentHeight
+        contentPosition: noteViewFlickable.contentY
+//            opacity: noteViewFlickable.flicking? 1: 0
+//            Behavior on opacity { NumberAnimation{} }
+    }
+
+
 
 
 //    Text {

@@ -94,5 +94,6 @@
         <file>qml/Res/images/camera75.svg</file>
         <file>qml/pages/About.qml</file>
         <file>qml/Res/images/mask.png</file>
+        <file>qml/common/Controls/ScrollIndicator.qml</file>
     </qresource>
 </RCC>
