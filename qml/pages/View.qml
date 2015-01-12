@@ -117,6 +117,12 @@ Layouts.Page {
                 enabled: app.logged
                 visible: enabled
 
+//                onFocusChanged: {
+//                    if(focus) {
+//                        Qt.inputMethod.setInputItemRectangle(Qt.rect(x,y,width,height))
+//                    }
+//                }
+
                 onActionPressed: {
 
                     var request = {"message": text }

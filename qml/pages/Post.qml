@@ -145,11 +145,11 @@ Layouts.Page {
 
         maxTextLength: 255
 
-        onFocusChanged: {
-            if(focus) {
-                Qt.inputMethod.setInputItemRectangle(Qt.rect(x,y,width,height))
-            }
-        }
+//        onFocusChanged: {
+//            if(focus) {
+//                Qt.inputMethod.setInputItemRectangle(Qt.rect(x,y,width,height))
+//            }
+//        }
 
         Component.onCompleted: noteEdit.forceActiveFocus()
     }
