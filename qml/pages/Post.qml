@@ -188,20 +188,25 @@ Layouts.Page {
         onRemove: addImage.pathGenerated = ""
     }
 
-    Widgets.Button {
-        anchors.top : addImage.bottom
-        anchors.topMargin: 20
-        anchors.horizontalCenter: parent.horizontalCenter
-        icon: Icons.LOGO
-        text: "set location"
-        style: "ACTION"
-        onClicked: {
+//    Widgets.Button {
+//        anchors.top : addImage.bottom
+//        anchors.topMargin: 20
+//        anchors.horizontalCenter: parent.horizontalCenter
+//        icon: Icons.LOGO
+//        text: "set location"
+//        style: "ACTION"
+//        onClicked: {
 
-            var mapSelector = Qt.resolvedUrl("MapSelector.qml")
-            app.goToPage(mapSelector)
-            app.currentPage.posChanged.connect(updatePos)
+//            var mapSelector = Qt.resolvedUrl("MapSelector.qml")
+//            app.goToPage(mapSelector)
+//            app.currentPage.posChanged.connect(updatePos)
 
-        }
+//        }
+//    }
+
+    BusyOverlay {
+        enabled: postNoteRequester.isLoading || postImageRequester.isLoading
+        z: 5
     }
 
 }
