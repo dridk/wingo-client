@@ -26,6 +26,7 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: qsTr("New Note")
         icon: Icons.POST
+        enabled: app.logged
         onClicked: page.goPost()
     }
     SideBar.SimpleListItem{

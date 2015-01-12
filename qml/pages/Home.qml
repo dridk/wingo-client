@@ -151,7 +151,9 @@ Layouts.Page {
     }
 
     Widgets.ActionButton {
-        id: addNoteActionButton
+        id: addNoteActionButton        
+        enabled: app.logged
+        visible: enabled
         onClicked: page.goPost()
     }
 

@@ -114,6 +114,9 @@ Layouts.Page {
 
                 action: Icons.SEND
 
+                enabled: app.logged
+                visible: enabled
+
                 onActionPressed: {
 
                     var request = {"message": text }
