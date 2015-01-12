@@ -145,6 +145,12 @@ Layouts.Page {
 
         maxTextLength: 255
 
+//        onFocusChanged: {
+//            if(focus) {
+//                Qt.inputMethod
+//            }
+//        }
+
         Component.onCompleted: noteEdit.forceActiveFocus()
     }
 
