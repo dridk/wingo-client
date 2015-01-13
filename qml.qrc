@@ -96,5 +96,6 @@
         <file>qml/Res/images/mask.png</file>
         <file>qml/common/Controls/ScrollIndicator.qml</file>
         <file>qml/pages/Post/BusyOverlay.qml</file>
+        <file>qml/common/Layouts/NoteListFooter.qml</file>
     </qresource>
 </RCC>
