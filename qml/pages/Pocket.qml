@@ -14,10 +14,15 @@ Layouts.Page {
 
     function refresh(){
         noteList.positionViewAtBeginning()
-       pocketNoteModel.load();
+        pocketNoteModel.load();
     }
 
     Component.onCompleted: refresh()
+
+    onSelectionModeChanged: {
+        //clear selection when changing mode
+        noteList.selectedIndexes = []
+    }
 
     RestModel {
         id: pocketNoteModel
@@ -36,16 +41,30 @@ Layouts.Page {
         showTrash: page.selectionMode
 
         onCheckmakClicked:{
-             page.selectionMode = !page.selectionMode
+            page.selectionMode = !page.selectionMode
             console.debug(page.selectionMode)
         }
         onTrashClicked: {
-            for(var i = 0; i < noteList.count; i++){
+            for(var index in noteList.selectedIndexes){
+
+                var noteId = noteList.selectedIndexes[index]
+                //warning... You should remove all in a same time... Doesn't want to shift index
+
+                if ( noteId )
+                {
+                    console.debug(noteId)
+                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+                    pocketNoteRequest.deleteResource();
+
+                }
+
+
             }
 
             page.selectionMode = false
-
             app.makeToast("Note(s) removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
+
+
         }
 
         onBackClicked: app.goBack()
@@ -63,6 +82,7 @@ Layouts.Page {
         busy: pocketNoteModel.isLoading
         enabled: !pocketNoteModel.isLoading
         refreshOnPull: false
+        property variant selectedIndexes : []
 
         delegate: Layouts.NoteListItem {
             lat: $lat
@@ -71,22 +91,27 @@ Layouts.Page {
             message: $message
             //POCKET NOTE IS A COPY A NOTES... THERE ARE NO AUTHOR.
             // YOU CAN GO TO THE ORIGINAL NOTES TO SEE IT
-//            anonymous: $anonymous
-//            nickname: $anonymous ? "" :$author.nickname
+            //            anonymous: $anonymous
+            //            nickname: $anonymous ? "" :$author.nickname
 
             //QR CODE : CHECK http://goqr.me/api/doc/create-qr-code/#general_tos
 
             avatar: "https://api.qrserver.com/v1/create-qr-code/?size=150x150&color=00B8CC&data="+$signature
-//            takesCount: $takes
+            //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
             selectable: page.selectionMode
 
             onClicked: {
                 if (page.selectionMode){
                     selectionToggle()
-                    //do something
+                    //Store selection in key:value ( index : selectable)
+                    console.debug($parent)
+                    ListView.view.selectedIndexes[index] = selected ? $parent : 0
+                    console.debug(ListView.view.selectedIndexes)
+
+
                 }else{
-                        // Remind : packet has parent, not id
+                    // Remind : packet has parent, not id
                     var noteId = pocketNoteModel.get(index).parent
                     app.goToPage(app.pages["View"]);
                     app.currentPage.noteId = noteId
@@ -95,22 +120,22 @@ Layouts.Page {
 
             function remove(){
                 if (!selected) return;
-              var noteId = pocketNoteModel.get(index).parent;
+                var noteId = pocketNoteModel.get(index).parent;
                 console.debug("DELETE " + noteId)
                 pocketNoteRequest.source = "/users/pockets/"+noteId;
                 pocketNoteRequest.deleteResource();
                 pocketNoteModel.remove(index)
             }
 
-//            onDraggedOut: {
-//                    // Remind : packet has parent, not id
-//                console.debug("DELETE")
-//                app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
-//                  var noteId = pocketNoteModel.get(index).parent;
-//                    pocketNoteRequest.source = "/users/pockets/"+noteId;
-//                    pocketNoteRequest.deleteResource();
-//                    pocketNoteModel.remove(index)
-//            }
+            //            onDraggedOut: {
+            //                    // Remind : packet has parent, not id
+            //                console.debug("DELETE")
+            //                app.makeToast("Note removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
+            //                  var noteId = pocketNoteModel.get(index).parent;
+            //                    pocketNoteRequest.source = "/users/pockets/"+noteId;
+            //                    pocketNoteRequest.deleteResource();
+            //                    pocketNoteModel.remove(index)
+            //            }
 
             Text {
                 text :$signature

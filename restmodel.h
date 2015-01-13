@@ -34,7 +34,7 @@ public:
     Q_INVOKABLE int count() const;
 
     Q_INVOKABLE bool remove(int index) ;
-
+    Q_INVOKABLE bool removeList(const QJsonArray& indexes) ;
 
 
 public slots:

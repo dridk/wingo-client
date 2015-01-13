@@ -100,7 +100,29 @@ bool RestModel::remove(int index)
     beginRemoveRows(QModelIndex(),index,index);
     mDatas.removeAt(index);
     endRemoveRows();
+
     return true;
+}
+
+bool RestModel::removeList(const QJsonArray &indexes)
+{
+
+    if (indexes.isEmpty()){
+        qDebug()<<"remove index out or range";
+        return false;
+    }
+
+    qDebug()<<indexes;
+        beginResetModel();
+
+        foreach (QJsonValue val, indexes) {
+            mDatas.removeAt(val.toInt());
+        }
+
+        endResetModel();
+
+    return true;
+
 }
 void RestModel::setParams(const QJsonObject &params)
 {
