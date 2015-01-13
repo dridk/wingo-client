@@ -48,7 +48,7 @@ Layouts.Page {
             ActionBar.Action {
                 style: "ACCENT"
                 icon: Icons.POCKET_ADD
-                enabled: app.logged
+                visible: app.logged
 
                 onClicked: {
                     //Add This note to the current pockets users

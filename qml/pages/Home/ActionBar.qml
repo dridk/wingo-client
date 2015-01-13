@@ -26,7 +26,7 @@ ActionBar.Widget {
         ActionBar.Button{
             icon: Icons.POCKET
             onClicked: page.goPocket()
-            enabled: app.logged
+            visible: app.logged
             Widgets.Badge{
                 value: app.logged ? app.pocket_count : 0
                 style: "ACTIONBAR"

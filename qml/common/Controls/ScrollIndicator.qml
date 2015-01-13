@@ -12,22 +12,17 @@ Item {
     property int contentHeight: 0
     property int contentPosition: 0
 
-    Item {
-        width: parent.width
-        height: 0
+    Rectangle {
 
-        property real realHeight: parent.contentHeight - parent.height
+        property real realHeight: parent.contentHeight - parent.height - height
         property real relativePosition: parent.contentPosition / realHeight
 
         y: parent.height * relativePosition
+        width: _RES.s_BORDER
+        height: _RES.s_ICON_SIZE
+        anchors.horizontalCenter: parent.horizontalCenter
+        color: Style.Background.OVERLAY
 
-        Rectangle {
-            width: scrollBarContainer.width
-            height: _RES.s_ICON_SIZE
-            color: Style.Background.OVERLAY
-            anchors.verticalCenter: parent.verticalCenter
-            transformOrigin: Item.Center
-        }
     }
 
 }

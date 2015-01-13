@@ -64,6 +64,7 @@ Layouts.Page {
 
         notesListModel.setParams(request);
         notesListModel.clear()
+        notesListModel.countNew = 0
         notesListModel.load()
     }
 
@@ -76,8 +77,14 @@ Layouts.Page {
     RestModel{
         id: notesListModel
         source:"/notes"
-        onSuccess : {
 
+        property int countOld: 0
+        property int countNew: 0
+        property bool more: countOld != countNew
+
+        onSuccess : {
+            countOld = countNew
+            countNew = count()
         }
 
         onError: {
@@ -125,7 +132,17 @@ Layouts.Page {
                 app.goToPage(app.pages["View"]);
                 app.currentPage.noteId = noteId
             }
-                    }
+        }
+
+        footer: Layouts.NoteListFooter{
+            text: qsTr("more...")
+            visible: notesListModel.more
+            onClicked: {
+                    var lastNoteId = notesListModel.last().id;
+                    notesListModel.setMaxId(lastNoteId)
+                    notesListModel.load()
+                }
+        }
 
 
 
@@ -143,11 +160,11 @@ Layouts.Page {
         }
         onRefresh: page.refresh()
 
-        onNewPageRequest: {
-            var lastNoteId = notesListModel.last().id;
-            notesListModel.setMaxId(lastNoteId)
-            notesListModel.load()
-        }
+//        onNewPageRequest: {
+//            var lastNoteId = notesListModel.last().id;
+//            notesListModel.setMaxId(lastNoteId)
+//            notesListModel.load()
+//        }
     }
 
     Widgets.ActionButton {

@@ -11,7 +11,6 @@ ListView {
     anchors.right: parent.right
     clip: true
 
-
     property real triggerAnDistance: height * 0.2
     property bool refreshOnPull: true
     property int refreshTimeout: 1000
@@ -21,21 +20,10 @@ ListView {
     property bool contentOverTopBound: contentY < 0
     property bool contentOverBottomBound: contentY > contentHeight
     property real contentDistanceTraveled: 0
-    property int currentCount : 0
-
 
     property alias busy: timeoutTimer.busy
 
     boundsBehavior: Flickable.DragOverBounds
-
-    signal newPageRequest()
-
-    onAtYEndChanged: {
-        if ((atYEnd) && (currentCount != count)){
-            newPageRequest()
-            currentCount = count
-        }
-    }
 
     property int _contentY0: 0
     onFlickStarted: {
