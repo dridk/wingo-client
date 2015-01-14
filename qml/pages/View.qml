@@ -11,6 +11,7 @@ import "../scripts/DistanceFormat.js" as DistanceFormat
 import "../common/Layouts" as Layouts
 import "../common/Controls" as Widgets
 import "../common/ActionBar" as ActionBar
+import "../common/Components" as Componenets
 
 import "View"
 
@@ -61,16 +62,15 @@ Layouts.Page {
         }
     }
 
-    Flickable {
+    Componenets.Flickable {
         id: noteViewFlickable
-        flickableDirection: Flickable.VerticalFlick
         anchors.top: actionBar.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
         contentHeight: noteViewColumn.height
-        boundsBehavior: Flickable.StopAtBounds
-        interactive: !mapView.pressed
+        interactive: height < contentHeight
+
         Column {
             id: noteViewColumn
             anchors.left: parent.left
@@ -152,15 +152,10 @@ Layouts.Page {
         }
     }
 
-
     Widgets.ScrollIndicator {
-        contentHeight: noteViewFlickable.contentHeight
-        contentPosition: noteViewFlickable.contentY
-//            opacity: noteViewFlickable.flicking? 1: 0
-//            Behavior on opacity { NumberAnimation{} }
+        attachTo: noteViewFlickable
+        showScrollBarWhen: noteViewFlickable.movingVertically
     }
-
-
 
 
 //    Text {

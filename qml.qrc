@@ -97,5 +97,6 @@
         <file>qml/common/Controls/ScrollIndicator.qml</file>
         <file>qml/pages/Post/BusyOverlay.qml</file>
         <file>qml/common/Layouts/NoteListFooter.qml</file>
+        <file>qml/common/Components/Flickable.qml</file>
     </qresource>
 </RCC>

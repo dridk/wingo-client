@@ -40,12 +40,10 @@ ListView {
             distancePassed()
     }
 
-    Widgets.ScrollIndicator {
-        contentHeight: parent.contentHeight
-        contentPosition: parent.contentY
-//        opacity: parent.flicking? 1: 0
-//        Behavior on opacity { NumberAnimation{duration: 1000} }
-    }
+//    Widgets.ScrollIndicator {
+//        contentHeight: parent.count
+//        contentPosition: parent.currentIndex
+//    }
 
     Widgets.LoadingIndicator {
         id: timeoutTimer

@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
+import "../Controls" as Widgets
 import "../Components" as Components
 import "../../scripts/AppStyle.js" as Style
 
@@ -67,11 +68,22 @@ Item {
         x: -width
         Behavior on x {NumberAnimation{easing.type: Easing.InOutQuad }}
 
-        ColumnLayout{
-            id: sideBarTrayColumn
-            anchors.left: parent.left
-            anchors.right: parent.right
-            spacing: 0
+        Components.Flickable{
+            id: sideBarTrayFlickable
+            anchors.fill: parent
+            contentHeight: sideBarTrayColumn.height
+            interactive: height < contentHeight
+
+            ColumnLayout{
+                id: sideBarTrayColumn
+                anchors.left: parent.left
+                anchors.right: parent.right
+                spacing: 0
+            }
+        }
+        Widgets.ScrollIndicator {
+            attachTo: sideBarTrayFlickable
+            showScrollBarWhen: sideBarTrayFlickable.movingVertically
         }
 
     }

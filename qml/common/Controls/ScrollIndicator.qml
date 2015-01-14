@@ -5,25 +5,68 @@ import "../../scripts/AppStyle.js" as Style
 Item {
     id: scrollBarContainer
     width: _RES.s_MARGIN
-    anchors.top: parent.top
-    anchors.bottom: parent.bottom
-    anchors.right: parent.right
 
-    property int contentHeight: 0
-    property int contentPosition: 0
+    property var attachTo: parent
+
+    anchors.top: attachTo.top
+    anchors.bottom: attachTo.bottom
+    anchors.right: attachTo.right
+
+    property int contentHeight: attachTo.contentHeight - height
+    property int contentPosition: attachTo.contentY
+
+    property bool alwaysOn: false
+    property bool showScrollBarWhen: false
 
     Rectangle {
+        id: scrollBar
+        property real relativePosition: parent.contentPosition / parent.contentHeight
+        property real adjustedHeight: parent.height - height - _RES.s_DOUBLE_MARGIN
 
-        property real realHeight: parent.contentHeight - parent.height - height
-        property real relativePosition: parent.contentPosition / realHeight
-
-        y: parent.height * relativePosition
+        y: adjustedHeight * relativePosition + _RES.s_MARGIN
         width: _RES.s_BORDER
         height: _RES.s_ICON_SIZE
         anchors.horizontalCenter: parent.horizontalCenter
         color: Style.Background.OVERLAY
+        opacity: parent.alwaysOn? 1: 0
 
     }
+
+    states: [
+        State{
+            name: "SHOW"
+            when: alwaysOn || showScrollBarWhen
+            PropertyChanges {
+                target: scrollBar
+                opacity: 1
+            }
+        }
+    ]
+
+    transitions: [
+        Transition {
+            from: ""
+            to: "SHOW"
+            NumberAnimation{
+                property: "opacity"
+                duration:100
+            }
+        },
+        Transition {
+            from: "SHOW"
+            to: ""
+            SequentialAnimation{
+
+                PauseAnimation {
+                    duration: 800
+                }
+                NumberAnimation{
+                    property: "opacity";
+                    duration: 500
+                }
+            }
+        }
+    ]
 
 }
 

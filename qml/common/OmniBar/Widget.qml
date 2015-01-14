@@ -132,14 +132,12 @@ Item {
             }
         }
 
-        Flickable {
+        Components.Flickable {
             id: omniBarTrayFlickable
-            flickableDirection: Flickable.VerticalFlick
             anchors.topMargin: _RES.s_DOUBLE_MARGIN
             anchors.bottomMargin: _RES.s_DOUBLE_MARGIN
             anchors.fill: parent
             contentHeight: filterBarTrayColumn.height
-            boundsBehavior: Flickable.StopAtBounds
             interactive: false
             Column {
                 id: filterBarTrayColumn
@@ -149,6 +147,10 @@ Item {
                 spacing: 0
                 //OmniBar contents go here >>>
             }
+        }
+        Widgets.ScrollIndicator {
+            attachTo: omniBarTrayFlickable
+            showScrollBarWhen: omniBarTrayFlickable.movingVertically
         }
     }
 
