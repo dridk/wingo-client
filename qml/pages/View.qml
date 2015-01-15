@@ -220,6 +220,7 @@ Layouts.Page {
         onSuccess: {
             app.makeToast(qsTr("Note placed into pocket"))
             app.pocket_count++
+            noteView.takes++
          }
         onError: app.showMessage("ERROR", message)
     }

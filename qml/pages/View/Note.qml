@@ -22,6 +22,8 @@ Componenets.WidgetItemBase {
     property alias image: noteImage.source
     property alias message: noteText.text
 
+    onTakesChanged: badgeAnim.start()
+
     Column {
         id: noteViewLayout
         anchors.left: parent.left
@@ -60,7 +62,7 @@ Componenets.WidgetItemBase {
 
                 Widgets.Label{
                     id: userIdentityName
-//                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    //                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.LINK
                 }
                 Widgets.Label{
@@ -91,6 +93,29 @@ Componenets.WidgetItemBase {
                         id: noteTakesBadge
                         anchors.verticalCenter: parent.verticalCenter
                         style: "ALTERNATIVE"
+
+                        SequentialAnimation{
+                            id:badgeAnim
+
+                            NumberAnimation {
+                                target: noteTakesBadge
+                                property: "scale"
+                                easing.type: Easing.InBack
+                                from : 1
+                                to:3
+                                duration:300
+
+                            }
+                            NumberAnimation {
+                                target: noteTakesBadge
+                                property: "scale"
+                                easing.type: Easing.OutBack
+                                duration:300
+                                from : 3
+                                to:1
+                            }
+
+                        }
                     }
                 }
                 Widgets.Label {

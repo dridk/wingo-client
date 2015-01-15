@@ -40,10 +40,14 @@ ListView {
             distancePassed()
     }
 
-    add: Transition {
+    populate: Transition {
         NumberAnimation { property: "opacity"; from : 0; to : 1; duration : 1000 }
         //        NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
     }
+
+    displaced: Transition {
+           NumberAnimation { properties: "x,y"; duration: 400; easing.type: Easing.OutBounce }
+       }
 
 
 //    Widgets.ScrollIndicator {
