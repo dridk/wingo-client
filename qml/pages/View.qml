@@ -235,6 +235,7 @@ Layouts.Page {
         onSuccess: {
             commentModel.clear()
             commentModel.load()
+            noteView.commentCount++
         }
 
     }
