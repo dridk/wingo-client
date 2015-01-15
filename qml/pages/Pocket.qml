@@ -91,6 +91,7 @@ Layouts.Page {
             lon: $lon
             timestamp: $timestamp
             message: $message
+            commentCount: $comment_count
             //POCKET NOTE IS A COPY A NOTES... THERE ARE NO AUTHOR.
             // YOU CAN GO TO THE ORIGINAL NOTES TO SEE IT
             //            anonymous: $anonymous
@@ -102,6 +103,8 @@ Layouts.Page {
             //            takesCount: $takes
             picture: $picture == undefined ? "" : $picture
             selectable: page.selectionMode
+            enabled : $valid
+
 
             onClicked: {
                 if (page.selectionMode){

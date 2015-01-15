@@ -18,9 +18,9 @@ Componenets.WidgetItemBase {
     property alias details: noteDetails.text
     property alias takes: noteTakesBadge.value
     property alias expiration: noteExpiery.text
-
     property alias image: noteImage.source
     property alias message: noteText.text
+    property int commentCount
 
     onTakesChanged: badgeAnim.start()
 
@@ -69,6 +69,14 @@ Componenets.WidgetItemBase {
                     id: noteDetails
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.QUOTE
+                }
+
+                Widgets.Label{
+                    id: commentCountLabel
+                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    color: Style.Typography.LINK
+                    text:"Comments ("+ commentCount +")"
+                    visible: commentCount > 0
                 }
             }
             Column{

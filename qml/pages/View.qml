@@ -77,6 +77,8 @@ Layouts.Page {
             anchors.right: parent.right
             spacing: 0
 
+
+
             Note{
                 id: noteView
                 z: 3
@@ -196,6 +198,9 @@ Layouts.Page {
 
             noteView.message = StringFormat.setWordColor(data["results"]["message"],
                                                          Style.Typography.LINK, /\#\w+/g)
+
+            noteView.commentCount = data["results"]["comment_count"]
+
             mapView.center = QtPositioning.coordinate(
                 data["results"]["lat"],
                 data["results"]["lon"]

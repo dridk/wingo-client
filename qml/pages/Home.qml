@@ -125,6 +125,8 @@ Layouts.Page {
             avatar: $anonymous ? "" :$author.avatar
             takesCount: $takes
             picture: $picture == undefined ? "" : $picture
+            commentCount: $comment_count
+
 
 
             onClicked: {

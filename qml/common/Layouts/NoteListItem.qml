@@ -27,9 +27,12 @@ Componenets.TouchSensorArea {
     property string timestamp
     property alias takesCount: noteTakesBadge.value
     property string message
+    property int commentCount
 
     property bool selectable: false
     property alias selected: itemSelected.checked
+    opacity: enabled ? 1 : 0.5
+
 
     function select(){
         itemSelected.checked = true
@@ -161,6 +164,15 @@ Componenets.TouchSensorArea {
                     font.pixelSize: _RES.s_TEXT_SIZE_MINI
                     color: Style.Typography.LINK
                     Layout.fillWidth: false
+                }
+
+                Widgets.Label {
+                    //Comment count
+                    text: "comment (" + commentCount+")"
+                    font.pixelSize: _RES.s_TEXT_SIZE_MINI
+                    color: Style.Typography.LINK
+                    Layout.fillWidth: false
+                    visible: commentCount > 0
                 }
             }
 
