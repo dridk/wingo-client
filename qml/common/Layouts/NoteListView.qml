@@ -40,12 +40,7 @@ ListView {
             distancePassed()
     }
 
-    remove: Transition {
-         ParallelAnimation {
-             NumberAnimation { property: "opacity"; to: 0; duration: 1000 }
 
-         }
-     }
 
 //    Widgets.ScrollIndicator {
 //        contentHeight: parent.count

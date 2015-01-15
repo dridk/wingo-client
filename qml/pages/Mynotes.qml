@@ -44,11 +44,23 @@ Layouts.Page {
             console.debug(page.selectionMode)
         }
         onTrashClicked: {
-            for(var i = 0; i < noteList.count; i++){
+            for (var index in myNoteModel.selection()) {
+
+                var noteId = myNoteModel.get(myNoteModel.selection()[index])["id"]
+                if (noteId) {
+                    myNoteRequest.source = "/notes/"+noteId;
+                    myNoteRequest.deleteResource();
+                }
+
             }
 
-            page.selectionMode = false
+            //remove UI items
+            myNoteModel.removeSelection();
 
+            //clear UI selection
+            myNoteModel.clearSelection();
+
+            page.selectionMode = false
             app.makeToast("Note(s) deleted", Style.MESSAGE_PURPOSE_ALERT)
         }
 
@@ -89,15 +101,17 @@ Layouts.Page {
                 if (!selected) return;
               var noteId = pocketNoteModel.get(index).parent;
                 console.debug("DELETE " + noteId)
-                pocketNoteRequest.source = "/users/pockets/"+noteId;
-                pocketNoteRequest.deleteResource();
+
                 pocketNoteModel.remove(index)
             }
 
             onClicked: {
                 if (page.selectionMode){
                     selectionToggle()
-                    //do something
+                    myNoteModel.setSelection(index, selected)
+
+
+
                 }else{
                     var noteId = myNoteModel.get(index).id
                     app.goToPage(app.pages["View"]);
@@ -118,6 +132,18 @@ Layouts.Page {
             }
         }
         onRefresh: page.refresh()
+    }
+
+    Request {
+        id:myNoteRequest
+        onSuccess: {
+//            app.showMessage("delete from mynotes", "Delete success")
+            app.mynote_count--
+
+
+        }
+        onError: app.showMessage("delete from mynotes","Cannot delete notes")
+
     }
 
 }

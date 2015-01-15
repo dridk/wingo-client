@@ -162,7 +162,7 @@ Layouts.Page {
 
         //success message is un necessary...
         onSuccess: {
-            app.showMessage("delete from pockets", "Delete success")
+//            app.showMessage("delete from pockets", "Delete success")
             app.pocket_count--
 
 

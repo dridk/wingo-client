@@ -111,11 +111,13 @@ void RestModel::removeSelection()
 
     qDebug()<<list;
 
-    beginResetModel();
 
     foreach (QVariant index, list) {
-        qDebug()<<"remove "<<index.toInt();
+        beginRemoveRows(QModelIndex(), index.toInt(), index.toInt());
+
         mDatas.removeAt(index.toInt());
+
+        endRemoveRows();
     }
 
     endResetModel();
