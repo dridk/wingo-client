@@ -13,9 +13,9 @@ import "../Controls" as Widgets
 
 Componenets.TouchSensorArea {
     id: root
-    anchors.left: parent.left
-    anchors.right: parent.right
+
     height: noteListItem.height + _RES.s_MARGIN
+    width: parent.width
 
 
     property string lat

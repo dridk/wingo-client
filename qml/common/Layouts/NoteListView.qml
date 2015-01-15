@@ -5,8 +5,8 @@ import "../Controls" as Widgets
 
 ListView {
     id: noteList
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+//    Layout.fillWidth: true
+//    Layout.fillHeight: true
     anchors.left: parent.left
     anchors.right: parent.right
     clip: true
@@ -40,6 +40,10 @@ ListView {
             distancePassed()
     }
 
+    add: Transition {
+        NumberAnimation { property: "opacity"; from : 0; to : 1; duration : 1000 }
+        //        NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: 400 }
+    }
 
 
 //    Widgets.ScrollIndicator {
