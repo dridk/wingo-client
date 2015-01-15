@@ -34,7 +34,12 @@ public:
     Q_INVOKABLE int count() const;
 
     Q_INVOKABLE bool remove(int index) ;
-    Q_INVOKABLE bool removeList(const QJsonArray& indexes) ;
+    Q_INVOKABLE void removeSelection() ;
+
+    Q_INVOKABLE void setSelection(int index, bool select = true);
+    Q_INVOKABLE void clearSelection();
+    Q_INVOKABLE QJsonArray selection();
+
 
 
 public slots:
@@ -66,6 +71,7 @@ private:
     QJsonObject mParams;
     Request * mRequest;
     int mCurrentPage;
+    QSet<int> mSelections;
 
 
 

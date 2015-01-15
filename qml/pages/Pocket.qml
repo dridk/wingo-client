@@ -45,21 +45,23 @@ Layouts.Page {
             console.debug(page.selectionMode)
         }
         onTrashClicked: {
-            for(var index in noteList.selectedIndexes){
 
-                var noteId = noteList.selectedIndexes[index]
-                //warning... You should remove all in a same time... Doesn't want to shift index
+            //remove server items
+            for (var index in pocketNoteModel.selection()) {
 
-                if ( noteId )
-                {
-                    console.debug(noteId)
+                var noteId = pocketNoteModel.get(pocketNoteModel.selection()[index])["parent"]
+                if (noteId) {
                     pocketNoteRequest.source = "/users/pockets/"+noteId;
                     pocketNoteRequest.deleteResource();
-
                 }
 
-
             }
+
+            //remove UI items
+            pocketNoteModel.removeSelection();
+
+            //clear UI selection
+            pocketNoteModel.clearSelection();
 
             page.selectionMode = false
             app.makeToast("Note(s) removed from Pocket", Style.MESSAGE_PURPOSE_ALERT)
@@ -104,11 +106,7 @@ Layouts.Page {
             onClicked: {
                 if (page.selectionMode){
                     selectionToggle()
-                    //Store selection in key:value ( index : selectable)
-                    console.debug($parent)
-                    ListView.view.selectedIndexes[index] = selected ? $parent : 0
-                    console.debug(ListView.view.selectedIndexes)
-
+                    pocketNoteModel.setSelection(index, selected)
 
                 }else{
                     // Remind : packet has parent, not id

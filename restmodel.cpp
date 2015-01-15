@@ -104,24 +104,72 @@ bool RestModel::remove(int index)
     return true;
 }
 
-bool RestModel::removeList(const QJsonArray &indexes)
+void RestModel::removeSelection()
 {
+    QList<int> list = mSelections.toList();
+    qSort(list.begin(), list.end(), qGreater<int>());
 
-    if (indexes.isEmpty()){
-        qDebug()<<"remove index out or range";
-        return false;
+    qDebug()<<list;
+
+    beginResetModel();
+
+    foreach (QVariant index, list) {
+        qDebug()<<"remove "<<index.toInt();
+        mDatas.removeAt(index.toInt());
     }
 
-    qDebug()<<indexes;
-        beginResetModel();
+    endResetModel();
 
-        foreach (QJsonValue val, indexes) {
-            mDatas.removeAt(val.toInt());
-        }
 
-        endResetModel();
 
-    return true;
+}
+
+void RestModel::setSelection(int index, bool select)
+{
+
+    if (select)
+        mSelections.insert(index);
+    else
+        mSelections.remove(index);
+}
+
+//bool RestModel::removeList(const QJsonArray &indexes)
+//{
+//    if (indexes.isEmpty()){
+//        qDebug()<<"remove index out or range";
+//        return false;
+//    }
+
+//    QVariantList list = indexes.toVariantList();
+//    qSort(list.begin(), list.end(), qGreater<QVariant>());
+
+//    beginResetModel();
+
+//    foreach (QVariant index, list) {
+//        mDatas.removeAt(index.toInt());
+//    }
+
+//    endResetModel();
+
+//    return true;
+
+//}
+
+
+
+void RestModel::clearSelection()
+{
+    mSelections.clear();
+}
+
+QJsonArray RestModel::selection()
+{
+    QJsonArray array;
+    foreach (int i , mSelections) {
+        array.append(i);
+    }
+    return array;
+
 
 }
 void RestModel::setParams(const QJsonObject &params)
