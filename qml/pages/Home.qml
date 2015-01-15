@@ -84,7 +84,7 @@ Layouts.Page {
 
         onSuccess : {
             countOld = countNew
-            countNew = count()
+            countNew = count
         }
 
         onError: {
@@ -136,7 +136,7 @@ Layouts.Page {
 
         footer: Layouts.NoteListFooter{
             text: qsTr("more...")
-            visible: notesListModel.more
+            visible: notesListModel.count < notesListModel.totalCount
             onClicked: {
                     var lastNoteId = notesListModel.last().id;
                     notesListModel.setMaxId(lastNoteId)

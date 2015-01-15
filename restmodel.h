@@ -14,6 +14,9 @@ class RestModel : public QAbstractListModel
     Q_PROPERTY(QString source READ source WRITE setSource NOTIFY sourceChanged)
     Q_PROPERTY(bool isLoading READ isLoading NOTIFY isLoadingChanged)
     Q_PROPERTY(QString maxId READ maxId WRITE setMaxId NOTIFY maxIdChanged)
+    Q_PROPERTY(int count READ count NOTIFY success)
+    Q_PROPERTY(int totalCount READ totalCount NOTIFY success)
+
 
 
 public:
@@ -27,11 +30,13 @@ public:
     const QString &source();
     bool isLoading();
     const QString &maxId() const;
+    int count() const;
+    int totalCount() const;
 
     Q_INVOKABLE QJsonValue get(int index) const;
     Q_INVOKABLE QJsonValue first() const;
     Q_INVOKABLE QJsonValue last() const;
-    Q_INVOKABLE int count() const;
+
 
     Q_INVOKABLE bool remove(int index) ;
     Q_INVOKABLE void removeSelection() ;
@@ -61,6 +66,7 @@ signals:
     void success();
     void maxIdChanged();
 
+
 protected:
     void createRoleNames();
 
@@ -71,6 +77,7 @@ private:
     QJsonObject mParams;
     Request * mRequest;
     int mCurrentPage;
+    int mTotalCount;
     QSet<int> mSelections;
 
 

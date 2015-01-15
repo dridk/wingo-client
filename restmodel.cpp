@@ -5,7 +5,7 @@ RestModel::RestModel(QObject * parent)
 {
 
     mRequest = new Request;
-
+    mTotalCount = 0;
 
     connect(mRequest,SIGNAL(success(QJsonObject)),this,SLOT(loadData(QJsonObject)));
     connect(mRequest,SIGNAL(sourceChanged()),this,SIGNAL(sourceChanged()));
@@ -90,6 +90,11 @@ int RestModel::count() const
     return mDatas.count();
 }
 
+int RestModel::totalCount() const
+{
+    return mTotalCount;
+}
+
 bool RestModel::remove(int index)
 {
     if (index >= mDatas.count()){
@@ -135,29 +140,6 @@ void RestModel::setSelection(int index, bool select)
         mSelections.remove(index);
 }
 
-//bool RestModel::removeList(const QJsonArray &indexes)
-//{
-//    if (indexes.isEmpty()){
-//        qDebug()<<"remove index out or range";
-//        return false;
-//    }
-
-//    QVariantList list = indexes.toVariantList();
-//    qSort(list.begin(), list.end(), qGreater<QVariant>());
-
-//    beginResetModel();
-
-//    foreach (QVariant index, list) {
-//        mDatas.removeAt(index.toInt());
-//    }
-
-//    endResetModel();
-
-//    return true;
-
-//}
-
-
 
 void RestModel::clearSelection()
 {
@@ -195,6 +177,9 @@ void RestModel::loadData(QJsonObject data)
     int curCount = mDatas.count();
     int newCount = data.value("results").toArray().count();
 
+    mTotalCount = data.value("total_count").toInt();
+
+    qDebug()<<"TOTAL"<<mTotalCount;
 
     if (newCount > 0 )
     {
