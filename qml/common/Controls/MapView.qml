@@ -112,7 +112,7 @@ Componenets.WidgetItemBase {
 
 //            LoadingIndicator{
 //                anchors.centerIn: parent
-//                anchors.verticalCenterOffset: - _RES.scale(10)
+//                anchors.verticalCenterOffset: - U.px(10)
 //                busy: mapLoader.status === Image.Loading
 //                opacity: busy? 1: 0
 //                Behavior on opacity {NumberAnimation{}}

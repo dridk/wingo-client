@@ -8,7 +8,7 @@ Rectangle {
     color: Style.Background.VIEW
     Image{
         id: shadow
-        height: _RES.scale(4)
+        height: U.px(4)
         source: "../../Res/images/shadow.png"
         anchors.top: parent.bottom
         anchors.topMargin: parent.outerShadow? 0 : -height

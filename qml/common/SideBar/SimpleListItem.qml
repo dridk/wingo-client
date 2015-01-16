@@ -32,7 +32,7 @@ Components.TouchSensorArea{
         id: listItemLabel
         text: "test"
         anchors.left: parent.left
-        anchors.leftMargin: _RES.scale(72)
+        anchors.leftMargin: U.px(72)
         anchors.verticalCenter: parent.verticalCenter
     }
 }

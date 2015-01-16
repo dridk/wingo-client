@@ -73,7 +73,7 @@ ApplicationWindow {
 
     ResolutionManager{
         id: _RES
-        appWindow: app
+        //appWindow: app
     }
 
 
@@ -101,7 +101,7 @@ ApplicationWindow {
             }
         }
 
-        initialItem: Qt.resolvedUrl("/qml/pages/Splash.qml")
+        initialItem: app.pages["Home"]//Qt.resolvedUrl("/qml/pages/Splash.qml")
 
 
         delegate: StackViewDelegate {

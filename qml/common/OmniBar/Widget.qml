@@ -82,7 +82,7 @@ Item {
             }
             Components.Trapezoid {
                 id: omniBarSensorShape
-                width: _RES.scale(80)
+                width: U.px(80)
                 height: parent.height
                 anchors.right: parent.right
                 color: omniBar.iconBackgroundColor

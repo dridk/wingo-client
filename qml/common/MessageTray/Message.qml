@@ -47,7 +47,7 @@ Componenets.ListItemBase {
         text: "test"
         color: styles[parent.purpose]
         anchors.left: parent.left
-        anchors.leftMargin: _RES.scale(72)
+        anchors.leftMargin: U.px(72)
         anchors.verticalCenter: parent.verticalCenter
         property variant styles: [
             Style.Palette.SILVER,

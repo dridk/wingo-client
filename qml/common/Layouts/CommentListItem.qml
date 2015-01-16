@@ -77,7 +77,7 @@ Item {
         }
 
         Image{
-            height: _RES.scale(4)
+            height: U.px(4)
             source: "../../Res/images/shadow.png"
             anchors.top: parent.bottom
             anchors.left: parent.left

@@ -6,7 +6,7 @@ import "../../scripts/AppStyle.js" as Style
 
 Rectangle {
     id: badge
-    width: Math.max(_RES.scale(24), childrenRect.width + _RES.s_DOUBLE_MARGIN)
+    width: Math.max(U.px(24), childrenRect.width + _RES.s_DOUBLE_MARGIN)
     height: childrenRect.height + _RES.s_MARGIN
     radius: height / 2
 

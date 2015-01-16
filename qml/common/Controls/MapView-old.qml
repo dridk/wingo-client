@@ -70,11 +70,11 @@ Componenets.WidgetItemBase {
             width: parent.width
             height: width
             anchors.centerIn: parent
-            anchors.verticalCenterOffset: _RES.scale(10)
+            anchors.verticalCenterOffset: U.px(10)
 
             LoadingIndicator{
                 anchors.centerIn: parent
-                anchors.verticalCenterOffset: - _RES.scale(10)
+                anchors.verticalCenterOffset: - U.px(10)
                 busy: mapLoader.status === Image.Loading
                 opacity: busy? 1: 0
                 Behavior on opacity {NumberAnimation{}}
@@ -84,7 +84,7 @@ Componenets.WidgetItemBase {
                 id: mapCursor
                 name: Icons.LOCATION
                 anchors.centerIn: parent
-                anchors.verticalCenterOffset: - _RES.scale(10)
+                anchors.verticalCenterOffset: - U.px(10)
                 color: Style.Palette.MAGENTA
                 visible: mapLoader.status === Image.Ready
                 size: _RES.s_ICON_SIZE_SMALL

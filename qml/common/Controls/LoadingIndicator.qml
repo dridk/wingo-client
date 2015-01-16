@@ -78,7 +78,7 @@ Rectangle {
         id: busyIndicator
         name: Icons.REFRESH
         anchors.centerIn: parent
-        anchors.verticalCenterOffset: _RES.scale(1)
+        anchors.verticalCenterOffset: U.px(1)
         size: _RES.s_ICON_SIZE_SMALL
         color: Style.Icon.SIDELINE
 //        Behavior on color{ColorAnimation{}}

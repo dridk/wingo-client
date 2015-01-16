@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("wingo", App::instance());
-    engine.rootContext()->setContextProperty("units", new Unit());
+    engine.rootContext()->setContextProperty("U", new Unit(QSize(540,960)));
 
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 

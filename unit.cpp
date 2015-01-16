@@ -5,13 +5,15 @@
 Unit::Unit(const QSize& size,QObject *parent) :
     QObject(parent)
 {
-    mIntendedSize = size;
+    mCurrentSize = size;
     mRoudUp = false;
 
     if (mIntendedSize.isEmpty()){
-        mIntendedSize = QSize(640, 480);
+        mIntendedSize = QSize(540, 960);
     }
-    mCurrentSize = qApp->screens().first()->size();
+    if (mCurrentSize.isEmpty()){
+        mCurrentSize = qApp->screens().first()->size();
+    }
     mScreen = qApp->screens().first();
 
     computeRatio();

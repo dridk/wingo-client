@@ -12,7 +12,7 @@ Componenets.TouchSensorArea {
     //-----------
     Layout.alignment: Qt.AlignRight
     height: _RES.s_ACTION_BAR_HEIGHT
-    width: height + _RES.scale(16)
+    width: height + U.px(16)
     Layout.fillHeight: true
     preventStealing: true
 
