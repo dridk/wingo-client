@@ -76,6 +76,8 @@ ApplicationWindow {
         appWindow: app
     }
 
+
+
     StackView {
         id: stack
         anchors.bottom: messageTray.top

@@ -10,6 +10,7 @@
 #include "maskimage.h"
 #include "app.h"
 #include "restmodel.h"
+#include "unit.h"
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
@@ -22,8 +23,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<PolygonItem>("Wingo",1,0,"PolygonItem");
     qmlRegisterType<PainterItem>("Wingo",1,0,"PainterItem");
     qmlRegisterType<MaskImage>("Wingo",1,0,"MaskImage");
-
     qmlRegisterType<RestModel>("Wingo",1,0,"RestModel");
+//    qmlRegisterType<Unit>("Wingo",1,0,"ResolutionManager2");
 
     app.setApplicationName("Wingo");
     app.setOrganizationDomain("localhost");
@@ -39,6 +40,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("wingo", App::instance());
+    engine.rootContext()->setContextProperty("units", new Unit());
+
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     return app.exec();
