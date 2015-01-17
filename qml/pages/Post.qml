@@ -151,7 +151,7 @@ Layouts.Page {
 //            }
 //        }
 
-        Component.onCompleted: noteEdit.forceActiveFocus()
+//        Component.onCompleted: noteEdit.forceActiveFocus()
     }
 
     Widgets.MapView {

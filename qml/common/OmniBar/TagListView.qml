@@ -15,6 +15,7 @@ Flow {
 
     property alias model: tagList.model
     signal click (int index, string tag)
+    property alias emptyText: emptyTextLabel.text
 
     Item {
         width: parent.width
@@ -22,7 +23,8 @@ Flow {
     }
 
     Widgets.Label{
-        text: qsTr("Looking for tags around you...")
+        id: emptyTextLabel
+        text: "Looking for tags around you..."
         visible: parent.model.count === 0
     }
 

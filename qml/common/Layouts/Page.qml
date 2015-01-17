@@ -24,16 +24,16 @@ Rectangle
 //    property alias containsMouse: pageClickSensor.containsMouse
 //    property alias pressed: pageClickSensor.pressed
 
-    signal pageInteraction (variant mouse)
+//    signal pageInteraction (variant mouse)
 
-    function beforeShown(){}
-    function afterShown() {}
-    function beforeHidden(){}
-    function afterHidden() {}
+    signal show()
+    signal shown()
+    signal hide()
+    signal hidden()
 
-    function back() { app.goBack() }
-    function menu() {}
-    function home() {}
+    function back() { app.goBack(); return true; }
+    function menu() {return true;}
+    function home() {return false;}
 
     //Main Page structure
 //    Loader

@@ -27,7 +27,9 @@ Item {
     z: 99
 
     signal expand
+    signal opened
     signal contract
+    signal closed
 
     function show() {
         state = ""
@@ -45,19 +47,19 @@ Item {
     }
 
     function expandTray() {
-        if (state === "EXPANDED") return;
-        Qt.inputMethod.hide(); //Hide all input methods
-        focus = true;  //Focus UI on self
-        state = "EXPANDED";
-        expand();
+        if (state === "EXPANDED")
+            return
+        Qt.inputMethod.hide() //Hide all input methods
+        focus = true //Focus UI on self
+        state = "EXPANDED"
     }
 
     function contractTray() {
-        if (state === "") return;
-        focus = false;  //Return Focus
+        if (state === "")
+            return
+        focus = false //Return Focus
         state = ""
         omniBarTrayFlickable.contentY = 0
-        contract()
     }
 
     Components.WidgetItemBase {
@@ -106,17 +108,6 @@ Item {
         }
     }
 
-    //Page shadowing effect
-    Components.OverlayBackground {
-        id: overlay
-        z: 0
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.top: parent.bottom
-        height: app.height - (omniBar.y + omniBar.height)
-        onClicked: omniBar.contractTray()
-    }
-
     Components.WidgetItemBase {
         id: omniBarTray
         z: 1
@@ -126,11 +117,11 @@ Item {
         height: 0
         clip: true
         color: Style.Background.VIEW
-        Behavior on height {
-            NumberAnimation {
-                easing.type: Easing.InOutQuad
-            }
-        }
+//        Behavior on height {
+//            NumberAnimation {
+//                easing.type: Easing.InOutQuad
+//            }
+//        }
 
         Components.Flickable {
             id: omniBarTrayFlickable
@@ -154,16 +145,23 @@ Item {
         }
     }
 
-    MouseArea {
-        id: omniBarFiller
-        //This is needed to make sure we get clicks outside the tray area
-        enabled: omniBar.expanded
-        height: 0
-        y: -height
+
+    //Page shadowing effect
+    Components.OverlayBackground {
+        id: overlay
+        z: 0
         anchors.left: parent.left
         anchors.right: parent.right
-        onClicked: omniBar.contractTray()
+        height: app.height // - (omniBar.y + omniBar.height)
+        onClicked: {
+            if (!Utilities.isPointInRect(
+                        Qt.point(mouse.x,mouse.y),
+                        Qt.rect(omniBarTray.x, omniBarTray.y + (-y), omniBarTray.width, omniBarTray.height)))
+               omniBar.contractTray();
+        }
     }
+
+    Component.onCompleted: overlay.y = -_computeY()
 
     function _computeY() {
         var barCoord = Utilities.getGlobalCoordinates(omniBar)
@@ -171,10 +169,8 @@ Item {
     }
 
     function _computeHeight() {
-        var fullHeight = app.height  - (_computeY() + omniBar.height),
-            trayHeight = fillHeight ? fullHeight : Math.min(fullHeight, (filterBarTrayColumn.height +
-                                                                         omniBarTrayFlickable.anchors.topMargin +
-                                                                         omniBarTrayFlickable.anchors.bottomMargin))
+        var fullHeight = app.height - (_computeY(
+                                           ) + omniBar.height), trayHeight = fillHeight ? fullHeight : Math.min(fullHeight, (filterBarTrayColumn.height + omniBarTrayFlickable.anchors.topMargin + omniBarTrayFlickable.anchors.bottomMargin))
         if (trayHeight === fullHeight)
             omniBarTrayFlickable.interactive = true
         else
@@ -196,10 +192,6 @@ Item {
                 target: omniBarTray
                 height: _computeHeight()
             }
-            PropertyChanges {
-                target: omniBarFiller
-                height: _computeY()
-            }
 
             PropertyChanges {
                 target: overlay
@@ -218,7 +210,7 @@ Item {
                 target: omniBar
                 clip: true
                 height: 0
-//                opacity: 0
+                //                opacity: 0
             }
             PropertyChanges {
                 target: omniBarSensor
@@ -229,12 +221,48 @@ Item {
 
     transitions: [
         Transition {
-        from: ""; to: "HIDDEN"
-        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
-    },
+            from: ""
+            to: "EXPANDED"
+            SequentialAnimation {
+                ScriptAction{script: omniBar.expand()}
+                NumberAnimation {
+                    target: omniBarTray
+                    property: "height"
+                    easing.type: Easing.InOutQuad
+                }
+                ScriptAction{script: omniBar.opened()}
+            }
+        },
         Transition {
-        from: "HIDDEN"; to: ""
-        NumberAnimation {target: omniBar; properties: "height, opacity"; easing.type: Easing.InOutQuad }
-    }
+            from: "EXPANDED"
+            to: ""
+            SequentialAnimation {
+                ScriptAction{script: omniBar.contract()}
+                NumberAnimation {
+                    target: omniBarTray
+                    property: "height"
+                    easing.type: Easing.InOutQuad
+                }
+                ScriptAction{script: omniBar.closed()}
+            }
+        },
+        Transition {
+            from: ""
+            to: "HIDDEN"
+            NumberAnimation {
+                target: omniBar
+                properties: "height, opacity"
+                easing.type: Easing.InOutQuad
+            }
+        },
+        Transition {
+            from: "HIDDEN"
+            to: ""
+            NumberAnimation {
+                target: omniBar
+                properties: "height, opacity"
+                easing.type: Easing.InOutQuad
+            }
+        }
     ]
 }

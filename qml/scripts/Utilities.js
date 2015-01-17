@@ -118,3 +118,9 @@ function applyFunction(array, fn) {
     });
     return _arr;
 }
+
+function isPointInRect(point, rect){
+    var width = rect.x + rect.width
+    var height = rect.y + rect.height
+    return (point.x > rect.x && point.x < width) && (point.y > rect.y && point.y < height)
+}

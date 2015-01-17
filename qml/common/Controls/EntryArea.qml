@@ -74,6 +74,8 @@ WidgetItemBase {
                 selectionColor: Style.Background.SELECTION
                 selectedTextColor: Style.Typography.SELECTION
 
+                Keys.onReleased: app.passFocus
+
                 Label {
                     id: textBoxPlaceholder
                     anchors.bottom: parent.bottom

@@ -17,7 +17,11 @@ Layouts.Page {
         pocketNoteModel.load();
     }
 
-    Component.onCompleted: refresh()
+//    Component.onCompleted: refresh()
+    onShown: {
+        if (pocketNoteModel.count < 1) refresh();
+    }// This repaces the above statement
+
 
     onSelectionModeChanged: {
         //clear selection when changing mode

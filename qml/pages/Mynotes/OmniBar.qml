@@ -11,7 +11,7 @@ OmniBar.Widget{
     id: filterBar
     icon: Icons.SEARCH
     animateIconOnexpand: false
-    fillHeight: true
+    fillHeight: false
     z: 2
 
     property bool sortByDate: true
@@ -31,16 +31,20 @@ OmniBar.Widget{
         text = filterBarSensorLabelText()
     }
 
-    onExpand: tagRequester.refresh()
+    onExpand: tagListView.emptyText = qsTr("Looking for tags around you...")
+    onOpened: tagRequester.refresh()
+//    onContract: tagRequester.cancel()
 
     text: filterBarSensorLabelText()
 
     Request {
         id: tagRequester
-        source: "/tags"
+        source: "/tags"        
         onSuccess: {
-            tagModel.clear()
-            tagModel.append(data.results)
+            if (data.results.length){
+                tagModel.clear()
+                tagModel.append(data.results)
+            } else tagListView.emptyText = qsTr("No active tags found")
         }
         onError: {
             console.debug(message)
@@ -85,6 +89,7 @@ OmniBar.Widget{
     OmniBar.SectionHeader{text:"Trending tags"}
 
     OmniBar.TagListView {
+        id: tagListView
         model: ListModel{id:tagModel}
         onClick: filterBar.search = tag
     }

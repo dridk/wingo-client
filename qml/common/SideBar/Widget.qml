@@ -4,6 +4,7 @@ import QtQuick.Layouts 1.1
 import "../Controls" as Widgets
 import "../Components" as Components
 import "../../scripts/AppStyle.js" as Style
+import "../../scripts/Utilities.js" as Utilities
 
 Item {
     id: sideBar
@@ -48,7 +49,12 @@ Item {
         id: overlay
         z: 0
         anchors.fill: parent
-        onClicked: sideBar.contractTray()
+        onClicked: {
+            if ( !Utilities.isPointInRect(
+                        Qt.point(mouse.x,mouse.y),
+                        Qt.rect(0,0,sideBarTray.width,sideBarTray.height)))
+            sideBar.contractTray();
+        }
     }
 //    Rectangle
 //    {

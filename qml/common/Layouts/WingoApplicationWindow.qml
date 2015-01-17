@@ -25,10 +25,29 @@ ApplicationWindow {
     //Application global property
     //---------------------------
     property alias currentPage   : stack.currentItem
-    property variant pages: []
+    property var pages: []
+    property alias busy: stack.busy
+//    property var passFocus: function(e){
+//        if (event.key === Qt.Key_Back || event.key === Qt.Key_Backspace
+//                || event.key === Qt.Key_Menu || event.key === Qt.Key_Meta
+//                || event.key === Qt.Key_Home || event.key === Qt.Key_F12 )
+//            event.accepted = false;
+//    }
+
+//    Keys.onReleased: {
+//        if (event.key === Qt.Key_Back || event.key === Qt.Key_Backspace) {
+//            event.accepted = stack.currentItem.back();
+//        }
+//        if (event.key === Qt.Key_Menu || event.key === Qt.Key_Meta ) {
+//            event.accepted = stack.currentItem.menu();
+//        }
+//        if (event.key === Qt.Key_Home || event.key === Qt.Key_F12 ) {
+//            event.accepted = stack.currentItem.home(event);
+//        }
+//    }
 
     //---------------------------
-    //Application global function
+    //Application global functions
     //---------------------------
     /**
      * Go To Previous Page
@@ -71,9 +90,43 @@ ApplicationWindow {
     //Application global Component
     //---------------------------
 
-    ResolutionManager{
+    Item{
         id: _RES
         //appWindow: app
+        //Base point size
+        property int s_BASE_UNIT: U.px(8)
+
+        //Fonts::
+        property int s_TEXT_SIZE_MEDIUM: U.px(22)
+        property int s_TEXT_SIZE_SMALL: U.px(18)
+        property int s_TEXT_SIZE_MINI: U.px(14)
+
+        //Layouts::
+        property int s_MARGIN: U.px(8)
+        property int s_DOUBLE_MARGIN: U.px(16)
+        property int s_HALF_DOUBLE_MARGIN: U.px(24)
+        property int s_TRIPPLE_MARGIN: U.px(32)
+        property int s_QUADRO_MARGIN: U.px(48)
+        property int s_HALF_MARGIN: U.px(4)
+
+        property int s_BORDER: U.px(2)
+
+        property int s_LIST_ITEM_HEIGHT: U.px(48)
+        property int s_LIST_ITEM_DOUBLE_HEIGHT: U.px(96)
+
+        property int s_ICON_SIZE: U.px(48)
+        property int s_ICON_SIZE_SMALL: U.px(32)
+        property int s_ICON_SIZE_MINI: U.px(24)
+        property int s_ICON_SIZE_BIG: U.px(64)
+        property int s_ICON_SIZE_HUGE: U.px(92)
+
+        //Special cases::
+        property int s_NOTE_LIST_MIN_HEIGHT: U.px(96)
+        property int s_ACTION_BAR_HEIGHT: U.px(82)
+        property int s_ACTION_BAR_BUTTON_SIZE: U.px(40)
+        property int s_OMNI_BAR_HEIGHT: U.px(56)
+        property int s_IMAGE_PREVIEWS_SIZE: U.px(210)
+        property int s_ACTION_BUTTON_SIZE: U.px(96)
     }
 
 
@@ -86,34 +139,23 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.top: parent.top
         // Implements back key navigation
-        focus: true
-        Keys.onReleased: {
-            if (event.key === Qt.Key_Back || event.key === Qt.Key_Backspace) {
-                currentItem.back();
-                event.accepted = true;
-            }
-            if (event.key === Qt.Key_Menu || event.key === Qt.Key_Meta ) {
-                currentItem.menu();
-                event.accepted = true;
-            }
-            if (event.key === Qt.Key_Home || event.key === Qt.Key_F12 ) {
-                currentItem.home(event);
-            }
-        }
 
-        initialItem: app.pages["Home"]//Qt.resolvedUrl("/qml/pages/Splash.qml")
-
+        initialItem: app.pages["Home"]
 
         delegate: StackViewDelegate {
 
-            pushTransition: StackViewTransition {
+            function transitionFinished(){
+                console.log("------------------------------------------------------------__Trnasition")
+            }
+
+            replaceTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
                         script: {
                             Qt.inputMethod.hide(); //Hide all input methods
-                            if(Utilities.isFunction(exitItem.beforeHidden)) exitItem.beforeHidden()
-                            if(Utilities.isFunction(enterItem.beforeShown)) enterItem.beforeShown()
-                            exitItem.enabled = false
+                            if (exitItem) exitItem.hide();
+                            enterItem.show()
+                            if (exitItem) exitItem.enabled = false
                         }
                     }
                     PropertyAnimation {
@@ -124,19 +166,45 @@ ApplicationWindow {
                     }
                     ScriptAction {
                         script: {
-                            if(Utilities.isFunction(exitItem.afterHidden)) exitItem.afterHidden()
-                            if(Utilities.isFunction(enterItem.afterShown)) enterItem.afterShown()
+                            if (exitItem) exitItem.hidden()
+                            enterItem.shown()
                         }
                     }
                 }
             }
+
+            pushTransition: StackViewTransition {
+                SequentialAnimation {
+                    ScriptAction {
+                        script: {
+                            Qt.inputMethod.hide(); //Hide all input methods
+                            if (exitItem) exitItem.hide();
+                            enterItem.show()
+                            if (exitItem) exitItem.enabled = false
+                        }
+                    }
+                    PropertyAnimation {
+                        target: enterItem
+                        property: "x"
+                        from: enterItem.width
+                        to: 0
+                    }
+                    ScriptAction {
+                        script: {
+                            if (exitItem) exitItem.hidden()
+                            enterItem.shown()
+                        }
+                    }
+                }
+            }
+
             popTransition: StackViewTransition {
                 SequentialAnimation {
                     ScriptAction {
                         script: {
                             Qt.inputMethod.hide(); //Hide all input methods
-                            if(Utilities.isFunction(exitItem.beforeHidden)) exitItem.beforeHidden()
-                            if(Utilities.isFunction(enterItem.beforeShown)) enterItem.beforeShown()
+                            exitItem.hide()
+                            enterItem.show()
                             enterItem.enabled = true
                         }
                     }
@@ -148,8 +216,8 @@ ApplicationWindow {
                     }
                     ScriptAction {
                         script: {
-                            if(Utilities.isFunction(exitItem.afterHidden)) exitItem.afterHidden()
-                            if(Utilities.isFunction(enterItem.afterShownn)) enterItem.afterShown()
+                            exitItem.hidden()
+                            enterItem.shown()
                         }
                     }
                 }

@@ -5,6 +5,7 @@ MouseArea
 {
     enabled: false
     default property alias _contentChildren: background.data
+
     Rectangle{
         id: background
         color: Style.Background.OVERLAY

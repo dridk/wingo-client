@@ -21,7 +21,10 @@ Layouts.Page {
         noteList.positionViewAtBeginning()
         myNoteModel.load()
     }
-    Component.onCompleted: refresh()
+//    Component.onCompleted: refresh()
+    onShown: {
+        if (myNoteModel.count < 1) refresh();
+    }// This repaces the above statement
 
     RestModel {
         id: myNoteModel

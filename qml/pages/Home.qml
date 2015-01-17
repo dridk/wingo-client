@@ -12,9 +12,17 @@ import "Home"
 Layouts.Page {
     id: page
 
-    //    function beforeShown() {noteList.re}
-    function back() {/*do nothing*/}
-    function menu() {appMenu.toggleTray()}
+    function back() {
+        if (appMenu.expanded) appMenu.contractTray();
+        if (omniBar.expanded) omniBar.contractTray();
+        return true;
+    }
+    function menu() {
+        if (omniBar.expanded) omniBar.contractTray();
+        if (!appMenu.expanded) appMenu.expandTray();
+        else appMenu.contractTray();
+        return true;
+    }
 
     function goPost(){
         appMenu.contractTray();
@@ -68,11 +76,10 @@ Layouts.Page {
         notesListModel.load()
     }
 
-
-
-
-    Component.onCompleted: refresh()
-
+    //Component.onCompleted: refresh()
+    onShown: {
+        if (notesListModel.count < 1) refresh();
+    } // This repaces the above statement
 
     RestModel{
         id: notesListModel
@@ -97,7 +104,7 @@ Layouts.Page {
     ActionBar {
         id: actionBar
         anchors.top: parent.top
-        onMenuClicked: page.menu()
+        onMenuClicked: appMenu.toggleTray()
         onRefreshClicked: page.refresh()
     }
 

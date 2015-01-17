@@ -33,7 +33,8 @@ OmniBar.Widget{
         text = filterBarSensorLabelText()
     }
 
-    onExpand: tagRequester.refresh()
+    onExpand: tagListView.emptyText = qsTr("Looking for tags around you...")
+    onOpened: tagRequester.refresh()
 
     text: filterBarSensorLabelText()
 
@@ -41,8 +42,10 @@ OmniBar.Widget{
         id: tagRequester
         source: "/tags"
         onSuccess: {
-            tagModel.clear()
-            tagModel.append(data.results)
+            if (data.results.length){
+                tagModel.clear()
+                tagModel.append(data.results)
+            } else tagListView.emptyText = qsTr("No active tags found")
         }
         onError: {
             console.debug(message)
@@ -77,6 +80,7 @@ OmniBar.Widget{
     OmniBar.SectionHeader{text:qsTr("Trending tags")}
 
     OmniBar.TagListView {
+        id: tagListView
         model: ListModel{id:tagModel}
         onClick: filterBar.search = tag
     }
