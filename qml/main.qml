@@ -69,8 +69,7 @@ WingoApplicationWindow{
                                 "lat": app.coordinate.latitude,
                                 "lon": app.coordinate.longitude
                             })
-
-
+        goToPage(pages["Home"])
     }
 
 

@@ -37,6 +37,7 @@ Item {
             fillMode: Image.PreserveAspectFit
             onStatusChanged: if (status === Image.Error) app.makeToast("Error loading image", Style.MESSAGE_PURPOSE_ALERT)
             cache: true
+            asynchronous: true
         }
 
         Icon{

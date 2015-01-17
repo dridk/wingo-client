@@ -76,10 +76,7 @@ Layouts.Page {
         notesListModel.load()
     }
 
-    //Component.onCompleted: refresh()
-    onShown: {
-        if (notesListModel.count < 1) refresh();
-    } // This repaces the above statement
+    Component.onCompleted: refresh()
 
     RestModel{
         id: notesListModel

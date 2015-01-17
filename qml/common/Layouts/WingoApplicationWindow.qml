@@ -140,13 +140,9 @@ ApplicationWindow {
         anchors.top: parent.top
         // Implements back key navigation
 
-        initialItem: app.pages["Home"]
+//        initialItem: app.pages["Home"]
 
         delegate: StackViewDelegate {
-
-            function transitionFinished(){
-                console.log("------------------------------------------------------------__Trnasition")
-            }
 
             replaceTransition: StackViewTransition {
                 SequentialAnimation {

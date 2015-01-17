@@ -102,28 +102,28 @@ Componenets.WidgetItemBase {
                         anchors.verticalCenter: parent.verticalCenter
                         style: "ALTERNATIVE"
 
-                        SequentialAnimation{
-                            id:badgeAnim
+//                        SequentialAnimation{
+//                            id:badgeAnim
 
-                            NumberAnimation {
-                                target: noteTakesBadge
-                                property: "scale"
-                                easing.type: Easing.InBack
-                                from : 1
-                                to:3
-                                duration:300
+//                            NumberAnimation {
+//                                target: noteTakesBadge
+//                                property: "scale"
+//                                easing.type: Easing.InBack
+//                                from : 1
+//                                to:3
+//                                duration:300
 
-                            }
-                            NumberAnimation {
-                                target: noteTakesBadge
-                                property: "scale"
-                                easing.type: Easing.OutBack
-                                duration:300
-                                from : 3
-                                to:1
-                            }
+//                            }
+//                            NumberAnimation {
+//                                target: noteTakesBadge
+//                                property: "scale"
+//                                easing.type: Easing.OutBack
+//                                duration:300
+//                                from : 3
+//                                to:1
+//                            }
 
-                        }
+//                        }
                     }
                 }
                 Widgets.Label {
