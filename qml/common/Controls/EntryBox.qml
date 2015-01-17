@@ -48,8 +48,6 @@ Item {
             anchors.leftMargin: _RES.s_MARGIN
             anchors.fill: parent
 
-            Keys.onReleased: app.passFocus
-
 
 //            activeFocusOnPress: true
 
