@@ -24,7 +24,7 @@ Item {
         property real adjustedHeight: parent.height - height - _RES.s_DOUBLE_MARGIN
 
         y: adjustedHeight * relativePosition + _RES.s_MARGIN
-        width: _RES.s_BORDER
+        width: _RES.s_HALF_MARGIN
         height: _RES.s_ICON_SIZE
         anchors.horizontalCenter: parent.horizontalCenter
         color: Style.Background.OVERLAY

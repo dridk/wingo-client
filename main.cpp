@@ -41,10 +41,8 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("wingo", App::instance());
 #if ((defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)) || defined(Q_OS_OSX) || defined(Q_OS_WINDOWS))
-    qDebug() << "------Desktop-----";
     engine.rootContext()->setContextProperty("U", new Unit(QSize(540,960)));
 #else
-    qDebug() << "------NON Desktop-----";
     engine.rootContext()->setContextProperty("U", new Unit());
 #endif
     engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));

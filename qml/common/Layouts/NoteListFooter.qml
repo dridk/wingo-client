@@ -11,16 +11,14 @@ Componenets.TouchSensorArea {
 
     anchors.left: parent.left
     anchors.right: parent.right
-    height: childrenRect.height + _RES.s_DOUBLE_MARGIN
+    height: _RES.s_ICON_SIZE_BIG
 
     property alias text: footerText.text
 
     Widgets.Label{
         id: footerText
         color: Style.Typography.QUOTE
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.top: parent.top
-        anchors.margins: _RES.s_DOUBLE_MARGIN
+        anchors.centerIn: parent
         text: "..."
     }
 }

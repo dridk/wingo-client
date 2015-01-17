@@ -23,7 +23,7 @@ Components.TouchSensorArea {
 
     Row{
         id: actionBarTitleRow
-        width: Math.min(childrenRect.width, app.width * 0.5)
+//        width: Math.min(childrenRect.width, app.width * 0.5)
         height: parent.height
         spacing: _RES.s_MARGIN
         Widgets.Icon{
@@ -39,9 +39,9 @@ Components.TouchSensorArea {
             color: Style.Typography.Actionbar[actionBarTitle.style]
 
         }
-//        Item{
-//            width: _RES.s_MARGIN
-//            height: parent.height
-//        }
+        Item{
+            width: _RES.s_MARGIN
+            height: 1
+        }
     }
 }

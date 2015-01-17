@@ -161,7 +161,9 @@ WingoApplicationWindow{
         text: wingo.getDeviceId() + "\n" +
               configRequester.host()+":"+
               configRequester.port()+
-              "\n pos:" + app.coordinate.latitude +" , "+app.coordinate.longitude
+              "\n pos:" + app.coordinate.latitude +" , "+app.coordinate.longitude+
+              "\n res: " + U.size() +
+              "\n scale: " + U.ratio()
         opacity: 0.4
     }
 
