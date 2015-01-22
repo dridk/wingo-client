@@ -20,7 +20,7 @@ Layouts.Page {
 
     property string noteId
 
-    onNoteIdChanged: {
+    onShown: {
         // Load note from the note identifier
         console.debug("Load NoteView data " + noteId)
         noteViewRequester.source = "/notes/" + noteId

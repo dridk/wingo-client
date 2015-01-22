@@ -44,7 +44,7 @@ ApplicationWindow {
 //        if (event.key === Qt.Key_Home || event.key === Qt.Key_F12 ) {
 //            event.accepted = stack.currentItem.home(event);
 //        }
-//    }
+//    }z
 
     //---------------------------
     //Application global functions
