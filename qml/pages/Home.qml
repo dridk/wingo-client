@@ -108,7 +108,7 @@ Layouts.Page {
     OmniBar {
         id: omniBar
         anchors.top: actionBar.bottom
-        onClosed: {addNoteActionButton.show(); refresh()}
+        onClosed: {addNoteActionButton.show(); if(changed)refresh()}
     }
 
     Layouts.NoteListView {

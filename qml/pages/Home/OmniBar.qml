@@ -18,6 +18,7 @@ OmniBar.Widget{
     property bool sortByPopularity: false
     property double distance: 1000
     property alias search: searchBar.text
+    property bool changed: false
 
     function filterBarSensorLabelText(){
         var t = "";
@@ -32,7 +33,7 @@ OmniBar.Widget{
         text = filterBarSensorLabelText()
     }
 
-    onExpand: tagListView.emptyText = qsTr("Looking for tags around you...")
+    onExpand: {changed = false; tagListView.emptyText = qsTr("Looking for tags around you...");}
     onOpened: tagRequester.refresh()
 
     text: filterBarSensorLabelText()
@@ -68,6 +69,7 @@ OmniBar.Widget{
             console.log(value)
             filterBar.sortByDate = index === 0;
             filterBar.sortByPopularity = index === 1;
+            filterBar.changed = true;
             tagRequester.refresh()
         }
     }
@@ -76,7 +78,7 @@ OmniBar.Widget{
         selected: 0
         model : ["All", "only takes", "only expirated"]
         onClick: {
-
+            filterBar.changed = true;
         }
     }
 
@@ -87,6 +89,7 @@ OmniBar.Widget{
         })
         onClick: {
             filterBar.distance = app.config.allowed_radius[index];
+            filterBar.changed = true;
             tagRequester.refresh();
         }
     }
@@ -96,6 +99,9 @@ OmniBar.Widget{
     OmniBar.TagListView {
         id: tagListView
         model: ListModel{id:tagModel}
-        onClick: searchBar.text = tag
+        onClick: {
+            filterBar.changed = true;
+            searchBar.text = tag
+        }
     }
 }

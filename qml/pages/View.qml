@@ -20,6 +20,12 @@ Layouts.Page {
 
     property string noteId
 
+    onHidden: {
+        //Empty all image data
+        noteView.avatar = ""
+        noteView.image = ""
+    }
+
     onShown: {
         // Load note from the note identifier
         console.debug("Load NoteView data " + noteId)
