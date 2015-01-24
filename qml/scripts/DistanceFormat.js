@@ -4,8 +4,8 @@
 
 
 var EARTH_RADIUS =  6371000; //METER
-var KM = METER * 1000;
 var METER = 1;
+var KM = METER * 1000;
 var CM = METER / 100;
 var FAR = 100*KM;
 var DEFAULT_DICTIONARY = ["here", "m", "km", "very far"];
@@ -52,17 +52,16 @@ function convert (value, from, to) {
 
 function format( distance, units, dict) {
     dict = dict || DEFAULT_DICTIONARY;
-//    units = units || KM;
+    units = units || KM;
 
-//    distance = units === METER ? distance : convert(distance, units, KM);
+    distance = units === METER ? distance : convert(distance, units, KM);
 
-
-    if (distance < METER * 5) { // less then 5meters is here
+    if (distance < METER * 100) { // less then 5meters is here
         return dict[0];
     } else if (distance < METER * 500) { // less then 500meters is meters
         return Math.round(distance) + dict[1]
     } else if (distance < FAR) {//Less then 100Km is KM
-        return Numbers.toFixed(distance, 1, Math.floor) + dict[2]
+        return Numbers.toFixed(distance / KM, 1, Math.floor) + dict[2]
     } else {//Everything else is too far
         return dict[3]
     }
