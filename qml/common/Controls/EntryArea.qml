@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQuick.Controls 1.2
 import QtGraphicalEffects 1.0
 import Wingo 1.0
 
@@ -35,45 +36,39 @@ WidgetItemBase {
         anchors.rightMargin: _RES.s_MARGIN
         anchors.topMargin: _RES.s_TRIPPLE_MARGIN
 
-        Rectangle{
-            height: _RES.s_MARGIN
+//        Rectangle{
+//            height: _RES.s_MARGIN
 
-            color: Style.Background.WINDOW
-            anchors.right: parent.right
-            anchors.bottom: textEntryBlock.bottom
-            anchors.left: parent.left
-            anchors.bottomMargin: -_RES.s_BORDER
-        }
+//            color: Style.Background.WINDOW
+//            anchors.right: parent.right
+//            anchors.bottom: textEntryBlock.bottom
+//            anchors.left: parent.left
+//            anchors.bottomMargin: -_RES.s_BORDER
+//        }
 
-        Rectangle{
+        Item{
             id: textEntryBlock
             height: textBoxEdit.contentHeight
 
-            color: Style.Background.VIEW
+//            color: Style.Background.VIEW
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.top: parent.top
             anchors.rightMargin: _RES.s_BORDER
             anchors.leftMargin: _RES.s_BORDER
 
-            TextEdit {
+            TextArea {
                 id: textBoxEdit
                 font.pixelSize: _RES.s_TEXT_SIZE_MEDIUM
                 textFormat: Text.PlainText
+                textColor: Style.Typography.TEXT
                 font.family: "Droid Sans"
-                verticalAlignment: Text.AlignVCenter
-                color: Style.Typography.TEXT
                 wrapMode: TextEdit.Wrap
                 anchors.bottomMargin: _RES.s_MARGIN
                 anchors.rightMargin: _RES.s_MARGIN
                 anchors.leftMargin: _RES.s_MARGIN
                 anchors.fill: parent
-                //focus: entryBox.focus
-//                activeFocusOnPress: true
                 selectByMouse: true
-                selectionColor: Style.Background.SELECTION
-                selectedTextColor: Style.Typography.SELECTION
-
                 Label {
                     id: textBoxPlaceholder
                     anchors.bottom: parent.bottom
@@ -81,8 +76,35 @@ WidgetItemBase {
                     color: Style.Typography.FADE
                     visible: !parent.focus && !parent.text.length
                 }
-
             }
+
+//            TextEdit {
+//                id: textBoxEdit
+//                font.pixelSize: _RES.s_TEXT_SIZE_MEDIUM
+//                textFormat: Text.PlainText
+//                font.family: "Droid Sans"
+//                verticalAlignment: Text.AlignVCenter
+//                color: Style.Typography.TEXT
+//                wrapMode: TextEdit.Wrap
+//                anchors.bottomMargin: _RES.s_MARGIN
+//                anchors.rightMargin: _RES.s_MARGIN
+//                anchors.leftMargin: _RES.s_MARGIN
+//                anchors.fill: parent
+//                //focus: entryBox.focus
+////                activeFocusOnPress: true
+//                selectByMouse: true
+//                selectionColor: Style.Background.SELECTION
+//                selectedTextColor: Style.Typography.SELECTION
+
+//                Label {
+//                    id: textBoxPlaceholder
+//                    anchors.bottom: parent.bottom
+//                    text: "Placeholder..."
+//                    color: Style.Typography.FADE
+//                    visible: !parent.focus && !parent.text.length
+//                }
+
+//            }
         }
     }
     Item {
@@ -96,7 +118,7 @@ WidgetItemBase {
         Button {
             id: actionButton
             anchors.centerIn: parent
-            icon: entryBox.action
+//            icon: entryBox.action
             visible: entryBox.action !== ""
             enabled: textBoxEdit.text.length
             opacity: enabled? 1: 0.5

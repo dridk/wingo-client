@@ -41,11 +41,11 @@ Layouts.Page {
 
     Column {
         anchors.verticalCenter: parent.verticalCenter
-        anchors.rightMargin: _RES.s_MARGIN
         spacing: _RES.s_MARGIN
         anchors.right: parent.right
         anchors.left: parent.left
-        anchors.leftMargin: _RES.s_MARGIN
+        anchors.rightMargin: _RES.s_DOUBLE_MARGIN
+        anchors.leftMargin: _RES.s_DOUBLE_MARGIN
         TextField {
             id: emailBox
             font.pixelSize: _RES.s_TEXT_SIZE_MEDIUM || 24
@@ -53,6 +53,7 @@ Layouts.Page {
             anchors.left: parent.left
             anchors.right: parent.right
             placeholderText: qsTr("Email")
+            inputMethodHints: Qt.ImhEmailCharactersOnly | Qt.ImhLowercaseOnly
         }
 
         TextField {
@@ -62,6 +63,7 @@ Layouts.Page {
             anchors.right: parent.right
             anchors.left: parent.left
             placeholderText: qsTr("Password")
+            inputMethodHints: Qt.ImhHiddenText | Qt.ImhLowercaseOnly
         }
 
         Button {
