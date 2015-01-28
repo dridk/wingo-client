@@ -13,6 +13,8 @@ import "Painter"
 Layouts.Page {
     id: page
 
+    property string viewType: "overlay"
+
     signal drawChange(string path)
 
     function back() {

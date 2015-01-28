@@ -12,13 +12,12 @@ import "Post"
 Layouts.Page {
     id: page
 
+    property string viewType: "overlay"
 
     Location {
         id:selectLocation
         coordinate: app.coordinate
     }
-
-
 
     function post() {
         Qt.inputMethod.hide();
@@ -73,10 +72,14 @@ Layouts.Page {
         postNoteRequester.post(post)
     }
 
-    function back() {
+    function postComplete() {
         app.goBack();
         app.currentPage.refresh()
 
+    }
+
+    function back() {
+        app.goBack();
     }
 
 
@@ -99,7 +102,7 @@ Layouts.Page {
         onSuccess: {
             app.makeToast("Note posted")
             app.mynote_count++
-            page.back()
+            page.postComplete()
         }
         onError: {
             app.showMessage("ERROR", message)

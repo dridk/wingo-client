@@ -144,78 +144,83 @@ ApplicationWindow {
 
         delegate: StackViewDelegate {
 
-            replaceTransition: StackViewTransition {
-                SequentialAnimation {
-                    ScriptAction {
-                        script: {
-                            Qt.inputMethod.hide(); //Hide all input methods
-                            if (exitItem) exitItem.hide();
-                            enterItem.show()
-                            if (exitItem) exitItem.enabled = false
-                        }
+            function getTransition(properties)
+                {
+                    if (properties.name === 'pushTransition' &&
+                            properties.enterItem.viewType){
+                        if (properties.enterItem.viewType === "overlay") return overlaylTransition;
+                    } else return this[properties.name];
+//                    console.log("Transition name is: " + properties.name)
+                    //return (properties.enterItem.Stack.index % 2) ? horizontalTransition : verticalTransition
+                }
+
+            function transitionFinished(properties){
+//                console.log("Transition finished");
+                if (properties.exitItem) properties.exitItem.hidden()
+                properties.enterItem.shown()
+            }
+
+            property Component overlaylTransition: StackViewTransition {
+                ScriptAction {
+                    script: {
+                        Qt.inputMethod.hide(); //Hide all input methods
+                        if (exitItem) exitItem.hide();
+                        enterItem.show()
+                        if (exitItem) exitItem.enabled = false
                     }
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: enterItem.width
-                        to: 0
-                    }
-                    ScriptAction {
-                        script: {
-                            if (exitItem) exitItem.hidden()
-                            enterItem.shown()
-                        }
-                    }
+                }
+                PropertyAnimation {
+                    target: enterItem
+                    duration: enterItem.backgroundAnimationDuration
+                    easing.type: Easing.OutQuad
+                    property: "y"
+                    from: enterItem.height * 0.5
+                    to: 0
+                }
+                PropertyAnimation {
+                    target: enterItem
+                    duration: enterItem.backgroundAnimationDuration
+                    property: "opacity"
+                    from: 0
+                    to: 1
                 }
             }
 
             pushTransition: StackViewTransition {
-                SequentialAnimation {
-                    ScriptAction {
-                        script: {
-                            Qt.inputMethod.hide(); //Hide all input methods
-                            if (exitItem) exitItem.hide();
-                            enterItem.show()
-                            if (exitItem) exitItem.enabled = false
-                        }
+                ScriptAction {
+                    script: {
+                        Qt.inputMethod.hide(); //Hide all input methods
+                        if (exitItem) exitItem.hide();
+                        enterItem.show()
+                        if (exitItem) exitItem.enabled = false
                     }
-                    PropertyAnimation {
-                        target: enterItem
-                        property: "x"
-                        from: enterItem.width
-                        to: 0
-                    }
-                    ScriptAction {
-                        script: {
-                            if (exitItem) exitItem.hidden()
-                            enterItem.shown()
-                        }
-                    }
+                }
+                PropertyAnimation {
+                    target: enterItem
+                    duration: enterItem.backgroundAnimationDuration
+                    easing.type: Easing.OutQuad
+                    property: "x"
+                    from: enterItem.width
+                    to: 0
                 }
             }
 
             popTransition: StackViewTransition {
-                SequentialAnimation {
-                    ScriptAction {
-                        script: {
-                            Qt.inputMethod.hide(); //Hide all input methods
-                            exitItem.hide()
-                            enterItem.show()
-                            enterItem.enabled = true
-                        }
+                ScriptAction {
+                    script: {
+                        Qt.inputMethod.hide(); //Hide all input methods
+                        exitItem.hide()
+                        enterItem.show()
+                        enterItem.enabled = true
                     }
-                    PropertyAnimation {
-                        target: exitItem
-                        property: "x"
-                        to: enterItem.width
-                        from: 0
-                    }
-                    ScriptAction {
-                        script: {
-                            exitItem.hidden()
-                            enterItem.shown()
-                        }
-                    }
+                }
+                PropertyAnimation {
+                    target: exitItem
+                    duration: enterItem.backgroundAnimationDuration
+                    easing.type: Easing.OutQuad
+                    property: "x"
+                    to: enterItem.width
+                    from: 0
                 }
             }
         }

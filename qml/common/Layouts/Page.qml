@@ -15,7 +15,7 @@ Rectangle
     property string style: Style.PAGE_DEFAULT
     color: Style.Background.WINDOW
 
-    property int backgroundAnimationDuration: 500
+    property int backgroundAnimationDuration: 350
 
 //    property Component header: Item{}
 //    property Component footer: Item{}
@@ -101,6 +101,23 @@ Rectangle
                 target: pageOverlay
                 opacity: 1
             }
+//            PropertyChanges {
+//                target: page
+//                scale: 0.95
+//            }
         }
     ]
+
+//    transitions: [
+//        Transition {
+//            from: ""
+//            to: "DISABLED"
+//            NumberAnimation{ properties: "opacity, scale"; duration: page.backgroundAnimationDuration}
+//        },
+//        Transition {
+//            from: "DISABLED"
+//            to: ""
+//            NumberAnimation{ properties: "opacity, scale"; duration: page.backgroundAnimationDuration}
+//        }
+//    ]
 }

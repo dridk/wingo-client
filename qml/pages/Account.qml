@@ -10,6 +10,7 @@ import "../common/ActionBar" as ActionBar
 
 Layouts.Page {
     id: page
+    color: "transparent"
 
 
 
