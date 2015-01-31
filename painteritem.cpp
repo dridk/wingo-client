@@ -61,7 +61,7 @@ bool PainterItem::loadFromPath(const QString &path)
     if (!pix.load(path))
         return false;
 
-    mCachePainter.drawPixmap(0,0,pix.scaled(width(),height()));
+    mCachePainter.drawPixmap(0,0,pix.scaled(width(),height(), Qt::KeepAspectRatio));
     update();
 
 }
