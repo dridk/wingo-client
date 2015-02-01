@@ -15,6 +15,7 @@ public:
     Q_INVOKABLE static QVariant getConfig(const QString& key);
     Q_INVOKABLE QString host() const;
     Q_INVOKABLE int port() const;
+    Q_INVOKABLE void cropImage(const QString& filename, int size = 600);
 
     static void setDomain(const QString& host, int port);
 

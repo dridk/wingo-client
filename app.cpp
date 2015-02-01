@@ -1,7 +1,8 @@
 #include "app.h"
 #include <QNetworkInterface>
 #include <QCoreApplication>
-
+#include <QImage>
+#include <QDebug>
 App * App::mInstance = NULL;
 
 App::App(QObject *parent) :
@@ -63,6 +64,18 @@ return mHost;
 int App::port() const
 {
     return mPort;
+}
+
+void App::cropImage(const QString &filename, int size)
+{
+
+    QImage image(filename);
+    int min = qMin(image.width(), image.height());
+    QImage newImage = image.copy(0,0,min,min).scaled(size,size);
+    newImage.save(filename);
+
+    qDebug()<<newImage.size();
+
 }
 
 void App::setDomain(const QString &host, int port)

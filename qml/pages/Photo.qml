@@ -22,6 +22,7 @@ Layouts.Page {
 
 
     Rectangle {
+        id:container
         width: parent.width
         height: parent.width
 
@@ -54,7 +55,9 @@ Layouts.Page {
 
 
             imageCapture {
+                resolution: Qt.size(container.width, container.width)
                 onImageSaved: {
+                    wingo.cropImage(path,400,400)
                     page.imageCaptured(path)
                     page.back()
                 }
