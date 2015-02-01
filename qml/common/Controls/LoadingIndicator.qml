@@ -1,5 +1,5 @@
 import QtQuick 2.0
-
+import Wingo 1.0
 import "../../scripts/Icons.js" as Icons
 import "../../scripts/AppStyle.js" as Style
 
@@ -19,60 +19,98 @@ Rectangle {
 
     signal timeoutTriggered
 
-    Canvas{
-        id: indicatorProgress
+
+    ArcItem {
         anchors.fill: parent
-//        anchors.margins: _RES.s_MARGIN
-        antialiasing: true
-        property real progress: 0
-        onPaint:{
-            var l = indicator.lineWidth,
-                w = indicatorProgress.width,
-                h = indicatorProgress.height,
-                r = (w - l * 3) / 2,
-                p1 = progress >= 0? 0: Math.PI * progress,
-                p2 = progress <= 0? 0: Math.PI * progress;
-           var ctx = indicatorProgress.getContext('2d');
+        border.width: indicator.lineWidth
+        border.color: indicatorBusyAnimation.running? indicator.lineColorBusy : indicator.lineColorTimeout;
+        startAngle: 0
 
-            ctx.save();
-            ctx.clearRect(0, 0, w, h);
-            ctx.translate(w/2, h/2)
-            ctx.rotate(-Math.PI/2);
 
-            ctx.strokeStyle = indicatorBusyAnimation.running? indicator.lineColorBusy : indicator.lineColorTimeout;
-            ctx.lineWidth = indicator.lineWidth;
-            ctx.beginPath();
-            ctx.arc(0, 0, r, p1, p2, true);
-            ctx.stroke();
-            ctx.restore();
-        }
-        onProgressChanged: requestPaint()
 
-        NumberAnimation on progress {
+        NumberAnimation on spanAngle {
             id: indicatorProgressAnimation
             running: indicatorTimer.running
             duration: indicatorTimer.interval
             from: 0
-            to: 2
+            to: 360
         }
 
-        SequentialAnimation on progress {
+        SequentialAnimation on spanAngle {
             id: indicatorBusyAnimation
             running: indicator.busy && !indicatorProgressAnimation.running
             loops: Animation.Infinite
             NumberAnimation{
-                from: -2
+                from: 360
                 to: 0
                 duration: 1000
             }
             NumberAnimation{
                 from: 0
-                to: 2
+                to: 360
                 duration: 1000
             }
         }
 
+
+
+
     }
+
+    //    Canvas{
+    //        id: indicatorProgress
+    //        anchors.fill: parent
+    ////        anchors.margins: _RES.s_MARGIN
+    //        antialiasing: true
+    //        property real progress: 0
+    //        onPaint:{
+    //            var l = indicator.lineWidth,
+    //                w = indicatorProgress.width,
+    //                h = indicatorProgress.height,
+    //                r = (w - l * 3) / 2,
+    //                p1 = progress >= 0? 0: Math.PI * progress,
+    //                p2 = progress <= 0? 0: Math.PI * progress;
+    //           var ctx = indicatorProgress.getContext('2d');
+
+    //            ctx.save();
+    //            ctx.clearRect(0, 0, w, h);
+    //            ctx.translate(w/2, h/2)
+    //            ctx.rotate(-Math.PI/2);
+
+    //            ctx.strokeStyle = indicatorBusyAnimation.running? indicator.lineColorBusy : indicator.lineColorTimeout;
+    //            ctx.lineWidth = indicator.lineWidth;
+    //            ctx.beginPath();
+    //            ctx.arc(0, 0, r, p1, p2, true);
+    //            ctx.stroke();
+    //            ctx.restore();
+    //        }
+    //        onProgressChanged: requestPaint()
+
+    //        NumberAnimation on progress {
+    //            id: indicatorProgressAnimation
+    //            running: indicatorTimer.running
+    //            duration: indicatorTimer.interval
+    //            from: 0
+    //            to: 2
+    //        }
+
+    //        SequentialAnimation on progress {
+    //            id: indicatorBusyAnimation
+    //            running: indicator.busy && !indicatorProgressAnimation.running
+    //            loops: Animation.Infinite
+    //            NumberAnimation{
+    //                from: -2
+    //                to: 0
+    //                duration: 1000
+    //            }
+    //            NumberAnimation{
+    //                from: 0
+    //                to: 2
+    //                duration: 1000
+    //            }
+    //        }
+
+    //    }
 
     Icon{
         id: busyIndicator
@@ -81,7 +119,7 @@ Rectangle {
         anchors.verticalCenterOffset: U.px(1)
         size: _RES.s_ICON_SIZE_SMALL
         color: Style.Icon.SIDELINE
-//        Behavior on color{ColorAnimation{}}
+        //        Behavior on color{ColorAnimation{}}
 
     }
 

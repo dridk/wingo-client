@@ -10,7 +10,9 @@ SOURCES += main.cpp \
     cookieJar.cpp \
     restmodel.cpp \
     maskimage.cpp \
-    unit.cpp
+    unit.cpp \
+    arcitem.cpp \
+    qquickpen.cpp
 
 RESOURCES += qml.qrc
 
@@ -28,7 +30,9 @@ HEADERS += \
     cookieJar.h \
     restmodel.h \
     maskimage.h \
-    unit.h
+    unit.h \
+    arcitem.h \
+    qquickpen.h
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

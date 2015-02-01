@@ -7,6 +7,7 @@
 #include "request.h"
 #include "polygonitem.h"
 #include "painteritem.h"
+#include "arcitem.h"
 #include "maskimage.h"
 #include "app.h"
 #include "restmodel.h"
@@ -22,6 +23,8 @@ int main(int argc, char *argv[])
     qmlRegisterType<Request>("Wingo",1,0,"Request");
     qmlRegisterType<PolygonItem>("Wingo",1,0,"PolygonItem");
     qmlRegisterType<PainterItem>("Wingo",1,0,"PainterItem");
+    qmlRegisterType<ArcItem>("Wingo",1,0,"ArcItem");
+
     qmlRegisterType<MaskImage>("Wingo",1,0,"MaskImage");
     qmlRegisterType<RestModel>("Wingo",1,0,"RestModel");
 //    qmlRegisterType<Unit>("Wingo",1,0,"ResolutionManager2");

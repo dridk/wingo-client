@@ -5,6 +5,7 @@
 #include <QPolygon>
 #include <QPainter>
 #include <QVariantList>
+#include "qquickpen.h"
 
 // ==== USAGE ===================
 //PolygonItem {
@@ -22,39 +23,6 @@
 // test.clear()
 
 // ==== USAGE ===================
-
-
-
-
-
-
-class  QQuickPen : public QObject
-{
-    Q_OBJECT
-    Q_PROPERTY(qreal width READ width WRITE setWidth NOTIFY penChanged)
-    Q_PROPERTY(QColor color READ color WRITE setColor NOTIFY penChanged)
-
-public:
-    QQuickPen(QObject *parent=0);
-    int width() const;
-    void setWidth(int w);
-    QColor color() const;
-    void setColor(const QColor &c);
-
-
-signals:
-    void penChanged();
-
-private:
-    QColor mColor;
-    int mWidth;
-
-
-
-};
-
-
-
 
 
 class PolygonItem : public QQuickPaintedItem
