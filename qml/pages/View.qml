@@ -51,6 +51,14 @@ Layouts.Page {
             ActionBar.Button {
                 //Share
                 icon: Icons.SHARE
+                onClicked: {
+                    //http://en.wikipedia.org/wiki/Geo_URI
+                    var url = "geo:"+mapView.center.latitude+","+mapView.center.longitude+
+                            "?q="+mapView.center.latitude+","+mapView.center.longitude+"("+noteView.message+")"
+                    console.debug(url);
+                    Qt.openUrlExternally(url);
+
+                }
             }
             ActionBar.Action {
                 style: "ACCENT"
