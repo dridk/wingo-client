@@ -98,5 +98,6 @@
         <file>qml/pages/Post/BusyOverlay.qml</file>
         <file>qml/common/Layouts/NoteListFooter.qml</file>
         <file>qml/common/Components/Flickable.qml</file>
+        <file>qml/common/Controls/SwitchBar.qml</file>
     </qresource>
 </RCC>

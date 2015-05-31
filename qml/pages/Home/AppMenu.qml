@@ -22,6 +22,28 @@ SideBar.Widget {
         }
 
     }
+
+    SideBar.SectionHeader{text:"Notes"}
+    SideBar.SimpleListItem{
+        text: qsTr("Recent Note")
+        icon: Icons.POST
+        enabled: app.logged
+        onClicked: page.goPost()
+    }
+    SideBar.SimpleListItem{
+        text: qsTr("Popular Note")
+        icon: Icons.POST
+        enabled: app.logged
+        onClicked: page.goPost()
+    }
+
+    SideBar.SimpleListItem{
+        text: qsTr("Search Note")
+        icon: Icons.POST
+        enabled: app.logged
+        onClicked: page.goPost()
+    }
+
     SideBar.SectionHeader{text:"Places"}
     SideBar.SimpleListItem{
         text: qsTr("New Note")

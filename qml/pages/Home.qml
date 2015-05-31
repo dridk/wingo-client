@@ -105,11 +105,17 @@ Layouts.Page {
         onRefreshClicked: page.refresh()
     }
 
-    OmniBar {
-        id: omniBar
+    Widgets.SwitchBar {
         anchors.top: actionBar.bottom
-        onClosed: {addNoteActionButton.show(); if(changed)refresh()}
+
     }
+
+
+//    OmniBar {
+//        id: omniBar
+//        anchors.top: actionBar.bottom
+//        onClosed: {addNoteActionButton.show(); if(changed)refresh()}
+//    }
 
     Layouts.NoteListView {
         id: noteList
