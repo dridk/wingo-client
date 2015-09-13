@@ -13,7 +13,8 @@ Rectangle
     //-----------
 
     property string style: Style.PAGE_DEFAULT
-    color: Style.Background.WINDOW
+    //color: Style.Background.WINDOW
+    color:"red"
 
     property int backgroundAnimationDuration: 500
 

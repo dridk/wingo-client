@@ -55,8 +55,6 @@ double Request::downloadProgress()
     return mDownloadProgress;
 }
 
-
-
 const QString &Request::source()
 {
     return mSource;

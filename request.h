@@ -15,14 +15,8 @@ class Request : public QObject
     Q_PROPERTY (bool isLoading READ isLoading NOTIFY isLoadingChanged)
     Q_PROPERTY (double downloadProgress READ downloadProgress NOTIFY downloadProgressChanged)
 
-
-
-
 public:
     explicit Request(QQuickItem *parent = 0);
-
-
-
     void setSource(const QString& source);
     const QString& source();
     Q_INVOKABLE QString host();

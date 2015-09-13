@@ -2,24 +2,42 @@ import QtQuick 2.3
 import QtQuick.Dialogs 1.2
 import QtQuick.Controls 1.2
 import QtPositioning 5.3
-//import Wingo 1.0
+import Wingo 1.0
 
-//import "common/Layouts"
+import "common/Layouts"
 
 
-ApplicationWindow {
-    width: 500
-    height: 500
+
+WingoApplicationWindow{
+
+    id: app
+    width: 540//238
+    height: 960//428
     visible: true
+
+Component{
+    id:testPage
+    Page {
+
+        Text {
+            anchors.centerIn: parent
+            text:"PAGE"
+        }
+    }
 }
 
-//WingoApplicationWindow{
+    Component.onCompleted: {
 
-//    id: app
-//    width: 540//238
-//    height: 960//428
-//    visible: true
+    }
 
+
+    MouseArea {
+        anchors.fill: parent
+        onClicked: {
+            console.debug("clicked")
+          app.goToPage(testPage)
+        }
+    }
 
 //    //---------------------------
 //    //Application global property
@@ -175,4 +193,4 @@ ApplicationWindow {
 
 
 
-//}
+}

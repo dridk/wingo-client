@@ -5,12 +5,13 @@
 #include <QDebug>
 App * App::mInstance = NULL;
 
+//==========================================
 App::App(QObject *parent) :
     QObject(parent)
 {
 }
 
-
+//==========================================
 App *App::instance()
 {
 
@@ -20,7 +21,7 @@ if (mInstance == NULL) {
 return mInstance;
 }
 
-
+//==========================================
 QString App::getDeviceId()
 {
     foreach(QNetworkInterface interface, QNetworkInterface::allInterfaces())
@@ -31,7 +32,7 @@ QString App::getDeviceId()
     }
     return "0:0:0:0";
 }
-
+//==========================================
 void App::setConfig(const QString &key, QVariant value)
 {
 
@@ -46,7 +47,7 @@ void App::setConfig(const QString &key, QVariant value)
     }
 
 }
-
+//==========================================
 QVariant App::getConfig(const QString &key)
 {
     QSettings settings;
@@ -55,17 +56,17 @@ QVariant App::getConfig(const QString &key)
     return settings.value(key);
 
 }
-
+//==========================================
 QString App::host() const
 {
 return mHost;
 }
-
+//==========================================
 int App::port() const
 {
     return mPort;
 }
-
+//==========================================
 void App::cropImage(const QString &filename, int size)
 {
 
@@ -77,25 +78,21 @@ void App::cropImage(const QString &filename, int size)
     qDebug()<<newImage.size();
 
 }
-
+//==========================================
 void App::setDomain(const QString &host, int port)
 {
     instance()->setHost(host);
     instance()->setPort(port);
 }
-
+//==========================================
 void App::setHost(const QString &hostname)
 {
-
     mHost = hostname;
-
 }
-
+//==========================================
 void App::setPort(int port)
 {
-
     mPort = port;
-
 }
-
+//==========================================
 
