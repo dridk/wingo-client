@@ -27,20 +27,17 @@ SideBar.Widget {
     SideBar.SimpleListItem{
         text: qsTr("Recent Note")
         icon: Icons.POST
-        enabled: app.logged
         onClicked: page.goPost()
     }
     SideBar.SimpleListItem{
         text: qsTr("Popular Note")
         icon: Icons.POST
-        enabled: app.logged
         onClicked: page.goPost()
     }
 
     SideBar.SimpleListItem{
         text: qsTr("Search Note")
         icon: Icons.POST
-        enabled: app.logged
         onClicked: page.goPost()
     }
 
