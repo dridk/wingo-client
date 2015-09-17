@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qml/main.qml</file>
+        <file>qml/Wingo/Material/Styles/qmldir</file>
+        <file>qml/Wingo/Material/Styles/CheckBoxStyle.qml</file>
+        <file>qml/Wingo/Material/Controls/qmldir</file>
+        <file>qml/Wingo/Material/Controls/Button.qml</file>
+        <file>qml/Wingo/Material/Styles/ButtonStyle.qml</file>
+        <file>qml/Wingo/Material/Units.qml</file>
+        <file>qml/Wingo/Material/qmldir</file>
+        <file>qml/Wingo/Material/View.qml</file>
+        <file>qml/Wingo/Material/Ink.qml</file>
+        <file>qml/Wingo/Material/CircleMask.qml</file>
+    </qresource>
+</RCC>

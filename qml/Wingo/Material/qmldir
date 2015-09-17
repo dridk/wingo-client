@@ -1,0 +1,5 @@
+module Wingo.Material
+View 0.1 View.qml
+Ink 0.1 Ink.qml
+CircleMask 0.1 CircleMask.qml
+singleton Units 0.1 Units.qml
